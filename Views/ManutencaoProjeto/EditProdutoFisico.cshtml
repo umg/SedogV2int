@@ -1,0 +1,38 @@
+﻿@using SEDOGv2.Models;
+@{
+    ViewBag.Title = "EditProdutoFisico";
+}
+
+
+
+<div id="mainContent">
+
+    @using (Html.BeginForm("EditProdutoFisico", "ManutencaoProjeto", FormMethod.Post, new { @id = "frmEditProdutoFisico" }))
+    {
+        <input type="hidden" name="idProjSedog" value="@Url.RequestContext.RouteData.Values["id"]" />
+            <input type="hidden" name="codprod" value="@Model.COD_PRODUTO" />
+            <input type="hidden" name="packing" value="@Model.PACKING" />
+
+            <div class="row">
+                <div class="col-md-12"><label>Projeto:</label>  <span>@Model.PROJETO</span></div>
+                <div class="col-md-12"><label>Artista:</label> <span>@Model.ARTISTA</span></div>
+                <div class="col-md-12"><label>Título:</label> <span>@Model.TITULO_PRODUTO</span></div>
+            </div>
+            <br />
+
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">Autoral:</span>
+                        <input type="text" id="autoral" name="autoral" class="form-control" placeholder="Direitos Autoral(%)" value="@Model.AUTORAL" aria-describedby="basic-addon2">
+                    </div>
+                    <br />
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">Artistico:</span>
+                        <input type="text" id="artistico" name="artistico" class="form-control" placeholder="Direitos Artistico(%)" value="@Model.ARTISTICO" aria-describedby="basic-addon2">
+                    </div>
+
+
+                    <input type="submit" id="submitEditProjSedog" value="Save" class="btn btn-default" style="display:none;" />
+    }
+
+</div>
+

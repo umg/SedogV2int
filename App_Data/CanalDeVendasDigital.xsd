@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CanalDeVendasDigital"
+    targetNamespace="http://tempuri.org/CanalDeVendasDigital.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/CanalDeVendasDigital.xsd"
+    xmlns:mstns="http://tempuri.org/CanalDeVendasDigital.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  
+  						   <xs:element name="CanalDeVendasDigital">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Grupo" type="xs:string"/>
+        <xs:element name="Qtde" type="xs:int"/>
+        <xs:element name="Valor" type="xs:decimal"/>
+        <xs:element name="Porcentagem" type="xs:decimal"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+</xs:schema>

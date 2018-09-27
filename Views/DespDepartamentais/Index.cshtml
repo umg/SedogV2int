@@ -1,0 +1,537 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+    int i = 0;
+    bool _fechada = false;
+}
+
+<div class="container-fluid">
+
+    <div class="panel panel-success">
+        <!-- Default panel contents -->
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    @appSettings.pageName()
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-md-12" runat="server" id="divAlert">
+            @Html.Raw(ViewBag.Message)
+        </div>
+
+        @using (Html.BeginForm("SendEmail", "DespDepartamentais", FormMethod.Post))
+        {
+            <div class="row noBg">
+                <div class="">
+                    <div class="itm">
+                        <div class="detalhesBody">
+                            <h4 data-toggle="collapse" data-target="#lsResposanveisDepartamento" class="clickRotateIcon">Enviar E-mail de Despesas:<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
+                            <div id="lsResposanveisDepartamento" class="collapse out" style="padding-left:5px;padding-right:5px;padding-bottom:5px;">
+                                <div class="col-md-4">
+                                    <h5><label><input type="checkbox" name="emails[]" id="chkAll" />Selecionar todos os itens</label></h5>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Esolha a data:</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <select class="form-control" name="emailmes" id="emailmes">
+                                            <option value="01" selected="@(1 == Model._selectedMes)">Janeiro</option>
+                                            <option value="02" selected="@(2 == Model._selectedMes)">Fevereiro</option>
+                                            <option value="03" selected="@(3 == Model._selectedMes)">Março</option>
+                                            <option value="04" selected="@(4 == Model._selectedMes)">Abril</option>
+                                            <option value="05" selected="@(5 == Model._selectedMes)">Maio</option>
+                                            <option value="06" selected="@(6 == Model._selectedMes)">Junho</option>
+                                            <option value="07" selected="@(7 == Model._selectedMes)">Julho</option>
+                                            <option value="08" selected="@(8 == Model._selectedMes)">Agosto</option>
+                                            <option value="09" selected="@(9 == Model._selectedMes)">Setembro</option>
+                                            <option value="10" selected="@(10 == Model._selectedMes)">Outubro</option>
+                                            <option value="11" selected="@(11 == Model._selectedMes)">Novembro</option>
+                                            <option value="12" selected="@(12 == Model._selectedMes)">Dezembro</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <select class="form-control" name="emailano" id="emailano">
+                                            @for (int ano = 0; ano < 5; ano++)
+                                            {
+                                                <option value="@DateTime.Now.AddYears(-ano).ToString("yy")"  selected="@(int.Parse(DateTime.Now.AddYears(-ano).ToString("yy")) ==  Model._selectedAno)">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                @foreach (SEDOGv2.Models.ResponsavelDepartamento item in Model._ResponsavelDepartamento)
+                                {
+                                    <div class="col-md-3">
+                                        <label><input type="checkbox" name="emails" value="@item.ID" class="chkBoxObs" />@item.NOME</label>
+                                    </div>
+                                }
+
+                                <div class="col-md-12">
+                                    <textarea name="previewEmail" id="previewEmail">Digite seu texto aqui...</textarea>
+                                </div>
+
+
+                                    <br />
+
+                                    <input id="btnSendEmail" type="submit" value="Enviar e-mail" class="btn btn-lg btn-default btn-block" />
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col-md-2 text-right">
+                    <div class="form-group">
+                        <h4>Esolha o departamento:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="departamento" id="departamento">
+                            <option value="0" selected="@(0 == Model._selectedDepartamento)"> -- Todos --</option>
+                            @foreach (Departamento dep in Model._Departamentos)
+                            {
+                                <option value="@dep.ID" selected="@(dep.ID == Model._selectedDepartamento)">@dep.MCDL01</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2 text-right">
+                    <div class="form-group">
+                        <h4>Esolha a data:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="mes" id="mes">
+                            <option value="01" selected="@(1 == Model._selectedMes)">Janeiro</option>
+                            <option value="02" selected="@(2 == Model._selectedMes)">Fevereiro</option>
+                            <option value="03" selected="@(3 == Model._selectedMes)">Março</option>
+                            <option value="04" selected="@(4 == Model._selectedMes)">Abril</option>
+                            <option value="05" selected="@(5 == Model._selectedMes)">Maio</option>
+                            <option value="06" selected="@(6 == Model._selectedMes)">Junho</option>
+                            <option value="07" selected="@(7 == Model._selectedMes)">Julho</option>
+                            <option value="08" selected="@(8 == Model._selectedMes)">Agosto</option>
+                            <option value="09" selected="@(9 == Model._selectedMes)">Setembro</option>
+                            <option value="10" selected="@(10 == Model._selectedMes)">Outubro</option>
+                            <option value="11" selected="@(11 == Model._selectedMes)">Novembro</option>
+                            <option value="12" selected="@(12 == Model._selectedMes)">Dezembro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="ano" id="ano">
+                            <option value="00"> -- Todos --</option>
+                            @for (int ano = 0; ano < 5; ano++)
+                            {
+                                <option value="@DateTime.Now.AddYears(-ano).ToString("yy")" selected="@(int.Parse(DateTime.Now.AddYears(-ano).ToString("yy")) ==  Model._selectedAno)">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input type="submit" name="Pesquisar" value="Pesquisar" class="btn btn-lg btn-default btn-block" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model._Listado)
+        {
+            
+            decimal MES_ACTION = 0, MES_FCAST = 0, MES_PLAN = 0,
+           DIF_ACTION_FCAST = 0, DIF_ACTION_PLAN = 0, AC_ACTION = 0, AC_FCAST = 0, AC_PLAN = 0, DIF_YTD_ACTION_FCAST = 0, DIF_YTD_ACTION_PLAN = 0;
+
+
+            <div class="panel panel-success">
+                <div class="row">
+                    <div class="col-md-10 text-right">
+                        Exportar para
+                    </div>
+                    <div class="col-md-1 text-left">
+                        <button type="submit" class="btn btn-default printExcel">
+                            <i class="fa fa-file-excel-o fa-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+                @if (Model._hasDepartamento)
+                {
+
+                    <div class="row">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr class="bg-default reportHeader">
+                                        <th>CONTA</th>
+                                        <th>SUB</th>
+                                        <th>DESCRIÇÃO</th>
+                                        <th>ACT. @ViewBag.MesAtual</th>
+                                        <th>@ViewBag.Forecast</th>
+                                        <th>PLAN @ViewBag.MesAtual</th>
+                                        <th>VAR. ACT/FCAST @ViewBag.MesAtual</th>
+                                        <th>VAR. ACT/PLAN @ViewBag.MesAtual</th>
+                                        <th>ACT YTD</th>
+                                        <th>PLAN. YTD</th>
+                                        <th>FCAST YTD</th>
+                                        <th>VAR. ACTION/FCAST YTD</th>
+                                        <th>VAR. ACTION/PLAN YTD</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (DespDepartamento item in Model._DespDepartamento)
+                                    {
+                                        <tr>
+                                            <td>@item.GBOBJ</td>
+                                            <td>@item.GBSUB</td>
+                                            <td>@item.GMDL01</td>
+                                            <td>@string.Format("{0:C0}", item.MES_ACTION)</td>
+                                            <td>@string.Format("{0:C0}", item.MES_FCAST)</td>
+                                            <td>@string.Format("{0:C0}", item.MES_PLAN)</td>
+                                            <td>@string.Format("{0:C0}", item.DIF_ACTION_FCAST)</td>
+                                            <td>@string.Format("{0:C0}", item.DIF_ACTION_PLAN)</td>
+                                            <td>@string.Format("{0:C0}", item.AC_ACTION)</td>
+                                            <td>@string.Format("{0:C0}", item.AC_FCAST)</td>
+                                            <td>@string.Format("{0:C0}", item.AC_PLAN)</td>
+                                            <td>@string.Format("{0:C0}", item.DIF_YTD_ACTION_FCAST)</td>
+                                            <td>@string.Format("{0:C0}", item.DIF_YTD_ACTION_PLAN)</td>
+                                        </tr>
+
+                                        MES_ACTION += item.MES_ACTION;
+                                        MES_FCAST += item.MES_FCAST;
+                                        MES_PLAN += item.MES_PLAN;
+                                        DIF_ACTION_FCAST += item.DIF_ACTION_FCAST;
+                                        DIF_ACTION_PLAN += item.DIF_ACTION_PLAN;
+                                        AC_ACTION += item.AC_ACTION;
+                                        AC_FCAST += item.AC_FCAST;
+                                        AC_PLAN += item.AC_PLAN;
+                                        DIF_YTD_ACTION_FCAST += item.DIF_YTD_ACTION_FCAST;
+                                        DIF_YTD_ACTION_PLAN += item.DIF_YTD_ACTION_PLAN;
+
+
+                                    }
+
+                                    <tr class="trTotal">
+                                        <td colspan="3">Total</td>
+                                        <td>@string.Format("{0:C0}", MES_ACTION)</td>
+                                        <td>@string.Format("{0:C0}", MES_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", MES_PLAN)</td>
+                                        <td>@string.Format("{0:C0}", DIF_ACTION_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", DIF_ACTION_PLAN)</td>
+                                        <td>@string.Format("{0:C0}", AC_ACTION)</td>
+                                        <td>@string.Format("{0:C0}", AC_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", AC_PLAN)</td>
+                                        <td>@string.Format("{0:C0}", DIF_YTD_ACTION_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", DIF_YTD_ACTION_PLAN)</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+
+
+                        <div class="print hidden">
+                           
+
+
+                            <table style="width:100%;white-space:nowrap;">
+                                <tr>
+                                    <td colspan="7" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="text-align:center"><h2 style="text-align:center" class="bold underline">Overhead</h2></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="text-align:center"><h2 style="text-align:center" class="bold underline">Despesas Departamentais</h2></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">&nbsp;</td>
+                                    <td>@DateTime.Now.ToString("MMMM").ToUpper()[0]@DateTime.Now.ToString("MMMM").Substring(1) / @DateTime.Now.Year</td>
+                                    <td>@DateTime.Now.ToString("dd/MM/yyyy") às @DateTime.Now.ToString("HH:mm:ss")</td>
+                                </tr>
+                                <tr>
+                                    <td>Conta</td>
+                                    <td>Sub</td>
+                                    <td>Descrição</td>
+                                    <td>Act. @ViewBag.MesAtual</td>
+                                    <td>@ViewBag.Forecast</td>
+                                    <td>Plan @ViewBag.MesAtual</td>
+                                    <td>Var. Act/Fcast @ViewBag.MesAtual</td>
+                                    <td>Var. Act/Plan @ViewBag.MesAtual</td>
+                                    <td>Act YTD</td>
+                                    <td>Plan. YTD</td>
+                                    <td>Fcast YTD</td>
+                                    <td>Var. Action/Fcast YTD</td>
+                                    <td>Var. Action/Plan YTD</td>
+                                </tr>
+
+                                    @foreach (DespDepartamento item in Model._DespDepartamento)
+                                    {
+                                        <tr>
+                                            <td>@item.GBOBJ</td>
+                                            <td>@item.GBSUB</td>
+                                            <td>@item.GMDL01</td>
+                                            <td>@string.Format("{0:C0}", item.MES_ACTION)</td>
+                                            <td>@string.Format("{0:C0}", item.MES_FCAST)</td>
+                                            <td>@string.Format("{0:C0}", item.MES_PLAN)</td>
+                                            <td>@string.Format("{0:C0}", item.DIF_ACTION_FCAST)</td>
+                                            <td>@string.Format("{0:C0}", item.DIF_ACTION_PLAN)</td>
+                                            <td>@string.Format("{0:C0}", item.AC_ACTION)</td>
+                                            <td>@string.Format("{0:C0}", item.AC_FCAST)</td>
+                                            <td>@string.Format("{0:C0}", item.AC_PLAN)</td>
+                                            <td>@string.Format("{0:C0}", item.DIF_YTD_ACTION_FCAST)</td>
+                                            <td>@string.Format("{0:C0}", item.DIF_YTD_ACTION_PLAN)</td>
+                                        </tr>
+                                        MES_ACTION += item.MES_ACTION;
+                                        MES_FCAST += item.MES_FCAST;
+                                        MES_PLAN += item.MES_PLAN;
+                                        DIF_ACTION_FCAST += item.DIF_ACTION_FCAST;
+                                        DIF_ACTION_PLAN += item.DIF_ACTION_PLAN;
+                                        AC_ACTION += item.AC_ACTION;
+                                        AC_FCAST += item.AC_FCAST;
+                                        AC_PLAN += item.AC_PLAN;
+                                        DIF_YTD_ACTION_FCAST += item.DIF_YTD_ACTION_FCAST;
+                                        DIF_YTD_ACTION_PLAN += item.DIF_YTD_ACTION_PLAN;
+
+
+                                    }
+
+                                    <tr class="trTotal">
+                                        <td colspan="3">Total</td>
+                                        <td>@string.Format("{0:C0}", MES_ACTION)</td>
+                                        <td>@string.Format("{0:C0}", MES_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", MES_PLAN)</td>
+                                        <td>@string.Format("{0:C0}", DIF_ACTION_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", DIF_ACTION_PLAN)</td>
+                                        <td>@string.Format("{0:C0}", AC_ACTION)</td>
+                                        <td>@string.Format("{0:C0}", AC_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", AC_PLAN)</td>
+                                        <td>@string.Format("{0:C0}", DIF_YTD_ACTION_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", DIF_YTD_ACTION_PLAN)</td>
+                                    </tr>
+                            </table>
+
+                        </div>
+
+
+
+
+                                }
+                                else
+                                {
+
+                    <div class="row">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr class="bg-default reportHeader">
+                                    <th>Departamento</th>
+                                    <th>Act. @ViewBag.MesAtual</th>
+                                    <th>@ViewBag.Forecast</th>
+                                    <th>Plan @ViewBag.MesAtual</th>
+                                    <th>Var. Act/Fcast @ViewBag.MesAtual</th>
+                                    <th>Var. Act/Plan @ViewBag.MesAtual</th>
+                                    <th>Act YTD</th>
+                                    <th>Fcast YTD</th>
+                                    <th>Plan. YTD</th>
+                                    <th>Var. Action/Fcast YTD</th>
+                                    <th>Var. Action/Plan YTD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DespDepartamento item in Model._DespDepartamento)
+                                {
+                                    <tr>
+                                        <td>@item.MCDL01</td>
+                                        <td>@string.Format("{0:C0}", item.MES_ACTION)</td>
+                                        <td>@string.Format("{0:C0}", item.MES_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", item.MES_PLAN)</td>
+                                        <td>@string.Format("{0:C0}", item.DIF_ACTION_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", item.DIF_ACTION_PLAN)</td>
+                                        <td>@string.Format("{0:C0}", item.AC_ACTION)</td>
+                                        <td>@string.Format("{0:C0}", item.AC_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", item.AC_PLAN)</td>
+                                        <td>@string.Format("{0:C0}", item.DIF_YTD_ACTION_FCAST)</td>
+                                        <td>@string.Format("{0:C0}", item.DIF_YTD_ACTION_PLAN)</td>
+                                    </tr>
+                                    MES_ACTION += item.MES_ACTION;
+                                    MES_FCAST += item.MES_FCAST;
+                                    MES_PLAN += item.MES_PLAN;
+                                    DIF_ACTION_FCAST += item.DIF_ACTION_FCAST;
+                                    DIF_ACTION_PLAN += item.DIF_ACTION_PLAN;
+                                    AC_ACTION += item.AC_ACTION;
+                                    AC_FCAST += item.AC_FCAST;
+                                    AC_PLAN += item.AC_PLAN;
+                                    DIF_YTD_ACTION_FCAST += item.DIF_YTD_ACTION_FCAST;
+                                    DIF_YTD_ACTION_PLAN += item.DIF_YTD_ACTION_PLAN;
+
+
+                                }
+
+                                <tr class="trTotal">
+                                    <td>Total</td>
+                                    <td>@string.Format("{0:C0}", MES_ACTION)</td>
+                                    <td>@string.Format("{0:C0}", MES_FCAST)</td>
+                                    <td>@string.Format("{0:C0}", MES_PLAN)</td>
+                                    <td>@string.Format("{0:C0}", DIF_ACTION_FCAST)</td>
+                                    <td>@string.Format("{0:C0}", DIF_ACTION_PLAN)</td>
+                                    <td>@string.Format("{0:C0}", AC_ACTION)</td>
+                                    <td>@string.Format("{0:C0}", AC_FCAST)</td>
+                                    <td>@string.Format("{0:C0}", AC_PLAN)</td>
+                                    <td>@string.Format("{0:C0}", DIF_YTD_ACTION_FCAST)</td>
+                                    <td>@string.Format("{0:C0}", DIF_YTD_ACTION_PLAN)</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+
+                    </div>
+
+
+                    <div class="print hidden">
+
+
+
+                        <table style="width:100%;white-space:nowrap;">
+                            <tr>
+                                <td colspan="7" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" style="text-align:center"><h2 style="text-align:center" class="bold underline">Overhead</h2></td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" style="text-align:center"><h2 style="text-align:center" class="bold underline">Despesas Departamentais</h2></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">&nbsp;</td>
+                                <td>@DateTime.Now.ToString("MMMM").ToUpper()[0]@DateTime.Now.ToString("MMMM").Substring(1) / @DateTime.Now.Year</td>
+                                <td>@DateTime.Now.ToString("dd/MM/yyyy") às @DateTime.Now.ToString("HH:mm:ss")</td>
+                            </tr>
+                            <tr>
+                                <td>Departamento</td>
+                                <td>Act. @ViewBag.MesAtual</td>
+                                <td>@ViewBag.Forecast</td>
+                                <td>Plan @ViewBag.MesAtual</td>
+                                <td>Var. Act/Fcast @ViewBag.MesAtual</td>
+                                <td>Var. Act/Plan @ViewBag.MesAtual</td>
+                                <td>Act YTD</td>
+                                <td>Plan. YTD</td>
+                                <td>Fcast YTD</td>
+                                <td>Var. Action/Fcast YTD</td>
+                                <td>Var. Action/Plan YTD</td>
+                            </tr>
+
+                            @foreach (DespDepartamento item in Model._DespDepartamento)
+                            {
+                                <tr>
+                                    <td>@item.MCDL01</td>
+                                    <td>@string.Format("{0:C0}", item.MES_ACTION)</td>
+                                    <td>@string.Format("{0:C0}", item.MES_FCAST)</td>
+                                    <td>@string.Format("{0:C0}", item.MES_PLAN)</td>
+                                    <td>@string.Format("{0:C0}", item.DIF_ACTION_FCAST)</td>
+                                    <td>@string.Format("{0:C0}", item.DIF_ACTION_PLAN)</td>
+                                    <td>@string.Format("{0:C0}", item.AC_ACTION)</td>
+                                    <td>@string.Format("{0:C0}", item.AC_FCAST)</td>
+                                    <td>@string.Format("{0:C0}", item.AC_PLAN)</td>
+                                    <td>@string.Format("{0:C0}", item.DIF_YTD_ACTION_FCAST)</td>
+                                    <td>@string.Format("{0:C0}", item.DIF_YTD_ACTION_PLAN)</td>
+                                </tr>
+                                MES_ACTION += item.MES_ACTION;
+                                MES_FCAST += item.MES_FCAST;
+                                MES_PLAN += item.MES_PLAN;
+                                DIF_ACTION_FCAST += item.DIF_ACTION_FCAST;
+                                DIF_ACTION_PLAN += item.DIF_ACTION_PLAN;
+                                AC_ACTION += item.AC_ACTION;
+                                AC_FCAST += item.AC_FCAST;
+                                AC_PLAN += item.AC_PLAN;
+                                DIF_YTD_ACTION_FCAST += item.DIF_YTD_ACTION_FCAST;
+                                DIF_YTD_ACTION_PLAN += item.DIF_YTD_ACTION_PLAN;
+
+
+                            }
+
+                            <tr class="trTotal">
+                                <td>Total</td>
+                                <td>@string.Format("{0:C0}", MES_ACTION)</td>
+                                <td>@string.Format("{0:C0}", MES_FCAST)</td>
+                                <td>@string.Format("{0:C0}", MES_PLAN)</td>
+                                <td>@string.Format("{0:C0}", DIF_ACTION_FCAST)</td>
+                                <td>@string.Format("{0:C0}", DIF_ACTION_PLAN)</td>
+                                <td>@string.Format("{0:C0}", AC_ACTION)</td>
+                                <td>@string.Format("{0:C0}", AC_FCAST)</td>
+                                <td>@string.Format("{0:C0}", AC_PLAN)</td>
+                                <td>@string.Format("{0:C0}", DIF_YTD_ACTION_FCAST)</td>
+                                <td>@string.Format("{0:C0}", DIF_YTD_ACTION_PLAN)</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+
+                }
+            </div>
+
+        }
+
+
+    </div>
+
+</div>
+
+
+@using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+{
+    <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+    <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        function checkALL(x) {
+
+            if (x.checked) {
+                $("input:checkbox").prop('checked', true);
+            }
+            else {
+                $("input:checkbox").prop('checked', false);
+            }
+        }
+
+        $("#chkAll").click(function () { checkALL(this); });
+
+    });
+
+</script>

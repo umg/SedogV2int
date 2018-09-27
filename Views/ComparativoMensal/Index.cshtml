@@ -1,0 +1,379 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    @using (Html.BeginForm("Index", "ComparativoMensal", FormMethod.Post, new { id = "FormGastoPessoal" }))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+
+            <div class="col-md-12" runat="server" id="divAlert">
+                <br />
+                @Html.Raw(ViewBag.Message)
+            </div>
+
+            <div class="row">
+                <div class="col-md-1 text-right">
+                    <div class="form-group">
+                        <h4>Mês:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="mes" id="mes">
+                            <option value="1" selected="@(1 == Model._selectedMes)">Janeiro</option>
+                            <option value="2" selected="@(2 == Model._selectedMes)">Fevereiro</option>
+                            <option value="3" selected="@(3 == Model._selectedMes)">Março</option>
+                            <option value="4" selected="@(4 == Model._selectedMes)">Abril</option>
+                            <option value="5" selected="@(5 == Model._selectedMes)">Maio</option>
+                            <option value="6" selected="@(6 == Model._selectedMes)">Junho</option>
+                            <option value="7" selected="@(7 == Model._selectedMes)">Julho</option>
+                            <option value="8" selected="@(8 == Model._selectedMes)">Agosto</option>
+                            <option value="9" selected="@(9 == Model._selectedMes)">Setembro</option>
+                            <option value="10" selected="@(10 == Model._selectedMes)">Outubro</option>
+                            <option value="11" selected="@(11 == Model._selectedMes)">Novembro</option>
+                            <option value="12" selected="@(12 == Model._selectedMes)">Dezembro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-1 text-right">
+                    <div class="form-group">
+                        <h4>Ano:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="ano" id="ano">
+                            @for (int ano = 0; ano <= DateTime.Now.Year - (DateTime.Now.Year-1); ano++)
+                            {
+                                <option value="@(DateTime.Now.AddYears(-ano).ToString("yyyy"))" selected="@(DateTime.Now.AddYears(-ano).Year == Model._selectedAno)">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-1 text-right">
+                    <div class="form-group">
+                        <h4>Visualização:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="visualizacao" id="visualizacao">
+                            <option value="mes" selected="@("mes" == Model._selectedVisualizacao)">Mês Anterior</option>
+                            <option value="plan" selected="@("plan" == Model._selectedVisualizacao)">Plan</option>
+                            <option value="forcast" selected="@("forcast" == Model._selectedVisualizacao)">Forcast</option>
+                           
+                        </select>
+                    </div>
+                </div>
+                
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="submit" name="Gerar" value="Generate" class="btn btn-default btn-lg" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+    @if (((OverheadViewModel)Model).Overhead.Count() > 0)
+    {
+        decimal totalContaMesAtual = 0, totalContaMesAnterior = 0, totalContaVariacao = 0,
+            totalMesAtual = 0, totalMesAnterior = 0, totalVariacao = 0;
+
+        decimal totalContaMesAtualYTD = 0, totalContaMesAnteriorYTD = 0, totalContaVariacaoYTD = 0,
+            totalMesAtualYTD = 0, totalMesAnteriorYTD = 0, totalVariacaoYTD = 0;
+
+        string conta = "";
+
+        <div class="panel panel-success">
+            <div class="row">
+                <div class="col-md-10 text-right">
+                    Exportar para
+                </div>
+                <div class="col-md-1 text-left">
+                    <button type="submit" class="btn btn-default printExcel">
+                        <i class="fa fa-file-excel-o fa-4"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>CONTA</th>
+                        <th>DESCRIÇÃO</th>
+                        <th>SUBCONTA</th>
+                        <th>@ViewBag.MesAnterior</th>
+                        <th>@ViewBag.MesAtual</th>
+                        <th>VARIAÇÃO</th>
+
+                        @if (Model._selectedVisualizacao != "mes")
+                        {
+                        <th>%</th>
+                        <th>@ViewBag.MesAnterior YTD</th>
+                        <th>@ViewBag.MesAtual YTD </th>
+                        <th>VAR. YTD</th>
+                        <th>YTD(%)</th>
+                        }
+                    </tr>
+
+                    @foreach (var item in Model.Overhead)
+                    {
+                        if (conta != item.OBJ_JDE && conta != "")
+                        {
+                            <tr class="trTotal">
+                                <td colspan="3">Total da conta @conta</td>
+                                <td @(totalContaMesAnterior < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaMesAnterior)</td>
+                                <td @(totalContaMesAtual < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaMesAtual)</td>
+                                <td @(totalContaVariacao < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaVariacao)</td>
+                               @if (Model._selectedVisualizacao != "mes")
+                               {
+                                 <td></td>
+                                <td @(totalContaMesAnteriorYTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaMesAnteriorYTD)</td>
+                                <td @(totalContaMesAtualYTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaMesAtualYTD)</td>
+                                <td @(totalContaVariacaoYTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaVariacaoYTD)</td>
+                                <td></td>
+                               }
+                            </tr>
+                            totalContaMesAnterior = 0;
+                            totalContaMesAtual = 0;
+                            totalContaVariacao = 0;
+                            totalContaMesAnteriorYTD = 0;
+                            totalContaMesAtualYTD = 0;
+                            totalContaVariacaoYTD = 0;
+                        }
+                        <tr>
+                            <td>@item.OBJ_JDE</td>
+                            <td>@item.DESCRICAO</td>
+                            <td>@item.GBSUB</td>
+                            <td @(item.MESANT < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", item.MESANT)</td>
+                            <td @(item.MES < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", item.MES)</td>
+                            <td @(item.DIF < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", item.DIF)</td>
+                            @if (Model._selectedVisualizacao != "mes")
+                            {
+
+                            <td>@(item.MESANT != 0 ? string.Format("{0:P2}", item.DIF / item.MESANT) : "0%")</td>
+
+                            <td @(item.YTDANT < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", item.YTDANT)</td>
+                            <td @(item.YTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", item.YTD)</td>
+                            <td @(item.DIFYTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", item.DIFYTD)</td>
+                            <td>@(item.YTDANT != 0 ? string.Format("{0:P2}", item.DIFYTD / item.YTDANT) : "0%")</td>
+                            }
+                        </tr>
+
+                        conta = item.OBJ_JDE;
+                        totalContaMesAnterior += item.MESANT;
+                        totalContaMesAtual += item.MES;
+                        totalContaVariacao += item.DIF;
+                        totalMesAtual += item.MESANT;
+                        totalMesAnterior += item.MES;
+                        totalVariacao += item.DIF;
+
+                        totalContaMesAnteriorYTD += item.YTDANT;
+                        totalContaMesAtualYTD += item.YTD;
+                        totalContaVariacaoYTD += item.DIFYTD;
+                        totalMesAtualYTD += item.YTDANT;
+                        totalMesAnteriorYTD += item.YTD;
+                        totalVariacaoYTD += item.DIFYTD;
+
+                    }
+                    <tr class="trTotal">
+                        <td colspan="3">Total da conta @conta</td>
+                        <td @(totalContaMesAnterior < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaMesAnterior)</td>
+                        <td @(totalContaMesAtual < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaMesAtual)</td>
+                        <td @(totalContaVariacao < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaVariacao)</td>
+                       @if (Model._selectedVisualizacao != "mes")
+                       {
+                         <td></td>
+
+                        <td @(totalContaMesAnteriorYTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaMesAnteriorYTD)</td>
+                        <td @(totalContaMesAtualYTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaMesAtualYTD)</td>
+                        <td @(totalContaVariacaoYTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalContaVariacaoYTD)</td>
+                        <td></td>
+                       }
+                    </tr>
+                    <tr class="trTotal">
+                        <td colspan="3">Total geral</td>
+                        <td @(totalMesAtual < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalMesAtual)</td>
+                        <td @(totalMesAnterior < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalMesAnterior)</td>
+                        <td @(totalVariacao < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalVariacao)</td>
+                        @if (Model._selectedVisualizacao != "mes")
+                        {
+                        <td></td>
+
+                        <td @(totalMesAtualYTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalMesAtualYTD)</td>
+                        <td @(totalMesAnteriorYTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalMesAnteriorYTD)</td>
+                        <td @(totalVariacaoYTD < 0 ? "style=color:red" : "")>@string.Format("{0:C2}", totalVariacaoYTD)</td>
+                        <td></td>
+                        }
+                    </tr>
+                </table>
+
+            </div>
+            <div class="print hidden">
+                @{
+                    totalContaMesAtual = 0;
+                    totalContaMesAnterior = 0;
+                    totalContaVariacao = 0;
+                    totalMesAtual = 0;
+                    totalMesAnterior = 0;
+                    totalVariacao = 0;
+                    conta = "";
+
+                    totalContaMesAtualYTD = 0;
+                    totalContaMesAnteriorYTD = 0;
+                    totalContaVariacaoYTD = 0;
+                    totalMesAtualYTD = 0;
+                    totalMesAnteriorYTD = 0;
+                    totalVariacaoYTD = 0;
+                }
+
+
+                <table style="width:100%;white-space:nowrap;">
+                    <tr>
+                        <td colspan="7" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" style="text-align:center"><h2 style="text-align:center" class="bold underline">Overhead</h2></td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" style="text-align:center"><h2 style="text-align:center" class="bold underline">Comparativo Mensal</h2></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">&nbsp;</td>
+                        <td>@DateTime.Now.ToString("MMMM").ToUpper()[0]@DateTime.Now.ToString("MMMM").Substring(1) / @DateTime.Now.Year</td>
+                        <td>@DateTime.Now.ToString("dd/MM/yyyy") às @DateTime.Now.ToString("HH:mm:ss")</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">CONTA</td>
+                        <td class="bold">DESCRIÇÃO</td>
+                        <td class="bold">SUBCONTA</td>
+                        <td class="boldright">@ViewBag.MesAnterior</td>
+                        <td class="boldright">@ViewBag.MesAtual</td>
+                        <td class="boldright">VARIAÇÃO</td>
+                        
+                        @if (Model._selectedVisualizacao != "mes")
+                        {
+                        <td class="boldright">%</td>
+                        <th>@ViewBag.MesAnterior YTD</th>
+                        <th>@ViewBag.MesAtual YTD </th>
+                        <th>VAR. YTD</th>
+                        <th>YTD(%)</th>
+                        }
+                    </tr>
+
+                    @foreach (var item in Model.Overhead)
+                    {
+                        if (conta != item.OBJ_JDE && conta != "")
+                        {
+                            <tr class="trTotal" style="background-color:#ccc;">
+                                <td colspan="3" class="bold" style="background-color:#ccc;">Total da conta @conta</td>
+                                <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaMesAnterior)</td>
+                                <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaMesAtual)</td>
+                                <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaVariacao)</td>
+@if (Model._selectedVisualizacao != "mes")
+{
+                                <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaMesAnteriorYTD)</td>
+                                <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaMesAtualYTD)</td>
+                                <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaVariacaoYTD)</td>
+                                <td style="background-color:#ccc;"></td>
+}
+                            </tr>
+                            totalContaMesAnterior = 0;
+                            totalContaMesAtual = 0;
+                            totalContaVariacao = 0;
+                            totalContaMesAnteriorYTD = 0;
+                            totalContaMesAtualYTD = 0;
+                            totalContaVariacaoYTD = 0;
+                        }
+                        <tr>
+                            <td>@item.OBJ_JDE</td>
+                            <td>@item.DESCRICAO</td>
+                            <td>@item.GBSUB</td>
+                            <td>@string.Format("{0:C2}", item.MESANT)</td>
+                            <td>@string.Format("{0:C2}", item.MES)</td>
+                            <td>@string.Format("{0:C2}", item.DIF)</td>
+@if (Model._selectedVisualizacao != "mes")
+{
+                            <td>@(item.MESANT != 0 ? string.Format("{0:P2}", item.DIF / item.MESANT) : "0%")</td>
+
+                            <td>@string.Format("{0:C2}", item.YTDANT)</td>
+                            <td>@string.Format("{0:C2}", item.YTD)</td>
+                            <td>@string.Format("{0:C2}", item.DIFYTD)</td>
+                            <td>@(item.YTDANT != 0 ? string.Format("{0:P2}", item.DIF / item.YTDANT) : "0%")</td>
+}
+                        </tr>
+
+                        conta = item.OBJ_JDE;
+                        totalContaMesAnterior += item.MESANT;
+                        totalContaMesAtual += item.MES;
+                        totalContaVariacao += item.DIF;
+                        totalMesAtual += item.MESANT;
+                        totalMesAnterior += item.MES;
+                        totalVariacao += item.DIF;
+
+                        totalContaMesAnteriorYTD += item.YTDANT;
+                        totalContaMesAtualYTD += item.YTD;
+                        totalContaVariacaoYTD += item.DIFYTD;
+                        totalMesAtualYTD += item.YTDANT;
+                        totalMesAnteriorYTD += item.YTD;
+                        totalVariacaoYTD += item.DIFYTD;
+                    }
+                    <tr class="trTotal" style="background-color:#ccc;">
+                        <td colspan="3" class="bold" style="background-color:#ccc;">Total da conta @conta</td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaMesAnterior)</td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaMesAtual)</td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaVariacao)</td>
+@if (Model._selectedVisualizacao != "mes")
+{
+                        <td style="background-color:#ccc;"></td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaMesAnteriorYTD)</td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaMesAtualYTD)</td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalContaVariacaoYTD)</td>
+                        <td style="background-color:#ccc;"></td>
+}
+                    </tr>
+                    <tr class="trTotal" style="background-color:#ccc;">
+                        <td colspan="3" class="bold">Total geral</td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalMesAtual)</td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalMesAnterior)</td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalVariacao)</td>
+@if (Model._selectedVisualizacao != "mes")
+{
+                        <td style="background-color:#ccc;"></td>
+
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalMesAtualYTD)</td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalMesAnteriorYTD)</td>
+                        <td class="bold" style="background-color:#ccc;">@string.Format("{0:C2}", totalVariacaoYTD)</td>
+                        <td style="background-color:#ccc;"></td>
+}
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+                    }
+</div>
+
+@using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+{
+    <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+    <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+}

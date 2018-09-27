@@ -1,0 +1,321 @@
+﻿@using SEDOGv2.Helpers;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+    int c = 0;
+}
+
+<div class="container-fluid">
+
+    @using (Html.BeginForm("Index", "DespesasDeMarketingPorGrupo", FormMethod.Post, new { id = "FormDespesasDeMarketingPorGrupo1" }))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+            <div class="col-md-12" runat="server" id="divAlert">
+                @ViewBag.Message
+            </div>
+
+            <div class="row">
+                <div class="col-md-1 text-right">
+                    <div class="form-group">
+                        <h4>Repertório:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="origem">
+                            <option value="">Todos</option>
+                            <option value="NAC">Nacional</option>
+                            <option value="INT">Internacional</option>
+                            <option value="SPE">Special Marketing</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1 text-right">
+                    <div class="form-group">
+                        <h4>Mês:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="mes">
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2 text-right">
+                    <div class="form-group">
+                        <h4>Ano:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select name="ano" id="selAno" class="form-control" >
+                            @for (int ano = 0; ano <= DateTime.Now.Year - 2010; ano++)
+                            {
+                                <option value="@(DateTime.Now.AddYears(-ano).ToString("yy"))">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input type="submit" name="btnGerarRelatorios" value="pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+        <div class="panel panel-success panel-report">
+            <div class="row reportHeader">
+                <div class="col-md-11 text-left"><h2>@ViewBag.Header</h2></div>
+                <div class="col-md-1 text-right">
+                    <button type="submit" class="btn btn-default printPDF">
+                        <i class="fa fa-file-pdf-o fa-4"></i>
+                    </button>
+                    <button type="submit" class="btn btn-default printExcel">
+                        <i class="fa fa-file-excel-o fa-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-inline text-medium tableSortPaggingGrupo">
+                        <thead>
+                            <tr class="bg-default">
+                                <th>BU</th>
+                                <th>Descrição</th>
+                                <th>Artista</th>
+                                <th>Classif.HFM</th>
+                                <th>Total Desp. Marketing</th>
+                                <th>ORCAMENTO_MES</th>
+                                <th>Custo Inicial</th>
+                                <th>TV</th>
+                                <th>Radio</th>
+                                <th>Ação Promocional Outros</th>
+                                <th>Mídia On Line</th>
+                                <th>Imprensa</th>
+                                <th>Merchandising</th>
+                                <th>Amostras</th>
+                                <th>Video Clips</th>
+                                <th>Freelancers</th>
+                                <th>Clipping</th>
+                                <th>NBD</th>
+                                <th>DIGITAL</th>
+                                <th>Marketing Outros</th>
+                                <th>Publicidade On Line</th>
+                            </tr>
+                            <tr class="bg-default">
+                                <th colspan="4" style="text-align:right">Total:</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TGTOTAL)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TORCAMENTO_MES)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG2)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG440)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG441)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG447)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG442)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG443)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG445)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG446)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG448)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG449)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG450)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TNBD)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TDIGITAL)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG444)</th>
+                                <th>@string.Format("{0:N2}", ViewBag.TG453)</th>
+                            </tr>
+                        </thead>
+                        @foreach (SEDOGv2.Models.DespesasDeMarketingCTBRepertorioPorGrupoViewModel item in Model)
+                        {
+                            <tr>
+                                <td>@item.BU</td>
+                                <td>@item.DESC</td>
+                                <td>@item.ARTISTA</td>
+                                <td>@item.DESC_HFM</td>
+                                <td>@string.Format("{0:N2}", item.GTOTAL)</td>
+                                <td>@string.Format("{0:N2}", item.ORCAMENTO_MES)</td>
+                                <td>@string.Format("{0:N2}", item.G2)</td>
+                                <td>@string.Format("{0:N2}", item.G440)</td>
+                                <td>@string.Format("{0:N2}", item.G441)</td>
+                                <td>@string.Format("{0:N2}", item.G447)</td>
+                                <td>@string.Format("{0:N2}", item.G442)</td>
+                                <td>@string.Format("{0:N2}", item.G443)</td>
+                                <td>@string.Format("{0:N2}", item.G445)</td>
+                                <td>@string.Format("{0:N2}", item.G446)</td>
+                                <td>@string.Format("{0:N2}", item.G448)</td>
+                                <td>@string.Format("{0:N2}", item.G449)</td>
+                                <td>@string.Format("{0:N2}", item.G450)</td>
+                                <td>@string.Format("{0:N2}", item.NBD)</td>
+                                <td>@string.Format("{0:N2}", item.DIGITAL)</td>
+                                <td>@string.Format("{0:N2}", item.G444)</td>
+                                <td>@string.Format("{0:N2}", item.G453)</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="print" style="display:none">
+            <table class="table table-bordered" width="100%" style="width:100%">
+                <tr>
+                    <td colspan="22" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                </tr>
+                <tr>
+                    <td colspan="22" style="text-align:center"><h2 style="text-align:center" class="bold">RELATÓRIO DE DESPESA DE MARKETING POR GRUPO</h2></td>
+                </tr>
+                <tr>
+                    <td colspan="22"><h2 style="text-align:center" class="bold">@ViewBag.Header</h2></td>
+                </tr>
+                <tr>
+                    <td colspan="22" style="text-align:center" class="bold"></td>
+                </tr>
+                <tr>
+                    <th class="box">BU</th>
+                    <th class="box">Descrição</th>
+                    <th class="box">Artista</th>
+                    <th class="box">Classif.HFM</th>
+                    <th class="box">Total Desp. Marketing</th>
+                    <th class="box">ORCAMENTO_MES</th>
+                    <th class="box">Custo Inicial</th>
+                    <th class="box">TV</th>
+                    <th class="box">Radio</th>
+                    <th class="box">Ação Promocional Outros</th>
+                    <th class="box">Mídia On Line</th>
+                    <th class="box">Imprensa</th>
+                    <th class="box">Merchandising</th>
+                    <th class="box">Amostras</th>
+                    <th class="box">Video Clips</th>
+                    <th class="box">Freelancers</th>
+                    <th class="box">Clipping</th>
+                    <th class="box">NBD</th>
+                    <th class="box">DIGITAL</th>
+                    <th class="box">Marketing Outros</th>
+                    <th class="box">Publicidade On Line</th>
+                </tr>
+                <tr>
+                    <th colspan="4" class="box" style="text-align:right">Total:</th>
+                    <th class="box">@ViewBag.TGTOTAL</th>
+                    <th class="box">@ViewBag.TORCAMENTO_MES</th>
+                    <th class="box">@ViewBag.TG2</th>
+                    <th class="box">@ViewBag.TG440</th>
+                    <th class="box">@ViewBag.TG441</th>
+                    <th class="box">@ViewBag.TG447</th>
+                    <th class="box">@ViewBag.TG442</th>
+                    <th class="box">@ViewBag.TG443</th>
+                    <th class="box">@ViewBag.TG445</th>
+                    <th class="box">@ViewBag.TG446</th>
+                    <th class="box">@ViewBag.TG448</th>
+                    <th class="box">@ViewBag.TG449</th>
+                    <th class="box">@ViewBag.TG450</th>
+                    <th class="box">@ViewBag.TNBD</th>
+                    <th class="box">@ViewBag.TDIGITAL</th>
+                    <th class="box">@ViewBag.TG444</th>
+                    <th class="box">@ViewBag.TG453</th>
+                </tr>
+                @foreach (SEDOGv2.Models.DespesasDeMarketingCTBRepertorioPorGrupoViewModel item in Model)
+                {
+                    <tr>
+                        <td class="altRow_@(c % 2)">@item.BU</td>
+                        <td class="altRow_@(c % 2)">@item.DESC</td>
+                        <td class="altRow_@(c % 2)">@item.ARTISTA</td>
+                        <td class="altRow_@(c % 2)">@item.DESC_HFM</td>
+                        <td class="altRow_@(c % 2)">@item.GTOTAL</td>
+                        <td class="altRow_@(c % 2)">@item.ORCAMENTO_MES</td>
+                        <td class="altRow_@(c % 2)">@item.G2</td>
+                        <td class="altRow_@(c % 2)">@item.G440</td>
+                        <td class="altRow_@(c % 2)">@item.G441</td>
+                        <td class="altRow_@(c % 2)">@item.G447</td>
+                        <td class="altRow_@(c % 2)">@item.G442</td>
+                        <td class="altRow_@(c % 2)">@item.G443</td>
+                        <td class="altRow_@(c % 2)">@item.G445</td>
+                        <td class="altRow_@(c % 2)">@item.G446</td>
+                        <td class="altRow_@(c % 2)">@item.G448</td>
+                        <td class="altRow_@(c % 2)">@item.G449</td>
+                        <td class="altRow_@(c % 2)">@item.G450</td>
+                        <td class="altRow_@(c % 2)">@item.NBD</td>
+                        <td class="altRow_@(c % 2)">@item.DIGITAL</td>
+                        <td class="altRow_@(c % 2)">@item.G444</td>
+                        <td class="altRow_@(c % 2)">@item.G453</td>
+                    </tr>
+                    c++;
+                }
+            </table>
+
+        </div>
+   
+
+    @using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+    {
+        <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+        <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $("#datepicker").datepicker({
+                language: 'pt-BR',
+                orientation: 'auto top',
+                autoclose: true,
+                clearBtn: true,
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years",
+                clearBtn:true
+            });
+            //$('#datepicker').datepicker('setDate', new Date(@DateTime.Now.Year.ToString(), 1, 1));
+            //$("#my_hidden_input_date").val($("#datepicker").datepicker('getFormattedDate'));
+            function checkALL(x) {
+
+                if (x.checked) {
+                    $("input:checkbox").prop('checked', true);
+                }
+                else {
+                    $("input:checkbox").prop('checked', false);
+                }
+            }
+
+            $("#datepicker").on("changeDate", function (event) {
+                $("#my_hidden_input_date").val($("#datepicker").datepicker('getFormattedDate'));
+            });
+            $("#chkAll").click(function () { checkALL(this); });
+
+            $("#FormDigitalCustomerUsageType2").submit(function (event) {
+                if ($("input:checked").length > 0){
+                    return;
+                }
+                $('#pleaseWaitDialog').modal('toggle');
+                event.preventDefault();
+            });
+
+        });
+
+    </script>
+
+</div>

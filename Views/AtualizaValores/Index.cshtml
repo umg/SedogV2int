@@ -1,0 +1,87 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    @using (Html.BeginForm("Index", "AtualizaValores", FormMethod.Post))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+            <div class="col-md-12" id="divAlert">
+                @Html.Raw(ViewBag.Message)
+            </div>
+            <div class="row">
+                <div class="col-md-1 text-right">
+                    <div class="form-group">
+                        <h4>Month:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="mes" id="mes">
+                            <option value="1" selected="">January</option>
+                            <option value="2" selected="">February</option>
+                            <option value="3" selected="">March</option>
+                            <option value="4" selected="">April</option>
+                            <option value="5" selected="">May</option>
+                            <option value="6" selected="">June</option>
+                            <option value="7" selected="">July</option>
+                            <option value="8" selected="">August</option>
+                            <option value="9" selected="">September</option>
+                            <option value="10" selected="">October</option>
+                            <option value="11" selected="">November</option>
+                            <option value="12" selected="">December</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1 text-right">
+                    <div class="form-group">
+                        <h4>Year:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="ano" id="ano">
+                            @for (int ano = 0; ano <= DateTime.Now.Year - (DateTime.Now.Year - 1); ano++)
+                            {
+                                <option value="@(DateTime.Now.AddYears(-ano).ToString("yyyy"))" selected="">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1 text-right">
+                    <div class="form-group">
+                        <h4>View:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="visualizacao" id="visualizacao">
+                            <option value="mes" selected="">Prev Month</option>
+                            <option value="plan" selected="">Plan</option>
+                            <option value="forcast" selected="">Forcast</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="submit" name="Gerar" value="Generate" class="btn btn-default btn-lg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

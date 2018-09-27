@@ -1,0 +1,57 @@
+﻿@using SEDOGv2.Helpers;
+@model SEDOGv2.Models.UsuarioViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    Delete User
+                </h2>
+            </div>
+        </div>
+
+
+        <div class="col-md-12" runat="server" id="divAlert">
+            @ViewBag.Error
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Delete User?</h4></div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <h5>Login:</h5>
+                                @Html.DisplayFor(model => model.LOGIN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.LOGIN, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>Name:</h5>
+                                @Html.DisplayFor(model => model.NOME, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>Email:</h5>
+                                @Html.DisplayFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>Department:</h5>
+                                @Html.DisplayFor(model => model.DEPTO, new { htmlAttributes = new { @class = "form-control" } })
+                                
+                                <br />
+                                <input type="submit" name="apagar" value="Delete" class="btn btn-default pull-right" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-right">
+                    @Html.ActionLink("Back to list", "Index", "Usuario", null, new { @class = "link" })
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

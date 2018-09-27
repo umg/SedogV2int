@@ -1,0 +1,26 @@
+﻿@using SEDOGv2.Models;
+@{
+    ViewBag.Title = "ProcuraArtistaPorProduto";
+    //Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+<div id="mainContent">
+        <div class="input-group">
+            <input type="text" class="form-control input-md" id="pesquisaNomeProjeto" placeholder="Project Name" />
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-md" type="button" id="btnProcuraProdutosPorArtista"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+        <p>&nbsp;</p>
+        <div id="tblProdutos">
+            <table class="table table-striped table-bordered table-inline tableSortPaggingDiv" cellspacing="0" width="100%">
+                <thead>
+                    <tr class="bg-default">
+                        <th>Project Code</th>
+                        <th>Artist</th>
+                        <th>Project</th>
+                        <th>Artist Id</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+</div>

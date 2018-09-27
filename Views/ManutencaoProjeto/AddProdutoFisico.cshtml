@@ -1,0 +1,32 @@
+﻿@using SEDOGv2.Models;
+@{
+    ViewBag.Title = "AddProdutoFisico";
+}
+<div id="mainContent">
+    @if (((List<ProdutoFisico>)Model).Count() > 0)
+    {
+        using (Html.BeginForm("AddProdutoFisico", "ManutencaoProjeto", FormMethod.Post, new { @id = "frmEnviaAlteraProjetoSedog" }))
+        {
+            <input type="hidden" name="idProjSedog" value="@Url.RequestContext.RouteData.Values["id"]" />
+            <table class="table">
+                @foreach (ProdutoFisico item in Model)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="chkSelProdutos[]" value="@item.CBCATN|@item.CBPKGC" />
+                        </td>
+                        <td>@item.CBCATN</td>
+                        <td>@item.CBPKGC</td>
+                        <td>@item.ARTISTA</td>
+                        <td>@item.TITULO</td>
+                    </tr>
+                }
+            </table>
+            <input type="submit" id="submitEditProjSedog" value="Save" class="btn btn-default" style="display:none;" />
+        }
+    }
+    else
+    {
+        <p> Não existem novos produtos físicos para associar.</p>
+    }
+</div>

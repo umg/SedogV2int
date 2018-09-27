@@ -1,0 +1,56 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+
+<div class="container-fluid">
+    @using (Html.BeginForm())
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+
+            @*<div class="col-md-12" runat="server" id="divAlert">
+                @ViewBag.Error
+                <p><a href="https://universalmusicgroup.sharepoint.com/sites/BR_Docs/_layouts/15/guestaccess.aspx?guestaccesstoken=RUrH21oXWVKFEDRtoD%2bffgSr149EIZ809EOE1ZbAdvA%3d&docid=2_0b2c8c1a88c8e4b4b9219d618311e4a14&rev=1" target="_blank">Arquvivo 360</a></p>
+            </div>*@
+
+
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Update Dashboard</h4></div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <h5>Month:</h5>
+                                <input type="text" name="txtMes" class="form-control" placeholder="Mês" value="@DateTime.Now.Month" />
+                                <h5>Year:</h5>
+                                <input type="text" name="txtAno" class="form-control" placeholder="Ano" value="@DateTime.Now.Year" />
+                                <br />
+                                <input type="submit" name="atualizar" value="Update" class="btn btn-default pull-right" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    @ViewBag.Error
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

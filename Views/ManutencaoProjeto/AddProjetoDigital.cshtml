@@ -1,0 +1,40 @@
+﻿@using SEDOGv2.Models;
+@{
+    ViewBag.Title = "AddProjetoDigital";
+}
+<div id="mainContent">
+    @if (((List<ProjetosBrdigitalPorArtistCode>)Model).Count() > 0)
+    {
+        using (Html.BeginForm("AddProjetoDigital", "ManutencaoProjeto", FormMethod.Post, new { @id = "frmEnviaAlteraProjetoSedog" }))
+        {
+            <input type="hidden" name="idProjSedog" value="@Url.RequestContext.RouteData.Values["id"]" />
+            <table class="table">
+                @foreach (ProjetosBrdigitalPorArtistCode item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (@item.ASSOCIADO != "")
+                            {
+                                <input type="checkbox" name="chkSelProjetos[]" value="@item.PROJECTCODE|@item.PROJECTNAME" style="display:none" />
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="chkSelProjetos[]" value="@item.PROJECTCODE|@item.PROJECTNAME" />
+
+                            }
+                        </td>
+                        <td>@item.PROJECTCODE</td>
+                        <td>@item.ARTISTNAME</td>
+                        <td>@item.PROJECTNAME</td>
+                        <td>@item.UPC</td>
+                    </tr>
+                }
+            </table>
+            <input type="submit" id="submitEditProjSedog" value="Save" class="btn btn-default" style="display:none;"/>
+        }
+    }
+    else
+    {
+        <p> Não existem novos projetos digitais para associar.</p>
+    }
+</div>

@@ -1,0 +1,135 @@
+﻿@model SEDOGv2.Models.RespostaCadastroProjetoViewModel
+
+@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@{
+    ViewBag.Title = "Cadastro de Projeto SEDOG";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <!-- Default panel contents -->
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    @appSettings.pageName()
+                </h2>
+                <h3>Finalizado</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <table class="table">
+                    <tr>
+                        <td colspan="10" class="text-center"><h4>Dados do Projeto</h4></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            IdProjetoSedog
+                        </th>
+                        <th>
+                            NomeDoProjeto
+                        </th>
+                        <th>
+                            IdArtista
+                        </th>
+                        <th>
+                            NomeDoArtista
+                        </th>
+                        <th>
+                            Obs
+                        </th>
+                        <th>
+                            TipoContrato
+                        </th>
+                        <th>
+                            TipoProcesso
+                        </th>
+                        <th>
+                            TipoRelease
+                        </th>
+                        <th>
+                            Lancamento
+                        </th>
+                        <th>
+                            Origem
+                        </th>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            @Model.IdProjetoSedog
+                        </td>
+                        <td>
+                            @Model.NomeDoProjeto
+                        </td>
+                        <td>
+                            @Model.IdArtista
+                        </td>
+                        <td>
+                            @Model.NomeDoArtista
+                        </td>
+                        <td>
+                            @Model.Obs
+                        </td>
+                        <td>
+                            @Model.TipoContrato
+                        </td>
+                        <td>
+                            @Model.TipoProcesso
+                        </td>
+                        <td>
+                            @Model.TipoRelease
+                        </td>
+                        <td>
+                            @Model.Lancamento
+                        </td>
+                        <td>
+                            @Model.Origem
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="10" class="text-center"><h4>Inclusões Relacionadas ao Projeto</h4></td>
+                    </tr>
+                    <tr>
+                        <td colspan="10">
+                            <table width="100%">
+                                <tr>
+                                    <th>Detalhes</th>
+                                    <th>Erro</th>
+                                    <th>Mensagem</th>
+                                </tr>
+                                @foreach (SEDOGv2.Models.Resposta<string> item in Model.Includes)
+                                {
+                                    <tr>
+                                        <td>@item.Dados</td>
+                                        <td>@if (item.Error != "")
+                                        {
+                                            <span>@item.Error</span>
+                                        }
+                                        else {
+                                            <span>NÂO</span>
+                                        }</td>
+                                        <td>
+                                            @if (item.Message != "")
+                                        {
+                                            <span>@item.Message</span>
+                                        }
+                                        else
+                                        {
+                                            <span>INCLUÍDO COM SUCESSO</span>
+                                        }
+                                    </td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

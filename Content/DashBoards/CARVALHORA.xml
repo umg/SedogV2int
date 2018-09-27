@@ -1,0 +1,1887 @@
+﻿<dashboards>
+  <dashboard name="Presidência" id="dPresidencia">
+    <obj type="scoreboard" name="Score" icon="fa fa-thermometer-three-quarters" forcastPlan="true" class="col-lg-7 col-md-7 col-xs-7 grafico hvr-float-shadow text-align" rowFlex="false">
+      <tanque id="TanqueReceita" name="Receita" tipo="receita" procedure="SEL_TANQUE_RECEITA" class="hud futuristic text-center">
+        <YTD>50405672</YTD>
+        <YTD_PLAN>53758731</YTD_PLAN>
+        <YTD_REAL>48303265</YTD_REAL>
+        <TOTAL_ANO>174696059</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>175182973</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque id="TanqueEBIDTA" name="EBITDA" tipo="ebitda" procedure="SEL_TANQUE_EBITDA" class="hud futuristic text-center">
+        <YTD>5773910</YTD>
+        <YTD_PLAN>5520663</YTD_PLAN>
+        <YTD_REAL>5919588</YTD_REAL>
+        <TOTAL_ANO>31323058</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>31319677</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque id="TanqueGravacao" name="Gravação" tipo="gravacao" procedure="SEL_TANQUE_GRAVACAO" class="hud futuristic text-center">
+        <YTD>3134777</YTD>
+        <YTD_PLAN>4078993</YTD_PLAN>
+        <YTD_REAL>3036197</YTD_REAL>
+        <TOTAL_ANO>7268200</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>7268196</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque id="TanqueMarketing" name="Marketing" tipo="marketing" procedure="SEL_TANQUE_MARKETING" class="hud futuristic text-center">
+        <YTD>5458569</YTD>
+        <YTD_PLAN>5520241</YTD_PLAN>
+        <YTD_REAL>4891777</YTD_REAL>
+        <TOTAL_ANO>13834101</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>13834095</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque id="TanqueOverhead" name="Overhead" tipo="overhead" procedure="SEL_TANQUE_OVERHEAD" class="hud futuristic text-center">
+        <YTD>12295156</YTD>
+        <YTD_PLAN>12312041</YTD_PLAN>
+        <YTD_REAL>12264546</YTD_REAL>
+        <TOTAL_ANO>38128065</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>38144950</TOTAL_ANO_PLAN>
+      </tanque>
+    </obj>
+    <obj type="table" name="Top 10 Profit &amp; Loss" icon="fa fa-fire" forcastPlan="false" class="col-lg-5 col-md-5 col-xs-5 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table id="TableTop10ProfitLoss" name="TOP 10 Profit &amp; Loss" tipo="top10" procedure="SLT_TOP_GRAFICO_PROFIT_LOSS" class="table table-condensed table-striped table-hover" param="ano2digitos">
+        <header>
+          <ARTISTA>Artista</ARTISTA>
+          <PROJETO>Projeto</PROJETO>
+          <PROFIT_LOSS_YTD>P&amp;L YTD</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>P&amp;L RTD</PROFIT_LOSS_RTD>
+        </header>
+        <row>
+          <ARTISTA>Simone &amp; Simaria</ARTISTA>
+          <PROJETO>Simone &amp; Simaria - Live</PROJETO>
+          <PROFIT_LOSS_YTD>479.282</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>300.064</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Matheus &amp; Kauan</ARTISTA>
+          <PROJETO>Na Praia</PROJETO>
+          <PROFIT_LOSS_YTD>409.926</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>612.802</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Projota</ARTISTA>
+          <PROJETO>3FS Ao Vivo</PROJETO>
+          <PROFIT_LOSS_YTD>351.962</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>285.629</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Matheus &amp; Kauan</ARTISTA>
+          <PROJETO>Face a Face</PROJETO>
+          <PROFIT_LOSS_YTD>317.026</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>1.355.613</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Justin Bieber</ARTISTA>
+          <PROJETO>Purpose - Deluxe</PROJETO>
+          <PROFIT_LOSS_YTD>294.118</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>2.234.286</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Bruna Viola</ARTISTA>
+          <PROJETO>Ao Vivo - Melodias do Sertão</PROJETO>
+          <PROFIT_LOSS_YTD>265.710</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>-576.488</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Ariana Grande</ARTISTA>
+          <PROJETO>Dangerous Woman</PROJETO>
+          <PROFIT_LOSS_YTD>218.943</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>680.037</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Shawn Mendes</ARTISTA>
+          <PROJETO>Illuminate - Deluxe</PROJETO>
+          <PROFIT_LOSS_YTD>215.587</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>510.614</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>The Weeknd</ARTISTA>
+          <PROJETO> Starboy</PROJETO>
+          <PROFIT_LOSS_YTD>213.397</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>294.154</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Rihanna</ARTISTA>
+          <PROJETO>Anti - Deluxe</PROJETO>
+          <PROFIT_LOSS_YTD>204.173</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>1.009.104</PROFIT_LOSS_RTD>
+        </row>
+      </table>
+    </obj>
+    <obj type="pieChartSimple" name="Top 5 Clientes" icon="fa fa-pie-chart" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <pieChartSimple id="PieChartSimpleTop5Clientes" name="Top5Clientes" tipo="pie" procedure="SLT_TOP_GRAFICO_CLIENTE2" class="" label="Top 5" show="percentual">
+        <labels>
+          <label>Spotify</label>
+          <label>Apple</label>
+          <label>Vevo</label>
+          <label>LOJAS AMERICANAS S/A lj006</label>
+          <label>Deezer</label>
+        </labels>
+        <datas>
+          <data color="rgba(255,165,0,1)">44661654</data>
+          <data color="rgba(0, 72, 70,1)">17041075</data>
+          <data color="rgba(23,123,172,1)">11580696</data>
+          <data color="rgba(90,90,90,1)">10517049</data>
+          <data color="rgba(255,0,0,1)">8643900</data>
+        </datas>
+      </pieChartSimple>
+    </obj>
+    <obj type="barChartComplex" name="Top 5 Parceiros Digitais Últimos 12 Meses" icon="fa fa-bar-chart" forcastPlan="false" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
+      <barChartComplex id="BarChartComplexTopParceirosDigitais12Meses" name="TopParceirosDigitais12Meses" class="" step="1000000" procedure="SLT_TOPGRAFICO_PARCEIROS_DIGITAL2">
+        <labels>
+          <label>mai</label>
+          <label>jun</label>
+          <label>jul</label>
+          <label>ago</label>
+          <label>set</label>
+          <label>out</label>
+          <label>nov</label>
+          <label>dez</label>
+          <label>jan</label>
+          <label>fev</label>
+          <label>mar</label>
+          <label>abr</label>
+        </labels>
+        <datasets>
+          <dataset tipo="bar" label="'Total'" hidden="true" barColor="'rgba(125, 125, 125, 0.5)'">
+            <data>7805494</data>
+            <data>8101896</data>
+            <data>7634634</data>
+            <data>8059431</data>
+            <data>7430128</data>
+            <data>7356342</data>
+            <data>7739363</data>
+            <data>9033109</data>
+            <data>13260143</data>
+            <data>9754737</data>
+            <data>8830820</data>
+            <data>9222092</data>
+          </dataset>
+          <dataset tipo="line" label="APPLE" color="rgba(255,165,0,1)">
+            <data>1746373</data>
+            <data>1526802</data>
+            <data>1328405</data>
+            <data>1627852</data>
+            <data>1171365</data>
+            <data>1293856</data>
+            <data>1522527</data>
+            <data>1289320</data>
+            <data>1583845</data>
+            <data>1443241</data>
+            <data>1157552</data>
+            <data>1221473</data>
+          </dataset>
+          <dataset tipo="line" label="DEEZER" color="rgba(0, 72, 70,1)">
+            <data>372027</data>
+            <data>372465</data>
+            <data>350822</data>
+            <data>73742</data>
+            <data>624306</data>
+            <data>338050</data>
+            <data>4368</data>
+            <data>346746</data>
+            <data>1606314</data>
+            <data>825638</data>
+            <data>1677364</data>
+            <data>2052050</data>
+          </dataset>
+          <dataset tipo="line" label="NAPSTER" color="rgba(23,123,172,1)">
+            <data>350814</data>
+            <data>359922</data>
+            <data>539753</data>
+            <data>364909</data>
+            <data>366139</data>
+            <data>349283</data>
+            <data>355625</data>
+            <data>337693</data>
+            <data>322524</data>
+            <data>325037</data>
+            <data>314490</data>
+            <data>301621</data>
+          </dataset>
+          <dataset tipo="line" label="OI" color="rgba(165,165,0,1)">
+            <data>113938</data>
+            <data>90312</data>
+            <data>196110</data>
+            <data>0</data>
+            <data>201241</data>
+            <data>103041</data>
+            <data>115375</data>
+            <data>112994</data>
+            <data>110876</data>
+            <data>165328</data>
+            <data>0</data>
+            <data>330598</data>
+          </dataset>
+          <dataset tipo="line" label="SPOTIFY" color="rgba(255,0,0,1)">
+            <data>2887356</data>
+            <data>2981412</data>
+            <data>3256667</data>
+            <data>3238496</data>
+            <data>3307909</data>
+            <data>3614917</data>
+            <data>3820442</data>
+            <data>3927310</data>
+            <data>4142606</data>
+            <data>4346801</data>
+            <data>4496980</data>
+            <data>4640735</data>
+          </dataset>
+        </datasets>
+      </barChartComplex>
+    </obj>
+    <obj type="pieChartSimple" name="Digital YTD" icon="fa fa-pie-chart" forcastPlan="false" class="hidden col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <pieChartSimple id="PieChartSimpleDigitalYTD" name="DigitalYTD" tipo="doughnut" procedure="SLT_TOTAL_TIPO_YTD2" class="" label="Top 5" show="percentual">
+        <labels>
+          <label>NAC</label>
+          <label>INT</label>
+        </labels>
+        <datas>
+          <data color="rgba(255,165,0,1)">14335997</data>
+          <data color="rgba(0, 72, 70,1)">26731334</data>
+        </datas>
+      </pieChartSimple>
+    </obj>
+    <obj type="tableIRP" name="Índice Resultado de Projeto" icon="fa fa-thumbs-up" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <tableIRP id="TableIRPTotal" name="Índice Resultado de Projeto" tipo="top10" procedure="SLT_GRAFICO_IRP_TOTAL" class="table table-condensed table-striped table-hover">
+        <header>
+          <IRP>IRP</IRP>
+          <PROJETOS>Projetos</PROJETOS>
+          <PERCENTUAL>%</PERCENTUAL>
+        </header>
+        <row>
+          <IRP>2</IRP>
+          <PROJETOS>101</PROJETOS>
+          <PERCENTUAL>62,34</PERCENTUAL>
+        </row>
+        <row>
+          <IRP>1,25</IRP>
+          <PROJETOS>1</PROJETOS>
+          <PERCENTUAL>0,61</PERCENTUAL>
+        </row>
+        <row>
+          <IRP>1,15</IRP>
+          <PROJETOS>4</PROJETOS>
+          <PERCENTUAL>2,46</PERCENTUAL>
+        </row>
+        <row>
+          <IRP>0,99</IRP>
+          <PROJETOS>56</PROJETOS>
+          <PERCENTUAL>34,56</PERCENTUAL>
+        </row>
+      </tableIRP>
+    </obj>
+  </dashboard>
+  <dashboard name="Digital" id="dDigital">
+    <obj type="scoreboard" name="Score" icon="fa fa-thermometer-three-quarters" forcastPlan="true" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <tanque id="TanqueDigitalIncome" name="Digital Income" tipo="digitalincome" procedure="SEL_TANQUE_DIGITAL_INCOME" class="hud futuristic text-center">
+        <YTD>38488714</YTD>
+        <YTD_PLAN>38191767</YTD_PLAN>
+        <YTD_REAL>38521813</YTD_REAL>
+        <TOTAL_ANO>119169139</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>118728601</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque id="TanqueDigitalSubscribers" name="Subscribers" tipo="digitalsubscribers" procedure="SEL_TANQUE_DIGITAL_SUBSCRIBERS" class="hud futuristic text-center">
+        <YTD>3404</YTD>
+        <YTD_PLAN>2916</YTD_PLAN>
+        <YTD_REAL>3081</YTD_REAL>
+        <TOTAL_ANO>3594</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>3239</TOTAL_ANO_PLAN>
+      </tanque>
+    </obj>
+    <obj type="table" name="Top 10 Partners" icon="fa fa-star" forcastPlan="false" class="col-lg-2 col-md-2 col-xs-2 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table id="TableTop10Partners" name="TOP 10 Partners" tipo="top10" procedure="SLT_TOP_GRAFICO_DIGITAL_PARCEIROS_TOP10" class="table table-condensed table-striped table-hover" param="anomes">
+        <header>
+          <NOMEGRUPO>Parceiro</NOMEGRUPO>
+          <NETREVENUE_MES>Mês</NETREVENUE_MES>
+          <NETREVENUE_YTD>YTD</NETREVENUE_YTD>
+          <PERCENT>%</PERCENT>
+        </header>
+        <row>
+          <NOMEGRUPO>SPOTIFY</NOMEGRUPO>
+          <NETREVENUE_MES>4.640.735</NETREVENUE_MES>
+          <NETREVENUE_YTD>17.627.123</NETREVENUE_YTD>
+          <PERCENT>48</PERCENT>
+        </row>
+        <row>
+          <NOMEGRUPO>DEEZER</NOMEGRUPO>
+          <NETREVENUE_MES>2.052.050</NETREVENUE_MES>
+          <NETREVENUE_YTD>6.161.368</NETREVENUE_YTD>
+          <PERCENT>17</PERCENT>
+        </row>
+        <row>
+          <NOMEGRUPO>APPLE</NOMEGRUPO>
+          <NETREVENUE_MES>1.229.650</NETREVENUE_MES>
+          <NETREVENUE_YTD>5.448.853</NETREVENUE_YTD>
+          <PERCENT>15</PERCENT>
+        </row>
+        <row>
+          <NOMEGRUPO>VEVO</NOMEGRUPO>
+          <NETREVENUE_MES>-101.433</NETREVENUE_MES>
+          <NETREVENUE_YTD>3.517.002</NETREVENUE_YTD>
+          <PERCENT>10</PERCENT>
+        </row>
+        <row>
+          <NOMEGRUPO>NAPSTER</NOMEGRUPO>
+          <NETREVENUE_MES>301.622</NETREVENUE_MES>
+          <NETREVENUE_YTD>1.263.674</NETREVENUE_YTD>
+          <PERCENT>3</PERCENT>
+        </row>
+        <row>
+          <NOMEGRUPO>Google</NOMEGRUPO>
+          <NETREVENUE_MES>269.802</NETREVENUE_MES>
+          <NETREVENUE_YTD>995.798</NETREVENUE_YTD>
+          <PERCENT>3</PERCENT>
+        </row>
+        <row>
+          <NOMEGRUPO>YOU TUBE</NOMEGRUPO>
+          <NETREVENUE_MES>177.380</NETREVENUE_MES>
+          <NETREVENUE_YTD>734.624</NETREVENUE_YTD>
+          <PERCENT>2</PERCENT>
+        </row>
+        <row>
+          <NOMEGRUPO>OI</NOMEGRUPO>
+          <NETREVENUE_MES>330.599</NETREVENUE_MES>
+          <NETREVENUE_YTD>606.804</NETREVENUE_YTD>
+          <PERCENT>2</PERCENT>
+        </row>
+        <row>
+          <NOMEGRUPO>TIM</NOMEGRUPO>
+          <NETREVENUE_MES>144.773</NETREVENUE_MES>
+          <NETREVENUE_YTD>313.003</NETREVENUE_YTD>
+          <PERCENT>1</PERCENT>
+        </row>
+        <row>
+          <NOMEGRUPO>Tidal</NOMEGRUPO>
+          <NETREVENUE_MES>108.386</NETREVENUE_MES>
+          <NETREVENUE_YTD>181.096</NETREVENUE_YTD>
+          <PERCENT>
+          </PERCENT>
+        </row>
+      </table>
+    </obj>
+    <obj type="pieChartSimple" name="YTD Revenue By Type" icon="fa fa-pie-chart" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <pieChartSimple id="PieChartSimpleYTDRevenueDigitalByType" name="YTDRevenueDigitalByType" tipo="pie" procedure="SLT_GRAFICO_DIGITAL_VENDAS_TIPO2" class="" label="YTD Revenue" show="percentual">
+        <labels>
+          <label>Download</label>
+          <label>Publicidade</label>
+          <label>Assinaturas</label>
+          <label>Outros</label>
+        </labels>
+        <datas>
+          <data color="rgba(255,165,0,1)">1216</data>
+          <data color="rgba(0, 72, 70,1)">5191</data>
+          <data color="rgba(23,123,172,1)">21115</data>
+          <data color="rgba(255,0,0,1)">1680</data>
+        </datas>
+      </pieChartSimple>
+    </obj>
+    <obj type="table" name="Market Share" icon="fa fa-shopping-basket" forcastPlan="false" class="col-lg-1 col-md-1 col-xs-1 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table id="TableMarketShare" name="Market Share" tipo="top10" procedure="SLT_MARKET_SHARE" class="table table-condensed table-striped table-hover" param="">
+        <header>
+          <ANO>Ano</ANO>
+          <MES>Mês</MES>
+          <PERCENT>%</PERCENT>
+        </header>
+        <row>
+          <ANO>2017</ANO>
+          <MES>Mar</MES>
+          <PERCENT>27,20</PERCENT>
+        </row>
+        <row>
+          <ANO>2017</ANO>
+          <MES>Fev</MES>
+          <PERCENT>27,10</PERCENT>
+        </row>
+        <row>
+          <ANO>2017</ANO>
+          <MES>Jan</MES>
+          <PERCENT>27,10</PERCENT>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Dez</MES>
+          <PERCENT>27,60</PERCENT>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Nov</MES>
+          <PERCENT>27,60</PERCENT>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Out</MES>
+          <PERCENT>27,60</PERCENT>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Set</MES>
+          <PERCENT>27,70</PERCENT>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Ago</MES>
+          <PERCENT>27,50</PERCENT>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Jul</MES>
+          <PERCENT>27,80</PERCENT>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Jun</MES>
+          <PERCENT>28,20</PERCENT>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Mai</MES>
+          <PERCENT>28,50</PERCENT>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Abr</MES>
+          <PERCENT>28,80</PERCENT>
+        </row>
+      </table>
+    </obj>
+    <obj type="table" name="ARPU" icon="fa fa-users" forcastPlan="false" class="col-lg-2 col-md-2 col-xs-2 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table id="TableARPU" name="ARPU" tipo="top10" procedure="SLT_ARPU" class="table table-condensed table-striped table-hover" param="">
+        <header>
+          <ANO>Ano</ANO>
+          <MES>Mês</MES>
+          <PREMIUM>Prem.</PREMIUM>
+          <GRATUITO>Free</GRATUITO>
+        </header>
+        <row>
+          <ANO>2017</ANO>
+          <MES>Mar</MES>
+          <PREMIUM>2,69</PREMIUM>
+          <GRATUITO>0,13</GRATUITO>
+        </row>
+        <row>
+          <ANO>2017</ANO>
+          <MES>Fev</MES>
+          <PREMIUM>2,16</PREMIUM>
+          <GRATUITO>0,13</GRATUITO>
+        </row>
+        <row>
+          <ANO>2017</ANO>
+          <MES>Jan</MES>
+          <PREMIUM>2,22</PREMIUM>
+          <GRATUITO>0,14</GRATUITO>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Dez</MES>
+          <PREMIUM>2,32</PREMIUM>
+          <GRATUITO>0,14</GRATUITO>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Nov</MES>
+          <PREMIUM>2,19</PREMIUM>
+          <GRATUITO>0,14</GRATUITO>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Out</MES>
+          <PREMIUM>2,15</PREMIUM>
+          <GRATUITO>0,14</GRATUITO>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Set</MES>
+          <PREMIUM>1,90</PREMIUM>
+          <GRATUITO>0,14</GRATUITO>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Ago</MES>
+          <PREMIUM>1,86</PREMIUM>
+          <GRATUITO>0,14</GRATUITO>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Jul</MES>
+          <PREMIUM>1,92</PREMIUM>
+          <GRATUITO>0,15</GRATUITO>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Jun</MES>
+          <PREMIUM>1,88</PREMIUM>
+          <GRATUITO>0,14</GRATUITO>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Mai</MES>
+          <PREMIUM>2,07</PREMIUM>
+          <GRATUITO>0,15</GRATUITO>
+        </row>
+        <row>
+          <ANO>2016</ANO>
+          <MES>Abr</MES>
+          <PREMIUM>2,02</PREMIUM>
+          <GRATUITO>0,15</GRATUITO>
+        </row>
+      </table>
+    </obj>
+    <obj type="barChartComplex" name="Streaming Revenue" icon="fa fa-bar-chart" forcastPlan="false" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
+      <barChartMultiBarAndLine id="BarChartMultiBarAndLineDigitalStreamingRevenue" name="digitalStreamingRevenue" class="" step="1000" procedure="SLT_GRAFICO_DIGITAL_VENDAS_STREAMING2">
+        <labels>
+          <label>mai</label>
+          <label>jun</label>
+          <label>jul</label>
+          <label>ago</label>
+          <label>set</label>
+          <label>out</label>
+          <label>nov</label>
+          <label>dez</label>
+          <label>jan</label>
+          <label>fev</label>
+          <label>mar</label>
+          <label>abr</label>
+        </labels>
+        <datasets>
+          <dataset tipo="multiBar">
+            <multibar label="ASSINATURA" barColor="rgba(255,165,0,1)">
+              <data>4834</data>
+              <data>5087</data>
+              <data>5353</data>
+              <data>4962</data>
+              <data>5253</data>
+              <data>5132</data>
+              <data>5381</data>
+              <data>6054</data>
+              <data>6227</data>
+              <data>6634</data>
+              <data>6879</data>
+              <data>6827</data>
+            </multibar>
+          </dataset>
+          <dataset tipo="multiBar">
+            <multibar label="PUBLICIDADE" barColor="rgba(0, 72, 70,1)">
+              <data>1864</data>
+              <data>1672</data>
+              <data>1869</data>
+              <data>1863</data>
+              <data>1670</data>
+              <data>1815</data>
+              <data>1653</data>
+              <data>1520</data>
+              <data>2040</data>
+              <data>2399</data>
+              <data>1064</data>
+              <data>1250</data>
+            </multibar>
+          </dataset>
+          <dataset tipo="line" label="TOTAL" color="rgba(70, 200, 70, 1)">
+            <data>6698</data>
+            <data>6759</data>
+            <data>7222</data>
+            <data>6826</data>
+            <data>6923</data>
+            <data>6947</data>
+            <data>7034</data>
+            <data>7575</data>
+            <data>8267</data>
+            <data>9032</data>
+            <data>7943</data>
+            <data>8077</data>
+          </dataset>
+        </datasets>
+      </barChartMultiBarAndLine>
+    </obj>
+    <obj type="barChartComplex" name="Assinantes por Plano" icon="fa fa-bar-chart" forcastPlan="false" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
+      <barChartMultiBarAndLine id="BarChartMultiBarAndLineDigitalAssinantesPorPlano" name="digitalAssinantesPorPlano" class="" step="1000" procedure="SLT_GRAFICO_ASSINANTES_DIGITAL2">
+        <labels>
+          <label>mai</label>
+          <label>jun</label>
+          <label>jul</label>
+          <label>ago</label>
+          <label>set</label>
+          <label>out</label>
+          <label>nov</label>
+          <label>dez</label>
+          <label>jan</label>
+          <label>fev</label>
+          <label>mar</label>
+          <label>abr</label>
+        </labels>
+        <datasets>
+          <dataset tipo="multiBar">
+            <multibar label="INDIVIDUAL" barColor="rgba(255,165,0,1)">
+              <data>2174</data>
+              <data>2051</data>
+              <data>2013</data>
+              <data>2010</data>
+              <data>2168</data>
+              <data>2188</data>
+              <data>2160</data>
+              <data>1951</data>
+              <data>1947</data>
+              <data>1968</data>
+              <data>1968</data>
+              <data>2023</data>
+            </multibar>
+          </dataset>
+          <dataset tipo="multiBar">
+            <multibar label="FAMILIA" barColor="rgba(0, 72, 70,1)">
+              <data>178</data>
+              <data>212</data>
+              <data>257</data>
+              <data>292</data>
+              <data>322</data>
+              <data>370</data>
+              <data>421</data>
+              <data>458</data>
+              <data>493</data>
+              <data>529</data>
+              <data>529</data>
+              <data>560</data>
+            </multibar>
+          </dataset>
+          <dataset tipo="multiBar">
+            <multibar label="PROMO" barColor="rgba(23,123,172,1)">
+              <data>238</data>
+              <data>377</data>
+              <data>460</data>
+              <data>452</data>
+              <data>345</data>
+              <data>264</data>
+              <data>266</data>
+              <data>446</data>
+              <data>651</data>
+              <data>657</data>
+              <data>487</data>
+              <data>318</data>
+            </multibar>
+          </dataset>
+          <dataset tipo="line" label="TOTAL" color="rgba(70, 200, 70, 1)">
+            <data>2590</data>
+            <data>2641</data>
+            <data>2730</data>
+            <data>2753</data>
+            <data>2835</data>
+            <data>2822</data>
+            <data>2847</data>
+            <data>2855</data>
+            <data>3091</data>
+            <data>3154</data>
+            <data>2984</data>
+            <data>3081</data>
+          </dataset>
+        </datasets>
+      </barChartMultiBarAndLine>
+    </obj>
+  </dashboard>
+  <dashboard name="NRI" id="dNRI">
+    <obj type="table" name="NRI" icon="fa fa-star" forcastPlan="false" class="col-lg-4 col-md-4 col-xs-4 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table id="TableNRI" name="NRI" tipo="top10" procedure="SLT_GRID_NRI" class="table table-condensed table-striped table-hover" hasCube="True">
+        <header>
+          <DESCRICAO>Descrição</DESCRICAO>
+          <AC>AC</AC>
+          <FC>FC</FC>
+          <PERC_FC>%FC</PERC_FC>
+          <PL>PL</PL>
+          <PERC_PL>%PL</PERC_PL>
+        </header>
+        <row>
+          <DESCRICAO cube="rgba(0,72,70,1)">Brands &amp; Music</DESCRICAO>
+          <AC>816</AC>
+          <FC>1.207</FC>
+          <PERC_FC>68</PERC_FC>
+          <PL>1.212</PL>
+          <PERC_PL>67</PERC_PL>
+        </row>
+        <row>
+          <DESCRICAO cube="rgba(255, 165, 0,1)">GTS &amp; Others</DESCRICAO>
+          <AC>190</AC>
+          <FC>514</FC>
+          <PERC_FC>37</PERC_FC>
+          <PL>439</PL>
+          <PERC_PL>43</PERC_PL>
+        </row>
+        <row>
+          <DESCRICAO>Merchandising</DESCRICAO>
+          <AC>542</AC>
+          <FC>642</FC>
+          <PERC_FC>84</PERC_FC>
+          <PL>633</PL>
+          <PERC_PL>86</PERC_PL>
+        </row>
+        <row>
+          <DESCRICAO>Σ NRI</DESCRICAO>
+          <AC>1.547</AC>
+          <FC>2.362</FC>
+          <PERC_FC>65</PERC_FC>
+          <PL>2.283</PL>
+          <PERC_PL>68</PERC_PL>
+        </row>
+        <row>
+          <DESCRICAO>Synchronisation</DESCRICAO>
+          <AC>454</AC>
+          <FC>671</FC>
+          <PERC_FC>68</PERC_FC>
+          <PL>847</PL>
+          <PERC_PL>54</PERC_PL>
+        </row>
+      </table>
+    </obj>
+    <obj type="pieChartSimple" name="YTD - Sales by Type" icon="fa fa-pie-chart" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <pieChartSimple id="PieChartSimpleNRIYTDBySaleType" name="NRIYTDBySaleType" tipo="pie" procedure="SLT_GRAFICO_SALES_BY_TYPE_NRI" class="" label="YTD Revenue" show="percentual">
+        <labels>
+          <label>Adv&amp;Spon</label>
+          <label>Merchan</label>
+          <label>Other</label>
+          <label>SMP</label>
+          <label>Tickets</label>
+          <label>360</label>
+        </labels>
+        <datas>
+          <data color="rgba(255,165,0,1)">181</data>
+          <data color="rgba(0, 72, 70,1)">542</data>
+          <data color="rgba(23,123,172,1)">180</data>
+          <data color="rgba(90,90,90,1)">474</data>
+          <data color="rgba(255,0,0,1)">88</data>
+          <data color="rgba(120,120,120,1)">176</data>
+        </datas>
+      </pieChartSimple>
+    </obj>
+    <obj type="table" name="Top 10 Projetos NRI" icon="fa fa-star" forcastPlan="false" class="col-lg-5 col-md-5 col-xs-5 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table id="TableTop10ProjetosNRI" name="Top 10 Projetos NRI" tipo="top10" procedure="SLT_GRAFICO_NRI_TOP_PARTNER" class="table table-condensed table-striped table-hover" param="ano2digitos">
+        <header>
+          <DESCRICAO>Business / Partner</DESCRICAO>
+          <YTD>YTD</YTD>
+          <PERC_YTD>%</PERC_YTD>
+          <MES>Mês</MES>
+          <PERC_MES>%</PERC_MES>
+        </header>
+        <row>
+          <DESCRICAO> Bradesco</DESCRICAO>
+          <YTD>474</YTD>
+          <PERC_YTD>30</PERC_YTD>
+          <MES>111</MES>
+          <PERC_MES>52</PERC_MES>
+        </row>
+        <row>
+          <DESCRICAO> Renner</DESCRICAO>
+          <YTD>330</YTD>
+          <PERC_YTD>21</PERC_YTD>
+          <MES>0</MES>
+          <PERC_MES>0</PERC_MES>
+        </row>
+        <row>
+          <DESCRICAO> Zoetis</DESCRICAO>
+          <YTD>252</YTD>
+          <PERC_YTD>16</PERC_YTD>
+          <MES>11</MES>
+          <PERC_MES>5</PERC_MES>
+        </row>
+        <row>
+          <DESCRICAO> PTICAS FRANQUEADORA LTDA</DESCRICAO>
+          <YTD>101</YTD>
+          <PERC_YTD>6</PERC_YTD>
+          <MES>31</MES>
+          <PERC_MES>14</PERC_MES>
+        </row>
+        <row>
+          <DESCRICAO>Biotipo</DESCRICAO>
+          <YTD>90</YTD>
+          <PERC_YTD>6</PERC_YTD>
+          <MES>0</MES>
+          <PERC_MES>0</PERC_MES>
+        </row>
+        <row>
+          <DESCRICAO> Pacific</DESCRICAO>
+          <YTD>88</YTD>
+          <PERC_YTD>6</PERC_YTD>
+          <MES>44</MES>
+          <PERC_MES>21</PERC_MES>
+        </row>
+        <row>
+          <DESCRICAO> CTN</DESCRICAO>
+          <YTD>88</YTD>
+          <PERC_YTD>6</PERC_YTD>
+          <MES>0</MES>
+          <PERC_MES>0</PERC_MES>
+        </row>
+        <row>
+          <DESCRICAO> Make U Sweat</DESCRICAO>
+          <YTD>68</YTD>
+          <PERC_YTD>4</PERC_YTD>
+          <MES>0</MES>
+          <PERC_MES>0</PERC_MES>
+        </row>
+        <row>
+          <DESCRICAO> Projota</DESCRICAO>
+          <YTD>44</YTD>
+          <PERC_YTD>3</PERC_YTD>
+          <MES>13</MES>
+          <PERC_MES>6</PERC_MES>
+        </row>
+        <row>
+          <DESCRICAO> Paula Fernandes</DESCRICAO>
+          <YTD>35</YTD>
+          <PERC_YTD>2</PERC_YTD>
+          <MES>4</MES>
+          <PERC_MES>2</PERC_MES>
+        </row>
+      </table>
+    </obj>
+    <obj type="scorecard" name="NRI YTD" icon="fa fa-thermometer-three-quarters" forcastPlan="true" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
+      <metric id="MetricNRIReceita" name="NRI" tipo="physicalSales" procedure="SLT_GRAFICO_RECEITA_NRI" class="hud futuristic text-center">
+        <col name="Receita">
+          <item name="SMP" color="rgba(0, 0, 0,1)" barcolor="rgba(0, 72, 70,1)">
+            <ATUAL>474</ATUAL>
+            <TOTALFCAST>2354</TOTALFCAST>
+            <TOTALPLAN>2359</TOTALPLAN>
+            <FCAST>607</FCAST>
+            <PLAN>612</PLAN>
+          </item>
+          <item name="Artist Revenue Shares 360 Contract" color="rgba(0, 0, 0,1)" barcolor="rgba(0, 72, 70,1)">
+            <ATUAL>176</ATUAL>
+            <TOTALFCAST>1198</TOTALFCAST>
+            <TOTALPLAN>1203</TOTALPLAN>
+            <FCAST>235</FCAST>
+            <PLAN>241</PLAN>
+          </item>
+          <item name="Live Event &amp; Theatre Prod Inc" color="rgba(0, 0, 0,1)" barcolor="rgba(0, 72, 70,1)">
+            <ATUAL>0</ATUAL>
+            <TOTALFCAST>700</TOTALFCAST>
+            <TOTALPLAN>700</TOTALPLAN>
+            <FCAST>0</FCAST>
+            <PLAN>0</PLAN>
+          </item>
+          <item name="Premium" color="rgba(0, 0, 0,1)" barcolor="rgba(0, 72, 70,1)">
+            <ATUAL>0</ATUAL>
+            <TOTALFCAST>100</TOTALFCAST>
+            <TOTALPLAN>100</TOTALPLAN>
+            <FCAST>0</FCAST>
+            <PLAN>0</PLAN>
+          </item>
+          <item name="Live Agency and Tickets" color="rgba(0, 0, 0,1)" barcolor="rgba(255, 165, 0,1)">
+            <ATUAL>88</ATUAL>
+            <TOTALFCAST>322</TOTALFCAST>
+            <TOTALPLAN>322</TOTALPLAN>
+            <FCAST>246</FCAST>
+            <PLAN>81</PLAN>
+          </item>
+          <item name="Other" color="rgba(0, 0, 0,1)" barcolor="rgba(255, 165, 0,1)">
+            <ATUAL>180</ATUAL>
+            <TOTALFCAST>0</TOTALFCAST>
+            <TOTALPLAN>0</TOTALPLAN>
+            <FCAST>0</FCAST>
+            <PLAN>0</PLAN>
+          </item>
+          <item name="ADV &amp; SPON" color="rgba(0, 0, 0,1)" barcolor="rgba(255, 165, 0,1)">
+            <ATUAL>181</ATUAL>
+            <TOTALFCAST>8900</TOTALFCAST>
+            <TOTALPLAN>8900</TOTALPLAN>
+            <FCAST>600</FCAST>
+            <PLAN>600</PLAN>
+          </item>
+          <item name="MGMT Commission" color="rgba(0, 0, 0,1)" barcolor="rgba(255, 165, 0,1)">
+            <ATUAL>-93</ATUAL>
+            <TOTALFCAST>1183</TOTALFCAST>
+            <TOTALPLAN>1183</TOTALPLAN>
+            <FCAST>32</FCAST>
+            <PLAN>117</PLAN>
+          </item>
+          <item name="Merchandising" color="rgba(0, 0, 0,1)" barcolor="rgba(255, 165, 0,1)">
+            <ATUAL>542</ATUAL>
+            <TOTALFCAST>1394</TOTALFCAST>
+            <TOTALPLAN>1394</TOTALPLAN>
+            <FCAST>642</FCAST>
+            <PLAN>633</PLAN>
+          </item>
+        </col>
+      </metric>
+    </obj>
+    <obj type="scorecard" name="NRI YTD" icon="fa fa-thermometer-three-quarters" forcastPlan="true" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
+      <metric id="MetricNRIMargem" name="NRI" tipo="physicalSales" procedure="SLT_GRAFICO_MARGEN_NRI" class="hud futuristic text-center">
+        <col name="Margin">
+          <item name="ADV &amp; SPON" color="rgba(0, 0, 0,1)" barcolor="rgba(0, 72, 70,1)">
+            <ATUAL>153</ATUAL>
+            <TOTALFCAST>2468</TOTALFCAST>
+            <TOTALPLAN>2470</TOTALPLAN>
+            <FCAST>166</FCAST>
+            <PLAN>168</PLAN>
+          </item>
+          <item name="Artist Revenue Shares 360 Contract" color="rgba(0, 0, 0,1)" barcolor="rgba(0, 72, 70,1)">
+            <ATUAL>176</ATUAL>
+            <TOTALFCAST>1198</TOTALFCAST>
+            <TOTALPLAN>1203</TOTALPLAN>
+            <FCAST>235</FCAST>
+            <PLAN>241</PLAN>
+          </item>
+          <item name="SMP" color="rgba(0, 0, 0,1)" barcolor="rgba(0, 72, 70,1)">
+            <ATUAL>227</ATUAL>
+            <TOTALFCAST>1486</TOTALFCAST>
+            <TOTALPLAN>1510</TOTALPLAN>
+            <FCAST>367</FCAST>
+            <PLAN>392</PLAN>
+          </item>
+          <item name="Other" color="rgba(0, 0, 0,1)" barcolor="rgba(0, 72, 70,1)">
+            <ATUAL>180</ATUAL>
+            <TOTALFCAST>0</TOTALFCAST>
+            <TOTALPLAN>0</TOTALPLAN>
+            <FCAST>0</FCAST>
+            <PLAN>0</PLAN>
+          </item>
+          <item name="MGMT Commission" color="rgba(0, 0, 0,1)" barcolor="rgba(255, 165, 0,1)">
+            <ATUAL>-93</ATUAL>
+            <TOTALFCAST>1183</TOTALFCAST>
+            <TOTALPLAN>1183</TOTALPLAN>
+            <FCAST>32</FCAST>
+            <PLAN>117</PLAN>
+          </item>
+          <item name="Merchandising" color="rgba(0, 0, 0,1)" barcolor="rgba(255, 165, 0,1)">
+            <ATUAL>108</ATUAL>
+            <TOTALFCAST>324</TOTALFCAST>
+            <TOTALPLAN>354</TOTALPLAN>
+            <FCAST>145</FCAST>
+            <PLAN>160</PLAN>
+          </item>
+          <item name="Live Event &amp; Theatre Prod Inc" color="rgba(0, 0, 0,1)" barcolor="rgba(255, 165, 0,1)">
+            <ATUAL>0</ATUAL>
+            <TOTALFCAST>0</TOTALFCAST>
+            <TOTALPLAN>0</TOTALPLAN>
+            <FCAST>0</FCAST>
+            <PLAN>0</PLAN>
+          </item>
+          <item name="Live Agency and Tickets" color="rgba(0, 0, 0,1)" barcolor="rgba(255, 165, 0,1)">
+            <ATUAL>88</ATUAL>
+            <TOTALFCAST>111</TOTALFCAST>
+            <TOTALPLAN>32</TOTALPLAN>
+            <FCAST>104</FCAST>
+            <PLAN>8</PLAN>
+          </item>
+          <item name="Premium" color="rgba(0, 0, 0,1)" barcolor="rgba(255, 165, 0,1)">
+            <ATUAL>0</ATUAL>
+            <TOTALFCAST>28</TOTALFCAST>
+            <TOTALPLAN>28</TOTALPLAN>
+            <FCAST>0</FCAST>
+            <PLAN>0</PLAN>
+          </item>
+        </col>
+      </metric>
+    </obj>
+  </dashboard>
+  <dashboard name="Vendas Físicas" id="dFisico">
+    <obj type="scoreboard" name="Score" icon="fa fa-thermometer-three-quarters" forcastPlan="true" class="col-lg-2 col-md-2 col-xs-2 grafico gSmall hvr-float-shadow text-align" rowFlex="false">
+      <tanque id="TanquePhysicalSales" name="Physical Sales" tipo="physicalsales" procedure="SEL_TANQUE_PHYSICALSALES" class="hud futuristic text-center">
+        <YTD>4622887</YTD>
+        <YTD_PLAN>8048555</YTD_PLAN>
+        <YTD_REAL>2862267</YTD_REAL>
+        <TOTAL_ANO>22497418</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>23503343</TOTAL_ANO_PLAN>
+      </tanque>
+    </obj>
+    <obj type="table" name="Top 10 Projetos" icon="fa fa-star" forcastPlan="false" class="col-lg-5 col-md-5 col-xs-5 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table id="TableTop10Projetos" name="Top 10 Projetos" tipo="top10" procedure="SLT_TOP_GRAFICO_FISICO_TOP10" class="table table-condensed table-striped table-hover" param="mes2digitos">
+        <header>
+          <ARTISTA>Artista</ARTISTA>
+          <PROJETO>Projeto</PROJETO>
+          <RECEITA_YTD>YTD</RECEITA_YTD>
+          <RECEITA_RTD>RTD</RECEITA_RTD>
+        </header>
+        <row>
+          <ARTISTA>Matheus&amp; Kauan</ARTISTA>
+          <PROJETO>Na Praia 2</PROJETO>
+          <RECEITA_YTD>147.627</RECEITA_YTD>
+          <RECEITA_RTD>147.627</RECEITA_RTD>
+        </row>
+        <row>
+          <ARTISTA>Metallica</ARTISTA>
+          <PROJETO>Hardwired To Self-Destruct</PROJETO>
+          <RECEITA_YTD>95.972</RECEITA_YTD>
+          <RECEITA_RTD>531.172</RECEITA_RTD>
+        </row>
+        <row>
+          <ARTISTA>IveteSangalo</ARTISTA>
+          <PROJETO>Acústico em Trancoso</PROJETO>
+          <RECEITA_YTD>94.900</RECEITA_YTD>
+          <RECEITA_RTD>1.147.730</RECEITA_RTD>
+        </row>
+        <row>
+          <ARTISTA>The Rolling Stones</ARTISTA>
+          <PROJETO>Blue &amp; Lonesome</PROJETO>
+          <RECEITA_YTD>78.712</RECEITA_YTD>
+          <RECEITA_RTD>233.567</RECEITA_RTD>
+        </row>
+        <row>
+          <ARTISTA>Matheus &amp; Kauan</ARTISTA>
+          <PROJETO>Na Praia</PROJETO>
+          <RECEITA_YTD>51.141</RECEITA_YTD>
+          <RECEITA_RTD>601.223</RECEITA_RTD>
+        </row>
+        <row>
+          <ARTISTA>Marisa Monte</ARTISTA>
+          <PROJETO>Coleção</PROJETO>
+          <RECEITA_YTD>47.712</RECEITA_YTD>
+          <RECEITA_RTD>798.860</RECEITA_RTD>
+        </row>
+        <row>
+          <ARTISTA>Bruno &amp; Marrone e Chitãozinho</ARTISTA>
+          <PROJETO>Clássico</PROJETO>
+          <RECEITA_YTD>41.441</RECEITA_YTD>
+          <RECEITA_RTD>854.997</RECEITA_RTD>
+        </row>
+        <row>
+          <ARTISTA>Paula Fernandes</ARTISTA>
+          <PROJETO>Amanhecer ao Vivo</PROJETO>
+          <RECEITA_YTD>41.214</RECEITA_YTD>
+          <RECEITA_RTD>417.747</RECEITA_RTD>
+        </row>
+        <row>
+          <ARTISTA>Simone &amp; Simaria</ARTISTA>
+          <PROJETO>Simone &amp; Simaria - Live</PROJETO>
+          <RECEITA_YTD>37.687</RECEITA_YTD>
+          <RECEITA_RTD>654.924</RECEITA_RTD>
+        </row>
+        <row>
+          <ARTISTA>André Rieu</ARTISTA>
+          <PROJETO>Falling in Love in Maastricht</PROJETO>
+          <RECEITA_YTD>34.865</RECEITA_YTD>
+          <RECEITA_RTD>34.865</RECEITA_RTD>
+        </row>
+      </table>
+    </obj>
+    <obj type="table" name="Top 10 Clientes" icon="fa fa-star" forcastPlan="false" class="col-lg-5 col-md-5 col-xs-5 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table id="TableTop10Clientes" name="Top 10 Clientes" tipo="top10" procedure="SLT_TOP10_GRAFICO_CLIENTES_FISICO" class="table table-condensed table-striped table-hover" param="stringMesEAno">
+        <header>
+          <CLIENTE>Cliente</CLIENTE>
+          <MES>Mês</MES>
+          <YTD>YTD</YTD>
+          <PERCENT>%</PERCENT>
+        </header>
+        <row>
+          <CLIENTE>LIVRARIA PAPELARIA SARAIVA</CLIENTE>
+          <MES>412.461</MES>
+          <YTD>545.341</YTD>
+          <PERCENT>19,27</PERCENT>
+        </row>
+        <row>
+          <CLIENTE>ABASTECEDORA JABORANDI LTD</CLIENTE>
+          <MES>110.848</MES>
+          <YTD>111.697</YTD>
+          <PERCENT>3,94</PERCENT>
+        </row>
+        <row>
+          <CLIENTE>LOJAS AMERICANAS S/A lj006</CLIENTE>
+          <MES>94.048</MES>
+          <YTD>108.105</YTD>
+          <PERCENT>3,82</PERCENT>
+        </row>
+        <row>
+          <CLIENTE>LIVRARIA CULTURA S/A      </CLIENTE>
+          <MES>92.110</MES>
+          <YTD>92.110</YTD>
+          <PERCENT>3,25</PERCENT>
+        </row>
+        <row>
+          <CLIENTE>FNAC BRASIL LTDA          </CLIENTE>
+          <MES>69.593</MES>
+          <YTD>106.774</YTD>
+          <PERCENT>3,77</PERCENT>
+        </row>
+        <row>
+          <CLIENTE>LIVRARIAS CURITIBA LTDA   </CLIENTE>
+          <MES>38.927</MES>
+          <YTD>43.092</YTD>
+          <PERCENT>1,52</PERCENT>
+        </row>
+        <row>
+          <CLIENTE>LIVRARIA DA FOLHA LTDA    </CLIENTE>
+          <MES>37.966</MES>
+          <YTD>43.694</YTD>
+          <PERCENT>1,54</PERCENT>
+        </row>
+        <row>
+          <CLIENTE>LIVRARIA DA TRAVESSA LTDA </CLIENTE>
+          <MES>31.298</MES>
+          <YTD>36.361</YTD>
+          <PERCENT>1,28</PERCENT>
+        </row>
+        <row>
+          <CLIENTE>LEITURA BH SHOPPING LTDA  </CLIENTE>
+          <MES>23.270</MES>
+          <YTD>30.667</YTD>
+          <PERCENT>1,08</PERCENT>
+        </row>
+        <row>
+          <CLIENTE>WINER DISK COM CDS LTDA EP</CLIENTE>
+          <MES>21.196</MES>
+          <YTD>24.431</YTD>
+          <PERCENT>0,86</PERCENT>
+        </row>
+      </table>
+    </obj>
+    <obj type="barChartComplex" name="Vendas Últimos 12 Meses" icon="fa fa-bar-chart" forcastPlan="false" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
+      <barChartComplex id="BarChartComplexVendasFisicasUltimos12Meses" name="VendasFisicasUltimos12Meses" class="" step="1000000" procedure="SLT_TOP_GRAFICO_FISICO_ULT12MESES2">
+        <labels>
+          <label>jun</label>
+          <label>jul</label>
+          <label>ago</label>
+          <label>set</label>
+          <label>out</label>
+          <label>nov</label>
+          <label>dez</label>
+          <label>jan</label>
+          <label>fev</label>
+          <label>mar</label>
+          <label>abr</label>
+          <label>mai</label>
+        </labels>
+        <datasets>
+          <dataset tipo="bar" label="'Total'" hidden="false" barColor="'rgba(0, 72, 70,1)'">
+            <data>3832554</data>
+            <data>1701405</data>
+            <data>1841601</data>
+            <data>3975153</data>
+            <data>4161978</data>
+            <data>3746401</data>
+            <data>1926167</data>
+            <data>1085694</data>
+            <data>475341</data>
+            <data>1329917</data>
+            <data>735178</data>
+            <data>537840</data>
+          </dataset>
+        </datasets>
+      </barChartComplex>
+    </obj>
+    <obj type="pieChartSimple" name="YTD Sales By Repertoire" icon="fa fa-pie-chart" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <pieChartSimple id="PieChartSimpleYTDSalesFisicasByRepertoire" name="YTDSalesFisicasByRepertoire" tipo="pie" procedure="SLT_TOP_GRAFICO_FISICO_REPERTORIO2" class="" label="YTD Sales" show="valor">
+        <labels>
+          <label>NAC</label>
+          <label>INT</label>
+        </labels>
+        <datas>
+          <data color="rgba(255,165,0,1)">2198402</data>
+          <data color="rgba(0, 72, 70,1)">1527468</data>
+        </datas>
+      </pieChartSimple>
+    </obj>
+    <obj type="pieChartSimple" name="YTD Sales By Format" icon="fa fa-pie-chart" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <pieChartSimple id="PieChartSimpleYTDSalesFisicasByFormat" name="YTDSalesFisicasByFormat" tipo="pie" procedure="SLT_TOP_GRAFICO_FISICO_FORMATO2" class="" label="YTD Sales" show="percentual">
+        <labels>
+          <label>CD</label>
+          <label>DV</label>
+          <label>BD</label>
+          <label>LP</label>
+        </labels>
+        <datas>
+          <data color="rgba(255,165,0,1)">2699052</data>
+          <data color="rgba(0, 72, 70,1)">1002641</data>
+          <data color="rgba(23,123,172,1)">19401</data>
+          <data color="rgba(255,165,0,1)">4776</data>
+        </datas>
+      </pieChartSimple>
+    </obj>
+  </dashboard>
+  <dashboard name="A&amp;R" id="dAR">
+    <obj type="scoreboard" name="Score" icon="fa fa-thermometer-three-quarters" forcastPlan="true" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <tanque id="TanqueGravacao" name="Gravação" tipo="gravacao" procedure="SEL_TANQUE_GRAVACAO" class="hud futuristic text-center">
+        <YTD>3134777</YTD>
+        <YTD_PLAN>4078993</YTD_PLAN>
+        <YTD_REAL>3036197</YTD_REAL>
+        <TOTAL_ANO>7268200</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>7268196</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque id="TanqueArOverHead" name="A&amp;R Overhead" tipo="aroverhead" procedure="SEL_TANQUE_AR_OVERHEAD" class="hud futuristic text-center">
+        <YTD>197305</YTD>
+        <YTD_PLAN>168170</YTD_PLAN>
+        <YTD_REAL>215036</YTD_REAL>
+        <TOTAL_ANO>570184</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>541049</TOTAL_ANO_PLAN>
+      </tanque>
+    </obj>
+    <obj type="radar" name="Radar de Gênero" icon="fa fa-pie-chart" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <radar id="RadarBussula" name="RadarBussola" tipo="radar" procedure="SLT_GRAFICO_BUSSOLA_AER2" class="" label="Radar" show="valor">
+        <labels>
+          <label>Funk 1%</label>
+          <label>Hip-Hop 3%</label>
+          <label>Pop 22%</label>
+          <label>Sertanejo 72%</label>
+          <label>Eletronic 0%</label>
+          <label>Gospel 0%</label>
+          <label>Rock 0%</label>
+          <label>Samba 0%</label>
+        </labels>
+        <datas label="Universal" color="rgba(0, 72, 70,0.5)">
+          <data>380</data>
+          <data>208</data>
+          <data>94</data>
+          <data>54</data>
+          <data>0</data>
+          <data>0</data>
+          <data>0</data>
+          <data>0</data>
+        </datas>
+      </radar>
+    </obj>
+    <obj type="piramid" name="BEP" icon="fa fa-signal" forcastPlan="false" class="col-lg-4 col-md-4 col-xs-4 grafico hvr-float-shadow text-align" rowFlex="false">
+      <piramid id="PiramidBEP" name="BEP" tipo="BEP" procedure="SLT_COMPARATIVO_EBITDA_X_EBITDA_PROJETADO" class="ZeroMiddleBar">
+        <data total="23831.5000000000" atual="-698533.4500000000" artist="Rodrigo Marim" percentual="0.0232953756">O Sequestrador</data>
+        <data total="30509.6500000000" atual="1355613.0300000000" artist="Matheus &amp; Kauan" percentual="0.0298232908">Face a Face</data>
+        <data total="91253.8900000000" atual="681013.2100000000" artist="Ivete Sangalo" percentual="0.0892010003">O Carnaval De Ivete Sangalo</data>
+        <data total="164894.5700000000" atual="301714.8200000000" artist="Simone &amp; Simaria" percentual="0.1611850256">Bar Das Coleguinhas</data>
+        <data total="173419.4300000000" atual="-1109436.8500000000" artist="IveteSangalo" percentual="0.1695181064">Acústico em Trancoso</data>
+        <data total="215001.3000000000" atual="408895.2600000000" artist="Projota" percentual="0.2101645314">Foco, Força e Fé</data>
+        <data total="226298.0000000000" atual="-679586.2900000000" artist="Thalles Roberto" percentual="0.2212070957">Ide - Live at Igreja Bola</data>
+        <data total="298702.3200000000" atual="612801.8600000000" artist="Matheus &amp; Kauan" percentual="0.2919825746">Na Praia</data>
+        <data total="497096.5900000000" atual="-1001368.6500000000" artist="Bruna Viola" percentual="0.4859136755">Sem Fronteiras</data>
+        <data total="1023014.2000000000" atual="-895208.8900000000" artist="Paula Fernandes" percentual="1.0000000000">Amanhecer ao Vivo</data>
+      </piramid>
+    </obj>
+    <obj type="table" name="Top A&amp;R Expenses YTD" icon="fa fa-star" forcastPlan="false" class="col-lg-5 col-md-5 col-xs-5 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table id="TableManageMeetingYTD" name="Top A&amp;R Expenses YTD" tipo="top10" procedure="SLT_GRID_RECORD_COSTS_AER" class="table table-condensed table-striped table-hover hidden" param="int:1:P_OPCAO">
+        <header>
+          <PRODUTO>Produto</PRODUTO>
+          <ACTUAL>Actual</ACTUAL>
+          <FCAST>Fcast</FCAST>
+          <PLAN>Plan</PLAN>
+          <ANO2016>2016</ANO2016>
+          <BUDGET>Budget</BUDGET>
+        </header>
+        <row>
+          <PRODUTO>Matheus &amp; Kauan Na Praia CD / DVD</PRODUTO>
+          <ACTUAL style="background-color:#FF0000;color:#FFFFFF;">632.800</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>504.000</BUDGET>
+        </row>
+        <row>
+          <PRODUTO>Rodrigo Marim CD / DVD 2017</PRODUTO>
+          <ACTUAL>294.279</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>450.000</BUDGET>
+        </row>
+        <row>
+          <PRODUTO>Maneva CD / DVD</PRODUTO>
+          <ACTUAL style="background-color:#FF0000;color:#FFFFFF;">262.100</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>222.300</BUDGET>
+        </row>
+        <row>
+          <PRODUTO>Anavitoria</PRODUTO>
+          <ACTUAL style="background-color:#FF0000;color:#FFFFFF;">114.345</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>97.000</BUDGET>
+        </row>
+        <row>
+          <PRODUTO>Paula Fernandes - faixa Dois Palabras</PRODUTO>
+          <ACTUAL>94.331</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>107.921</BUDGET>
+        </row>
+        <row>
+          <PRODUTO>Projota CD 2017</PRODUTO>
+          <ACTUAL>90.000</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>90.000</BUDGET>
+        </row>
+        <row>
+          <PRODUTO>Manu Gavassi CD 2017</PRODUTO>
+          <ACTUAL>88.332</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>140.000</BUDGET>
+        </row>
+        <row>
+          <PRODUTO>Gabily CD</PRODUTO>
+          <ACTUAL style="background-color:#FF0000;color:#FFFFFF;">79.446</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>72.000</BUDGET>
+        </row>
+        <row>
+          <PRODUTO>Clau Riffel CD 2017</PRODUTO>
+          <ACTUAL>72.873</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>110.011</BUDGET>
+        </row>
+        <row>
+          <PRODUTO>Mylena Jardim CD 2017</PRODUTO>
+          <ACTUAL>71.721</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>75.000</BUDGET>
+        </row>
+        <row>
+          <PRODUTO>
+          </PRODUTO>
+          <ACTUAL>
+          </ACTUAL>
+          <FCAST>
+          </FCAST>
+          <PLAN>
+          </PLAN>
+          <ANO2016>
+          </ANO2016>
+          <BUDGET>
+          </BUDGET>
+        </row>
+        <row>
+          <PRODUTO>Other</PRODUTO>
+          <ACTUAL style="background-color:#FF0000;color:#FFFFFF;">513.501</ACTUAL>
+          <FCAST>-</FCAST>
+          <PLAN>-</PLAN>
+          <ANO2016>-</ANO2016>
+          <BUDGET>-</BUDGET>
+        </row>
+        <header>
+          <PRODUTO>TOTAL</PRODUTO>
+          <ACTUAL>2.313.732</ACTUAL>
+          <FCAST>2.159.477</FCAST>
+          <PLAN>3.436.400</PLAN>
+          <ANO2016>1.274.417</ANO2016>
+          <BUDGET>-</BUDGET>
+        </header>
+      </table>
+      <table id="TableTopMarketingExpensesYTD" name="Top A&amp;R Expenses YTD" tipo="top10" procedure="SLT_TOP_GRAFICO_AER_TOP10" class="table table-condensed table-striped table-hover" param="ano2posicoes">
+        <header>
+          <ARTISTA>Artista</ARTISTA>
+          <PROJETO>Projeto</PROJETO>
+          <AER_YTD>YTD</AER_YTD>
+          <AER_RTD>RTD</AER_RTD>
+        </header>
+        <row>
+          <ARTISTA>Matheus&amp; Kauan</ARTISTA>
+          <PROJETO>Na Praia 2</PROJETO>
+          <AER_YTD>632.800</AER_YTD>
+          <AER_YTD>632.800</AER_YTD>
+        </row>
+        <row>
+          <ARTISTA>Maneva</ARTISTA>
+          <PROJETO>Maneva ao vivo São Paulo</PROJETO>
+          <AER_YTD>264.100</AER_YTD>
+          <AER_YTD>264.100</AER_YTD>
+        </row>
+        <row>
+          <ARTISTA>Manu Gavassi</ARTISTA>
+          <PROJETO>Manu</PROJETO>
+          <AER_YTD>219.483</AER_YTD>
+          <AER_YTD>219.483</AER_YTD>
+        </row>
+        <row>
+          <ARTISTA>Anavitória</ARTISTA>
+          <PROJETO>Agora Eu Quero Ir</PROJETO>
+          <AER_YTD>112.845</AER_YTD>
+          <AER_YTD>114.345</AER_YTD>
+        </row>
+        <row>
+          <ARTISTA>Projota</ARTISTA>
+          <PROJETO>A Milenar Arte de Meter o Louco</PROJETO>
+          <AER_YTD>90.000</AER_YTD>
+          <AER_YTD>90.000</AER_YTD>
+        </row>
+        <row>
+          <ARTISTA>Gabily</ARTISTA>
+          <PROJETO>Gabily</PROJETO>
+          <AER_YTD>72.947</AER_YTD>
+          <AER_YTD>79.447</AER_YTD>
+        </row>
+        <row>
+          <ARTISTA>Make U Sweat</ARTISTA>
+          <PROJETO>Make U Sweat</PROJETO>
+          <AER_YTD>16.000</AER_YTD>
+          <AER_YTD>16.000</AER_YTD>
+        </row>
+        <row>
+          <ARTISTA>Joelma</ARTISTA>
+          <PROJETO>Joelma</PROJETO>
+          <AER_YTD>1.500</AER_YTD>
+          <AER_YTD>6.300</AER_YTD>
+        </row>
+        <row>
+          <ARTISTA>Diogo Nogueira</ARTISTA>
+          <PROJETO>Alma Brasileira Ao vivo</PROJETO>
+          <AER_YTD>766</AER_YTD>
+          <AER_YTD>557.016</AER_YTD>
+        </row>
+        <row>
+          <ARTISTA>Mano Walter</ARTISTA>
+          <PROJETO>Ao vivo em Maceio</PROJETO>
+          <AER_YTD>231</AER_YTD>
+          <AER_YTD>231</AER_YTD>
+        </row>
+      </table>
+    </obj>
+    <obj type="tableIRP" name="Índice Resultado de Projeto" icon="fa fa-thumbs-up" forcastPlan="false" class="col-lg-5 col-md-5 col-xs-5 grafico hvr-float-shadow text-align" rowFlex="false">
+      <tableIRP id="TableIRPAER" name="Índice Resultado de Projeto" tipo="top10" procedure="SLT_GRAFICO_IRP_AER2" class="table table-condensed table-striped table-hover">
+        <header>
+          <IRP>IRP</IRP>
+          <ARTISTA>Artista</ARTISTA>
+          <PROJETO>Projeto</PROJETO>
+        </header>
+        <row>
+          <IRP>1,2</IRP>
+          <ARTISTA>Anavitória</ARTISTA>
+          <PROJETO>Agora Eu Quero Ir</PROJETO>
+        </row>
+        <row>
+          <IRP>0,4</IRP>
+          <ARTISTA>Bruna Viola</ARTISTA>
+          <PROJETO>Ao Vivo - Melodias do Sertão</PROJETO>
+        </row>
+        <row>
+          <IRP>-0,2</IRP>
+          <ARTISTA>Bruna Viola</ARTISTA>
+          <PROJETO>Sem Fronteiras</PROJETO>
+        </row>
+        <row>
+          <IRP>0,8</IRP>
+          <ARTISTA>Bruno &amp; Marrone e Chitãozinho</ARTISTA>
+          <PROJETO>Clássico</PROJETO>
+        </row>
+        <row>
+          <IRP>2,1</IRP>
+          <ARTISTA>Daniel</ARTISTA>
+          <PROJETO>Daniel in Concert - em Brotas</PROJETO>
+        </row>
+        <row>
+          <IRP>0,1</IRP>
+          <ARTISTA>Daniel</ARTISTA>
+          <PROJETO>Daniel</PROJETO>
+        </row>
+        <row>
+          <IRP>0,4</IRP>
+          <ARTISTA>Diogo Nogueira</ARTISTA>
+          <PROJETO>Porta-voz Da Alegria</PROJETO>
+        </row>
+        <row>
+          <IRP>0,4</IRP>
+          <ARTISTA>Diogo Nogueira</ARTISTA>
+          <PROJETO>Alma Brasileira Ao vivo</PROJETO>
+        </row>
+        <row>
+          <IRP>0,7</IRP>
+          <ARTISTA>Diversos</ARTISTA>
+          <PROJETO>Zeca Apresenta: O Quintal do Pagodinho 3</PROJETO>
+        </row>
+        <row>
+          <IRP>0,8</IRP>
+          <ARTISTA>Diversos</ARTISTA>
+          <PROJETO>Sambas de Enredo 2017</PROJETO>
+        </row>
+        <row>
+          <IRP>130,5</IRP>
+          <ARTISTA>Família Lima</ARTISTA>
+          <PROJETO>Natal em casa</PROJETO>
+        </row>
+        <row>
+          <IRP>0</IRP>
+          <ARTISTA>Gabily</ARTISTA>
+          <PROJETO>Gabily</PROJETO>
+        </row>
+        <row>
+          <IRP>22,5</IRP>
+          <ARTISTA>Ivete Sangalo</ARTISTA>
+          <PROJETO>O Carnaval De Ivete Sangalo</PROJETO>
+        </row>
+        <row>
+          <IRP>0,5</IRP>
+          <ARTISTA>IveteSangalo</ARTISTA>
+          <PROJETO>Acústico em Trancoso</PROJETO>
+        </row>
+        <row>
+          <IRP>2,3</IRP>
+          <ARTISTA>Joelma</ARTISTA>
+          <PROJETO>Joelma</PROJETO>
+        </row>
+        <row>
+          <IRP>1,5</IRP>
+          <ARTISTA>Legião Urbana</ARTISTA>
+          <PROJETO>Legião Urbana 30 Anos</PROJETO>
+        </row>
+        <row>
+          <IRP>2,3</IRP>
+          <ARTISTA>Maria Cecília &amp; Rodolfo</ARTISTA>
+          <PROJETO>Em Fases - Deluxe</PROJETO>
+        </row>
+        <row>
+          <IRP>0,6</IRP>
+          <ARTISTA>Maria Rita</ARTISTA>
+          <PROJETO>O Samba Em Mim - Ao Vivo Na Lapa</PROJETO>
+        </row>
+        <row>
+          <IRP>1,2</IRP>
+          <ARTISTA>Marisa Monte</ARTISTA>
+          <PROJETO>Coleção</PROJETO>
+        </row>
+        <row>
+          <IRP>5,5</IRP>
+          <ARTISTA>Matheus &amp; Kauan</ARTISTA>
+          <PROJETO>Face a Face</PROJETO>
+        </row>
+        <row>
+          <IRP>2,3</IRP>
+          <ARTISTA>Matheus &amp; Kauan</ARTISTA>
+          <PROJETO>Na Praia</PROJETO>
+        </row>
+        <row>
+          <IRP>0,6</IRP>
+          <ARTISTA>Matheus&amp; Kauan</ARTISTA>
+          <PROJETO>Na Praia 2</PROJETO>
+        </row>
+        <row>
+          <IRP>0,7</IRP>
+          <ARTISTA>Paula Fernandes</ARTISTA>
+          <PROJETO>Amanhecer</PROJETO>
+        </row>
+        <row>
+          <IRP>0,2</IRP>
+          <ARTISTA>Paula Fernandes</ARTISTA>
+          <PROJETO>Amanhecer ao Vivo</PROJETO>
+        </row>
+        <row>
+          <IRP>1,4</IRP>
+          <ARTISTA>Projota</ARTISTA>
+          <PROJETO>3FS Ao Vivo</PROJETO>
+        </row>
+        <row>
+          <IRP>0,1</IRP>
+          <ARTISTA>Rafaela Miranda</ARTISTA>
+          <PROJETO>Rafaela Miranda</PROJETO>
+        </row>
+        <row>
+          <IRP>-0,1</IRP>
+          <ARTISTA>Rodrigo Marim</ARTISTA>
+          <PROJETO>O Sequestrador</PROJETO>
+        </row>
+        <row>
+          <IRP>3,3</IRP>
+          <ARTISTA>Sandy</ARTISTA>
+          <PROJETO>Meu Canto</PROJETO>
+        </row>
+        <row>
+          <IRP>17,1</IRP>
+          <ARTISTA>Simone &amp; Simaria</ARTISTA>
+          <PROJETO>Bar Das Coleguinhas</PROJETO>
+        </row>
+        <row>
+          <IRP>3,2</IRP>
+          <ARTISTA>Simone &amp; Simaria</ARTISTA>
+          <PROJETO>Simone &amp; Simaria - Live</PROJETO>
+        </row>
+        <row>
+          <IRP>0,3</IRP>
+          <ARTISTA>ZecaPagodinho</ARTISTA>
+          <PROJETO>Ser Humano</PROJETO>
+        </row>
+      </tableIRP>
+    </obj>
+  </dashboard>
+  <dashboard name="Marketing" id="dMarketing">
+    <obj type="scoreboard" name="Score" icon="fa fa-thermometer-three-quarters" forcastPlan="true" class="col-lg-7 col-md-7 col-xs-7 grafico hvr-float-shadow text-align" rowFlex="false">
+      <tanque id="TanqueMarketing" name="Marketing" tipo="marketing" procedure="SEL_TANQUE_MARKETING" class="hud futuristic text-center">
+        <YTD>5458569</YTD>
+        <YTD_PLAN>5520241</YTD_PLAN>
+        <YTD_REAL>4891777</YTD_REAL>
+        <TOTAL_ANO>13834101</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>13834095</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque id="TanqueMarketingInternacional" name="Marketing Int" tipo="marketinginternacional" procedure="SEL_TANQUE_MARKETING_INTERNACIONAL" class="hud futuristic text-center">
+        <YTD>1441795</YTD>
+        <YTD_PLAN>1183749</YTD_PLAN>
+        <YTD_REAL>2581412</YTD_REAL>
+        <TOTAL_ANO>3702759</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>3000796</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque id="TanqueMarketingNacional" name="Marketing Dom" tipo="marketingnacional" procedure="SEL_TANQUE_MARKETING_NACIONAL" class="hud futuristic text-center">
+        <YTD>3825823</YTD>
+        <YTD_PLAN>4050333</YTD_PLAN>
+        <YTD_REAL>2249792</YTD_REAL>
+        <TOTAL_ANO>9596510</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>10267814</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque id="TanqueMarketingEspecial" name="Marketing Special" tipo="marketingespecial" procedure="SEL_TANQUE_MARKETING_ESPECIAL" class="hud futuristic text-center">
+        <YTD>190948</YTD>
+        <YTD_PLAN>286154</YTD_PLAN>
+        <YTD_REAL>60565</YTD_REAL>
+        <TOTAL_ANO>534817</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>565471</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque id="TanqueMarketingOverhead" name="Marketing Overhead" tipo="marketingoverhead" procedure="SEL_TANQUE_MARKETING_OVERHEAD" class="hud futuristic text-center">
+        <YTD>331448</YTD>
+        <YTD_PLAN>288922</YTD_PLAN>
+        <YTD_REAL>419468</YTD_REAL>
+        <TOTAL_ANO>927159</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>884633</TOTAL_ANO_PLAN>
+      </tanque>
+    </obj>
+    <obj type="table" name="Top 10 Marketing Expenses" icon="fa fa-star" forcastPlan="false" class="col-lg-5 col-md-5 col-xs-5 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table id="TableTopMarketingExpenses" name="Top 10 Marketing Expenses" tipo="top10" procedure="SLT_TOP_GRAFICO_MARKETING_TOP10" class="table table-condensed table-striped table-hover" param="mes2digitos">
+        <header>
+          <ARTISTA>Artista</ARTISTA>
+          <PROJETO>Projeto</PROJETO>
+          <MAKETING_YTD>YTD</MAKETING_YTD>
+          <MAKETING_RTD>RTD</MAKETING_RTD>
+        </header>
+        <row>
+          <ARTISTA>Projota</ARTISTA>
+          <PROJETO>A Milenar Arte de Meter o Louco</PROJETO>
+          <MAKETING_YTD>238.766</MAKETING_YTD>
+          <MAKETING_YTD>238.766</MAKETING_YTD>
+        </row>
+        <row>
+          <ARTISTA>Luis Fonsi</ARTISTA>
+          <PROJETO>[No Project] LP4</PROJETO>
+          <MAKETING_YTD>183.505</MAKETING_YTD>
+          <MAKETING_YTD>183.505</MAKETING_YTD>
+        </row>
+        <row>
+          <ARTISTA>Gabily</ARTISTA>
+          <PROJETO>Gabily</PROJETO>
+          <MAKETING_YTD>175.109</MAKETING_YTD>
+          <MAKETING_YTD>312.427</MAKETING_YTD>
+        </row>
+        <row>
+          <ARTISTA>Matheus&amp; Kauan</ARTISTA>
+          <PROJETO>Na Praia 2</PROJETO>
+          <MAKETING_YTD>155.631</MAKETING_YTD>
+          <MAKETING_YTD>166.882</MAKETING_YTD>
+        </row>
+        <row>
+          <ARTISTA>Matheus &amp; Kauan</ARTISTA>
+          <PROJETO>Na Praia</PROJETO>
+          <MAKETING_YTD>140.370</MAKETING_YTD>
+          <MAKETING_YTD>744.315</MAKETING_YTD>
+        </row>
+        <row>
+          <ARTISTA>Shawn Mendes</ARTISTA>
+          <PROJETO>Illuminate - Deluxe </PROJETO>
+          <MAKETING_YTD>112.949</MAKETING_YTD>
+          <MAKETING_YTD>152.727</MAKETING_YTD>
+        </row>
+        <row>
+          <ARTISTA>Maneva</ARTISTA>
+          <PROJETO>Maneva ao vivo São Paulo</PROJETO>
+          <MAKETING_YTD>112.597</MAKETING_YTD>
+          <MAKETING_YTD>117.097</MAKETING_YTD>
+        </row>
+        <row>
+          <ARTISTA>Anavitória</ARTISTA>
+          <PROJETO>Agora Eu Quero Ir</PROJETO>
+          <MAKETING_YTD>109.182</MAKETING_YTD>
+          <MAKETING_YTD>223.122</MAKETING_YTD>
+        </row>
+        <row>
+          <ARTISTA>Manu Gavassi</ARTISTA>
+          <PROJETO>Manu</PROJETO>
+          <MAKETING_YTD>90.026</MAKETING_YTD>
+          <MAKETING_YTD>90.026</MAKETING_YTD>
+        </row>
+        <row>
+          <ARTISTA>Various Artists</ARTISTA>
+          <PROJETO>Beauty and the Beast 2017</PROJETO>
+          <MAKETING_YTD>69.874</MAKETING_YTD>
+          <MAKETING_YTD>69.874</MAKETING_YTD>
+        </row>
+      </table>
+    </obj>
+    <obj type="pieChartSimple" name="YTD Market Expenses by Department" icon="fa fa-pie-chart" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <pieChartSimple id="PieChartSimpleYTDMarketExpensesByDepartmena" name="YTDMarketExpensesByDepartmena" tipo="pie" procedure="SLT_GRAFICO_MARKETING_EXPENSES_DEPARTAMENTO2" class="" label="YTD Sales" show="valor">
+        <labels>
+          <label>Digital</label>
+          <label>Others</label>
+          <label>Radio</label>
+          <label>TV</label>
+          <label>Imprensa</label>
+        </labels>
+        <datas>
+          <data color="rgba(255,165,0,1)">1384240</data>
+          <data color="rgba(0, 72, 70,1)">1230766</data>
+          <data color="rgba(23,123,172,1)">658796</data>
+          <data color="rgba(255,165,0,1)">273806</data>
+          <data color="rgba(255,0,0,1)">102109</data>
+        </datas>
+      </pieChartSimple>
+    </obj>
+    <obj type="barChartComplex" name="Histórico de Despesas dos Últimos 12 Meses" icon="fa fa-bar-chart" forcastPlan="false" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
+      <barChartComplex id="BarChartComplexHistoricoDeDespesasDosUltimos12Meses" name="historicoDeDespesasDosUltimos12Meses" class="" step="100000" procedure="SLT_GRAFICO_MARKETING_DESPESAS_ULT12MESES" param="ano2digitosmes">
+        <labels>
+          <label>mai</label>
+          <label>jun</label>
+          <label>jul</label>
+          <label>ago</label>
+          <label>set</label>
+          <label>out</label>
+          <label>nov</label>
+          <label>dez</label>
+          <label>jan</label>
+          <label>fev</label>
+          <label>mar</label>
+          <label>abr</label>
+        </labels>
+        <datasets>
+          <dataset tipo="bar" label="'Total'" hidden="false" barColor="'rgba(0, 72, 70,1)'">
+            <data>1242059</data>
+            <data>1564885</data>
+            <data>528229</data>
+            <data>1556602</data>
+            <data>204775</data>
+            <data>1049394</data>
+            <data>715429</data>
+            <data>1302688</data>
+            <data>1244769</data>
+            <data>907264</data>
+            <data>1761424</data>
+            <data>1201130</data>
+          </dataset>
+        </datasets>
+      </barChartComplex>
+    </obj>
+    <obj type="pieChartSimple" name="YTD Market Expenses by Type" icon="fa fa-pie-chart" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <pieChartSimple id="PieChartSimpleYTDMarketExpensesByType" name="YTDMarketExpensesByType" tipo="pie" procedure="SLT_GRAFICO_MARKETING_EXPENSES_TIPO2" class="" label="YTD Sales" show="valor">
+        <labels>
+          <label>Media</label>
+          <label>Promo Cost</label>
+          <label>Others</label>
+        </labels>
+        <datas>
+          <data color="rgba(255,165,0,1)">1722290</data>
+          <data color="rgba(0, 72, 70,1)">1391099</data>
+          <data color="rgba(23,123,172,1)">536328</data>
+        </datas>
+      </pieChartSimple>
+    </obj>
+  </dashboard>
+  <dashboard name="GTS" id="dGTS">
+    <obj type="twoColumn" name="" icon="" forcastPlan="false" class="col-lg-12 col-md-12 col-xs-12 multiobj" rowFlex="false">
+      <twoColumn>
+        <left class="col-lg-3 col-md-3 col-xs-3 flexHeight">
+          <obj type="carousel" name="Artista" icon="fa fa-star" forcastPlan="false" class="col-lg-12 col-md-12 col-xs-12 hvr-float-shadow text-align multiobj" rowFlex="false">
+            <carousel id="carouselArtistas">
+              <image id="ImageArtista" name="TOP 10 Partners" tipo="top10" procedure="SLT_TOP_GRAFICO_DIGITAL_PARCEIROS_TOP10" class="">
+                <src>Content/images/bruna_viola.png</src>
+              </image>
+              <image id="ImageArtista" name="TOP 10 Partners" tipo="top10" procedure="SLT_TOP_GRAFICO_DIGITAL_PARCEIROS_TOP10" class="">
+                <src>Content/images/cara_violao.png</src>
+              </image>
+              <image id="ImageArtista" name="TOP 10 Partners" tipo="top10" procedure="SLT_TOP_GRAFICO_DIGITAL_PARCEIROS_TOP10" class="">
+                <src>Content/images/dj_batata.png</src>
+              </image>
+              <image id="ImageArtista" name="TOP 10 Partners" tipo="top10" procedure="SLT_TOP_GRAFICO_DIGITAL_PARCEIROS_TOP10" class="">
+                <src>Content/images/mlks.png</src>
+              </image>
+            </carousel>
+          </obj>
+          <obj type="scoreboard" name="Score Operação" icon="fa fa-thermometer-three-quarters" forcastPlan="true" class="col-lg-12 col-md-12 col-xs-12 grafico hvr-float-shadow text-align" rowFlex="false">
+            <tanque id="TanqueGTSMargin" name="Margin GTS" tipo="aroverhead" procedure="SLT_GTS_TANQUE_MARGEN_PAINEL " class="hud futuristic text-center">
+              <YTD>264508</YTD>
+              <YTD_PLAN>520472</YTD_PLAN>
+              <YTD_REAL>3089</YTD_REAL>
+              <TOTAL_ANO>2173992</TOTAL_ANO>
+              <TOTAL_ANO_PLAN>2924416</TOTAL_ANO_PLAN>
+            </tanque>
+            <tanque id="TanqueGTSReceita" name="Receita GTS" tipo="aroverhead" procedure="SLT_GTS_TANQUE_RECEITA_PAINEL " class="hud futuristic text-center">
+              <YTD>1245000</YTD>
+              <YTD_PLAN>3270000</YTD_PLAN>
+              <YTD_REAL>591350</YTD_REAL>
+              <TOTAL_ANO>7676000</TOTAL_ANO>
+              <TOTAL_ANO_PLAN>12530000</TOTAL_ANO_PLAN>
+            </tanque>
+          </obj>
+        </left>
+        <right class="col-lg-9 col-md-9 col-xs-9">
+          <obj type="barChartComplex" name="Histórico de Receita dos Últimos 12 Meses" icon="fa fa-bar-chart" forcastPlan="false" class="col-lg-8 col-md-8 col-xs-8 grafico hvr-float-shadow text-align" rowFlex="false">
+            <barChartComplex id="BarChartComplexGTSReceita12Meses" name="GTSReceita12Meses" class="" step="100000" procedure="SLT_GTS_RECEITA_ULT12MESES_PAINEL">
+              <labels>
+                <label>mai</label>
+                <label>jun</label>
+                <label>jul</label>
+                <label>ago</label>
+                <label>set</label>
+                <label>out</label>
+                <label>nov</label>
+                <label>dez</label>
+                <label>jan</label>
+                <label>fev</label>
+                <label>mar</label>
+                <label>abr</label>
+              </labels>
+              <datasets>
+                <dataset tipo="bar" label="'Total'" hidden="false" barColor="'rgba(0, 72, 70,1)'">
+                  <data>211000</data>
+                  <data>173391</data>
+                  <data>277800</data>
+                  <data>280780</data>
+                  <data>388126</data>
+                  <data>127950</data>
+                  <data>209700</data>
+                  <data>179250</data>
+                  <data>96450</data>
+                  <data>107200</data>
+                  <data>242500</data>
+                  <data>145200</data>
+                </dataset>
+              </datasets>
+            </barChartComplex>
+          </obj>
+          <obj type="mapaRegiao" name="Mapa de Shows" icon="fa fa-star" forcastPlan="false" class="col-lg-4 col-md-4 col-xs-4 grafico hvr-float-shadow text-align" rowFlex="false">
+            <mapaRegiao id="MapaRegiaoShows" name="Mapa de Shows" tipo="Mapa" procedure="SLT_GTS_SHOWS_REGIAO_PAINEL" class="MapaRegiao" percent="True">
+              <datas artista="Todos">
+                <data id="Sudeste">87</data>
+                <data id="Sul">15</data>
+                <data id="Centro Oeste">5</data>
+                <data id="Exterior">1</data>
+                <data id="Norte">3</data>
+                <data id="Nordeste">3</data>
+              </datas>
+            </mapaRegiao>
+          </obj>
+          <obj type="table" name="Detalhes do Artista" icon="fa fa-star" forcastPlan="false" class="col-lg-12 col-md-12 col-xs-12 hvr-float-shadow text-align grafico" rowFlex="false">        
+            <table id="TableGTSValores" name="Detalhes do Artista" tipo="top10" procedure="SLT_GTS_CACHE_PAINEL" class="fontGiant" param="ano2digitos">
+              <header>
+                <VALOR>Cachê Médio do Mês</VALOR>
+                <VALOR>Números de Shows do Mês</VALOR>
+                <VALOR>Total da Receita do Mês</VALOR>
+                <VALOR>Saldo em Aberto</VALOR>
+              </header>
+            <row>
+              <VALOR class="">R$ 42.716</VALOR>
+              <VALOR class="">7</VALOR>
+              <VALOR class="">R$ 145.200</VALOR>
+              <VALOR class="">R$ 373.942</VALOR>
+              </row>
+            </table>
+            <table id="TableGTSValores" name="Valores" tipo="top10" procedure="SLT_GTS_CACHE_PAINEL" class="fontGiant" param="ano2digitos">
+              <header>
+                <VALOR>Margin do Mês</VALOR>
+                <VALOR>Participação GTS</VALOR>
+                <VALOR>Participação ARTISTA</VALOR>
+                <VALOR>Participação LIVE</VALOR>
+              </header>
+              <row>
+                <VALOR class="">R$ -1.556</VALOR>
+                <VALOR class="">R$ -33.192</VALOR>
+                <VALOR class="">R$ 26.492</VALOR>
+                <VALOR class="">R$ 5.143</VALOR>
+              </row>
+            </table>
+          </obj>
+        </right>
+      </twoColumn>
+    </obj>
+  </dashboard>
+</dashboards>

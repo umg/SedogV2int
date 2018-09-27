@@ -1,0 +1,74 @@
+﻿@using SEDOGv2.Helpers;
+
+@model IEnumerable<SEDOGv2.Models.DepartamentosViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+                      <div class="container-fluid">
+
+                          @using (Html.BeginForm())
+                          {
+                              <div class="panel panel-success">
+                                  <!-- Default panel contents -->
+                                  <div class="row">
+                                      <div class="panel-heading  text-center">
+                                          <h2>
+                                              @appSettings.pageName()
+                                          </h2>
+                                      </div>
+                                  </div>
+
+
+                                  <div class="col-md-12" runat="server" id="divAlert">
+                                      @ViewBag.Error
+                                  </div>
+
+
+                                  <div class="row">
+                                      <div class="col-md-4 text-right">
+                                          <div class="form-group">
+                                              <h4>New Department:</h4>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                              <input type="text" name="txtDepartamento" class="form-control" placeholder="Type the department name" />
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                              <input type="submit" name="inserir" value="Add" class="btn btn-default" />
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          }
+                          <div class="panel panel-success panel-report">
+                              <div class="row">
+
+                                  <div class="col-md-12">
+                                      <table class="table table-bordered">
+                                          <tr>
+                                              <th>
+                                                  Department
+                                              </th>
+                                              <th></th>
+                                          </tr>
+
+                                          @foreach (var item in Model)
+                                          {
+                                              <tr>
+                                                  <td>
+                                                      @Html.DisplayFor(modelItem => item.DEPTO)
+                                                  </td>
+                                                  <td><a href="Departamentos/Apagar/?nome=@Html.DisplayFor(modelItem => item.DEPTO)">Delete</a></td>
+                                              </tr>
+                                          }
+
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>

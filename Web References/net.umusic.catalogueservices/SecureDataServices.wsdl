@@ -1,0 +1,2094 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://umusic.com/itdi/centralcatalogue/webservices/v2.0" xmlns:s1="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://umusic.com/itdi/centralcatalogue/webservices/v2.0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">A set of secured web services to make data available from the Central Catalogue. 
+		These services are secured through WSE 3.0 and requires that client calls adhere 
+		to the ServerPolicy, as defined within the UsernameAssertionLibrary.&lt;br/&gt;
+		&lt;br/&gt;
+		Object schema definitions and example Notification Service messages are available &lt;a href=schema&gt;here&lt;/a&gt;.  Example code and other useful resources can be found &lt;a href=public&gt;here&lt;/a&gt;.&lt;br/&gt;
+		&lt;br/&gt;
+		Author: D Moggs&lt;br/&gt;
+		Created: 27-Jun-2006&lt;br/&gt;
+		Update History:&lt;br/&gt;
+		&lt;ul&gt;
+			&lt;li&gt;2.5.0 (P Tebbutt 30-March-2007)
+				&lt;span&gt;&lt;br/&gt;Services added for News Articles (CMS) and Biographies and Press &amp; Publicity Photos (AEC)&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.2 (P Tebbutt 11-May-2007)
+				&lt;span&gt;&lt;br/&gt;&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.3 (P Tebbutt 17-May-2007)
+				&lt;span&gt;&lt;br/&gt;Added GetNewsArticleByContentId&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;&lt;I&gt;2.5.4 (P Tebbutt 6-June-2007)
+				&lt;span&gt;&lt;br/&gt;Dutch Interface fix (no change to SDS)&lt;/span&gt;&lt;/I&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.5 (P Tebbutt 11-June-2007)
+				&lt;span&gt;&lt;br/&gt;Added GetProductsByContributorID&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.6 (P Tebbutt 31-July-2007)
+				&lt;span&gt;&lt;br/&gt;Restricted assets returned 'by Artist' to products available in the users territory&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;
+				&lt;I&gt;2.5.7 (P Tebbutt 12-October-2007)
+				&lt;span&gt;&lt;br/&gt;Fix problem where Data Services not populating Release Dates (no change to SDS)&lt;/span&gt;
+				&lt;/I&gt;
+			&lt;/li&gt;
+			&lt;li&gt;
+				2.5.8 (P Tebbutt 16-October-2007)
+				&lt;span&gt;
+					&lt;br/&gt;Return extended contributor information.
+					&lt;br/&gt;Provide PPD (Published Price to Dealer) to authorised clients.
+					&lt;br/&gt;Return territorial restrictions for assets.
+					&lt;br/&gt;Publish improved schema.
+				&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.9 (P Tebbutt 14-July-2008)
+				&lt;span&gt;&lt;br/&gt;Extend contributor information to include FirstName, LastNamePrefix and LastName/Group.&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.10 (P Tebbutt 10-September-2008)
+				&lt;span&gt;&lt;br/&gt;New GetArtistMerchandisingAssetsByBarcode method that provides details of Bravado &lt;I&gt;'Artist Assets'&lt;/I&gt; in AEC.&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.11 (P Tebbutt 24-October-2008)
+				&lt;span&gt;
+					&lt;br/&gt;Moved to new server.
+					&lt;br/&gt;Merchandising: Barcode must be 13 digits for GetArtistMerchandisingAssetsByBarcode.
+					&lt;br/&gt;Cover Art: Fixed Available property.
+					&lt;br/&gt;Cover Art: Added AssetSource.None.
+					&lt;br/&gt;Cover Art: Cover Art returned by GetProductById and GetProductsByContributorId made consistent.
+					&lt;br/&gt;Cover Art: Preference given to AEC covers if multiple latest covers availble with identical created date.
+				&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.17 (P Tebbutt 23-June-2009)
+				&lt;span&gt;
+					&lt;br/&gt;Extend contributor information to include Company details.
+					&lt;br/&gt;Add/move AssetType fields - FileSize, FileType, UploadedBy, SourceFile and Description.
+					&lt;br/&gt;New methods to retrieve Press Releases.
+					&lt;br/&gt;New method to return an array of Products
+				&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.18 (P Tebbutt 30-October-2009)
+				&lt;span&gt;
+					&lt;br/&gt;New methods for retrieving Release Groups
+					&lt;br/&gt;GetReleaseGroupById
+					&lt;br/&gt;GetReleaseGroupContributors
+					&lt;br/&gt;GetReleaseGroupProducts
+					&lt;br/&gt;GetReleaseGroupsByContributorId
+				&lt;/span&gt;
+			&lt;/li&gt;
+            &lt;li&gt;2.5.20 (J Poynting 30-August-2011)
+				&lt;span&gt;
+					&lt;br/&gt;Add ghost track indicator
+				&lt;/span&gt;
+			&lt;/li&gt;
+            &lt;li&gt;2.5.21 (J Sharpe 13-September-2011)
+				&lt;span&gt;
+					&lt;br/&gt;Added ProductGrouping code to the product release information for both 
+                    &lt;br/&gt;digital and physical releases.
+				&lt;/span&gt;
+			&lt;/li&gt;    
+            &lt;li&gt;2.5.26 (J Poynting 24-November-2011)
+                &lt;span&gt;
+                    &lt;br/&gt;Added the audioclips and videoclips collections to track listings.
+                &lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;2.5.29 (P.Tebbutt/R.Chong 25-January-2012)
+                &lt;span&gt;
+                    &lt;br/&gt;Maintenance release.
+                &lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;2.5.30 (P.Tebbutt 31-January-2012)
+                &lt;span&gt;
+                    &lt;br/&gt;Maintenance release.
+                &lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;2.5.31 (M.Steven 24-February-2012)
+                &lt;span&gt;
+                    &lt;br/&gt;Filtering on release groups brought into line with products.
+                &lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;2.5.32 (M.Steven 25-May-2012)
+                &lt;span&gt;
+                    &lt;br/&gt;Added GetContributorsByProduct.  Returns the contributors associated with a given product id 
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.33 (P.Tebbutt 8-March-2013)
+                &lt;span&gt;
+                    &lt;br/&gt;Added CarrierCode to Release information.
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.34(J.Poynting 19-April-2013)
+                &lt;span&gt;
+                    &lt;br/&gt;Added MusicType to Product.
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.40(M.Steven 18-November-2013)
+                &lt;span&gt;
+                    &lt;br/&gt;Added ReleaseGroupID to Product
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.41(M.Steven 14-April-2014)
+                &lt;span&gt;
+                    &lt;br/&gt;Modified to return US products and assets for US users and to observe Mark restrictions.
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.42(M.Steven 20-May-2014)
+                &lt;span&gt;
+                    &lt;br/&gt;Added AccountID to method that return contributors
+                        &lt;ul&gt;
+                            &lt;li&gt;GetContributorsByProduct&lt;/li&gt;
+                            &lt;li&gt;GetProductById&lt;/li&gt;
+                            &lt;li&gt;GetProductListById&lt;/li&gt;
+                            &lt;li&gt;GetProductsByContributorId&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupById&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupProducts&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupsByContributorId&lt;/li&gt;
+                        &lt;/ul&gt;
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.45(P.Tebbutt 29-Sep-2014)
+                &lt;span&gt;
+                    &lt;br/&gt;(no change to Secure Data Services)
+                &lt;/span&gt; 
+            &lt;/li&gt;
+             &lt;li&gt;2.5.51(J.Poynting 05-Nov-2014)
+                &lt;span&gt;
+                    &lt;br/&gt;Added GetCoverArtByUPCList which retrieves cover art for a list of UPCs
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.52(J.Poynting 07-Nov-2014)
+                &lt;span&gt;
+                    &lt;br/&gt;(no change to Secure Data Services)
+                &lt;/span&gt; 
+            &lt;/li&gt;
+              &lt;li&gt;2.5.55(M.Steven 25-Feb-2015)
+                &lt;span&gt;
+                    &lt;br/&gt;Added RoleId RoleCreditPrefix and RoleGroup to methods that return contributors
+                        &lt;ul&gt;
+                            &lt;li&gt;GetProductById&lt;/li&gt;
+                            &lt;li&gt;GetProductListById&lt;/li&gt;
+                            &lt;li&gt;GetProductsByContributorId&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupById&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupContributors&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupProducts&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupsByContributorId&lt;/li&gt;
+                            &lt;li&gt;GetTracklistingForProduct&lt;/li&gt;
+                            &lt;li&gt;GetContributorsByProduct&lt;/li&gt;
+                        &lt;/ul&gt;
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.56(J.Poynting 20-Mar-2015)
+                &lt;span&gt;
+                    &lt;br/&gt;Added catalogue number to releases and component titles and version titles.
+                &lt;/span&gt; 
+            &lt;/li&gt;
+		&lt;/ul&gt;&lt;hr/&gt;</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://umusic.com/itdi/centralcatalogue/webservices/v2.0">
+      <s:import namespace="http://tempuri.org/" />
+      <s:element name="GetContributorsByProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="productID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContributorsByProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContributorsByProductResult" type="tns:ArrayOfContributor" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfContributor">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Contributor" nillable="true" type="tns:Contributor" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Contributor">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="contributorId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="formattedName" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="role" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="sequence" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="mainContributorFlag" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="firstName" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="lastNamePrefix" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="lastNameGroup" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="company" type="tns:CodeNameType" />
+          <s:element minOccurs="1" maxOccurs="1" name="companyCountry" type="tns:CodeNameType" />
+          <s:element minOccurs="1" maxOccurs="1" name="accountId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="roleId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="roleCreditPrefix" nillable="true" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="roleGroup" type="tns:CodeNameType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CodeNameType">
+        <s:attribute name="code" type="s:string" />
+        <s:attribute name="name" type="s:string" />
+      </s:complexType>
+      <s:element name="GetProductIdByUpc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="upc" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductIdByUpcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetProductIdByUpcResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductIdListByUpc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="upcList" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProductIdListByUpcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductIdListByUpcResult" type="tns:ArrayOfLong" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="long" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProductById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="productId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="product" nillable="true" type="tns:Product" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Product">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="productId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="upc" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="lastUpdated" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="contributorSummary" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ArtistInfo" type="tns:ArrayOfContributor1" />
+          <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="musicType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="versionTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="genre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="formatInfo" type="tns:Format" />
+          <s:element minOccurs="0" maxOccurs="1" name="releaseInfo" type="tns:ArrayOfTerritoryRelease" />
+          <s:element minOccurs="0" maxOccurs="1" name="coverArt" type="tns:CoverArtAsset" />
+          <s:element minOccurs="1" maxOccurs="1" name="componentCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="clipsAvailable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="finalLabelCopy" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="explicitLyrics" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="repOwnerInfo" type="tns:RepertoireOwner" />
+          <s:element minOccurs="0" maxOccurs="1" name="releaseGroupID" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContributor1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="contributor" nillable="true" type="tns:Contributor" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Format">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="physicalFormat" type="tns:ReleaseFormatType" />
+          <s:element minOccurs="1" maxOccurs="1" name="digitalFormat" type="tns:ReleaseFormatType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReleaseFormatType">
+        <s:attribute name="code" type="s:string" />
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="productGrouping" type="s:string" />
+        <s:attribute name="carrierCode" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfTerritoryRelease">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="territoryRelease" nillable="true" type="tns:TerritoryRelease" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TerritoryRelease">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="country" type="tns:CodeNameType" />
+          <s:element minOccurs="0" maxOccurs="1" name="priceCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ppd" type="tns:CurrencyType" />
+          <s:element minOccurs="0" maxOccurs="1" name="physicalReleaseDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="digitalReleaseDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="catalogueNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CurrencyType">
+        <s:attribute name="currencyCode" type="s:string" />
+        <s:attribute name="amount" type="s:string" />
+      </s:complexType>
+      <s:complexType name="CoverArtAsset">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Asset">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="coverArtToenailUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="coverArtThumbnailUrl" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="available" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="isrc" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="category" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Asset" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="assetId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="publicationDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="source" type="tns:AssetSource" />
+          <s:element minOccurs="1" maxOccurs="1" name="isRestrictedByCountry" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="countryRestrictions" type="tns:ArrayOfCodeNameType" />
+          <s:element minOccurs="1" maxOccurs="1" name="productId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="upc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="artist" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fileSize" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="format" type="s1:FormatType" />
+          <s:element minOccurs="0" maxOccurs="1" name="uploadedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sourceFile" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="AssetSource">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="AEC" />
+          <s:enumeration value="HAL" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfCodeNameType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="codeNameType" type="tns:CodeNameType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RepertoireOwner">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="country" type="tns:CodeNameType" />
+          <s:element minOccurs="1" maxOccurs="1" name="company" type="tns:CodeNameType" />
+          <s:element minOccurs="1" maxOccurs="1" name="division" type="tns:CodeNameType" />
+          <s:element minOccurs="1" maxOccurs="1" name="label" type="tns:CodeNameType" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProductListById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="productIdList" type="tns:ArrayOfLong" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfProduct">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Product" nillable="true" type="tns:Product" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetProductListByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductListByIdResult" type="tns:ArrayOfProduct" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTracklistingForProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="productId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ComponentCollection">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="productId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="upc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="components" type="tns:ArrayOfComponent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfComponent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="component" nillable="true" type="tns:Component" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Component">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="upc" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="componentNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="componentTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="componentVersionTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tracks" type="tns:ArrayOfTrack" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTrack">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="track" nillable="true" type="tns:Track" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Track">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="trackId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="isrc" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="side" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="trackNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="duration" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="trackTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="trackVersionTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="clipUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="contributorSummary" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="contributors" type="tns:ArrayOfContributor2" />
+          <s:element minOccurs="0" maxOccurs="1" name="composer" type="tns:Contributor" />
+          <s:element minOccurs="0" maxOccurs="1" name="worksTitle" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isGhostTrack" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContributor2">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="trackContributor" nillable="true" type="tns:Contributor" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTracklistingForProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="productComponents" nillable="true" type="tns:ComponentCollection" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductIdsByReleaseDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="dateFrom" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateTo" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductIdsByReleaseDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductIdsByReleaseDateResult" type="tns:ArrayOfLong" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductsByContributorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="contributorId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductsByContributorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductsByContributorIdResult" type="tns:ArrayOfProduct" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReleaseGroupById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="releaseGroupId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReleaseGroup">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="releaseGroupId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="contributorSummary" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="productGrouping" type="tns:ProductGrouping" />
+          <s:element minOccurs="1" maxOccurs="1" name="lastUpdated" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="referenceProduct" type="tns:Product" />
+          <s:element minOccurs="0" maxOccurs="1" name="marketingDivisions" type="tns:ArrayOfCodeNameType" />
+          <s:element minOccurs="0" maxOccurs="1" name="comment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="products" type="tns:ArrayOfProduct1" />
+          <s:element minOccurs="0" maxOccurs="1" name="contributors" type="tns:ArrayOfContributor1" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ProductGrouping">
+        <s:restriction base="s:string">
+          <s:enumeration value="Album" />
+          <s:enumeration value="CDiReady" />
+          <s:enumeration value="Mobile" />
+          <s:enumeration value="Merchandise" />
+          <s:enumeration value="Single" />
+          <s:enumeration value="Video" />
+          <s:enumeration value="Unknown" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfProduct1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="product" nillable="true" type="tns:Product" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetReleaseGroupByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="releaseGroup" nillable="true" type="tns:ReleaseGroup" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReleaseGroupsByContributorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="contributorId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReleaseGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReleaseGroup" nillable="true" type="tns:ReleaseGroup" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetReleaseGroupsByContributorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReleaseGroupsByContributorIdResult" type="tns:ArrayOfReleaseGroup" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReleaseGroupProducts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="releaseGroupId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReleaseGroupProductsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReleaseGroupProductsResult" type="tns:ArrayOfProduct" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReleaseGroupContributors">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="releaseGroupId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReleaseGroupContributorsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReleaseGroupContributorsResult" type="tns:ArrayOfContributor" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUpdatedCoverArtInformation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="dateFrom" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateTo" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="isoCountryCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCoverArtAsset">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="coverArtAsset" nillable="true" type="tns:CoverArtAsset" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUpdatedCoverArtInformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUpdatedCoverArtInformationResult" type="tns:ArrayOfCoverArtAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBiographiesByProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="productId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBiographyAsset">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="biographyAsset" nillable="true" type="tns:BiographyAsset" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BiographyAsset">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Asset" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetBiographiesByProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBiographiesByProductResult" type="tns:ArrayOfBiographyAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBiographiesByArtist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="contributorId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBiographiesByArtistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBiographiesByArtistResult" type="tns:ArrayOfBiographyAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPressPhotosByProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="productId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPressPhotoAsset">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="pressPhotoAsset" nillable="true" type="tns:PressPhotoAsset" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PressPhotoAsset">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Asset">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="toenailUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="thumbnailUrl" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetPressPhotosByProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPressPhotosByProductResult" type="tns:ArrayOfPressPhotoAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPressPhotosByArtist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="contributorId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPressPhotosByArtistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPressPhotosByArtistResult" type="tns:ArrayOfPressPhotoAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublicityPhotosByProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="productId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPublicityPhotoAsset">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="publicityPhotoAsset" nillable="true" type="tns:PublicityPhotoAsset" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PublicityPhotoAsset">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Asset">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="toenailUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="thumbnailUrl" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetPublicityPhotosByProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPublicityPhotosByProductResult" type="tns:ArrayOfPublicityPhotoAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCoverArtByUPCList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="upcs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CoverArtMetaData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="assetype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="copyright" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dateCreated" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dateModified" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="toenailURL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="thumbnailURL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isPrimaryCover" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="photoCredit" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="assetID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="upc" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCoverArtMetaData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="coverArtMetaData" nillable="true" type="tns:CoverArtMetaData" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCoverArtByUPCListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCoverArtByUPCListResult" type="tns:ArrayOfCoverArtMetaData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublicityPhotosByArtist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="contributorId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPublicityPhotosByArtistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPublicityPhotosByArtistResult" type="tns:ArrayOfPublicityPhotoAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetArtistMerchandisingAssetsByBarcode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArtistMerchandisingAsset">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="artistMerchandisingAsset" nillable="true" type="tns:ArtistMerchandisingAsset" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArtistMerchandisingAsset">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Asset">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="toenailUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="thumbnailUrl" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="labelDescription" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="originalFileName" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetArtistMerchandisingAssetsByBarcodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetArtistMerchandisingAssetsByBarcodeResult" type="tns:ArrayOfArtistMerchandisingAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPressReleasesByProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="productId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPressReleaseAsset">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="pressReleaseAsset" nillable="true" type="tns:PressReleaseAsset" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PressReleaseAsset">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Asset" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetPressReleasesByProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPressReleasesByProductResult" type="tns:ArrayOfPressReleaseAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPressReleasesByArtist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="contributorId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPressReleasesByArtistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPressReleasesByArtistResult" type="tns:ArrayOfPressReleaseAsset" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetJpegRgbAssetAsStream">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="assetId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="widthInPixels" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="heightInPixels" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="dpi" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetJpegRgbAssetAsStreamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetJpegRgbAssetAsStreamResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentAssetAsStream">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="assetId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentAssetAsStreamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocumentAssetAsStreamResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewsArticlesByArtist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="contributorId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="NewsArticle">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="contentId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="summary" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="body" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="publicationDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="expiryDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="relatedContributors" type="tns:ArrayOfContributor1" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfNewsArticle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NewsArticle" nillable="true" type="tns:NewsArticle" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetNewsArticlesByArtistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewsArticlesByArtistResult" type="tns:ArrayOfNewsArticle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewsArticlesByDateRange">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateFrom" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateTo" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewsArticlesByDateRangeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewsArticlesByDateRangeResult" type="tns:ArrayOfNewsArticle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewsArticles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="contributorId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateFrom" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateTo" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewsArticlesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewsArticlesResult" type="tns:ArrayOfNewsArticle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewsArticleByContentId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="siteId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="contentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNewsArticleByContentIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="newsArticle" nillable="true" type="tns:NewsArticle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="encryptedPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Logout">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogoutResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:simpleType name="FormatType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Unknown" />
+          <s:enumeration value="TIFF" />
+          <s:enumeration value="JFIF" />
+          <s:enumeration value="JPEG" />
+          <s:enumeration value="EPS" />
+          <s:enumeration value="PS" />
+          <s:enumeration value="GIF" />
+          <s:enumeration value="BMP" />
+          <s:enumeration value="PDF" />
+          <s:enumeration value="Word" />
+          <s:enumeration value="Text" />
+          <s:enumeration value="Excel" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetContributorsByProductSoapIn">
+    <wsdl:part name="parameters" element="tns:GetContributorsByProduct" />
+  </wsdl:message>
+  <wsdl:message name="GetContributorsByProductSoapOut">
+    <wsdl:part name="parameters" element="tns:GetContributorsByProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductIdByUpcSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductIdByUpc" />
+  </wsdl:message>
+  <wsdl:message name="GetProductIdByUpcSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductIdByUpcResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductIdListByUpcSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductIdListByUpc" />
+  </wsdl:message>
+  <wsdl:message name="GetProductIdListByUpcSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductIdListByUpcResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductById" />
+  </wsdl:message>
+  <wsdl:message name="GetProductByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductListByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductListById" />
+  </wsdl:message>
+  <wsdl:message name="GetProductListByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductListByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTracklistingForProductSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTracklistingForProduct" />
+  </wsdl:message>
+  <wsdl:message name="GetTracklistingForProductSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTracklistingForProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductIdsByReleaseDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductIdsByReleaseDate" />
+  </wsdl:message>
+  <wsdl:message name="GetProductIdsByReleaseDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductIdsByReleaseDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductsByContributorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductsByContributorId" />
+  </wsdl:message>
+  <wsdl:message name="GetProductsByContributorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductsByContributorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReleaseGroupByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReleaseGroupById" />
+  </wsdl:message>
+  <wsdl:message name="GetReleaseGroupByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReleaseGroupByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReleaseGroupsByContributorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReleaseGroupsByContributorId" />
+  </wsdl:message>
+  <wsdl:message name="GetReleaseGroupsByContributorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReleaseGroupsByContributorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReleaseGroupProductsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReleaseGroupProducts" />
+  </wsdl:message>
+  <wsdl:message name="GetReleaseGroupProductsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReleaseGroupProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReleaseGroupContributorsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReleaseGroupContributors" />
+  </wsdl:message>
+  <wsdl:message name="GetReleaseGroupContributorsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReleaseGroupContributorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUpdatedCoverArtInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUpdatedCoverArtInformation" />
+  </wsdl:message>
+  <wsdl:message name="GetUpdatedCoverArtInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUpdatedCoverArtInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBiographiesByProductSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBiographiesByProduct" />
+  </wsdl:message>
+  <wsdl:message name="GetBiographiesByProductSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBiographiesByProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBiographiesByArtistSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBiographiesByArtist" />
+  </wsdl:message>
+  <wsdl:message name="GetBiographiesByArtistSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBiographiesByArtistResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPressPhotosByProductSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPressPhotosByProduct" />
+  </wsdl:message>
+  <wsdl:message name="GetPressPhotosByProductSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPressPhotosByProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPressPhotosByArtistSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPressPhotosByArtist" />
+  </wsdl:message>
+  <wsdl:message name="GetPressPhotosByArtistSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPressPhotosByArtistResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPublicityPhotosByProductSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPublicityPhotosByProduct" />
+  </wsdl:message>
+  <wsdl:message name="GetPublicityPhotosByProductSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPublicityPhotosByProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCoverArtByUPCListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCoverArtByUPCList" />
+  </wsdl:message>
+  <wsdl:message name="GetCoverArtByUPCListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCoverArtByUPCListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPublicityPhotosByArtistSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPublicityPhotosByArtist" />
+  </wsdl:message>
+  <wsdl:message name="GetPublicityPhotosByArtistSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPublicityPhotosByArtistResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetArtistMerchandisingAssetsByBarcodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetArtistMerchandisingAssetsByBarcode" />
+  </wsdl:message>
+  <wsdl:message name="GetArtistMerchandisingAssetsByBarcodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetArtistMerchandisingAssetsByBarcodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPressReleasesByProductSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPressReleasesByProduct" />
+  </wsdl:message>
+  <wsdl:message name="GetPressReleasesByProductSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPressReleasesByProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPressReleasesByArtistSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPressReleasesByArtist" />
+  </wsdl:message>
+  <wsdl:message name="GetPressReleasesByArtistSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPressReleasesByArtistResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetJpegRgbAssetAsStreamSoapIn">
+    <wsdl:part name="parameters" element="tns:GetJpegRgbAssetAsStream" />
+  </wsdl:message>
+  <wsdl:message name="GetJpegRgbAssetAsStreamSoapOut">
+    <wsdl:part name="parameters" element="tns:GetJpegRgbAssetAsStreamResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentAssetAsStreamSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocumentAssetAsStream" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentAssetAsStreamSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentAssetAsStreamResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewsArticlesByArtistSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewsArticlesByArtist" />
+  </wsdl:message>
+  <wsdl:message name="GetNewsArticlesByArtistSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewsArticlesByArtistResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewsArticlesByDateRangeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewsArticlesByDateRange" />
+  </wsdl:message>
+  <wsdl:message name="GetNewsArticlesByDateRangeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewsArticlesByDateRangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewsArticlesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewsArticles" />
+  </wsdl:message>
+  <wsdl:message name="GetNewsArticlesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewsArticlesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewsArticleByContentIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewsArticleByContentId" />
+  </wsdl:message>
+  <wsdl:message name="GetNewsArticleByContentIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewsArticleByContentIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapIn">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapOut">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SecureDataServicesSoap">
+    <wsdl:operation name="GetContributorsByProduct">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/cd.gif"/&gt; Returns the contributors associated to a product</wsdl:documentation>
+      <wsdl:input message="tns:GetContributorsByProductSoapIn" />
+      <wsdl:output message="tns:GetContributorsByProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdByUpc">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/cd.gif"/&gt; Returns the Central Catalogue product identifier when supplied with a valid product Upc.</wsdl:documentation>
+      <wsdl:input message="tns:GetProductIdByUpcSoapIn" />
+      <wsdl:output message="tns:GetProductIdByUpcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdListByUpc">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/cd.gif"/&gt; Returns an array of Central Catalogue product identifiers when supplied with a list of valid product Upcs.Note that any exception raised will terminate the batch.</wsdl:documentation>
+      <wsdl:input message="tns:GetProductIdListByUpcSoapIn" />
+      <wsdl:output message="tns:GetProductIdListByUpcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/cd.gif"/&gt; Returns a populated Product object as conforms to the schema &lt;a href="schema/Product.xsd"&gt;Product.xsd&lt;/a&gt;. The release information returned is dependent on the rights of the client making the call.</wsdl:documentation>
+      <wsdl:input message="tns:GetProductByIdSoapIn" />
+      <wsdl:output message="tns:GetProductByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductListById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/cd.gif"/&gt; Returns an array of populated &lt;a href="schema/Product.xsd"&gt;Product&lt;/a&gt; objects. The release information returned is dependent on the rights of the client making the call. Note that any exception raised will terminate the batch.</wsdl:documentation>
+      <wsdl:input message="tns:GetProductListByIdSoapIn" />
+      <wsdl:output message="tns:GetProductListByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTracklistingForProduct">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/cd.gif"/&gt; Returns componentised track listing information for a given product which conforms to the schema &lt;a href="schema/Product Components.xsd"&gt;Product Components.xsd&lt;/a&gt;.&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetTracklistingForProductSoapIn" />
+      <wsdl:output message="tns:GetTracklistingForProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdsByReleaseDate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/cd.gif"/&gt; Returns a list of Product Ids for products with a digital or physical release date in any of the caller's territories that falls within the supplied date range.</wsdl:documentation>
+      <wsdl:input message="tns:GetProductIdsByReleaseDateSoapIn" />
+      <wsdl:output message="tns:GetProductIdsByReleaseDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductsByContributorId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/cd.gif"/&gt; Returns a collection of populated Product objects as conforms to the schema &lt;a href="schema/Product.xsd"&gt;Product.xsd&lt;/a&gt;. The release information returned is dependent on the rights of the client making the call.&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetProductsByContributorIdSoapIn" />
+      <wsdl:output message="tns:GetProductsByContributorIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/multi_cd.gif"/&gt; Returns a &lt;a href="schema/ReleaseGroup.xsd"&gt;Release Group&lt;/a&gt; object.</wsdl:documentation>
+      <wsdl:input message="tns:GetReleaseGroupByIdSoapIn" />
+      <wsdl:output message="tns:GetReleaseGroupByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupsByContributorId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/multi_cd.gif"/&gt; Returns an array of &lt;a href="schema/ReleaseGroup.xsd"&gt;Release Group&lt;/a&gt; objects.&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetReleaseGroupsByContributorIdSoapIn" />
+      <wsdl:output message="tns:GetReleaseGroupsByContributorIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupProducts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/multi_cd.gif"/&gt; Returns an array of &lt;a href="schema/Product.xsd"&gt;Product&lt;/a&gt; objects.</wsdl:documentation>
+      <wsdl:input message="tns:GetReleaseGroupProductsSoapIn" />
+      <wsdl:output message="tns:GetReleaseGroupProductsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupContributors">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/multi_cd.gif"/&gt; Returns an array of &lt;a href="schema/GlobalTypes.xsd"&gt;Contributor&lt;/a&gt; objects.</wsdl:documentation>
+      <wsdl:input message="tns:GetReleaseGroupContributorsSoapIn" />
+      <wsdl:output message="tns:GetReleaseGroupContributorsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUpdatedCoverArtInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of Cover Art Assets conforming to the schema defined in &lt;a href="schema/GlobalTypes.xsd"&gt;GlobalTypes.xsd&lt;/a&gt; which have been updated in the Central Catalogue in the specified timeframe and are associated to products with releases in the specified territory.&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetUpdatedCoverArtInformationSoapIn" />
+      <wsdl:output message="tns:GetUpdatedCoverArtInformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBiographiesByProduct">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of &lt;a href="schema/BiographyAsset.xsd"&gt;Biography Assets&lt;/a&gt; associated to the specified product. The client may then call GetDocumentAssetAsStream with the assetId to retrieve the document as a binary stream.&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetBiographiesByProductSoapIn" />
+      <wsdl:output message="tns:GetBiographiesByProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBiographiesByArtist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of &lt;a href="schema/BiographyAsset.xsd"&gt;Biography Assets&lt;/a&gt; associated to the specified artist. The client may then call GetDocumentAssetAsStream with the assetId to retrieve the document as a binary stream.</wsdl:documentation>
+      <wsdl:input message="tns:GetBiographiesByArtistSoapIn" />
+      <wsdl:output message="tns:GetBiographiesByArtistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPressPhotosByProduct">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of &lt;a href="schema/PressPhotoAsset.xsd"&gt;Press Photo Assets&lt;/a&gt; associated to the specified product. The client may then call GetJpegRgbAssetAsStream with the assetId to retrieve the image as a binary stream.&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetPressPhotosByProductSoapIn" />
+      <wsdl:output message="tns:GetPressPhotosByProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPressPhotosByArtist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of &lt;a href="schema/PressPhotoAsset.xsd"&gt;Press Photo Assets&lt;/a&gt; associated to the specified artist. The client may then call GetJpegRgbAssetAsStream with the assetId to retrieve the image as a binary stream.</wsdl:documentation>
+      <wsdl:input message="tns:GetPressPhotosByArtistSoapIn" />
+      <wsdl:output message="tns:GetPressPhotosByArtistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicityPhotosByProduct">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of &lt;a href="schema/PublicityPhotoAsset.xsd"&gt;Publicity Photo Assets&lt;/a&gt; associated to the specified product. The client may then call GetJpegRgbAssetAsStream with the assetId to retrieve the image as a binary stream.&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetPublicityPhotosByProductSoapIn" />
+      <wsdl:output message="tns:GetPublicityPhotosByProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCoverArtByUPCList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of &lt;a href="schema/CoverArtMetaData.xsd"&gt;Cover Art Assets&lt;/a&gt; associated to the supplied list of UPCs. Only one asset is returned for each UPC</wsdl:documentation>
+      <wsdl:input message="tns:GetCoverArtByUPCListSoapIn" />
+      <wsdl:output message="tns:GetCoverArtByUPCListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicityPhotosByArtist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of &lt;a href="schema/PublicityPhotoAsset.xsd"&gt;Publicity Photo Assets&lt;/a&gt; associated to the specified artist. The client may then call GetJpegRgbAssetAsStream with the assetId to retrieve the image as a binary stream.</wsdl:documentation>
+      <wsdl:input message="tns:GetPublicityPhotosByArtistSoapIn" />
+      <wsdl:output message="tns:GetPublicityPhotosByArtistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetArtistMerchandisingAssetsByBarcode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of &lt;a href="schema/ArtistMerchandisingAsset.xsd"&gt;Artist Merchandising Assets&lt;/a&gt; matching the supplied barcode. The client may then call GetJpegRgbAssetAsStream with the assetId to retrieve the image as a binary stream.&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetArtistMerchandisingAssetsByBarcodeSoapIn" />
+      <wsdl:output message="tns:GetArtistMerchandisingAssetsByBarcodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPressReleasesByProduct">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of &lt;a href="schema/PressReleaseAsset.xsd"&gt;Press Release Assets&lt;/a&gt; associated to the specified product. The client may then call GetDocumentAssetAsStream with the assetId to retrieve the document as a binary stream. Access to this method is restricted.&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetPressReleasesByProductSoapIn" />
+      <wsdl:output message="tns:GetPressReleasesByProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPressReleasesByArtist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Returns a list of &lt;a href="schema/PressReleaseAsset.xsd"&gt;Press Release Assets&lt;/a&gt; associated to the specified artist. The client may then call GetDocumentAssetAsStream with the assetId to retrieve the document as a binary stream. Access to this method is restricted.</wsdl:documentation>
+      <wsdl:input message="tns:GetPressReleasesByArtistSoapIn" />
+      <wsdl:output message="tns:GetPressReleasesByArtistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJpegRgbAssetAsStream">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Render an asset as an array of bytes with the parameters for width, height and dpi as specified by the caller.&lt;br/&gt;&lt;em&gt;Please note that this only works with AEC images (assets with Source = AssetSource.AEC or 'AEC')&lt;/em&gt;&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetJpegRgbAssetAsStreamSoapIn" />
+      <wsdl:output message="tns:GetJpegRgbAssetAsStreamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentAssetAsStream">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/photo.gif"/&gt; Render a document asset as an array of bytes.</wsdl:documentation>
+      <wsdl:input message="tns:GetDocumentAssetAsStreamSoapIn" />
+      <wsdl:output message="tns:GetDocumentAssetAsStreamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticlesByArtist">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/news.gif"/&gt; Returns an array of local &lt;a href="schema/News Article.xsd"&gt;News Article&lt;/a&gt; objects related to this artist, that have been published on a site.</wsdl:documentation>
+      <wsdl:input message="tns:GetNewsArticlesByArtistSoapIn" />
+      <wsdl:output message="tns:GetNewsArticlesByArtistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticlesByDateRange">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/news.gif"/&gt; Returns an array of local &lt;a href="schema/News Article.xsd"&gt;News Article&lt;/a&gt; objects published within the date range on a site.&lt;br/&gt;&lt;hr/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetNewsArticlesByDateRangeSoapIn" />
+      <wsdl:output message="tns:GetNewsArticlesByDateRangeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/news.gif"/&gt; Returns an array of local &lt;a href="schema/News Article.xsd"&gt;News Article&lt;/a&gt; objects related to this artist and published within the date range on a site.</wsdl:documentation>
+      <wsdl:input message="tns:GetNewsArticlesSoapIn" />
+      <wsdl:output message="tns:GetNewsArticlesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticleByContentId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;img src="images/news.gif"/&gt; Returns an individual local &lt;a href="schema/News Article.xsd"&gt;News Article&lt;/a&gt; object from a site.</wsdl:documentation>
+      <wsdl:input message="tns:GetNewsArticleByContentIdSoapIn" />
+      <wsdl:output message="tns:GetNewsArticleByContentIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input message="tns:LogoutSoapIn" />
+      <wsdl:output message="tns:LogoutSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SecureDataServicesSoap" type="tns:SecureDataServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetContributorsByProduct">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetContributorsByProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdByUpc">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductIdByUpc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdListByUpc">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductIdListByUpc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductById">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductListById">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductListById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTracklistingForProduct">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetTracklistingForProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdsByReleaseDate">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductIdsByReleaseDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductsByContributorId">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductsByContributorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupById">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetReleaseGroupById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupsByContributorId">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetReleaseGroupsByContributorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupProducts">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetReleaseGroupProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupContributors">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetReleaseGroupContributors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUpdatedCoverArtInformation">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetUpdatedCoverArtInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBiographiesByProduct">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetBiographiesByProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBiographiesByArtist">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetBiographiesByArtist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPressPhotosByProduct">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPressPhotosByProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPressPhotosByArtist">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPressPhotosByArtist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicityPhotosByProduct">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPublicityPhotosByProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoverArtByUPCList">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetCoverArtByUPCList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicityPhotosByArtist">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPublicityPhotosByArtist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArtistMerchandisingAssetsByBarcode">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetArtistMerchandisingAssetsByBarcode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPressReleasesByProduct">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPressReleasesByProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPressReleasesByArtist">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPressReleasesByArtist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJpegRgbAssetAsStream">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetJpegRgbAssetAsStream" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentAssetAsStream">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetDocumentAssetAsStream" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticlesByArtist">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetNewsArticlesByArtist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticlesByDateRange">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetNewsArticlesByDateRange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticles">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetNewsArticles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticleByContentId">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetNewsArticleByContentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SecureDataServicesSoap12" type="tns:SecureDataServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetContributorsByProduct">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetContributorsByProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdByUpc">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductIdByUpc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdListByUpc">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductIdListByUpc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductById">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductListById">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductListById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTracklistingForProduct">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetTracklistingForProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductIdsByReleaseDate">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductIdsByReleaseDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductsByContributorId">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetProductsByContributorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupById">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetReleaseGroupById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupsByContributorId">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetReleaseGroupsByContributorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupProducts">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetReleaseGroupProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReleaseGroupContributors">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetReleaseGroupContributors" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUpdatedCoverArtInformation">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetUpdatedCoverArtInformation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBiographiesByProduct">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetBiographiesByProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBiographiesByArtist">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetBiographiesByArtist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPressPhotosByProduct">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPressPhotosByProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPressPhotosByArtist">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPressPhotosByArtist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicityPhotosByProduct">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPublicityPhotosByProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCoverArtByUPCList">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetCoverArtByUPCList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicityPhotosByArtist">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPublicityPhotosByArtist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetArtistMerchandisingAssetsByBarcode">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetArtistMerchandisingAssetsByBarcode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPressReleasesByProduct">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPressReleasesByProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPressReleasesByArtist">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetPressReleasesByArtist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJpegRgbAssetAsStream">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetJpegRgbAssetAsStream" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentAssetAsStream">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetDocumentAssetAsStream" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticlesByArtist">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetNewsArticlesByArtist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticlesByDateRange">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetNewsArticlesByDateRange" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticles">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetNewsArticles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsArticleByContentId">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/GetNewsArticleByContentId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap12:operation soapAction="http://umusic.com/itdi/centralcatalogue/webservices/v2.0/Logout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SecureDataServices">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">A set of secured web services to make data available from the Central Catalogue. 
+		These services are secured through WSE 3.0 and requires that client calls adhere 
+		to the ServerPolicy, as defined within the UsernameAssertionLibrary.&lt;br/&gt;
+		&lt;br/&gt;
+		Object schema definitions and example Notification Service messages are available &lt;a href=schema&gt;here&lt;/a&gt;.  Example code and other useful resources can be found &lt;a href=public&gt;here&lt;/a&gt;.&lt;br/&gt;
+		&lt;br/&gt;
+		Author: D Moggs&lt;br/&gt;
+		Created: 27-Jun-2006&lt;br/&gt;
+		Update History:&lt;br/&gt;
+		&lt;ul&gt;
+			&lt;li&gt;2.5.0 (P Tebbutt 30-March-2007)
+				&lt;span&gt;&lt;br/&gt;Services added for News Articles (CMS) and Biographies and Press &amp; Publicity Photos (AEC)&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.2 (P Tebbutt 11-May-2007)
+				&lt;span&gt;&lt;br/&gt;&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.3 (P Tebbutt 17-May-2007)
+				&lt;span&gt;&lt;br/&gt;Added GetNewsArticleByContentId&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;&lt;I&gt;2.5.4 (P Tebbutt 6-June-2007)
+				&lt;span&gt;&lt;br/&gt;Dutch Interface fix (no change to SDS)&lt;/span&gt;&lt;/I&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.5 (P Tebbutt 11-June-2007)
+				&lt;span&gt;&lt;br/&gt;Added GetProductsByContributorID&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.6 (P Tebbutt 31-July-2007)
+				&lt;span&gt;&lt;br/&gt;Restricted assets returned 'by Artist' to products available in the users territory&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;
+				&lt;I&gt;2.5.7 (P Tebbutt 12-October-2007)
+				&lt;span&gt;&lt;br/&gt;Fix problem where Data Services not populating Release Dates (no change to SDS)&lt;/span&gt;
+				&lt;/I&gt;
+			&lt;/li&gt;
+			&lt;li&gt;
+				2.5.8 (P Tebbutt 16-October-2007)
+				&lt;span&gt;
+					&lt;br/&gt;Return extended contributor information.
+					&lt;br/&gt;Provide PPD (Published Price to Dealer) to authorised clients.
+					&lt;br/&gt;Return territorial restrictions for assets.
+					&lt;br/&gt;Publish improved schema.
+				&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.9 (P Tebbutt 14-July-2008)
+				&lt;span&gt;&lt;br/&gt;Extend contributor information to include FirstName, LastNamePrefix and LastName/Group.&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.10 (P Tebbutt 10-September-2008)
+				&lt;span&gt;&lt;br/&gt;New GetArtistMerchandisingAssetsByBarcode method that provides details of Bravado &lt;I&gt;'Artist Assets'&lt;/I&gt; in AEC.&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.11 (P Tebbutt 24-October-2008)
+				&lt;span&gt;
+					&lt;br/&gt;Moved to new server.
+					&lt;br/&gt;Merchandising: Barcode must be 13 digits for GetArtistMerchandisingAssetsByBarcode.
+					&lt;br/&gt;Cover Art: Fixed Available property.
+					&lt;br/&gt;Cover Art: Added AssetSource.None.
+					&lt;br/&gt;Cover Art: Cover Art returned by GetProductById and GetProductsByContributorId made consistent.
+					&lt;br/&gt;Cover Art: Preference given to AEC covers if multiple latest covers availble with identical created date.
+				&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.17 (P Tebbutt 23-June-2009)
+				&lt;span&gt;
+					&lt;br/&gt;Extend contributor information to include Company details.
+					&lt;br/&gt;Add/move AssetType fields - FileSize, FileType, UploadedBy, SourceFile and Description.
+					&lt;br/&gt;New methods to retrieve Press Releases.
+					&lt;br/&gt;New method to return an array of Products
+				&lt;/span&gt;
+			&lt;/li&gt;
+			&lt;li&gt;2.5.18 (P Tebbutt 30-October-2009)
+				&lt;span&gt;
+					&lt;br/&gt;New methods for retrieving Release Groups
+					&lt;br/&gt;GetReleaseGroupById
+					&lt;br/&gt;GetReleaseGroupContributors
+					&lt;br/&gt;GetReleaseGroupProducts
+					&lt;br/&gt;GetReleaseGroupsByContributorId
+				&lt;/span&gt;
+			&lt;/li&gt;
+            &lt;li&gt;2.5.20 (J Poynting 30-August-2011)
+				&lt;span&gt;
+					&lt;br/&gt;Add ghost track indicator
+				&lt;/span&gt;
+			&lt;/li&gt;
+            &lt;li&gt;2.5.21 (J Sharpe 13-September-2011)
+				&lt;span&gt;
+					&lt;br/&gt;Added ProductGrouping code to the product release information for both 
+                    &lt;br/&gt;digital and physical releases.
+				&lt;/span&gt;
+			&lt;/li&gt;    
+            &lt;li&gt;2.5.26 (J Poynting 24-November-2011)
+                &lt;span&gt;
+                    &lt;br/&gt;Added the audioclips and videoclips collections to track listings.
+                &lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;2.5.29 (P.Tebbutt/R.Chong 25-January-2012)
+                &lt;span&gt;
+                    &lt;br/&gt;Maintenance release.
+                &lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;2.5.30 (P.Tebbutt 31-January-2012)
+                &lt;span&gt;
+                    &lt;br/&gt;Maintenance release.
+                &lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;2.5.31 (M.Steven 24-February-2012)
+                &lt;span&gt;
+                    &lt;br/&gt;Filtering on release groups brought into line with products.
+                &lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;2.5.32 (M.Steven 25-May-2012)
+                &lt;span&gt;
+                    &lt;br/&gt;Added GetContributorsByProduct.  Returns the contributors associated with a given product id 
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.33 (P.Tebbutt 8-March-2013)
+                &lt;span&gt;
+                    &lt;br/&gt;Added CarrierCode to Release information.
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.34(J.Poynting 19-April-2013)
+                &lt;span&gt;
+                    &lt;br/&gt;Added MusicType to Product.
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.40(M.Steven 18-November-2013)
+                &lt;span&gt;
+                    &lt;br/&gt;Added ReleaseGroupID to Product
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.41(M.Steven 14-April-2014)
+                &lt;span&gt;
+                    &lt;br/&gt;Modified to return US products and assets for US users and to observe Mark restrictions.
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.42(M.Steven 20-May-2014)
+                &lt;span&gt;
+                    &lt;br/&gt;Added AccountID to method that return contributors
+                        &lt;ul&gt;
+                            &lt;li&gt;GetContributorsByProduct&lt;/li&gt;
+                            &lt;li&gt;GetProductById&lt;/li&gt;
+                            &lt;li&gt;GetProductListById&lt;/li&gt;
+                            &lt;li&gt;GetProductsByContributorId&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupById&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupProducts&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupsByContributorId&lt;/li&gt;
+                        &lt;/ul&gt;
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.45(P.Tebbutt 29-Sep-2014)
+                &lt;span&gt;
+                    &lt;br/&gt;(no change to Secure Data Services)
+                &lt;/span&gt; 
+            &lt;/li&gt;
+             &lt;li&gt;2.5.51(J.Poynting 05-Nov-2014)
+                &lt;span&gt;
+                    &lt;br/&gt;Added GetCoverArtByUPCList which retrieves cover art for a list of UPCs
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.52(J.Poynting 07-Nov-2014)
+                &lt;span&gt;
+                    &lt;br/&gt;(no change to Secure Data Services)
+                &lt;/span&gt; 
+            &lt;/li&gt;
+              &lt;li&gt;2.5.55(M.Steven 25-Feb-2015)
+                &lt;span&gt;
+                    &lt;br/&gt;Added RoleId RoleCreditPrefix and RoleGroup to methods that return contributors
+                        &lt;ul&gt;
+                            &lt;li&gt;GetProductById&lt;/li&gt;
+                            &lt;li&gt;GetProductListById&lt;/li&gt;
+                            &lt;li&gt;GetProductsByContributorId&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupById&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupContributors&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupProducts&lt;/li&gt;
+                            &lt;li&gt;GetReleaseGroupsByContributorId&lt;/li&gt;
+                            &lt;li&gt;GetTracklistingForProduct&lt;/li&gt;
+                            &lt;li&gt;GetContributorsByProduct&lt;/li&gt;
+                        &lt;/ul&gt;
+                &lt;/span&gt; 
+            &lt;/li&gt;
+            &lt;li&gt;2.5.56(J.Poynting 20-Mar-2015)
+                &lt;span&gt;
+                    &lt;br/&gt;Added catalogue number to releases and component titles and version titles.
+                &lt;/span&gt; 
+            &lt;/li&gt;
+		&lt;/ul&gt;&lt;hr/&gt;</wsdl:documentation>
+    <wsdl:port name="SecureDataServicesSoap" binding="tns:SecureDataServicesSoap">
+      <soap:address location="http://catalogueservices.umusic.net/CCWS/SecureDataServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SecureDataServicesSoap12" binding="tns:SecureDataServicesSoap12">
+      <soap12:address location="http://catalogueservices.umusic.net/CCWS/SecureDataServices.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

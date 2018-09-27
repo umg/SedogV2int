@@ -1,0 +1,91 @@
+﻿@using SEDOGv2.Helpers;
+@model SEDOGv2.Models.UsuarioViewModel
+
+@{
+    ViewBag.Title = "Add Departamento JDE";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    Add JDE Departments
+                </h2>
+            </div>
+        </div>
+
+
+        <div class="col-md-12" runat="server" id="divAlert">
+            @ViewBag.Error
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>User</h4></div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <h5>Login: <span class="label label-default">@Model.LOGIN</span></h5>
+                                <input type="hidden" id="login" name="login" value="@Model.LOGIN" />
+                                <h5>Name: <span class="label label-default">@Model.NOME</span></h5>
+
+                                <h5>
+                                    JDE Departments &nbsp;<span>
+                                        <input type="checkbox" name="chkAll" id="chkAll" />Select all
+                                    </span>
+                                </h5>
+                                @foreach (var depto in Model._Departamentos)
+                                {
+                                    if (string.IsNullOrEmpty(depto.LOGIN))
+                                    {
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="chkDeptoJDE" value="@depto.ID"> @depto.MCDL01</label>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="chkDeptoJDE" value="@depto.ID" checked> @depto.MCDL01</label>
+                                        </div>
+                                    }
+                                }
+                                <br />
+                                <input type="submit" name="salvar" value="Save" class="btn btn-default pull-right" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-right">
+                    @Html.ActionLink("Back to list", "Index", "Usuario", null, new { @class = "link" })
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        function checkALL(x) {
+
+            if (x.checked) {
+                $("input:checkbox").prop('checked', true);
+            }
+            else {
+                $("input:checkbox").prop('checked', false);
+            }
+        }
+
+        $("#chkAll").click(function () { checkALL(this); });
+
+    });
+
+</script>
+

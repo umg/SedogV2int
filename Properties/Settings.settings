@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SEDOGv2.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SEDOGv2_net_umusic_catalogueservices_SecureDataServices" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://catalogueservices.umusic.net/CCWS/SecureDataServices.asmx</Value>
+    </Setting>
+    <Setting Name="SEDOGv2_r2Release_WSReleaseSearchServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://r2.umusic.net:443/r2/Release/services/WSReleaseSearchService</Value>
+    </Setting>
+    <Setting Name="SEDOGv2_r2Resource_WSResourceSearchServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://r2.umusic.net:443/r2/Resource/services/WSResourceSearchService</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

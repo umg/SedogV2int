@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MarginAnalysis"
+    targetNamespace="http://tempuri.org/MarginAnalysis.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/MarginAnalysis.xsd"
+    xmlns:mstns="http://tempuri.org/MarginAnalysis.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="IDProj_SEDOG" type="xs:int"></xs:element>
+  <xs:element name="ID_TIPO_RELEASE" type="xs:int"></xs:element>
+  <xs:element name="TIPO_RELEASE" type="xs:string"></xs:element>
+  <xs:element name="Artista" type="xs:string"></xs:element>
+  <xs:element name="Projeto" type="xs:string"></xs:element>
+  <xs:element name="FISICAL_INCOME" type="xs:decimal"></xs:element>
+  <xs:element name="DIGITAL_INCOME" type="xs:decimal"></xs:element>
+  <xs:element name="BROADCAST_INCOME" type="xs:decimal"></xs:element>
+  <xs:element name="NB_INCOME" type="xs:decimal"></xs:element>
+  <xs:element name="TOTAL_INCOME" type="xs:decimal"></xs:element>
+  <xs:element name="FISICAL_MARGIN" type="xs:decimal"></xs:element>
+  <xs:element name="DIGITAL_MARGIN" type="xs:decimal"></xs:element>
+  <xs:element name="BROADCAST_MARGIN" type="xs:decimal"></xs:element>
+  <xs:element name="NB_MARGIN" type="xs:decimal"></xs:element>
+  <xs:element name="TOTAL_MARGIN" type="xs:decimal"></xs:element>
+  <xs:element name="MARKETING_INITIAL_COSTS" type="xs:decimal"></xs:element>
+  <xs:element name="PROFIT_LOSS" type="xs:decimal"></xs:element>
+  <xs:element name="Percent" type="xs:decimal"></xs:element>
+
+</xs:schema>

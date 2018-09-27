@@ -1,0 +1,306 @@
+﻿@using SEDOGv2.Helpers;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+    int c = 0;
+}
+
+
+<div class="container-fluid">
+
+    @using (Html.BeginForm("Index", "DespesaDeMarketingPorArtistaProjeto", FormMethod.Post, new { id = "FormDespesasDeMarketingTotalPorArtista1" }))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+            <div class="col-md-12" runat="server" id="divAlert">
+                @Html.Raw(Model.Message)
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 text-right">
+                    <div class="form-group">
+                        <h4>Artista ou projeto:</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" name="txtArtistaProduto" class="form-control" placeholder="Digite o artista ou projeto" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" name="Pesquisar" value="Pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+
+    @if (Model.PLProjetos.Count > 0)
+    {
+        using (Html.BeginForm("Index", "DespesaDeMarketingPorArtistaProjeto", FormMethod.Post, new { id = "FormDespesasDeMarketingTotalPorArtista2" }))
+        {
+            <div class="panel panel-success">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <table class="table">
+                            <tr class="bg-default">
+                                <th></th>
+                                <th>ID Projeto</th>
+                                <th>Projeto</th>
+                                <th>ID Artista</th>
+                                <th>Artista</th>
+                                <th>Lançamento</th>
+
+                            </tr>
+                            @foreach (SEDOGv2.Models.PLProjeto item in Model.PLProjetos)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="selProduto" value="@item.IDProj_SEDOG|@item.Artista|@item.Projeto" />
+                                    </td>
+                                    <td>@item.IDProj_SEDOG</td>
+                                    <td>@item.Projeto</td>
+                                    <td>@item.IDArtista</td>
+                                    <td>@item.Artista</td>
+                                    <td>@item.DataLancamento.ToString("dd/MM/yyyy")</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+                    <div class="col-md-2">
+                        <select class="form-control" name="selTipo">
+                            <option value="CONSOLIDADO">Consolidado</option>
+                            <option value="MENSAL">Mensal</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row hidden">
+                            <div id="datepicker"></div>
+                            <input type="hidden" runat="server" id="my_hidden_input_date" />
+                        </div>
+                        <input type="submit" id="btnGerarRelatorios" name="btnGerarRelatorios" value="Gerar Relatório" class="btn btn-lg btn-default btn-block" />
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+
+    @if (Model.DespesasDeMarketingTotalPorArtistaReport.Count > 0)
+    {
+        <div class="panel panel-success panel-report">
+            @using (Html.BeginForm("Index", "DespesaDeMarketingPorArtistaProjeto", FormMethod.Post, new { id = "FormDespesasDeMarketingTotalPorArtista3" }))
+            {
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-control" name="selTipo">
+                            <option value="CONSOLIDADO">Consolidado</option>
+                            <option value="MENSAL">Mensal</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="hidden" name="selProduto" id="idProjeto" value="@ViewBag.IDProjetoSedog" />
+                        <input type="submit" id="btnGerarRelatorios" name="btnGerarRelatorios" value="Gerar Relatório" class="btn btn-lg btn-default btn-block" />
+                    </div>
+                </div>
+            }
+            <div class="row reportHeader">
+                <div class="col-md-9 text-left"><h2>@ViewBag.Artista - @ViewBag.Projeto</h2></div>
+                <div class="col-md-2 text-right">Tipo: @ViewBag.Ano</div>
+                <div class="col-md-1 text-right">
+                    <button type="submit" class="btn btn-default printPDF">
+                        <i class="fa fa-file-pdf-o fa-4"></i>
+                    </button>
+                    <button type="submit" class="btn btn-default printExcel">
+                        <i class="fa fa-file-excel-o fa-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <tr class="bg-default reportHeader">
+                            <th>TIPO</th>
+                            <th>BU</th>
+                            <th>DESCRIÇÃO BU</th>
+                            <th>CONTA</th>
+                            <th>SUB</th>
+                            <th>DESCRIÇÃO</th>
+                            @if (!ViewBag.Hide)
+                            {
+                            <th>ANO</th>
+                            <th>MÊS</th>
+                            }
+                            <th>DESPESA</th>
+                        </tr>
+                        @foreach (SEDOGv2.Models.DespesasDeMarketingTotalPorArtista item in Model.DespesasDeMarketingTotalPorArtistaReport)
+                        {
+                            <tr>
+                                <td>@item.TIPO</td>
+                                <td>@item.MCMCU</td>
+                                <td>@item.MCDL01</td>
+                                <td>@item.PDOBJ</td>
+                                <td>@item.PDSUB</td>
+                                <td>@item.DESCRICAO</td>
+                                @if (!ViewBag.Hide)
+                                {
+                                <td>@item.ANO</td>
+                                <td>@item.MES</td>
+                                } 
+                                <td>@string.Format("{0:c2}", item.VALOR)</td>
+                            </tr>
+                        }
+@if (!ViewBag.Hide)
+{
+                        <tr class="bg-default reportHeader">
+                            <td colspan="8">Total:</td>
+                            <td>@string.Format("{0:C2}", ViewBag.VALOR)</td>
+                        </tr>
+}
+else
+{
+                        <tr class="bg-default reportHeader">
+                            <td colspan="6">Total:</td>
+                            <td>@string.Format("{0:C2}", ViewBag.VALOR)</td>
+                        </tr>
+}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="print" style="display:none">
+            <table class="table table-bordered" width="100%" style="width:100%">
+                <tr>
+                    <td colspan="@ViewBag.Columns" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                </tr>
+                <tr>
+                    <td colspan="@ViewBag.Columns" style="text-align:center"><h2 style="text-align:center" class="bold">RELATÓRIO DE DESPESAS DE MARKETING POR PROJETO</h2></td>
+                </tr>
+                <tr>
+                    <td colspan="@ViewBag.Columns"><h2 style="text-align:center" class="bold">@ViewBag.Artista - @ViewBag.Projeto</h2></td>
+                </tr>
+                <tr>
+                    <td colspan="@ViewBag.Columns" style="text-align:center" class="bold">Tipo: @ViewBag.Ano</td>
+                </tr>
+                <tr>
+                    <td colspan="@ViewBag.Columns" style="text-align:center" class="bold"></td>
+                </tr>
+                <tr>
+                    <th class="box">TIPO</th>
+                    <th class="box">BU</th>
+                    <th class="box">DESCRIÇÃO BU</th>
+                    <th class="box">CONTA</th>
+                    <th class="box">SUB</th>
+                    <th class="box">DESCRIÇÃO</th>
+                    @if (!ViewBag.Hide)
+                    {
+                    <th class="box">ANO</th>
+                    <th class="box">MÊS</th>
+                    }
+                    <th class="box">DESPESA</th>
+                </tr>
+                @foreach (SEDOGv2.Models.DespesasDeMarketingTotalPorArtista item in Model.DespesasDeMarketingTotalPorArtistaReport)
+                {
+                    <tr>
+                        <td class="altRow_@(c % 2)">@item.TIPO</td>
+                        <td class="altRow_@(c % 2)">@item.MCMCU</td>
+                        <td class="altRow_@(c % 2)">@item.MCDL01</td>
+                        <td class="altRow_@(c % 2)">@item.PDOBJ</td>
+                        <td class="altRow_@(c % 2)">@item.PDSUB</td>
+                        <td class="altRow_@(c % 2)">@item.DESCRICAO</td>
+                        @if (!ViewBag.Hide)
+                        {
+                        <td class="altRow_@(c % 2)">@item.ANO</td>
+                        <td class="altRow_@(c % 2)">@item.MES</td>
+                        }
+                        <td class="altRow_@(c % 2)">@string.Format("{0:c2}", item.VALOR)</td>
+                    </tr>
+                    c++;
+                }
+@if (!ViewBag.Hide)
+{
+                <tr class="RDLast">
+                    <td colspan="8" style="text-align:left">Total:</td>
+                    <td>@string.Format("{0:c2}", ViewBag.VALOR)</td>
+                </tr>
+}
+else
+{
+                <tr class="RDLast">
+                    <td colspan="6" style="text-align:left">Total:</td>
+                    <td>@string.Format("{0:c2}", ViewBag.VALOR)</td>
+                </tr>
+}
+            </table>
+
+        </div>
+    }
+
+    @using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+    {
+        <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+        <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $("#datepicker").datepicker({
+                language: 'pt-BR',
+                orientation: 'auto top',
+                autoclose: true,
+                clearBtn: true,
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years",
+                clearBtn:true
+            });
+            //$('#datepicker').datepicker('setDate', new Date(@DateTime.Now.Year.ToString(), 1, 1));
+            //$("#my_hidden_input_date").val($("#datepicker").datepicker('getFormattedDate'));
+            function checkALL(x) {
+
+                if (x.checked) {
+                    $("input:checkbox").prop('checked', true);
+                }
+                else {
+                    $("input:checkbox").prop('checked', false);
+                }
+            }
+
+            $("#datepicker").on("changeDate", function (event) {
+                $("#my_hidden_input_date").val($("#datepicker").datepicker('getFormattedDate'));
+            });
+            $("#chkAll").click(function () { checkALL(this); });
+
+            $("#FormDigitalCustomerUsageType2").submit(function (event) {
+                if ($("input:checked").length > 0){
+                    return;
+                }
+                $('#pleaseWaitDialog').modal('toggle');
+                event.preventDefault();
+            });
+        });
+
+    </script>
+
+</div>

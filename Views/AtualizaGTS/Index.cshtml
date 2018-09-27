@@ -1,0 +1,960 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+
+@{
+    ViewBag.Title = "Atualização GTS";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<style type="text/css">
+    .li-loading {
+        float: right;
+        margin-right: 6px;
+        margin-top: -23px;
+        position: relative;
+        z-index: 2;
+    }
+</style>
+
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <!-- Default panel contents -->
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    @appSettings.pageName()
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-md-12 alertMessage" runat="server" id="divAlert">
+            @Html.Raw(ViewBag.Message)
+        </div>
+
+        @using (Html.BeginForm("SendEmail", "DespDepartamentais", FormMethod.Post))
+        {
+            <div class="row noBg">
+                <div class="">
+                    <div class="itm">
+                        <div class="detalhesBody">
+                            <h4 data-toggle="collapse" data-target="#lsResposanveisDepartamento" class="clickRotateIcon">Remover Artistas da GTS:<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
+                            <div id="lsResposanveisDepartamento" class="collapse out" style="padding-left:5px;padding-right:5px;padding-bottom:5px;">
+
+
+                                <div class="col-md-12">
+                                    <table class="table" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="bg-default reportHeader">
+                                                <th>ID Artista</th>
+                                                <th>Artista</th>
+                                                <th>Avatar</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        @if (Model.Artista != null)
+                                        {
+                                        foreach (ArtistaProjeto item in Model.Artista)
+                                        {
+                                            <tr>
+
+                                                <td>@item.IDARTISTA</td>
+                                                <td>@item.ARTISTNAME</td>
+                                                <td><img src="@Url.Content(@item.IMAGEPATH)" alt="Image" style="width: 42px; height: 42px;" data-idartista="@item.IDARTISTA" /></td>
+                                                <td>
+                                                    <a href="" class="actremove" title="Remover a artista: @item.ARTISTNAME" data-idartista="@item.IDARTISTA" data-artista="@item.ARTISTNAME">Remover</a>&nbsp;&nbsp;|
+                                                    &nbsp;&nbsp; <a href="" class="actUploadImage" data-idartista="@item.IDARTISTA" data-artista="@item.ARTISTNAME" title="Para uma melhor resolução é recomendado uma imagem quadrada">Adicionar Imagem</a>
+                                                    &nbsp;&nbsp; <input type="file" id="fileUpload" name="fileUpload" onchange="javascritp:fileOnChange(this, @item.IDARTISTA);" data-idartista="@item.IDARTISTA" data-artista="@item.ARTISTNAME" class="fileactUploadImage" style="visibility: hidden;" />
+                                                </td>
+                                            </tr>
+                                        }
+                                        }
+                                    </table>
+
+                                    <input type="hidden" id="hddWebConfigPath" value="@System.Configuration.ConfigurationManager.AppSettings["imagePath"]" />
+                                </div>
+
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row noBg">
+            <div class="">
+                <div class="itm" style="overflow-x: inherit;">
+                    <div class="detalhesBody">
+                        <h4 data-toggle="collapse" class="clickRotateIcon">Atualizar Tabelas GTS<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
+                        <div id="lsAtualizaGTS" style="padding-left:5px;padding-right:5px;padding-bottom:5px;">
+
+
+
+                            @using (Html.BeginForm())
+                            {
+                                <div class="row">
+                                    <br />
+                                    <div class="col-md-1 text-left">
+                                        <div class="form-group">
+                                            <label style="font-size:18px; font-weight: bold;">Tipo:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <select class="form-control" name="selTipo" id="selTipo">
+                                                <option value="1" selected="@("1" == ViewBag.IDTipo)">Forecast & Plan</option>
+                                                <option value="2" selected="@("2" == ViewBag.IDTipo)">Receita</option>
+                                                <option value="3" selected="@("3" == ViewBag.IDTipo)">Shows</option>
+                                                <option value="4" selected="@("4" == ViewBag.IDTipo)">GTS Saldo</option>
+                                                <option value="5" selected="@("5" == ViewBag.IDTipo)">Margin, Cachê e Participação</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-1 text-left">
+                                        <div class="form-group">
+                                            <label style="font-size:18px; font-weight: bold;">Artista:</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+
+                                        <div class="form-group">
+                                            <input class="typeahead form-control" placeholder="Artista" id="typeAheadArtista" name="nomeArtista" value="@ViewBag.consultaNomeCodArtista" /><i id="loading" class="fa fa-cog fa-spin fa-fw hidden li-loading"></i>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-1 text-left">
+                                        <div class="form-group">
+                                            <label style="font-size:18px; font-weight: bold;">Ano:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="anoALL" id="anoALL" value="@ViewBag.anoALL" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input type="submit" name="buscar" value="Buscar" class="btn btn-default btn-lg btn-block" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+                            @if (Model.Infos != null && Model.Infos.Pesquisa)
+                            {
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <div class="col-md-4">
+                                            <h4>Tipo: @Model.Infos.Tipo</h4>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <h4>Artista: @Model.Infos.Nome</h4>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <h4>Ano: @Model.Infos.Ano</h4>
+                                        </div>
+
+
+                                        <input type="hidden" value="@Model.Infos.IDArtista" name="hddIDArtista" class="hddIDArtista" />
+                                        <input type="hidden" value="@Model.Infos.Ano" name="hddAno" class="hddAno" />
+                                    </div>
+                                </div>
+                            }
+
+
+                            @if (Model._GTSForecast != null)
+                            {
+                                decimal totalVALOR_FCAST_RECEITA = 0, totalVALOR_PLAN_RECEITA = 0, totalVALOR_FCAST_MARGIN = 0,
+                                totalVALOR_PLAN_MARGIN = 0;
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-hover table-bordered updateTotalTable1">
+                                            <tr>
+                                                <th>Mês</th>
+                                                <th>Valor FCast Receita</th>
+                                                <th>Valor Plan Receita</th>
+                                                <th>Valor FCast Margin</th>
+                                                <th>Valor Plan Margin</th>
+                                            </tr>
+                                            @foreach (GTSForecast item in Model._GTSForecast)
+                                            {
+                                                <tr class="saveLine1">
+                                                    <td class="mesVAL">@item.MES</td>
+                                                    <td><a href="#" class="editable1 fcastReceitaVAL" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_FCAST_RECEITA.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
+                                                    <td><a href="#" class="editable1 planReceitaVAL" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_PLAN_RECEITA.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
+                                                    <td><a href="#" class="editable1 fcastMarginVAL" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_FCAST_MARGIN.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
+                                                    <td><a href="#" class="editable1 planMarginVAL" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_PLAN_MARGIN.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
+                                                </tr>
+
+                                                totalVALOR_FCAST_RECEITA += item.VALOR_FCAST_RECEITA;
+                                                totalVALOR_PLAN_RECEITA += item.VALOR_PLAN_RECEITA;
+                                                totalVALOR_FCAST_MARGIN += item.VALOR_FCAST_MARGIN;
+                                                totalVALOR_PLAN_MARGIN += item.VALOR_PLAN_MARGIN;
+                                            }
+                                            <tr>
+                                                <th colspan="1" class="text-right">Total:</th>
+                                                <th class="totalfcastReceitaVAL">@totalVALOR_FCAST_RECEITA.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</th>
+                                                <th class="totalplanReceitaVAL">@totalVALOR_PLAN_RECEITA.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</th>
+                                                <th class="totafcastMarginVAL">@totalVALOR_FCAST_MARGIN.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</th>
+                                                <th class="totaplanMarginVAL">@totalVALOR_PLAN_MARGIN.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</th>
+                                            </tr>
+                                        </table>
+                                        <input type="button" id="btnUpdate1" value="Update" class="btn btn-default pull-right hidden btnShowModal" />
+                                    </div>
+                                </div>
+                            }
+
+
+                            @if (Model._GTSRegiaoReceitaShows != null && Model.GTSIsReceita)
+                            {
+                                decimal totalVLSul = 0, totalVLSudeste = 0, totalVLNorte = 0, totalVLNordeste = 0, totalVLCentroOeste = 0, totalVLExterior = 0;
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-hover table-bordered updateTotalTable2">
+                                            <tr>
+                                                <th>Mês</th>
+                                                <th>Valor Sul</th>
+                                                <th>Valor Sudeste</th>
+                                                <th>Valor Norte</th>
+                                                <th>Valor Nordeste</th>
+                                                <th>Valor Centro Oeste</th>
+                                                <th>Valor Exterior</th>
+                                            </tr>
+                                            @foreach (GTSRegiaoReceitaShows item in Model._GTSRegiaoReceitaShows)
+                                            {
+                                                <tr class="saveLine2">
+                                                    <td class="mesVAL">@item.MES</td>
+                                                    <td><a href="#" class="editable2 VLSul" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLSul.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLSudeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLSudeste.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLNorte" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLNorte.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLNordeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLNordeste.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLCentroOeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLCentroOeste.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLExterior" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLExterior.ToString("#,0")</a></td>
+                                                </tr>
+
+                                                totalVLSul += item.VLSul;
+                                                totalVLSudeste += item.VLSudeste;
+                                                totalVLNorte += item.VLNorte;
+                                                totalVLNordeste += item.VLNordeste;
+                                                totalVLCentroOeste += item.VLCentroOeste;
+                                                totalVLExterior += item.VLExterior;
+                                            }
+                                            <tr>
+                                                <th class="text-right">Total:</th>
+                                                <th class="totalVLSul">@totalVLSul.ToString("#,0")</th>
+                                                <th class="totalVLSudeste">@totalVLSudeste.ToString("#,0")</th>
+                                                <th class="totalVLNorte">@totalVLNorte.ToString("#,0")</th>
+                                                <th class="totalVLNordeste">@totalVLNordeste.ToString("#,0")</th>
+                                                <th class="totalVLCentroOeste">@totalVLCentroOeste.ToString("#,0")</th>
+                                                <th class="totalVLExterior">@totalVLExterior.ToString("#,0")</th>
+                                            </tr>
+                                        </table>
+                                        <input type="button" id="btnUpdate2" value="Update" class="btn btn-default pull-right hidden btnShowModal" />
+                                    </div>
+                                </div>
+                            }
+
+
+
+                            @if (Model._GTSRegiaoReceitaShows != null && Model.GTSIsShows)
+                            {
+                                decimal totalQTDSul = 0, totalQTDSudeste = 0, totalQTDNorte = 0, totalQTDNordeste = 0, totalQTDCentroOeste = 0, totalQTDExterior = 0;
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-hover table-bordered updateTotalTable3">
+                                            <tr>
+                                                <th>Mês</th>
+                                                <th>Qtd Sul</th>
+                                                <th>Qtd Sudeste</th>
+                                                <th>Qtd Norte</th>
+                                                <th>Qtd Nordeste</th>
+                                                <th>Qtd Centro Oeste</th>
+                                                <th>Qtd Exterior</th>
+                                            </tr>
+                                            @foreach (GTSRegiaoReceitaShows item in Model._GTSRegiaoReceitaShows)
+                                            {
+                                                <tr class="saveLine3">
+                                                    <td class="mesVAL">@item.MES</td>
+                                                    <td><a href="#" class="editable3 QTDSul" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDSul.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDSudeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDSudeste.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDNorte" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDNorte.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDNordeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDNordeste.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDCentroOeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDCentroOeste.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDExterior" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDExterior.ToString("#")</a></td>
+                                                </tr>
+
+                                                totalQTDSul += item.QTDSul;
+                                                totalQTDSudeste += item.QTDSudeste;
+                                                totalQTDNorte += item.QTDNorte;
+                                                totalQTDNordeste += item.QTDNordeste;
+                                                totalQTDCentroOeste += item.QTDCentroOeste;
+                                                totalQTDExterior += item.QTDExterior;
+                                            }
+                                            <tr>
+                                                <th class="text-right">Total:</th>
+                                                <th class="totalQTDSul">@totalQTDSul.ToString("#,0")</th>
+                                                <th class="totalQTDSudeste">@totalQTDSudeste.ToString("#,0")</th>
+                                                <th class="totalQTDNorte">@totalQTDNorte.ToString("#,0")</th>
+                                                <th class="totalQTDNordeste">@totalQTDNordeste.ToString("#,0")</th>
+                                                <th class="totalQTDCentroOeste">@totalQTDCentroOeste.ToString("#,0")</th>
+                                                <th class="totalQTDExterior">@totalQTDExterior.ToString("#,0")</th>
+                                            </tr>
+                                        </table>
+                                        <input type="button" id="btnUpdate3" value="Update" class="btn btn-default pull-right hidden btnShowModal" />
+                                    </div>
+                                </div>
+                            }
+
+
+                            @if (Model._GTSSaldos != null)
+                            {
+                                decimal totalVALOR_Saldos = 0;
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-hover table-bordered updateTotalTable4">
+                                            <tr>
+                                                <th>Artista</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                            @foreach (GTSSaldos item in Model._GTSSaldos)
+                                            {
+                                                <tr class="saveLine4">
+                                                    <td class="idartistaVAL">@item.IDARTISTA</td>
+                                                    <td><a href="#" class="editable4 saldoQuantidade" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR.ToString("#,0")</a></td>
+                                                </tr>
+
+                                                totalVALOR_Saldos += item.VALOR;
+                                            }
+                                            <tr>
+                                                <th class="text-left">Total:</th>
+                                                <th class="totalVL">@totalVALOR_Saldos.ToString("#,0")</th>
+                                            </tr>
+                                        </table>
+                                        <input type="button" id="btnUpdate4" value="Update" class="btn btn-default pull-right hidden btnShowModal" />
+                                    </div>
+                                </div>
+                            }
+
+
+                            @if (Model._GTSMarginCachePartc != null)
+                            {
+
+                                decimal totalVLArtista = 0, totalVLLive = 0, totalVLGTS = 0, totalVLCache = 0, totalVLMargem = 0;
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-hover table-bordered updateTotalTable5">
+                                            <tr>
+                                                <th>Mês</th>
+                                                <th>VL Artista</th>
+                                                <th>VL Live</th>
+                                                <th>VL GTS</th>
+                                                <th>VL Cache</th>
+                                                <th>VL Margem</th>
+                                            </tr>
+                                            @foreach (GTSMarginCachePartc item in Model._GTSMarginCachePartc)
+                                            {
+                                                <tr class="saveLine5">
+                                                    <td class="mesVAL">@item.MES</td>
+                                                    <td><a href="#" class="editable5 VLArtista" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_ARTISTA.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable5 VLLive" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_LIVE.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable5 VLGTS" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_GTS.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable5 VLCache" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_CACHE.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable5 VLMargem" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_MARGEM.ToString("#,0")</a></td>
+                                                </tr>
+
+
+                                                totalVLArtista += item.VALOR_ARTISTA;
+                                                totalVLLive += item.VALOR_LIVE;
+                                                totalVLGTS += item.VALOR_GTS;
+                                                totalVLCache += item.VALOR_CACHE;
+                                                totalVLMargem += item.VALOR_MARGEM;
+                                            }
+                                            <tr>
+                                                <th class="text-left">Total:</th>
+                                                <th class="totalVLArtista">@totalVLArtista.ToString("#,0")</th>
+                                                <th class="totalVLLive">@totalVLLive.ToString("#,0")</th>
+                                                <th class="totaVLGTS">@totalVLGTS.ToString("#,0")</th>
+                                                <th class="totaVLCache">@totalVLCache.ToString("#,0")</th>
+                                                <th class="totaVLMargem">@totalVLMargem.ToString("#,0")</th>
+                                            </tr>
+                                        </table>
+                                        <input type="button" id="btnUpdate5" value="Update" class="btn btn-default pull-right hidden btnShowModal" />
+                                    </div>
+                                </div>
+                            }
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    function fileOnChange(value, idartista) {
+        if (!value.files) {
+            $(".alertMessage").html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Erro!</strong> Nenhum arquivo foi enviado</div>");
+            return;
+        }
+        else if (!value.files[0]) {
+            $(".alertMessage").html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Erro!</strong> Nenhum arquivo foi enviado</div>");
+            return;
+        }
+        else if (!value.files[0].name.match(/\.(jpg|jpeg|png)$/)) {
+            $(".alertMessage").html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Erro!</strong> O arquivo enviado não é uma imagem</div>");
+            return;
+        }
+        else if (value.files[0].size > 320000) {
+            $(".alertMessage").html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Erro!</strong> A imagem precisa ser menor do que 300kb</div>");
+            return;
+        }
+
+        $('#pleaseWaitDialog').modal('toggle');
+
+        var uriUploadArtista = "@Url.Action("UploadImage", "AtualizaGTS")";
+        var form = new FormData();
+
+        form.append('fileUpload', value.files[0]);
+        form.append('idartista', idartista);
+        form.append('artista', $(value).attr('data-artista'));
+
+
+        $.ajax({
+            url: uriUploadArtista,
+            type: "POST",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: form,
+            success: function (result) {
+
+                $(".alertMessage").html(result);
+
+                var src = "@System.Configuration.ConfigurationManager.AppSettings["imagePath"]";
+                src = src + idartista + ".png";
+                $('img[data-idartista="' + idartista + '"]').attr("src", src);
+
+            },
+            error: function (err) {
+
+                $(".alertMessage").html(err);
+            }
+        });
+        $('#pleaseWaitDialog').modal('toggle');
+
+    }
+
+    /*Começa a rodar o script somente depois que o documento esteja pronto*/
+    $(document).ready(function () {
+
+        $('.actremove').click(function () {
+            var dataArtista = $(this).attr('data-idartista');
+            var decisao = confirm("Você tem certeza que deseja remover todos os dados do(a) artista " + $(this).attr('data-artista') + " ? ");
+
+            if (decisao) {
+
+                var uriRemoverArtista = "@Url.Action("RemoverArtista", "AtualizaGTS")";
+                $.post(uriRemoverArtista, { term: dataArtista }, function (data) {
+                    $(".alertMessage").html(data);
+                });
+            }
+
+            return false;
+        });
+
+        $('.actUploadImage').click(function () {
+            // alert(1);
+
+            var dataArtista = $(this).attr('data-idartista');
+            // Alert(dataArtista);
+            $('.fileactUploadImage[data-idartista="' + dataArtista + '"]').click();
+
+
+
+            return false;
+        });
+
+
+        $('table').DataTable({
+            "bSortCellsTop": true,
+            "paging": true,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "Nada encontrado",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                "search": "Procurar:",
+                "paginate": {
+                    "first": '«',
+                    "previous": '‹',
+                    "next": '›',
+                    "last": '»'
+                },
+                "aria": {
+                    "paginate": {
+                        "first": 'Início',
+                        "previous": 'Anterior',
+                        "next": 'Próximo',
+                        "last": 'Último'
+                    }
+                }
+            },
+            "fixedHeader": {
+                "header": true,
+                "footer": true
+            }
+        });
+
+
+
+        /*Procura os projetos do artista selecionado*/
+        /*Procura artista autocomplete - inicio*/
+        var uriServico = "@Url.Action("ArtistaLookup", "AtualizaGTS")";
+        $('#typeAheadArtista').typeahead(
+            {
+                hint: true,
+                highlight: true,
+                minLength: 3
+            },
+            {
+                name: 'artistas',
+                source: function (query, process) {
+                    $('#loading').removeClass('hidden');
+                    var artistas = [];
+                    map = {};
+                    return $.post(uriServico, { term: query }, function (data) {
+                        $.each(data, function (i, artist) {
+                            map[artist.ARTISTNAME] = artist;
+                            artistas.push({ value: artist.ARTISTNAME + " - " + artist.IDARTISTA + "", id: artist.IDARTISTA, });
+                        });
+                        process(artistas);
+                        $('#loading').addClass('hidden');
+                    });
+                }
+            }).on("click", function (e) {
+                var s = $('#typeAheadArtista.tt-input').val().split(' -')[0];
+                $('#typeAheadArtista').attr("placeholder", s);
+                $('#typeAheadArtista').val('');
+            });
+        /*Procura artista autocomplete - fim*/
+    });
+
+
+    Number.prototype.format = function () {
+        return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+    };
+
+
+    /* ATUALIZANDO: GTSForecast: 1*/
+    $(".editable1").editable().on('shown', function (e, editable) {
+        editable.input.$input.val(editable.input.$input.val().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+        editable.input.$input.keydown(function (e) {
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190, 109, 189]) !== -1 ||
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+    }).on('hidden', function (e, reason) {
+        var totalFcastReceita = 0;
+        var totalPlanReceita = 0;
+        var totalFcastMargin = 0;
+        var totalPlanMargin = 0;
+
+        $('.updateTotalTable1 .saveLine1').each(function (i, e) {
+            totalFcastReceita += Number($(this).find('.fcastReceitaVAL').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalPlanReceita += Number($(this).find('.planReceitaVAL').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalFcastMargin += Number($(this).find('.fcastMarginVAL').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalPlanMargin += Number($(this).find('.planMarginVAL').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+        });
+        $('.updateTotalTable1 .totalfcastReceitaVAL').html(totalFcastReceita.format());
+        $('.updateTotalTable1 .totalplanReceitaVAL').html(totalPlanReceita.format());
+        $('.updateTotalTable1 .totafcastMarginVAL').html(totalFcastMargin.format());
+        $('.updateTotalTable1 .totaplanMarginVAL').html(totalPlanMargin.format());
+
+        if (reason === 'save') {
+            $('#btnUpdate1').removeClass('hidden');
+        }
+    });
+
+    $('#btnUpdate1').click(function () {
+        var linhas = [];
+        $('.updateTotalTable1 .saveLine1').each(function (i, e) {
+            var linha =
+                        {
+                            IDARTISTA: $('.hddIDArtista').val(),
+                            ANO: $('.hddAno').val(),
+                            MES: $(this).find('.mesVAL').html(),
+                            VALOR_FCAST_RECEITA: Number($(this).find('.fcastReceitaVAL').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VALOR_PLAN_RECEITA: Number($(this).find('.planReceitaVAL').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VALOR_FCAST_MARGIN: Number($(this).find('.fcastMarginVAL').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VALOR_PLAN_MARGIN: Number($(this).find('.planMarginVAL').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+                        };
+            linhas.push(linha);
+        });
+
+        $.ajax({
+            url: "AtualizaGTS/UpdateGTSForecast",
+            type: "POST",
+            data: JSON.stringify({ 'valores': linhas }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                $('#pleaseWaitDialog .messageDialog').html(response.responseText);
+                $('.alertMessage').html('<br /><div class=\'alert alert-success alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><strong>Tudo certo!</strong>' + response.responseText + '</div>');
+                setTimeout(
+                    function () {
+                        $('#pleaseWaitDialog').modal('toggle');
+                        $('#pleaseWaitDialog .messageDialog').html('');
+                    }, 5000);
+            },
+            error: function (response) {
+                $('#pleaseWaitDialog').modal('toggle');
+                alert("Erro.");
+            }
+        });
+    });
+
+
+
+
+
+    /* ATUALIZANDO: GTSRegiaoReceitaShows: 2*/
+    $(".editable2").editable().on('shown', function (e, editable) {
+        editable.input.$input.val(editable.input.$input.val().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+        editable.input.$input.keydown(function (e) {
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190, 109, 189]) !== -1 ||
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+    }).on('hidden', function (e, reason) {
+        var totalVLSul = 0;
+        var totalVLSudeste = 0;
+        var totalVLNorte = 0;
+        var totalVLNordeste = 0;
+        var totalVLCentroOeste = 0;
+        var totalVLExterior = 0;
+
+        $('.updateTotalTable2 .saveLine2').each(function (i, e) {
+            totalVLSul += Number($(this).find('.VLSul').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalVLSudeste += Number($(this).find('.VLSudeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalVLNorte += Number($(this).find('.VLNorte').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalVLNordeste += Number($(this).find('.VLNordeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalVLCentroOeste += Number($(this).find('.VLCentroOeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalVLExterior += Number($(this).find('.VLExterior').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+        });
+        $('.updateTotalTable2 .totalVLSul').html(totalVLSul.format());
+        $('.updateTotalTable2 .totalVLSudeste').html(totalVLSudeste.format());
+        $('.updateTotalTable2 .totalVLNorte').html(totalVLNorte.format());
+        $('.updateTotalTable2 .totalVLNordeste').html(totalVLNordeste.format());
+        $('.updateTotalTable2 .totalVLCentroOeste').html(totalVLCentroOeste.format());
+        $('.updateTotalTable2 .totalVLExterior').html(totalVLExterior.format());
+
+        if (reason === 'save') {
+            $('#btnUpdate2').removeClass('hidden');
+        }
+    });
+
+    $('#btnUpdate2').click(function () {
+        var linhas = [];
+        $('.updateTotalTable2 .saveLine2').each(function (i, e) {
+            var linha =
+                        {
+                            IDARTISTA: $('.hddIDArtista').val(),
+                            ANO: $('.hddAno').val(),
+                            MES: $(this).find('.mesVAL').html(),
+                            VLSul: Number($(this).find('.VLSul').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VLSudeste: Number($(this).find('.VLSudeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VLNorte: Number($(this).find('.VLNorte').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VLNordeste: Number($(this).find('.VLNordeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VLCentroOeste: Number($(this).find('.VLCentroOeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VLExterior: Number($(this).find('.VLExterior').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+                        };
+            linhas.push(linha);
+        });
+
+        $.ajax({
+            url: "AtualizaGTS/UpdateGTSReceita",
+            type: "POST",
+            data: JSON.stringify({ 'valores': linhas }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                $('#pleaseWaitDialog .messageDialog').html(response.responseText);
+                $('.alertMessage').html('<br /><div class=\'alert alert-success alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><strong>Tudo certo!</strong>' + response.responseText + '</div>');
+                setTimeout(
+                    function () {
+                        $('#pleaseWaitDialog').modal('toggle');
+                        $('#pleaseWaitDialog .messageDialog').html('');
+                    }, 5000);
+            },
+            error: function (response) {
+                $('#pleaseWaitDialog').modal('toggle');
+                alert("Erro.");
+            }
+        });
+    });
+
+
+
+
+
+
+    /* ATUALIZANDO: GTSRegiaoReceitaShows: 3*/
+    $(".editable3").editable().on('shown', function (e, editable) {
+        editable.input.$input.val(editable.input.$input.val().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+        editable.input.$input.keydown(function (e) {
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190, 109, 189]) !== -1 ||
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+    }).on('hidden', function (e, reason) {
+        var totalQTDSul = 0;
+        var totalQTDSudeste = 0;
+        var totalQTDNorte = 0;
+        var totalQTDNordeste = 0;
+        var totalQTDCentroOeste = 0;
+        var totalQTDExterior = 0;
+
+        $('.updateTotalTable3 .saveLine3').each(function (i, e) {
+            totalQTDSul += Number($(this).find('.QTDSul').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalQTDSudeste += Number($(this).find('.QTDSudeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalQTDNorte += Number($(this).find('.QTDNorte').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalQTDNordeste += Number($(this).find('.QTDNordeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalQTDCentroOeste += Number($(this).find('.QTDCentroOeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalQTDExterior += Number($(this).find('.QTDExterior').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+        });
+        $('.updateTotalTable3 .totalQTDSul').html(totalQTDSul.format());
+        $('.updateTotalTable3 .totalQTDSudeste').html(totalQTDSudeste.format());
+        $('.updateTotalTable3 .totalQTDNorte').html(totalQTDNorte.format());
+        $('.updateTotalTable3 .totalQTDNordeste').html(totalQTDNordeste.format());
+        $('.updateTotalTable3 .totalQTDCentroOeste').html(totalQTDCentroOeste.format());
+        $('.updateTotalTable3 .totalQTDExterior').html(totalQTDExterior.format());
+
+        if (reason === 'save') {
+            $('#btnUpdate3').removeClass('hidden');
+        }
+    });
+
+    $('#btnUpdate3').click(function () {
+        var linhas = [];
+        $('.updateTotalTable3 .saveLine3').each(function (i, e) {
+            var linha =
+                        {
+                            IDARTISTA: $('.hddIDArtista').val(),
+                            ANO: $('.hddAno').val(),
+                            MES: $(this).find('.mesVAL').html(),
+                            QTDSul: Number($(this).find('.QTDSul').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            QTDSudeste: Number($(this).find('.QTDSudeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            QTDNorte: Number($(this).find('.QTDNorte').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            QTDNordeste: Number($(this).find('.QTDNordeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            QTDCentroOeste: Number($(this).find('.QTDCentroOeste').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            QTDExterior: Number($(this).find('.QTDExterior').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+                        };
+            linhas.push(linha);
+        });
+
+        $.ajax({
+            url: "AtualizaGTS/UpdateGTSShows",
+            type: "POST",
+            data: JSON.stringify({ 'valores': linhas }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                $('#pleaseWaitDialog .messageDialog').html(response.responseText);
+                $('.alertMessage').html('<br /><div class=\'alert alert-success alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><strong>Tudo certo!</strong>' + response.responseText + '</div>');
+
+                setTimeout(
+                    function () {
+                        $('#pleaseWaitDialog').modal('toggle');
+                        $('#pleaseWaitDialog .messageDialog').html('');
+                    }, 5000);
+            },
+            error: function (response) {
+                $('#pleaseWaitDialog').modal('toggle');
+                alert("Erro.");
+            }
+        });
+    });
+
+
+
+
+
+    /* ATUALIZANDO: GTSSaldos: 4*/
+    $(".editable4").editable().on('shown', function (e, editable) {
+        editable.input.$input.val(editable.input.$input.val().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+        editable.input.$input.keydown(function (e) {
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190, 109, 189]) !== -1 ||
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+    }).on('hidden', function (e, reason) {
+        var totalVL = 0;
+
+
+        $('.updateTotalTable4 .saveLine4').each(function (i, e) {
+            totalVL += Number($(this).find('.saldoQuantidade').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+
+        });
+        $('.updateTotalTable4 .totalVL').html(totalVL.format());
+        if (reason === 'save') {
+            $('#btnUpdate4').removeClass('hidden');
+        }
+    });
+
+    $('#btnUpdate4').click(function () {
+        var linhas = [];
+        $('.updateTotalTable4 .saveLine4').each(function (i, e) {
+            var linha =
+                        {
+                            IDARTISTA: $('.hddIDArtista').val(),
+                            VALOR: Number($(this).find('.saldoQuantidade').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+                        };
+            linhas.push(linha);
+        });
+
+        $.ajax({
+            url: "AtualizaGTS/UpdateGTSSaldos",
+            type: "POST",
+            data: JSON.stringify({ 'valores': linhas }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                $('#pleaseWaitDialog .messageDialog').html(response.responseText);
+                $('.alertMessage').html('<br /><div class=\'alert alert-success alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><strong>Tudo certo!</strong>' + response.responseText + '</div>');
+                setTimeout(
+                    function () {
+                        $('#pleaseWaitDialog').modal('toggle');
+                        $('#pleaseWaitDialog .messageDialog').html('');
+                    }, 5000);
+            },
+            error: function (response) {
+                $('#pleaseWaitDialog').modal('toggle');
+                alert("Erro.");
+            }
+        });
+    });
+
+
+
+    /* ATUALIZANDO: GTSMarginCachePartc: 5*/
+    $(".editable5").editable().on('shown', function (e, editable) {
+        editable.input.$input.val(editable.input.$input.val().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+        editable.input.$input.keydown(function (e) {
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190, 109, 189]) !== -1 ||
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+    }).on('hidden', function (e, reason) {
+        var totalVLArtista = 0;
+        var totalVLLive = 0;
+        var totalVLGTS = 0;
+        var totalVLCache = 0;
+        var totalVLMargem = 0;
+
+
+        $('.updateTotalTable5 .saveLine5').each(function (i, e) {
+            totalVLArtista += Number($(this).find('.VLArtista').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalVLLive += Number($(this).find('.VLLive').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalVLGTS += Number($(this).find('.VLGTS').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalVLCache += Number($(this).find('.VLCache').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+            totalVLMargem += Number($(this).find('.VLMargem').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''));
+        });
+        $('.updateTotalTable5 .totalVLArtista').html(totalVLArtista.format());
+        $('.updateTotalTable5 .totalVLLive').html(totalVLLive.format());
+        $('.updateTotalTable5 .totalVLGTS').html(totalVLGTS.format());
+        $('.updateTotalTable5 .totalVLCache').html(totalVLCache.format());
+        $('.updateTotalTable5 .totalVLMargem').html(totalVLMargem.format());
+        if (reason === 'save') {
+            $('#btnUpdate5').removeClass('hidden');
+        }
+    });
+
+    $('#btnUpdate5').click(function () {
+        var linhas = [];
+        $('.updateTotalTable5 .saveLine5').each(function (i, e) {
+            var linha =
+                        {
+                            IDARTISTA: $('.hddIDArtista').val(),
+                            ANO: $('.hddAno').val(),
+                            MES: $(this).find('.mesVAL').html(),
+                            VALOR_ARTISTA: Number($(this).find('.VLArtista').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VALOR_LIVE: Number($(this).find('.VLLive').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VALOR_GTS: Number($(this).find('.VLGTS').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VALOR_CACHE: Number($(this).find('.VLCache').html().replace(/[\.]+/g, '').replace(/[\,]+/g, '')),
+                            VALOR_MARGEM: Number($(this).find('.VLMargem').html().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+                        };
+            linhas.push(linha);
+        });
+
+        $.ajax({
+            url: "AtualizaGTS/UpdateGTSMargenCachePartc",
+            type: "POST",
+            data: JSON.stringify({ 'valores': linhas }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                $('#pleaseWaitDialog .messageDialog').html(response.responseText);
+                $('.alertMessage').html('<br /><div class=\'alert alert-success alert-dismissible\' role=\'alert\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\' aria-label=\'Close\'><span aria-hidden=\'true\'>&times;</span></button><strong>Tudo certo!</strong>' + response.responseText + '</div>');
+                setTimeout(
+                    function () {
+                        $('#pleaseWaitDialog').modal('toggle');
+                        $('#pleaseWaitDialog .messageDialog').html('');
+                    }, 5000);
+            },
+            error: function (response) {
+                $('#pleaseWaitDialog').modal('toggle');
+                alert("Erro.");
+            }
+        });
+    });
+
+
+</script>

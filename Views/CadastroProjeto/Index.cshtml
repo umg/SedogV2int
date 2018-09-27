@@ -1,0 +1,988 @@
+﻿    @using SEDOGv2.Helpers;
+    @using SEDOGv2.Models;
+    @{
+        ViewBag.Title = "Cadastro de Projeto SEDOG";
+        Layout = "~/Views/Shared/_LoggedIn.cshtml";
+    }
+
+    @*<link href="~/Content/stepform.css" rel="stylesheet" />*@
+
+    <div class="container-fluid">
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+            @using (Html.BeginForm("CreateProject", "CadastroProjeto", FormMethod.Post, new { id = "frmSaveProject" }))
+            {
+                <div class="row">
+                    <div class="container">
+                        <input type="hidden" id="idArtista" name="idArtista" />
+                        <input type="hidden" id="selectedProjects" name="selectedProjects" />
+                        <input type="hidden" id="selectedProducts" name="selectedProducts" />
+                        <input type="hidden" id="busExtras" name="busExtras" />
+                        <div class="row form-group">
+                            <div class="col-xs-12">
+                                <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                                    <li class="active">
+                                        <a href="#step1">
+                                            <h4 class="list-group-item-heading">Artist</h4>
+                                            <p class="list-group-item-text">Select artist</p>
+                                        </a>
+                                    </li>
+                                    <li class="disabled">
+                                        <a href="#step2">
+                                            <h4 class="list-group-item-heading">Digital Product</h4>
+                                            <p class="list-group-item-text">Select Digital Products</p>
+                                        </a>
+                                    </li>
+                                    <li class="disabled">
+                                        <a href="#step3">
+                                            <h4 class="list-group-item-heading">Physical Product</h4>
+                                            <p class="list-group-item-text">Select Physical Product</p>
+                                        </a>
+                                    </li>
+                                    <li class="disabled">
+                                        <a href="#step4">
+                                            <h4 class="list-group-item-heading">Additional Detail</h4>
+                                            <p class="list-group-item-text">Add Additional Detail</p>
+                                        </a>
+                                    </li>
+                                    <li class="disabled">
+                                        <a href="#step5">
+                                            <h4 class="list-group-item-heading">Summary</h4>
+                                            <p class="list-group-item-text">Summary of what will be created</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row setup-content" id="step1">
+                            <div class="col-xs-12">
+                                <div class="col-md-12 well text-center">
+                                    <h1 class="text-center">Search Artist</h1>
+                                    <h3 class="text-center">Type the artist name and select from list</h3>
+                                    <div class="col-md-offset-2 col-md-8 text-center">
+                                        <div class="input-group">
+                                            <input type="text" id="typeAheadArtista" class="typeahead form-control input-lg" placeholder="Artist" />
+                                            <span class="input-group-btn">
+                                                <button id="btnStep1" class="btn btn-default btn-lg disabled" type="button">Next<i id="loading" class="fa fa-cog fa-spin fa-fw hidden"></i></button>
+                                            </span>
+                                        </div>
+                                        <p>
+                                            <a href="@Url.Action("ProcuraArtistaPorProduto" , "CadastroProjeto")" class="linkDiv" data-title="Advanced Artist Search"><i class="fa fa-search"></i> Advanced Search</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row setup-content" id="step2">
+                            <div class="col-xs-12">
+                                <div class="col-md-12 well text-center">
+                                    <h1 class="text-center">Digital Products</h1>
+                                    <h3 class="text-center">Select products to link</h3>
+                                    <div class="col-md-12 text-center">
+                                        <div class="input-group">
+                                            <input type="text" id="filtrarProjetoBrdigital" class="form-control input-lg" placeholder="Filter" aria-describedby="basic-addon2">
+                                            <span class="input-group-btn">
+                                                <button id="limparFiltros" class="btn btn-primary btn-lg" type="button">Clear</button>
+                                                <button id="marcarTodos" class="btn btn-primary btn-lg" type="button">Select All</button>
+                                                <button id="desmarcarTodos" class="btn btn-primary btn-lg" type="button">Deselect All</button>
+                                                <button id="btnStep2" class="btn btn-default btn-lg disabled" type="button">Next</button>
+                                            </span>
+                                        </div>
+                                        <p>
+                                            <a href="@Url.Action("ProcuraPorProjetoPorISRC" , "CadastroProjeto")" class="linkDiv linkHidden" data-title="Advanced Digital Product Search"><i class="fa fa-search"></i> Advanced Search</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-12"><h4 id="responseToCliente2"></h4></div>
+                                    <div class="col-xs-12" id="ProjetosPorArtistCode"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row setup-content" id="step3">
+                            <div class="col-xs-12">
+                                <div class="col-md-12 well text-center">
+                                    <h1 class="text-center">Physical Products</h1>
+                                    <h3 class="text-center">Select Physical Products</h3>
+                                    <div class="col-md-12 text-center">
+                                        <div class="input-group">
+                                            <input type="text" id="filtrarProdutoBrdigital" class="form-control input-lg" placeholder="Filter" aria-describedby="basic-addon2">
+                                            <span class="input-group-btn">
+                                                <button id="limparFiltrosFisico" class="btn btn-primary btn-lg" type="button">Clear</button>
+                                                <button id="marcarTodosFisico" class="btn btn-primary btn-lg" type="button">Select All</button>
+                                                <button id="desmarcarTodosFisico" class="btn btn-primary btn-lg" type="button">Deselect All</button>
+                                                <button id="btnStep3" class="btn btn-default btn-lg disabled" type="button">Next</button>
+                                            </span>
+                                        </div>
+                                        <p>
+                                            <a href="@Url.Action("ProcuraPorProduto" , "CadastroProjeto")" class="linkDiv linkHidden" data-title="Advanced Product Search"><i class="fa fa-search"></i> Advanced Search</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-12"><h4 id="responseToCliente3"></h4></div>
+                                    <div class="col-xs-12" id="ProdutosPorArtist"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row setup-content" id="step4">
+                            <div class="col-xs-12">
+                                <div class="col-md-12 well text-center">
+                                    <h1 class="text-center">Additional Detail</h1>
+                                    <h3 class="text-center">Add aditional detail for projec</h3>
+                                    <div id="ProdutosBus" class="col-md-12 text-center">
+                                        <button id="btnStep4" class="btn btn-default btn-lg disabled" type="button">Ready!</button><p>&nbsp;</p>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Project Name</span>
+                                            <input type="text" id="nomeDoProjeto" name="nomeDoProjeto" class="form-control input-lg" placeholder="Type a name for the project" aria-describedby="basic-addon2">
+                                        </div><p>&nbsp;</p>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Artist Name</span>
+                                            <input type="text" id="nomeDoArtista" name="nomeDoArtista" class="form-control input-lg" placeholder="" aria-describedby="basic-addon2">
+                                        </div><p>&nbsp;</p>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Release date</span>
+                                            <input type="text" id="lancamento" name="lancamento" class="form-control input-lg" placeholder="Release Date" aria-describedby="basic-addon2">
+                                        </div><p>&nbsp;</p>
+                                        <div class="input-group col-lg-12">
+                                            <div class="text-left col-md-6">
+                                                <label><input type="checkbox" name="obs[]" value="DIG" class="chkBoxObs" />Digital</label>
+                                                <label><input type="checkbox" name="obs[]" value="FIS" class="chkBoxObs" />Physical</label>
+                                                <label><input type="checkbox" name="obs[]" value="CD" class="chkBoxObs" />CD</label>
+                                                <label><input type="checkbox" name="obs[]" value="DV" class="chkBoxObs" />DV</label>
+                                            </div>
+                                            <div class="text-right col-md-6">
+                                                <label><input type="checkbox" name="GOS" value="GOS" class="chkBoxGOS" />Gospel</label>
+                                            </div>
+                                        </div><p>&nbsp;</p>
+                                        <div class="input-group col-lg-12">
+                                            <div class="col-lg-3">
+                                                <label for="selTipoRelease" class="control-label">Release Type:</label>
+                                                <select class="form-control" id="selTipoRelease" name="selTipoRelease">
+                                                    @foreach (TipoRelease item in Model._TipoRelease)
+                                                    {
+                                                        <option value="@item.ID_TIPO_RELEASE">@item.TIPO_RELEASE</option>
+                                                    }
+                                                </select>
+                                                <input type="hidden" id="selOrigem" name="selOrigem" />
+                                            </div>
+                                            <div class="col-lg-1">
+                                                <label for="percArt" class="control-label">% Digital Artistic:</label>
+                                                <input type="text" id="_percArt" class="form-control input-lg" placeholder="" aria-describedby="basic-addon2" style="width:80px;height:34px" />
+                                                <input type="hidden" id="percArt" name="percArt" />
+                                            </div>
+                                            <div class="col-lg-1">
+                                                <label for="percArt" class="control-label">% Digital Copyright:</label>
+                                                <input type="text" id="_percAut" class="form-control input-lg" placeholder="" aria-describedby="basic-addon2" style="width:80px;height:34px" />
+                                                <input type="hidden" id="percAut" name="percAut" />
+                                            </div>
+                                            <div class="col-lg-1">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <label for="selTipoContrato" class="control-label">Contract Type:</label>
+                                                <select class="form-control" id="selTipoContrato" name="selTipoContrato">
+                                                    @foreach (TipoContrato item in Model._TipoContrato)
+                                                    {
+                                                        <option value="@item.ID_TIPO_CONTRATO">@item.TIPO_CONTRATO</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <label for="selTipoProcesso" class="control-label">Process Type:</label>
+                                                <select class="form-control" id="selTipoProcesso" name="selTipoProcesso">
+                                                    @foreach (TipoProcesso item in Model._TipoProcesso)
+                                                    {
+                                                        <option value="@item.ID_TIPO_PROCESSO">@item.TIPO_PROCESSO</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div><p>&nbsp;</p>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1">Project BUs</span>
+                                            <input type="text" id="busAdicionaisProjeto" name="busAdicionaisProjeto" class="form-control input-lg" placeholder="type the BUs separated by commas (,)" aria-describedby="basic-addon2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row setup-content" id="step5">
+                            <div class="col-xs-12">
+                                <div class="col-md-12 well text-center">
+                                    <h1 class="text-center">Summary</h1>
+                                    <h3 class="text-center">Project details that will be created</h3>
+                                    <div id="resumoProjeto" class="col-md-12 text-center"></div>
+                                    <p>&nbsp;</p>
+                                    <div class="col-md-12 text-right">
+                                        <input type="submit" id="btnCriarProjeto" name="btnCriarProjeto" value="Create Project!" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="divAlert">
+                        @Html.Raw(Model.Message)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+<div id="myModalCadastraProjetos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*
+*
+* script para controlar a página de cadastro de projetos
+*
+*/
+
+    /*Começa a rodar o script somente depois que o documento esteja pronto*/
+    $(document).ready(function () {
+
+
+        /*Ajusta o header da tabela dinâmica*/
+        $('#myModalCadastraProjetos').on('shown.bs.modal', function () {
+            $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+        })
+
+        /*Mostra o div com a pesquisa avançada*/
+        $(".linkDiv").click(function () {
+            var table;
+            $("#myModalCadastraProjetos .modal-title").html($(this).data("title"));
+            $("#myModalCadastraProjetos .modal-body").html("<p><i class=\"fa fa-cog fa-spin fa-fw\"></i>Carregando...</p>").load($(this).attr('href') + " #mainContent", function () {
+                $("#btnProcuraProjetosPorISRCs").click(function (evt) {
+                    table = $('.tableSortPaggingDivProj').DataTable();
+                    table.destroy();
+                    $('.tableSortPaggingDivProj').DataTable({
+                        "processing": true,
+                        "ajax": {
+                            "url": "@Url.Action("ListaProjetoPorISRC", "CadastroProjeto")",
+                            "data": { "term": $("#pesquisaProjetoPorISRCs").val() }
+                        },
+                        "columns": [
+                            { "data": "ARTISTCODE" },
+                            { "data": "ARTISTNAME" },
+                            { "data": "PROJECTCODE" },
+                            { "data": "PROJECTNAME" },
+                            { "data": "NETREVEUE" }
+                        ]
+                        //,
+                        //"language": {
+                        //    "processing": "Processando...",
+                        //    "lengthMenu": "Mostrar _MENU_ registros",
+                        //    "zeroRecords": "Nada encontrado",
+                        //    "info": "Mostrando página _PAGE_ de _PAGES_",
+                        //    "infoEmpty": "Nenhum registro disponível",
+                        //    "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                        //    "search": "Procurar:",
+                        //    "paginate": {
+                        //        "first": '«',
+                        //        "previous": '‹',
+                        //        "next": '›',
+                        //        "last": '»'
+                        //    },
+                        //    "aria": {
+                        //        "paginate": {
+                        //            "first": 'Início',
+                        //            "previous": 'Anterior',
+                        //            "next": 'Próximo',
+                        //            "last": 'Último'    
+                        //        }
+                        //    }
+                        //}
+                    });
+                $('.tableSortPaggingDivProj tbody').css("cursor", "pointer");
+                $('.tableSortPaggingDivProj tbody').on('click', 'tr', function () {
+                    var items = [];
+                    var s = "<div class='panel-body'><h4 class='card-title'>Artist:&nbsp;" + $(this).find('td:eq(1)').text() + "</h4><p class='card-text'>Code:&nbsp;" + $(this).find('td:eq(2)').text() + "</p><p class='card-text'>Name:&nbsp;<span class='projNameDigital'>" + $(this).find('td:eq(3)').text() + "</span></p><div class='checkbox prj pull-right'><label class='lblPrjCode'><input type='checkbox' value='" + $(this).find('td:eq(2)').text() + ";" + $(this).find('td:eq(3)').text() + "' class='chkBx' checked>&nbsp;</label></div></div></div>";
+                    items.push(s);
+                    $("<div/>", {
+                        "class": "panel-card col-sm-4",
+                        html: items.join("")
+                    }).appendTo("#ProjetosPorArtistCode .flex");
+                    AtualizaPrdSelecionados();
+                    $(".prd input:checkbox").on("change", function (e) {
+                        AtualizaSelecionados();
+                    });
+                    var table = $('.tableSortPaggingDivProj').DataTable();
+                    table.row($(this)).remove().draw();
+                });
+            });
+                $("#btnProcuraProdutos").click(function (evt) {
+                    table = $('.tableSortPaggingDiv').DataTable();
+                    table.destroy();
+                    $('.tableSortPaggingDivPrd').DataTable({
+                        "processing": true,
+                        "ajax": {
+                            "url": "@Url.Action("ListaProduto", "CadastroProjeto")",
+                            "data": { "term": $("#pesquisaProduto").val() }
+                    },
+                        "columns": [
+                            { "data": "CBCATN" },
+                            { "data": "CBPKGC" },
+                            { "data": "CBMACF" },
+                            { "data": "CBSDPK" },
+                            { "data": "ARTISTA" },
+                            { "data": "TITULO" },
+                            { "data": "DATA" },
+                            { "data": "CBCRLD" },
+                            { "data": "BU" }
+                        ]
+                        //,
+                        //"language": {
+                        //    "processing": "Processando...",
+                        //    "lengthMenu": "Mostrar _MENU_ registros",
+                        //    "zeroRecords": "Nada encontrado",
+                        //    "info": "Mostrando página _PAGE_ de _PAGES_",
+                        //    "infoEmpty": "Nenhum registro disponível",
+                        //    "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                        //    "search": "Procurar:",
+                        //    "paginate": {
+                        //        "first": '«',
+                        //        "previous": '‹',
+                        //        "next": '›',
+                        //        "last": '»'
+                        //    },
+                        //    "aria": {
+                        //        "paginate": {
+                        //            "first": 'Início',
+                        //            "previous": 'Anterior',
+                        //            "next": 'Próximo',
+                        //            "last": 'Último'    
+                        //        }
+                        //    }
+                        //}
+                });
+                    $('.tableSortPaggingDivPrd tbody').css("cursor", "pointer");
+                    $('.tableSortPaggingDivPrd tbody').on('click', 'tr', function () {
+                    var items = [];
+                    var s = "<div class='panel-body'><h4 class='card-title'>Artist:&nbsp;<span class='artistaNome'>" + $(this).find('td:eq(4)').text() + "</span></h4><p class='card-text'>Code:&nbsp;" + $(this).find('td:eq(0)').text() + '/' + $(this).find('td:eq(1)').text() + "</p><p class='card-text'>Name:&nbsp;<span class='prodNameDigital'>" + $(this).find('td:eq(5)').text() + "</span></p><div class='checkbox prd pull-right'><label class='lblPrjCode'><input type='checkbox' value='" + $(this).find('td:eq(0)').text() + ';' + $(this).find('td:eq(1)').text() + ';' + $(this).find('td:eq(8)').text() + "' class='chkBx' checked>&nbsp;</label></div></div>";
+                    items.push(s);
+                    $("<div/>", {
+                        "class": "panel-card col-sm-4",
+                        html: items.join("")
+                    }).appendTo("#ProdutosPorArtist .flex");
+                    AtualizaPrdSelecionados();
+                    $(".prd input:checkbox").on("change", function (e) {
+                        AtualizaPrdSelecionados();
+                    });
+                    var table = $('.tableSortPaggingDivPrd').DataTable();
+                    table.row($(this)).remove().draw();
+                    });
+                });
+                $("#btnProcuraProdutosPorArtista").click(function (evt) {
+                    table = $('.tableSortPaggingDiv').DataTable();
+                    table.destroy();
+                    $('.tableSortPaggingDiv').DataTable({
+                        "processing": true,
+                        "ajax": {
+                            "url": "@Url.Action("ListaArtistaPorProduto", "CadastroProjeto")",
+                            "data": { "term": $("#pesquisaNomeProjeto").val() }
+                        },
+                        "columns": [
+                            { "data": "PROJECTCODE" },
+                            { "data": "ARTISTNAME" },
+                            { "data": "PROJECTNAME" },
+                            { "data": "IDARTISTA" }
+                        ]
+                        //,
+                        //"language": {
+                        //    "processing": "Processando...",
+                        //    "lengthMenu": "Mostrar _MENU_ registros",
+                        //    "zeroRecords": "Nada encontrado",
+                        //    "info": "Mostrando página _PAGE_ de _PAGES_",
+                        //    "infoEmpty": "Nenhum registro disponível",
+                        //    "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                        //    "search": "Procurar:",
+                        //    "paginate": {
+                        //        "first": '«',
+                        //        "previous": '‹',
+                        //        "next": '›',
+                        //        "last": '»'
+                        //    },
+                        //    "aria": {
+                        //        "paginate": {
+                        //            "first": 'Início',
+                        //            "previous": 'Anterior',
+                        //            "next": 'Próximo',
+                        //            "last": 'Último'    
+                        //        }
+                        //    }
+                        //}
+                    });
+                    
+                    $('.tableSortPaggingDiv tbody').css("cursor", "pointer");
+                    $('.tableSortPaggingDiv tbody').on('click', 'tr', function () {
+
+                        //limpa tudo!
+                        LimpaTudo();
+                        //***
+
+                        var _artistName = $(this).find('td:eq(1)').text();
+                        var _artistId = $(this).find('td:eq(3)').text();
+                        $('#idArtista').val(_artistId);
+                        $('#typeAheadArtista').val(_artistName);
+                        $('#nomeDoArtista').val(_artistName);
+                        $('#btnStep1').removeClass('disabled');
+                        $('#typeAheadArtista:focus').blur();
+                        $("#myModalCadastraProjetos").modal("hide");
+                    });
+                });
+            });
+            $("#myModalCadastraProjetos").modal("show");
+            return false;
+        });
+
+
+
+        /*Evita que o submit seja acionado ao pressionar ENTER*/
+        $('#frmSaveProject').on('keyup keypress', function (e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode === 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        /*Prepara as variáveis dos passos no topo da página e seus conteúdos*/
+        var navListItems = $('ul.setup-panel li a'),
+            allWells = $('.setup-content');
+
+        /*Esconde os passos*/
+        allWells.hide();
+
+        /*Cria a função de para o evento click dos passos no topo da página*/
+        navListItems.click(function (e) {
+            e.preventDefault();
+            $item = $(this).closest('li');
+            var $target = $($(this).attr('href'));
+
+            if (!$item.hasClass('disabled')) {
+                navListItems.closest('li').removeClass('active');
+                $item.addClass('active');
+                allWells.hide();
+                $target.show();
+            }
+        });
+
+        /*Adiciona um calendário ao campo data de lançamento*/
+        $('#lancamento').datepicker({
+            format: 'yyyy-mm-dd',
+            language: "en-US",
+            orientation: "top auto",
+            autoclose: true
+        });
+
+
+        /*Carrega valor para o campo origem*/
+        $("#selOrigem").val($("#selTipoRelease option:selected").text().toUpperCase().substr(0, 3));
+
+
+        /*Carrega valor para os campos percentuais de acordo com o campo origem*/
+        if ($("#selTipoRelease option:selected").text().toUpperCase().substr(0, 3) == "INT") {
+            $("#percArt,#_percArt").val("40");
+            $("#percAut,#_percAut").val("0");
+            $("#_percArt , #_percAut").prop('disabled', true);
+        } else {
+            $("#percArt,#_percArt").val("0");
+            $("#percAut,#_percAut").val("0");
+            $("#_percArt , #_percAut").prop('disabled', false);
+        }
+
+        /*aciona o click do primeiro passo*/
+        $('ul.setup-panel li a[href="#step1"]').trigger('click');
+
+        /*Função do click do botão "próximo passo" no step 1*/
+        $('#btnStep1').on('click', function (e) {
+            GetListOfProjectsByArtistcode();
+            $('ul.setup-panel li:eq(1)').removeClass('disabled');
+            $('ul.setup-panel li a[href="#step2"]').trigger('click');
+            $(this).addClass('disabled');
+        })
+
+        /*Função do click do botão "próximo passo" no step 2*/
+        $('#btnStep2').on('click', function (e) {
+            $('#step3 .btn').addClass("disabled");
+            GetListOfProductsByArtist();
+            $('#responseToCliente2').html("Produtos Digitais Selecionados:");
+            $('ul.setup-panel li:eq(2)').removeClass('disabled');
+            $('ul.setup-panel li a[href="#step3"]').trigger('click');
+            $(this).addClass('disabled');
+            $("#step2 .btn").addClass('disabled');
+            $("#step2 .hideLater").hide();
+            $("#step2 .chkBx").hide();
+            $("#filtrarProjetoBrdigital").addClass("disabled");
+            $("#step2 .chkBx").each(function (i, item) {
+                if (!$(item).is(':checked')) {
+                    $(item).closest('.panel-card').hide();
+                }
+            });
+        })
+
+        /*Função do click do botão "próximo passo" no step 3*/
+        $('#btnStep3').on('click', function (e) {
+            GetProductsBus();
+            $(".linkHidden").addClass("hidden");
+            $('ul.setup-panel li:eq(3)').removeClass('disabled');
+            $('ul.setup-panel li a[href="#step4"]').trigger('click');
+            $('#responseToCliente3').html("Produtos Físicos Selecionados:");
+            $(this).addClass('disabled');
+            $("#step3 .btn").addClass('disabled');
+            $("#step3 .hideLater").hide();
+            $("#step3 .chkBx").hide();
+            $("#step3 .chkBx").each(function (i, item) {
+                if (!$(item).is(':checked')) {
+                    $(item).closest('.panel-card').hide();
+                }
+            });
+        });
+
+        /*Função do click do botão "próximo passo" no step 4*/
+        $('#btnStep4').on('click', function (e) {
+            $('ul.setup-panel li:eq(4)').removeClass('disabled');
+            $('ul.setup-panel li a[href="#step5"]').trigger('click');
+            //$('#resumoProjeto').html('');
+            CreateResumo();
+        });
+
+        /*Procura os projetos do artista selecionado*/
+        var uriArtistProjects = "@Url.Action("ProjectsByArtistCodeBrDigital", "CadastroProjeto")";
+        var uriArtistProducts = "@Url.Action("ProductsByArtistBrDigital", "CadastroProjeto")";
+
+        /*Cria texto do resumo do projeto*/
+        function CreateResumo() {
+
+            $("#resumoProjeto table").remove();
+            var strResumo = "<table width='100%' style='width:100%; font-size:12px;'>";
+            strResumo += "<tr style='background-color:#ccc; color:#fff; font-size:14px;'><td colspan='2'>Project Name</td></tr>";
+            strResumo += "<tr><td>Name</td><td>" + $('#nomeDoProjeto').val() + "</td></tr>";
+            strResumo += "<tr><td>Release</td><td>" + $('#lancamento').val() + "</td></tr>";
+            strResumo += "<tr style='background-color:#ccc; color:#fff; font-size:14px;'><td colspan='2'>Artist Detail</td></tr>";
+            strResumo += "<tr><td>Artist</td><td>" + $('#nomeDoArtista').val() + "</td></tr>";
+            strResumo += "<tr><td>Artist ID</td><td>" + $('#idArtista').val() + "</td></tr>";
+            strResumo += "<tr style='background-color:#ccc; color:#fff; font-size:14px;'><td colspan='2'>Scope</td></tr>";
+            $(".chkBoxObs").each(function (i, item) {
+                if ($(item).is(':checked')) {
+                    strResumo += "<tr><td>Scope</td><td>" + $(item).val();
+                }
+            });
+            strResumo += "<tr style='background-color:#ccc; color:#fff; font-size:14px;'><td colspan='2'>Data</td></tr>";
+
+            strResumo += "<tr><td>Source</td><td>" + $('#selOrigem').val() + "</td></tr>";
+            strResumo += "<tr><td>%Artistic</td><td>" + $('#percArt').val() + "</td></tr>";
+            strResumo += "<tr><td>%Copyright</td><td>" + $('#percAut').val() + "</td></tr>";
+            strResumo += "<tr><td>Contract</td><td>" + $('#selTipoContrato option:selected').text() + "</td></tr>";
+            strResumo += "<tr><td>Release</td><td>" + $('#selTipoRelease option:selected').text() + "</td></tr>";
+            strResumo += "<tr><td>Process</td><td>" + $('#selTipoProcesso option:selected').text() + "</td></tr>";
+
+            strResumo += "<tr style='background-color:#ccc; color:#fff; font-weight:bold; font-size:14px;'><td colspan='2'>Digital Projects</td></tr>";
+            $("#step2 .chkBx").each(function (i, item) {
+                if ($(item).is(':checked')) {
+                    strResumo += "<tr><td>Digital Project</td><td>" + $(item).val() + " - " + $(item).closest('.panel-card').find('.projNameDigital').html() + "</td></tr>";
+                }
+            });
+            strResumo += "<tr style='background-color:#ccc; color:#fff; font-size:14px;'><td colspan='2'>Physical Products</td></tr>";
+            $("#step3 .chkBx").each(function (i, item) {
+                if ($(item).is(':checked')) {
+                    strResumo += "<tr><td>Physical Product</td><td>" + $(item).val() + " - " + $(item).closest('.panel-card').find('.prodNameDigital').html() + " - " + $(item).closest('.panel-card').find('.artistaNome').html() + "</td></tr>";
+                }
+            });
+            strResumo += "<tr style='background-color:#ccc; color:#fff; font-size:14px;'><td colspan='2'>Extra BUs for project</td></tr>";
+            strResumo += "<tr><td>Extra BU</td><td>" + $("#busAdicionaisProjeto").val() + "</td></tr>";
+            strResumo += "<tr style='background-color:#ccc; color:#fff; font-size:14px;'><td colspan='2'>Product Extra BUs</td></tr>";
+            var arr = $("#busExtras").val().split("|");
+            $.each(arr, function (i, v) {
+                if (v != "") {
+                    strResumo += "<tr><td>Extra BU</td><td>" + v + "</td></tr>";
+                }
+            });
+            strResumo += "</table>"
+            $(strResumo).appendTo("#resumoProjeto");
+        }
+
+        /*Limpa todos os dados de formulário e começa do zero*/
+        function LimpaTudo() {
+            $('#typeAheadArtista').attr("placeholder", "");
+            $('#btnStep1').addClass('disabled');
+            $('ul.setup-panel li:eq(1)').addClass('disabled');
+            $('ul.setup-panel li:eq(2)').addClass('disabled');
+            $('ul.setup-panel li:eq(3)').addClass('disabled');
+            $('ul.setup-panel li:eq(4)').addClass('disabled');
+            $("#ProjetosPorArtistCode, #ProdutosPorArtist").html("");
+            $(".busExtrasProdutosDiv").remove();
+            $("#filtrarProjetoBrdigital").removeClass("disabled");
+            $("#step2 .btn").removeClass("disabled");
+            $('#step4 .btn').addClass('disabled');
+            $("#nomeDoProjeto").val('');
+
+            $("#idArtista, #selectedProjects, #selectedProducts, #busExtras, #busAdicionaisProjeto").val('');
+
+            AtualizaSelecionados();
+        }
+
+        /*Atualiza texto do projeto ao selecionar as checkboxes do passo 2*/
+        function AtualizaSelecionados() {
+            var x = "";
+            $("input:checked").each(function (i, item) {
+                x += $(item).val() + "|";
+            });
+            $("#selectedProjects").val(x);
+
+            if (x.length > 0) {
+                //$('#btnStep2').removeClass('disabled');
+                //$('ul.setup-panel li:eq(2)').removeClass('disabled');
+            } else {
+                //$('#btnStep2').addClass('disabled');
+                //$('ul.setup-panel li:eq(2)').addClass('disabled');
+            }
+        }
+
+        /*Atualiza texto do produto ao selecionar as checkboxes do passo 3*/
+        function AtualizaPrdSelecionados() {
+            var x = "";
+            $(".prd input:checked").each(function (i, item) {
+                x += $(item).val() + "|";
+            });
+            $("#selectedProducts").val(x);
+        }
+
+        /*Ajax consulta projetos por codigo do artista*/
+        function GetListOfProjectsByArtistcode() {
+            $('#responseToCliente2').html("Loading Digital Product List...");
+            $("#ProjetosPorArtistCode").html("<div class='progress'><div class='progress-bar progress-bar-success progress-bar-striped active' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%'></div></div>");
+            $.post(uriArtistProjects, { artistcode: $('#idArtista').val() }, function (data) {
+                var items = [];
+                $.each(data, function (i, prjArtistCode) {
+                    var s = "";
+                    if (prjArtistCode.ASSOCIADO == "") {
+                        s = "<div class='panel-card col-sm-4'><div class='panel-body'><h4 class='card-title'>Artist:&nbsp;" + prjArtistCode.ARTISTNAME + "</h4><p class='card-text'>Code:&nbsp;" + prjArtistCode.PROJECTCODE + "</p><p class='card-text'>Name:&nbsp;<span class='projNameDigital'>" + prjArtistCode.PROJECTNAME + "</span></p><div class='checkbox prj pull-right'><label class='lblPrjCode'><input type='checkbox' value='" + prjArtistCode.PROJECTCODE + ";" + prjArtistCode.PROJECTNAME + "' class='chkBx'>&nbsp;</label></div></div></div>";
+                    } else {
+                        s = "<div class='panel-card col-sm-4 hideLater'><div class='panel-body'><h4 class='card-title'>Artist:&nbsp;" + prjArtistCode.ARTISTNAME + "</h4><p class='card-text'>Code:&nbsp;" + prjArtistCode.PROJECTCODE + "</p><p class='card-text'>Name:&nbsp;<span class='projNameDigital'>" + prjArtistCode.PROJECTNAME + "</span></p><div class='pull-right'><label>Product Linked to:" + prjArtistCode.ASSOCIADO + "</label></div></div></div>";
+                    }
+                    items.push(s);
+                });
+                $("#ProjetosPorArtistCode").html("");
+                $("<div/>", {
+                    "class": "flex",
+                    html: items.join("")
+                }).appendTo("#ProjetosPorArtistCode");
+                $('#responseToCliente2').html("Digital Products:");
+
+                $(".prj input:checkbox").on("change", function (e) {
+                    AtualizaSelecionados();
+                }).always(function () {
+                    $("#btnStep2").removeClass('disabled');
+                });
+            });
+        }
+
+        /*Ajax consulta produtos por artista*/
+        function GetListOfProductsByArtist() {
+            $(".linkHidden").addClass("hidden");
+            $('#responseToCliente3').html("Loading Product List...");
+            $("#ProdutosPorArtist").html("<div class='progress'><div class='progress-bar progress-bar-success progress-bar-striped active' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%'></div></div>");
+            $.post(uriArtistProducts, { artist: $('#typeAheadArtista').val() }, function (data) {
+                var items = [];
+                $.each(data, function (i, prdArtistCode) {
+                    var s = "";
+                    if (prdArtistCode.ASSOCIADO == "") {
+                        s = "<div class='panel-card col-sm-4'><div class='panel-body'><h4 class='card-title'>Artist:&nbsp;<span class='artistaNome'>" + prdArtistCode.ARTISTA + "</span></h4><p class='card-text'>Code:&nbsp;" + prdArtistCode.CBCATN + '/' + prdArtistCode.CBPKGC + "</p><p class='card-text'>Name:&nbsp;<span class='prodNameDigital'>" + prdArtistCode.TITULO + "</span></p><div class='checkbox prd pull-right'><label class='lblPrjCode'><input type='checkbox' value='" + prdArtistCode.CBCATN + ';' + prdArtistCode.CBPKGC + ';' + prdArtistCode.BU + "' class='chkBx'>&nbsp;</label></div></div></div>";
+                    } else {
+                        s = "<div class='panel-card col-sm-4 hideLater'><div class='panel-body'><h4 class='card-title'>Artist:&nbsp;<span class='artistaNome'>" + prdArtistCode.ARTISTA + "</span></h4><p class='card-text prdCodePack'>Code:&nbsp;" + prdArtistCode.CBCATN + '/' + prdArtistCode.CBPKGC + "</p><p class='card-text'>Name:&nbsp;<span class='prodNameDigital'>" + prdArtistCode.TITULO + "</span></p><div><label>Product linked:" + prdArtistCode.ASSOCIADO + "</label></div></div></div>";
+                    }
+                    items.push(s);
+                });
+                $("#ProdutosPorArtist").html("");
+                $("<div/>", {
+                    "class": "flex",
+                    html: items.join("")
+                }).appendTo("#ProdutosPorArtist");
+                $('#responseToCliente3').html("Phisical Products:");
+
+                $(".prd input:checkbox").on("change", function (e) {
+                    AtualizaPrdSelecionados();
+                });
+            }).always(function () {
+                $("#step3 .btn").removeClass('disabled');
+                $(".linkHidden").removeClass("hidden");
+            });
+        }
+
+        /*Ajax consulta bus do produto*/
+        function GetProductsBus() {
+            var items = [];
+            var splitBus = $("#selectedProducts").val().split("|");
+
+            items.push("<h3 class='text-center'>Enclude extra BU for product</h3>");
+
+            for (i = 0; i < splitBus.length; i++) {
+                if (splitBus[i] != "") {
+                    var splitBusPRD = splitBus[i].split(";");
+                    var s = "";
+                    s = "<div class='input-group'><span class='input-group-addon'>" + splitBusPRD[0] + "/" + splitBusPRD[1] + "</span><span class='input-group-addon'>" + splitBusPRD[2] + "</span><input type='text' class='form-control input-lg buextra' placeholder='digite os Bus separados por vírgulas (,)' aria-describedby='basic-addon2'><span class='prodCbcatn hidden'>" + splitBusPRD[0] + ";" + splitBusPRD[1] + ";</span></div>";
+                    items.push(s);
+                }
+            }
+            $("<div/>", {
+                "class": "flex busExtrasProdutosDiv",
+                html: items.join("")
+            }).appendTo("#ProdutosBus");
+
+            $(".buextra").on("keyup", function (e) {
+                var strBusExtras = '';
+                $(".buextra").each(function () {
+                    if ($(this).val() != '') {
+                        var valBus = $(this).parent().children('.prodCbcatn').first().html();
+                        strBusExtras += valBus + $(this).val() + "|";
+                    }
+                });
+                $("#busExtras").val(strBusExtras);
+                CreateResumo();
+            });
+        }
+
+        /*Controla o percentual dos direitos de acordo com a origem do produto*/
+        $("#selTipoContrato, #selTipoRelease, #selTipoProcesso").on('change', function (e) {
+            if (this.id == "selTipoRelease") {
+                var tipo = $("option:selected", this).text().toUpperCase().substr(0, 3);
+                $("#selOrigem").val(tipo);
+                if(tipo=="INT")
+                {
+                    $("#percArt,#_percArt").val("40");
+                    $("#percAut,#_percAut").val("0");
+                    $("#_percArt , #_percAut").prop('disabled', true);
+                } else {
+                    $("#percArt,#_percArt").val("0");
+                    $("#percAut,#_percAut").val("0");
+                    $("#_percArt , #_percAut").prop('disabled', false);
+                }
+
+            }
+            CreateResumo();
+        });
+
+        /*Atualiza os campos de percentual*/
+        $("#_percAut,#_percArt").on("keyup", function (e) {
+            $("#percArt").val($("#_percArt").val());
+            $("#percAut").val($("#_percAut").val());
+            CreateResumo();
+        });
+
+        /*Atualiza o resumo ao mudar o tipo de release*/
+        $("#selTipoRelease").on('change', function (e) {
+            CreateResumo();
+        });
+
+        /*Atualiza o resumo ao selecionar os tipos de produto*/
+        $(".chkBoxObs").on("change", function (e) {
+            CreateResumo();
+        });
+
+        /*Filtra os cards com os projetos digitais do passo 2*/
+        $("#filtrarProjetoBrdigital").on('keyup', function (e) {
+            var inp = String.fromCharCode(e.keyCode);
+            if (!$(this).hasClass("disabled")) {
+                var strX = $('#filtrarProjetoBrdigital').val().toLowerCase();
+                var len = strX.length;
+
+
+                if (len > 0) {
+                    $(".projNameDigital").each(function (i, item) {
+                        if ($(item).html().toLowerCase().indexOf(strX) > -1) {
+                            //if ($(item).html().toLowerCase().substr(0, len) == strX) {
+                            $(item).closest(".panel-card").show();
+                        }
+                        else {
+                            $(item).closest(".panel-card").hide();
+                        }
+                    });
+                }
+                else {
+                    $(".panel-card").show();
+                }
+            }
+        });
+
+        /*Filtra os cards com os produtos físicos do passo 3*/
+        $("#filtrarProdutoBrdigital").on('keyup', function (e) {
+            var inp = String.fromCharCode(e.keyCode);
+            if (!$(this).hasClass("disabled")) {
+                var strX = $('#filtrarProdutoBrdigital').val().toLowerCase();
+                var len = strX.length;
+
+
+                if (len > 0) {
+                    $(".prodNameDigital").each(function (i, item) {
+                        if($(item).html().toLowerCase().indexOf(strX) > -1){
+                        //if ($(item).html().toLowerCase().substr(0, len) == strX) {
+                            $(item).closest(".panel-card").show();
+                        }
+                        else {
+                            $(item).closest(".panel-card").hide();
+                        }
+                    });
+                }
+                else {
+                    $(".panel-card").show();
+                }
+            }
+        });
+
+        /*Não deixa continuar caso o nome do projeto ou o nome do artista estejam em branco*/
+        $("#nomeDoProjeto, #nomeDoArtista").on('keyup', function (e) {
+            if ($('#nomeDoProjeto').val() != "" && $('#nomeDoArtista').val() != "") {
+                $('#btnStep4').removeClass('disabled');
+            }
+            else {
+                $('ul.setup-panel li:eq(4) , #btnStep4').addClass('disabled');
+            }
+        });
+
+        /*Não deixa continuar caso o nome do projeto ou o nome do artista estejam em branco*/
+        $("#nomeDoProjeto, #nomeDoArtista").on('change keyup click', function (e) {
+            if ($('#nomeDoProjeto').val() != "" && $('#nomeDoArtista').val() != "") {
+                $('#btnStep4').removeClass('disabled');
+            }
+            else {
+                $('ul.setup-panel li:eq(4) , #btnStep4').addClass('disabled');
+            }
+        });
+
+        /*Adiciona classe collapse ao card*/
+        $(".panel-card").click(function () {
+            $(".panel-card").addClass("collapse");
+            $(this).removeClass("collapse");
+        });
+
+        /*LimpaFiltros dos projetos no passo 2*/
+        $("#limparFiltros").on("click", function (e) {
+            $('#filtrarProjetoBrdigital').val("");
+            $("#step2 .panel-card").show();
+        });
+
+        /*Marca todos os cards visíveis dos projetos no passo 2*/
+        $("#marcarTodos").on("click", function (e) {
+            $("#step2 .chkBx").each(function (i, item) {
+                if ($(item).closest(".panel-card").is(':visible')) {
+                    $(item).prop('checked', true);
+                }
+            });
+            AtualizaSelecionados();
+        });
+
+        /*Desmarca todos os cards visíveis dos projetos no passo 2*/
+        $("#desmarcarTodos").on("click", function (e) {
+            $("#step2 .chkBx").each(function (i, item) {
+                if ($(item).closest(".panel-card").is(':visible')) {
+                    $(item).prop('checked', false);
+                }
+            });
+            AtualizaSelecionados();
+        });
+
+        /*LimpaFiltros dos produtos no passo 3*/
+        $("#limparFiltrosFisico").on("click", function (e) {
+            $('#filtrarProdutoBrdigital').val("");
+            $("#step3 .panel-card").show();
+        });
+
+        /*Marca todos os cards visíveis dos produtos no passo 3*/
+        $("#marcarTodosFisico").on("click", function (e) {
+            $("#step3 .chkBx").each(function (i, item) {
+                if ($(item).closest(".panel-card").is(':visible')) {
+                    $(item).prop('checked', true);
+                }
+            });
+            AtualizaPrdSelecionados();
+        });
+
+        /*Marca todos os cards visíveis dos produtos no passo 3*/
+        $("#desmarcarTodosFisico").on("click", function (e) {
+            $("#step3 .chkBx").each(function (i, item) {
+                if ($(item).closest(".panel-card").is(':visible')) {
+                    $(item).prop('checked', false);
+                }
+            });
+            AtualizaPrdSelecionados();
+        });
+
+        /*Procura os projetos do artista selecionado*/
+        /*Procura artista autocomplete - inicio*/
+        var uriServico = "@Url.Action("ArtistaLookup", "CadastroProjeto")";
+        $('#typeAheadArtista').typeahead(
+            {
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+            {
+                name: 'artistas',
+                source: function (query, process) {
+                    $('#loading').removeClass('hidden');
+                    var artistas = [];
+                    map = {};
+                    return $.post(uriServico, { term: query }, function (data) {
+                        $.each(data, function (i, artist) {
+                            map[artist.ARTISTNAME] = artist;
+                            artistas.push({ value: artist.ARTISTNAME + " .(" + artist.IDARTISTA + ")", id: artist.IDARTISTA, });
+                        });
+                        process(artistas);
+                        $('#loading').addClass('hidden');
+                    });
+                }
+            }).on("typeahead:selected", function (obj, selectedItem) {
+                $('#idArtista').val(selectedItem.id);
+                $('#nomeDoArtista').val(selectedItem.value.split(' .(')[0]);
+                $('#btnStep1').removeClass('disabled');
+                $('#typeAheadArtista:focus').blur();
+            }).on('keyup', function (e) {
+                var inp = String.fromCharCode(e.keyCode);
+                if (/[a-zA-Z0-9-_ ]/.test(inp)) {
+                    LimpaTudo();
+                    /*$('#typeAheadArtista').attr("placeholder", "");
+                    $('#btnStep1').addClass('disabled');
+                    $('ul.setup-panel li:eq(1)').addClass('disabled');
+                    $('ul.setup-panel li:eq(2)').addClass('disabled');
+                    $('ul.setup-panel li:eq(3)').addClass('disabled');
+                    $('ul.setup-panel li:eq(4)').addClass('disabled');
+                    $("#ProjetosPorArtistCode, #ProdutosPorArtist").html("");
+                    $(".busExtrasProdutosDiv").remove();
+                    $("#filtrarProjetoBrdigital").removeClass("disabled");
+                    $("#step2 .btn").removeClass("disabled");
+                    $('#step4 .btn').addClass('disabled');
+                    $("#nomeDoProjeto").val('');
+
+                    $("#idArtista, #selectedProjects, #selectedProducts, #busExtras, #busAdicionaisProjeto").val('');
+
+                    AtualizaSelecionados();*/
+                }
+            }).on("click", function (e) {
+                var s = $('#typeAheadArtista.tt-input').val().split(' .(')[0];
+                $('#typeAheadArtista').attr("placeholder", s);
+                $('#typeAheadArtista').val('');
+            });
+        /*Procura artista autocomplete - fim*/
+    });
+
+
+</script>
+    

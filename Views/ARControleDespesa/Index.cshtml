@@ -1,0 +1,97 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@{
+    ViewBag.Title = "Controle A&R";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <!-- Default panel contents -->
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    @appSettings.pageName()
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-md-12 alertMessage" runat="server" id="divAlert">
+            @Html.Raw(ViewBag.Message)
+        </div>
+
+        @using (Html.BeginForm("Index", "ARControleDespesa", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <h4>Mês:</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-2 text-center">
+                    <div class="form-group">
+                        <select class="form-control" name="mesALL" id="mesALL">
+                            <option value=""> -- Todos -- </option>
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <h4>Ano:</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-2 text-center">
+                    <div class="form-group">
+                        <select class="form-control" name="mesALL" id="mesALL">
+                            @for (int ano = 2018; ano > DateTime.Now.Year - 5; ano--)
+                            {
+                                <option value="@ano">@ano</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <input type="submit" name="buscar" value="Buscar" id="btnSubmit" class="btn btn-default btn-lg btn-block" />
+                    </div>
+
+
+
+                    <div class="col-md-1">
+                    </div>
+
+                </div>
+
+        }
+    </div>
+
+
+    @if(Model != null)
+    {
+
+
+    }
+
+</div>
+

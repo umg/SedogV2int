@@ -1,0 +1,160 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    @appSettings.pageName()
+                </h2>
+                @ViewBag.Error
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="detalhesBody">
+                    <h4 data-toggle="collapse" data-target="#tblNovoProjeto" class="clickRotateIcon">Novo Projeto<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
+                    <div id="tblNovoProjeto" class="collapse in" style="background-color:rgba(125,125,125,0.2)">
+                        @using (Html.BeginForm("AddProjeto", "Artistas360", FormMethod.Post))
+                        {
+                            <input type="hidden" id="idArtista" name="idArtista" />
+                            <input type="hidden" id="nomeDoArtista" name="nomeDoArtista" />
+                            <table class="table">
+                                <tr>
+                                    <th>Artista</th>
+                                    <th>Projeto</th>
+                                    <th>BU</th>
+                                    <th>Início</th>
+                                    <th>Expiração</th>
+                                    <th>Observação</th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control input-md" id="typeAheadArtista" name="typeAheadArtista" placeholder="Nome do Artista" /><i id="loading" class="fa fa-cog fa-spin fa-fw hidden"></i></td>
+                                    <td><input type="text" class="form-control input-md" id="project" name="project" placeholder="Nome do Projeto" /></td>
+                                    <td><input type="text" class="form-control input-md" id="bu" name="bu" placeholder="Business Unit do Projeto" /></td>
+                                    <td><input type="text" class="form-control input-md" id="lancamento" name="lancamento" placeholder="Data de Início" /></td>
+                                    <td><input type="text" class="form-control input-md" id="expiracao" name="expiracao" placeholder="Data de Expiração" /></td>
+                                    <td><input type="text" class="form-control input-md" id="obs" name="obs" placeholder="Observações" /></td>
+                                    <td><input type="submit" name="salvar" class="btn btn-default" value="Adicionar Projeto" /></td>
+                                </tr>
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-bordered table-inline tableSortPagging" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Projeto</th>
+                            <th>Artista</th>
+                            <th>Início</th>
+                            <th>Expiração</th>
+                            <th>Observação</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (NRIProjetos360ViewModel item in Model)
+                    {
+                        <tr>
+                            <td>@item.PROJETO</td>
+                            <td>@item.ARTISTA</td>
+                            <td>@item.DATA_INICIO.ToString("yyyy-MM-dd")</td>
+                            <td>@item.DATA_EXPIRACAO.ToString("yyyy-MM-dd")</td>
+                            <td>@item.OBS</td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.ID_PROJNRI }, new { title = "Editar o projeto" }) |
+                                <a href="@Url.Action("Delete" , "Artistas360" , new { @id = item.ID_PROJNRI})" class="linkRemove" data-title="Apagar Projeto NRI" data-query="Tem certeza que deseja remover o projeto: @item.PROJETO / @item.ARTISTA?">Apagar</a>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModalRemoveEditProjetos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" href="#" id="followLinkRemove">Sim</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $(".linkRemove").click(function (e) {
+            $("#followLinkRemove").attr('href', $(this).attr('href'));
+            $("#myModalRemoveEditProjetos .modal-title").html($(this).data("title"));
+            $("#myModalRemoveEditProjetos .modal-body").html($(this).data("query"));
+            $("#myModalRemoveEditProjetos").modal("show");
+            e.preventDefault();
+        });
+
+        $("#followLinkRemove").click(function () {
+            $("#myModalRemoveEditProjetos").modal("toggle");
+            $('#pleaseWaitDialog').modal({
+                backdrop: 'static'
+            });
+        });
+
+        $("#lancamento, #expiracao").datepicker({
+            format: "yyyy-mm-dd",
+            language: "pt-BR",
+            orientation: "top auto",
+            autoclose: true
+        });
+
+        /*Procura os projetos do artista selecionado*/
+        /*Procura artista autocomplete - inicio*/
+        var uriServico = "@Url.Action("ArtistaLookup", "CadastroProjeto")";
+        $('#typeAheadArtista').typeahead(
+            {
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+            {
+                name: 'artistas',
+                source: function (query, process) {
+                    $('#loading').removeClass('hidden');
+                    var artistas = [];
+                    map = {};
+                    return $.post(uriServico, { term: query }, function (data) {
+                        $.each(data, function (i, artist) {
+                            map[artist.ARTISTNAME] = artist;
+                            artistas.push({ value: artist.ARTISTNAME + " .(" + artist.IDARTISTA + ")", id: artist.IDARTISTA, });
+                        });
+                        process(artistas);
+                        $('#loading').addClass('hidden');
+                    });
+                }
+            }).on("typeahead:selected", function (obj, selectedItem) {
+                $('#idArtista').val(selectedItem.id);
+                $('#nomeDoArtista').val(selectedItem.value.split(' .(')[0]);
+                $('#typeAheadArtista:focus').blur();
+            });
+        /*Procura artista autocomplete - fim*/
+    });
+</script>

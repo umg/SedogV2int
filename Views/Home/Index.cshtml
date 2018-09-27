@@ -1,0 +1,181 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<style>
+    #containment-wrapper .barraTitulo {
+        cursor: move;
+    }
+
+    .portlet-placeholder {
+        border: 1px dotted black;
+        margin: 0 1em 1em 0;
+        height: 20px;
+        width: 20px;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="container col-md-12 col-xs-12 col-sm-12" id="containment-wrapper">
+            <div class="row col-md-12 col-xs-12 col-sm-12">
+                @Html.Raw(ViewBag.Nav)
+            </div>
+            <div class="row col-md-12 col-xs-12 col-sm-12 rowFlexNew">
+                @Html.Raw(ViewBag.Dashboard)                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+   
+
+    $(document).ready(function () {
+        $('.dashNavPils li a').on('click', function (e) {
+            e.preventDefault();
+            $('.dashboardDiv').css("display", "flex").hide();
+
+            $($(this).attr('href')).show();
+
+            $('.grafico').find('.switchCheckBoxFcast').each(function () {
+                var checked = $(this).is(":checked");
+                var checked2 = $(this).closest('.grafico').find('.switchCheckBoxMensal').is(":checked");
+                $(this).closest('.grafico').find('.tanque').bombaCombustivel({
+                    plan: checked,
+                    mensal: checked2
+                });
+            });
+            $('.grafico').find('.switchCheckBoxMensal').each(function () {
+                var checked = $(this).is(":checked");
+                var checked2 = $(this).closest('.grafico').find('.switchCheckBoxFcast').is(":checked");
+                $(this).closest('.grafico').find('.tanque').bombaCombustivel({
+                    mensal: checked,
+                    plan: checked2
+                });
+            });
+            $('.grafico').find('.switchCheckBoxExtra').each(function () {
+                var checked = $(this).is(":checked");
+                $(this).closest('.grafico').find('.MetricHorizontalBar').MetricHorizontalBar({
+                    isPlan: checked
+                });
+            });
+
+            $(".ZeroMiddleBar").ZeroMiddleBar();
+
+            $(".MapaRegiao").MapaRegiao();
+        });
+
+        Number.prototype.formatMoney = function (places, symbol, thousand, decimal, divided) {
+            places = !isNaN(places = Math.abs(places)) ? places : 0;
+            symbol = symbol !== undefined ? symbol : "$";
+            thousand = thousand || ".";
+            decimal = decimal || ",";
+            divided = divided || 1000;
+            var number = this,
+                negative = number < 0 ? "-" : "",
+                i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + "",
+                j = (j = i.length) > 3 ? j % 3 : 0;
+            return negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
+        };
+
+        function hex2rgb(hex) {
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16),
+                rgb: parseInt(result[1], 16) + ", " + parseInt(result[2], 16) + ", " + parseInt(result[3], 16)
+            } : null;
+        }
+
+
+
+        var checked = $("#switchCheckBox").is(":checked");
+        $('.tanque').bombaCombustivel({
+            plan: checked
+        });
+
+        $(".MetricHorizontalBar").MetricHorizontalBar();
+
+        window.onresize = function () {
+
+            $('.switchCheckBoxFcast').each(function (e) {
+                var checked = $(this).is(":checked");
+                var checked2 = $(this).closest('.grafico').find('.switchCheckBoxMensal').is(":checked");
+                $(this).closest('.grafico').find('.tanque').bombaCombustivel({
+                    plan: checked,
+                    mensal: checked2
+                });
+            });
+
+            $('.switchCheckBoxMensal').change(function (e) {
+                var checked = $(this).is(":checked");
+                var checked2 = $(this).closest('.grafico').find('.switchCheckBoxFcast').is(":checked");
+                $(this).closest('.grafico').find('.tanque').bombaCombustivel({
+                    mensal: checked,
+                    plan: checked2
+                });
+            });
+
+            /*var checked = $("#switchCheckBox").is(":checked");
+            $('.tanque').bombaCombustivel({
+                plan: checked
+            });*/
+            var checked2 = $("#switchCheckBoxExtra").is(":checked");
+            $('.MetricHorizontalBar').MetricHorizontalBar({
+                isPlan: checked2
+            });
+            
+            $(".ZeroMiddleBar").ZeroMiddleBar();
+            $(".MapaRegiao").MapaRegiao();
+        };
+        
+        $('.switchCheckBoxFcast').change(function (e) {
+            var checked = $(this).is(":checked");
+            var checked2 = $(this).closest('.grafico').find('.switchCheckBoxMensal').is(":checked");
+            $(this).closest('.grafico').find('.tanque').bombaCombustivel({
+                plan: checked,
+                mensal: checked2
+            });
+        });
+
+        $('.switchCheckBoxMensal').change(function (e) {
+            var checked = $(this).is(":checked");
+            var checked2 = $(this).closest('.grafico').find('.switchCheckBoxFcast').is(":checked");
+            $(this).closest('.grafico').find('.tanque').bombaCombustivel({
+                mensal: checked,
+                plan: checked2
+            });
+        });
+
+        $('.switchCheckBoxExtra').change(function (e) {
+            var checked = $(this).is(":checked");
+            $(this).closest('.grafico').find('.MetricHorizontalBar').MetricHorizontalBar({
+                isPlan: checked
+            });
+        });
+
+        $('.dashNavPils li:first-child').addClass('active');
+        $('.row .dashboardDiv:not(:first-child)').hide();
+        //$('.dashNavPils').addClass('pull-left');
+
+        @Html.Raw(ViewBag.ScriptData) 
+
+        $(".rowFlexNew .dashboardDiv").sortable({
+            connectWith: ".rowFlexNew .dashboardDiv .grafico",
+            handle: ".barraTitulo",
+            placeholder: "portlet-placeholder"
+        });
+        //$(".rowFlexNew").disableSelection();
+
+        $(".ZeroMiddleBar").ZeroMiddleBar();
+        $(".MapaRegiao").MapaRegiao();
+    });
+</script>

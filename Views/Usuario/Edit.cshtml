@@ -1,0 +1,74 @@
+﻿@using SEDOGv2.Helpers;
+@model SEDOGv2.Models.UsuarioViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    Edit User
+                </h2>
+            </div>
+        </div>
+
+
+        <div class="col-md-12" runat="server" id="divAlert">
+            @ViewBag.Error
+        </div>
+@using (Html.BeginForm())
+{
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4>Edit User</h4></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <h5>Login:</h5>
+                            @Html.EditorFor(model => model.LOGIN, new { htmlAttributes = new { @class = "form-control" } })
+                            <h5>Name:</h5>
+                            @Html.EditorFor(model => model.NOME, new { htmlAttributes = new { @class = "form-control" } })
+                            <h5>Email:</h5>
+                            @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                            <h5>Department:</h5>
+                            @Html.DropDownListFor(model => model.DEPTO, new SelectList(ViewBag.Departamentos, "DEPTO", "DEPTO"), new { @class = "form-control" })
+                            <h5>Page</h5>
+                            @foreach (var pagina in Model.Paginas)
+                            {
+                                if (pagina.SELECIONADO == 0)
+                                {
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="chkPaginas" value="@pagina.ID" > @pagina.PAGE</label>
+                                </div>
+                                }
+                                else
+                                {
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="chkPaginas" value="@pagina.ID" checked> @pagina.PAGE</label>
+                                    </div>
+                                }
+                            }
+                            <br />
+                            <input type="submit" name="salvar" value="Save" class="btn btn-default pull-right" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 text-right">
+                @Html.ActionLink("Back to list", "Index", "Usuario", null , new { @class = "link" })
+            </div>
+        </div>
+}
+        
+    </div>
+
+</div>
+
+     
+
+        

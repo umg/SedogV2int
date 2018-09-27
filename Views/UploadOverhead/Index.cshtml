@@ -1,0 +1,110 @@
+﻿@using SEDOGv2.Helpers;
+
+
+
+@{
+    ViewBag.Title = "Upload Overhead";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+
+   @using (Html.BeginForm("Upload", "UploadOverhead", FormMethod.Post,
+             new { enctype = "multipart/form-data" }))
+   {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+            <div class="col-md-12" runat="server" id="divAlert">
+                <br />
+                @Html.Raw(ViewBag.PlanMessage)
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4 text-right">
+                    <div class="form-group">
+                        <h4>Escolha o Arquivo para upload</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.TextBox("file", "", new { type = "file" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" name="btnEnviar" value="Enviar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    @using (Html.BeginForm("UploadForcast", "UploadOverhead", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        Upload Planilha Forcast
+                    </h2>
+                </div>
+            </div>
+
+            <div class="col-md-12" runat="server" id="divAlert">
+                <br />
+                @Html.Raw(ViewBag.ForcastMessage)
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3 text-right">
+                    <div class="form-group">
+                        <h4>Escolha o Arquivo para upload</h4>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.TextBox("file", "", new { type = "file" })
+                    </div>
+                </div>
+
+                <div class="col-md-2 text-right">
+                    <div class="form-group">
+                        <h4>Escolha o Mês</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="mes" id="emailmes">
+                            <option value="00" selected="@(0 == ViewBag._selectMes)">Escolha um mês</option>
+                            <option value="02" selected="@(2 == ViewBag._selectMes)">Fevereiro</option>
+                            <option value="05" selected="@(5 == ViewBag._selectMess)">Maio</option>
+                            <option value="09" selected="@(9 == ViewBag._selectMes)">Setembro</option>
+                            <option value="11" selected="@(11 == ViewBag._selectMes)">Novembro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input type="submit" name="btnEnviar" value="Enviar" class="btn btn-default btn-block" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+

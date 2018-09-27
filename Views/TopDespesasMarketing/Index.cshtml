@@ -1,0 +1,220 @@
+﻿@model IEnumerable<SEDOGv2.Models.TopDespesasMarketingViewModel>
+@using SEDOGv2.Helpers;
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+                      <div class="container-fluid">
+                          @using (Html.BeginForm("Index", "TopDespesasMarketing", FormMethod.Post))
+                          {
+                              <div class="panel panel-success">
+                                  <!-- Default panel contents -->
+                                  <div class="row">
+                                      <div class="panel-heading  text-center">
+                                          <h2>
+                                              @appSettings.pageName()
+                                          </h2>
+                                      </div>
+                                  </div>
+
+
+                                  <div class="col-md-12" id="divAlert">
+                                      @ViewBag.Message
+                                  </div>
+
+
+                                  <div class="row">
+                                      <div class="col-md-3 text-right">
+                                          <div class="form-group">
+                                              <h4>Escolha o tipo:</h4>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-2">
+                                          <div class="form-group">
+                                              <select class="form-control" name="tipo" id="tipo">
+                                                  <option value="NAC">Nacional</option>
+                                                  <option value="INT">Internacional</option>
+                                                  <option value="GOS">Gospel</option>
+                                              </select>
+                                          </div>
+                                      </div>
+
+                                      <div class="col-md-3 text-right">
+                                          <div class="form-group">
+                                              <h4>Escolha o ano:</h4>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-2">
+                                          <div class="form-group">
+                                              <select class="form-control" name="ano" id="ano">
+                                                  <option value="0">- Todos - </option>
+                                                  @for (int ano = 0; ano <= DateTime.Now.Year - 2010; ano++)
+                                                  {
+                                                      <option value="@(DateTime.Now.AddYears(-ano).ToString("yyyy"))">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                                                  }
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-2">
+                                          <div class="form-group">
+                                              <input type="submit" name="Gerar" value="Generate" class="btn btn-default" />
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          }
+                          <div class="panel panel-success panel-report">
+                              <div class="row">
+                                  <div class="col-md-10 text-right">
+                                      Exportar para
+                                  </div>
+                                  <div class="col-md-1 text-center">
+                                      <button type="submit" class="btn btn-default printExcel">
+                                          <i class="fa fa-file-excel-o fa-4"></i>
+                                      </button>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <h2>@ViewBag.TituloReport</h2>
+                                  <table class="table table-striped table-bordered table-inline tableSortPagging" cellspacing="0" width="100%">
+                                      <thead>
+                                          <tr>
+                                              <th>Artista</th>
+                                              <th>Projeto</th>
+                                              <th>Custo Inicial</th>
+                                              <th>Ação TV</th>
+                                              <th>Ação Imprensa</th>
+                                              <th>Ação Rádio</th>
+                                              <th>Ação Internet</th>
+                                              <th>Ação Outros</th>
+                                              <th>Mídia Impressa</th>
+                                              <th>Mídia TV</th>
+                                              <th>Mídia Digital</th>
+                                              <th>Mídia Rádio</th>
+                                              <th>Mídia Influentes</th>
+                                              <th>Mídia Outros</th>
+                                              <th>Prod Vídeo</th>
+                                              <th>Apoio Turnê</th>
+                                              <th>Poster/Banner</th>
+                                              <th>Websites</th>
+                                              <th>Clipagem</th>
+                                              <th>CD Promo</th>
+                                              <th>Mkt+Custo</th>
+                                              <th>Net Sales</th>
+                                              <th>Resultado Liq</th>
+                                          </tr>
+                                      </thead>
+
+                                      @foreach (var item in Model)
+                                      {
+                                          <tr>
+                                              <td>@item.ARTISTA</td>
+                                              <td>@item.PROJETO</td>
+                                              <td>@String.Format("{0:N2}", item.CUSTO_INICIAL)</td>
+                                              <td>@String.Format("{0:N2}", item.ACAO_TV)</td>
+                                              <td>@String.Format("{0:N2}", item.ACAO_IMPRENSA)</td>
+                                              <td>@String.Format("{0:N2}", item.ACAO_RADIO)</td>
+                                              <td>@String.Format("{0:N2}", item.ACAO_INTERNET)</td>
+                                              <td>@String.Format("{0:N2}", item.ACAO_OUTROS)</td>
+                                              <td>@String.Format("{0:N2}", item.MIDIA_IMPRESSA)</td>
+                                              <td>@String.Format("{0:N2}", item.MIDIA_TV)</td>
+                                              <td>@String.Format("{0:N2}", item.MIDIA_DIGITAL)</td>
+                                              <td>@String.Format("{0:N2}", item.MIDIA_RADIO)</td>
+                                              <td>@String.Format("{0:N2}", item.MIDIA_INFLUENTES)</td>
+                                              <td>@String.Format("{0:N2}", item.MIDIA_OUTROS)</td>
+                                              <td>@String.Format("{0:N2}", item.PROD_VIDEO)</td>
+                                              <td>@String.Format("{0:N2}", item.APOIO_TURNE)</td>
+                                              <td>@String.Format("{0:N2}", item.POSTER_BANNER)</td>
+                                              <td>@String.Format("{0:N2}", item.WEBSITES)</td>
+                                              <td>@String.Format("{0:N2}", item.CLIPAGEM)</td>
+                                              <td>@String.Format("{0:N2}", item.CD_PROMO)</td>
+                                              <td>@String.Format("{0:N2}", item.TOT_MARKETING_E_CUSTO_INICIAL)</td>
+                                              <td>@String.Format("{0:N2}", item.TOTAL_NET_SALES)</td>
+                                              <td>@String.Format("{0:N2}", item.RESULTADO_LIQUIDO)</td>
+                                          </tr>
+                                      }
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="print" style="display:none">
+                          <table style="width:100%;white-space:nowrap;">
+                              <tr>
+                                  <td colspan="22" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                              </tr>
+                              <tr>
+                                  <td colspan="22" style="text-align:center"><h2 style="text-align:center" class="bold underline">TOP Despesas de Marketing</h2></td>
+                              </tr>
+                              <tr>
+                                  <td colspan="22" style="text-align:center"><h2 style="text-align:center" class="bold underline">@ViewBag.TituloReport</h2></td>
+                              </tr>
+                              <tr>
+                                  <td colspan="20">&nbsp;</td>
+                                  <td>@DateTime.Now.ToString("MMMM").ToUpper()[0]@DateTime.Now.ToString("MMMM").Substring(1) / @DateTime.Now.Year</td>
+                                  <td>@DateTime.Now.ToString("dd/MM/yyyy") às @DateTime.Now.ToString("HH:mm:ss")</td>
+                              </tr>
+                              <tr class="RDLast">
+                                  <td class="bold">Artista</td>
+                                  <td class="bold">Projeto</td>
+                                  <td class="bold">Custo Inicial</td>
+                                  <td class="bold">Ação TV</td>
+                                  <td class="bold">Ação Imprensa</td>
+                                  <td class="bold">Ação Rádio</td>
+                                  <td class="bold">Ação Internet</td>
+                                  <td class="bold">Ação Outros</td>
+                                  <td class="bold">Mídia Impressa</td>
+                                  <td class="bold">Mídia TV</td>
+                                  <td class="bold">Mídia Digital</td>
+                                  <td class="bold">Mídia Rádio</td>
+                                  <td class="bold">Mídia Influentes</td>
+                                  <td class="bold">Mídia Outros</td>
+                                  <td class="bold">Prod Vídeo</td>
+                                  <td class="bold">Apoio Turnê</td>
+                                  <td class="bold">Poster/Banner</td>
+                                  <td class="bold">Websites</td>
+                                  <td class="bold">Clipagem</td>
+                                  <td class="bold">CD Promo</td>
+                                  <td class="bold">Mkt+Custo</td>
+                                  <td class="bold">Net Sales</td>
+                                  <td class="boldright">Resultado Liq</td>
+                              </tr>
+
+                              @foreach (var item in Model)
+                              {
+                                  <tr>
+                                      <td  class="bold">@String.Format("{0:c}", item.ARTISTA)</td>
+                                      <td  class="bold">@String.Format("{0:c}", item.PROJETO)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.CUSTO_INICIAL)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.ACAO_TV)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.ACAO_IMPRENSA)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.ACAO_RADIO)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.ACAO_INTERNET)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.ACAO_OUTROS)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.MIDIA_IMPRESSA)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.MIDIA_TV)</td>
+                                      <td class="right">@String.Format("{0:c}", item.MIDIA_DIGITAL)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.MIDIA_RADIO)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.MIDIA_INFLUENTES)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.MIDIA_OUTROS)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.PROD_VIDEO)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.APOIO_TURNE)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.POSTER_BANNER)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.WEBSITES)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.CLIPAGEM)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.CD_PROMO)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.TOT_MARKETING_E_CUSTO_INICIAL)</td>
+                                      <td  class="right">@String.Format("{0:c}", item.TOTAL_NET_SALES)</td>
+                                      <td  class="boldright">@String.Format("{0:c}", item.RESULTADO_LIQUIDO)</td>
+                                  </tr>
+                              }
+                          </table>
+                      </div>
+
+@using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+{
+    <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+    <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+}

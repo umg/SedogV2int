@@ -1,0 +1,90 @@
+﻿* {
+    font-family:Verdana;
+    font-size:10px;
+    text-align:center;
+    padding-top:4px;
+    padding-bottom:4px;
+    padding-left:2px;
+    padding-right:2px;
+}
+ h2
+ {
+     font-size:14px;
+ }
+td
+{
+    padding-top:4px;
+    padding-bottom:4px;
+    padding-left:2px;
+    padding-right:2px;
+}
+.left
+{
+    text-align:left;
+}
+.right
+{
+    text-align:right;
+}
+.bold {
+    font-weight: bold; 
+}
+.boldright {
+    font-weight: bold; 
+    text-align:right;
+}
+.underline {
+    border-bottom: 2px solid #000000;
+} 
+.upperline {
+    border-top: 2px solid #000000;
+}
+.bgRed, .bgRed td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #FF0000;
+    color: #FFFFFF;
+}
+.bgBlue, .bgBlue td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #0000FF;
+    color: #FFFFFF;
+}
+.bgGray
+{
+    background-color:#CCCCCC;
+}
+
+.bgGrayBold
+{
+    background-color:#CCCCCC;
+    font-weight: bold;
+}
+.box{
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+}
+.RD{
+    color:#000;
+    font-weight:bold;
+    background-color:#ccc;
+}
+.RDLast {
+    color:#000;
+    font-weight:bold;
+    background-color:#ccc;
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+}
+.paddingTD7 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.altRow_0{
+    background-color:#eeeeee;
+}
+.altRow_1{
+    background-color:#ffffff;
+}

@@ -1,0 +1,475 @@
+﻿@using SEDOGv2.Helpers;
+
+
+@{
+    ViewBag.Title = "Lucros & Perdas Presidência & Financeiro";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+
+    @using (Html.BeginForm("Index", "PLPresidenciaFinanceiro", FormMethod.Post, new { id = "FormPLPresidenciaFinanceiro1" }))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+
+            <div class="col-md-12" runat="server" id="divAlert">
+                @Html.Raw(Model.Message)
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4 text-right">
+                    <div class="form-group">
+                        <h4>Artista ou projeto:</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" name="txtArtistaProduto" class="form-control" placeholder="Digite o artista ou projeto" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" name="Pesquisar" value="Pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+
+    @if (Model.PLProjetos.Count > 0)
+    {
+        using (Html.BeginForm("Index", "PLPresidenciaFinanceiro", FormMethod.Post, new { id = "FormPLPresidenciaFinanceiro2" }))
+        {
+            <div class="panel panel-success">
+
+                <div class="row">
+
+                    <div class="col-md-9">
+                        <table class="table">
+                            <tr class="bg-default">
+                                <th><input type="checkbox" name="seltodos" id="chkAll" /></th>
+                                <th>ID Projeto</th>
+                                <th>Projeto</th>
+                                <th>ID Artista</th>
+                                <th>Artista</th>
+                                <th>Lançamento</th>
+
+                            </tr>
+                            @foreach (SEDOGv2.Models.PLProjeto item in Model.PLProjetos)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="selProdutos" value="@item.IDProj_SEDOG" />
+                                    </td>
+                                    <td>@item.IDProj_SEDOG</td>
+                                    <td>@item.Projeto</td>
+                                    <td>@item.IDArtista</td>
+                                    <td>@item.Artista</td>
+                                    <td>@item.DataLancamento.ToString("dd/MM/yyyy")</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="row hidden">
+                            <div id="datepicker"></div>
+                            <input type="hidden" runat="server" id="my_hidden_input_date" />
+                        </div>
+                        <div class="row">
+                            <input type="submit" id="btnGerarRelatorios" name="btnGerarRelatorios" value="Gerar Relatório" class="btn btn-lg btn-default btn-block" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+
+
+
+
+    @if (Model.LucrosEPerdas.Count > 0)
+    {
+
+
+
+        decimal primeiroIDPL = 0;
+        decimal primeiroIDPLPrint = 0;
+        <div class="panel panel-success panel-report">
+            @using (Html.BeginForm("Index", "PLPresidenciaFinanceiro", FormMethod.Post, new { id = "FormPLPresidenciaFinanceiro3" }))
+            {
+                <div class="row text-right">
+                    <input type="hidden" name="idProjeto" id="idProjeto" value="@ViewBag.IDLote" />
+                    <select name="selAno" id="selAno">
+                        <option value="0">TODOS</option>
+                        @for (int ano = 0; ano <= DateTime.Now.Year - 2010; ano++)
+                        {
+                            <option value="@(DateTime.Now.AddYears(-ano).ToString("yy"))">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                        }
+                    </select>
+                    <input type="submit" class="btn btn-default" value="Recalcular" />
+                </div>
+            }
+            <div class="row reportHeader">
+                <div class="col-md-1 text-center"><h2>&nbsp;</h2></div>
+                <div class="col-md-3 text-center"><h4>Receita Total</h4></div>
+                <div class="col-md-4 text-center"><h4>Despesa Total</h4></div>
+                <div class="col-md-3 text-center"><h4>Resultado</h4></div>
+                <div class="col-md-1 text-center">
+                    <button type="submit" class="btn btn-default printPDF">
+                        <i class="fa fa-file-pdf-o fa-4"></i>
+                    </button>
+                    <button type="submit" class="btn btn-default printExcel">
+                        <i class="fa fa-file-excel-o fa-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1 text-center"><h2>&nbsp;</h2></div>
+                <div class="col-md-3 text-center"><h3 class="receita">@ViewBag.receita</h3></div>
+                <div class="col-md-4 text-center"><h3 class="despesa">@ViewBag.despesa</h3></div>
+                <div class="col-md-3 text-center"><h3 class="@ViewBag.desprec">@ViewBag.resultado</h3></div>
+                <div class="col-md-1 text-center"><h3>@ViewBag.Ano</h3></div>
+            </div>
+
+            <div class="row dontPrintExcel">
+                <div class="col-md-12">
+                    <table class="report-table" style="width:100%">
+                        <tr>
+                            <td colspan="8" class="text-center" style="padding:5px">
+                                <div class="col-md-12 text-left"><h4>Projeto(s)</h4></div>
+                                <div class="col-md-12">
+                                    <div class="flex">
+                                        @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesHeaderDosProdutos)
+                                        {
+                                            <div class="flex-child">
+                                                <div class="flex-item">
+                                                    <table>
+                                                        <tr>
+                                                            <td valign="top"><img src="@prd.URL" alt="@prd.COD_BARRAS" class="plcHld150 shadow" style="width:150px; height:150px;" /></td>
+                                                            <td class="text-left">
+                                                                <div class="text-bold"><span class="text-small">ID Projeto:</span> @prd.IDPROJ_SEDOG</div>
+                                                                <div class="text-bold"><span class="text-small">Artista:</span> @prd.ARTISTA</div>
+                                                                <div class="text-bold"><span class="text-small">Projeto:</span> @prd.PROJETO</div>
+                                                                <div class="text-bold"><span class="text-small">Formatos:</span> @prd.OBS</div>
+                                                                <div class="text-bold"><span class="text-small">Lançamento:</span> @prd.DATA_LANCAMENTO</div>
+                                                                <div class="text-bold">
+                                                                    <span class="text-small">Contrato:</span> @prd.TIPO_CONTRATO @if (prd.TIPO_CONTRATO == "Join Venture")
+                                                                    { <i class="fa fa-exclamation-circle"></i> }
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="8" class="text-right"><button class="btn btn-default" data-toggle="collapse" data-target="#tdProdutos">Produtos</button>&nbsp;<button class="btn btn-default" data-toggle="collapse" data-target="#tdBUs">BUs</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <div id="tdProdutos" class="collapse row">
+                                    <div class="modal-header">Produtos&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdProdutos">fechar</button></div>
+                                    <div class="modal-body">
+                                        @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesDosProdutos)
+                                        {
+                                            <p>Artista: @prd.ARTISTA - Produto: @prd.TITULO_PRODUTO - Código: @prd.COD_PRODUTO - Mídia: @prd.MIDIA</p>
+                                        }
+                                    </div>
+                                </div>
+                                <div id="tdBUs" class="collapse row">
+                                    <div class="modal-header">BUs&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdBUs">fechar</button></div>
+                                    <div class="modal-body">
+                                        @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesDosProdutos)
+                                        {
+                                            <p>BU's:@prd.BUS</p>
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <tr class="bg-default reportHeader">
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>%</th>
+                        </tr>
+                        @foreach (SEDOGv2.Models.LucrosEPerdas item in Model.LucrosEPerdas)
+                        {
+                            <tr class="@item.Tipo">
+
+                                <td class="no-padding"><a href="#" data-toggle="tooltip" title="@item.OBS" data-placement="right" class="info-tooltip"><div><i class="fa fa-info"></i>&nbsp;@item.Nome</div></a></td>
+                                <td>@string.Format("{0:c2}", @item.Valor)</td>
+
+
+                                @switch (item.Tipo)
+                                {
+                                    case "R":
+                                        <td class="right">
+                                            @(item.Valor != 0 ? "100%" : "0%" )
+                                        </td>
+                                        primeiroIDPL = item.Valor;
+                                        break;
+                                    case "RD":
+                                        if (item.IDPL != 250)
+                                        {
+                                            <td class="right">
+                                                @(primeiroIDPL != 0 ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="right">
+                                                @( ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", (item.Valor / ViewBag.ValorTotalReceita)) : "0%" )
+                                            </td>
+                                        }
+                                        primeiroIDPL = 0;
+                                        break;
+                                    case "D":
+                                        switch (item.IDPL)
+                                        {
+                                            case 245:
+                                                <td class="right">
+                                                    @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", ((item.Valor / ViewBag.ValorTotalReceita))) : "0%" )
+                                                </td>
+                                                break;
+                                            default:
+                                                <td>
+                                                    @(primeiroIDPL != 0 ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
+                                                </td>
+                                                break;
+                                        }
+                                        break;
+                                    case "DD":
+                                        switch (item.IDPL)
+                                        {
+                                            case 180:
+                                            case 190:
+                                            case 200:
+                                            case 210:
+                                            case 220:
+                                            case 230:
+                                            case 240:
+                                                <td class="right">
+                                                    @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", ((item.Valor / ViewBag.ValorTotalReceita))) : "0%" )
+                                                </td>
+                                                break;
+                                        }
+                                        break;
+                                    default:
+                                        <td>0%</td>
+                                        break;
+                                }
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="print" style="display:none">
+            <table cellspacing="0px" style="width:100%">
+                <tr>
+                    <td colspan="3" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:center"><h2 style="text-align:center" class="bold underline">RELATÓRIO DE LUCROS E PERDAS</h2></td>
+                </tr>
+                @*<tr>
+                        <td colspan="3" style="text-align:center"><h2 style="text-align:center" class="bold underline">@ViewBag.Ano</h2></td>
+                    </tr>*@
+                <tr>
+                    <td width="33%">&nbsp;</td>
+                    <td width="33%">@DateTime.Now.ToString("MMMM").ToUpper()[0]@DateTime.Now.ToString("MMMM").Substring(1) / @DateTime.Now.Year</td>
+                    <td width="33%">@DateTime.Now.ToString("dd/MM/yyyy") às @DateTime.Now.ToString("HH:mm:ss")</td>
+                </tr>
+                <tr class="@ViewBag.fundoResultado">
+                    <td width="33%"><span class="bold">Revenue:</span> @ViewBag.receita</td>
+                    <td width="33%"><span class="bold">Expenses:</span> @ViewBag.despesa</td>
+                    <td width="33%"><span class="bold">Total:</span> @ViewBag.resultado</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <table class="box" style="width:100%">
+                            <tr>
+                                <td class="bold">Cover</td>
+                                <td class="bold">ID Projeto</td>
+                                <td class="bold">Artist</td>
+                                <td class="bold">Title</td>
+                                <td class="bold">Media</td>
+                                <td class="bold">Release</td>
+                                <td class="bold">Contrato</td>
+                            </tr>
+                            @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesHeaderDosProdutos)
+                            {
+                                <tr>
+                                    <td style="height:50px;"><img src="@prd.URL" alt="@Model.DetalhesDosProdutos[0].COD_BARRAS" width="50" height="50" style="width:50px; height:50px;" /></td>
+                                    <td>@prd.IDPROJ_SEDOG</td>
+                                    <td>@prd.ARTISTA</td>
+                                    <td>@prd.PROJETO</td>
+                                    <td>@prd.OBS</td>
+                                    <td>@prd.DATA_LANCAMENTO</td>
+                                    <td>@prd.TIPO_CONTRATO</td>
+                                </tr>
+                            }
+                            @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesDosProdutos)
+                            {
+                                <tr>
+                                    <td colspan="7" class="left">Bu's: @prd.BUS</td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+                <tr class="RDLast">
+                    <td width="33%" class="bold underline left">Description</td>
+                    <td width="33%" class="bold underline left">Release to date value (BRL)</td>
+                    <td width="33%" class="bold underline right">% Release to date</td>
+                </tr>
+
+                @foreach (SEDOGv2.Models.LucrosEPerdas item in Model.LucrosEPerdas)
+                {
+                    <tr class="@item.Tipo">
+
+                        <td class="left">@item.Nome</td>
+                        <td class="right">@string.Format("{0:N2}", @item.Valor)</td>
+
+
+                        @switch (item.Tipo)
+                        {
+                            case "R":
+                                <td class="right">
+                                    @(item.Valor != 0 ? "100,00" : "0,00" )
+                                </td>
+                                primeiroIDPL = item.Valor;
+                                break;
+                            case "RD":
+                                if (item.IDPL != 250)
+                                {
+                                    <td class="right">
+                                        @(primeiroIDPL != 0 ? string.Format("{0:N2}", 100 * (item.Valor / primeiroIDPL)) : "0,00" )
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="right">
+                                        @( ViewBag.ValorTotalReceita != 0 ? string.Format("{0:N2}", 100 * (item.Valor / ViewBag.ValorTotalReceita)) : "0,00" )
+                                    </td>
+                                }
+                                primeiroIDPL = 0;
+                                break;
+                            case "D":
+                                switch (item.IDPL)
+                                {
+                                    case 245:
+                                        <td class="right">
+                                            @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:N2}", 100 * ((item.Valor / ViewBag.ValorTotalReceita))) : "0,00" )
+                                        </td>
+                                        break;
+                                    default:
+                                        <td class="right">
+                                            @(primeiroIDPL != 0 ? string.Format("{0:N2}", 100 * (item.Valor / primeiroIDPL)) : "0,00" )
+                                        </td>
+                                        break;
+                                }
+                                break;
+                            case "DD":
+                                switch (item.IDPL)
+                                {  
+                                    case 210:
+                                    case 180:
+                                    case 190:
+                                    case 200:
+                                    case 220:
+                                    case 230:
+                                    case 240:
+                                        <td class="right">
+                                            @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:N2}", 100 * ((item.Valor / ViewBag.ValorTotalReceita))) : "0,00" )
+                                        </td>
+                                        break;
+                                }
+                                break;
+                            default:
+                                <td class="right">0,00</td>
+                                break;
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+
+    @using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+    {
+        <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+        <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $("#datepicker").datepicker({
+                language: 'pt-BR',
+                orientation: 'auto top',
+                autoclose: true,
+                clearBtn: true,
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years",
+                clearBtn:true
+            });
+            //$('#datepicker').datepicker('setDate', new Date(@DateTime.Now.Year.ToString(), 1, 1));
+            //$("#my_hidden_input_date").val($("#datepicker").datepicker('getFormattedDate'));
+            function checkALL(x) {
+
+                if (x.checked) {
+                    $("input:checkbox").prop('checked', true);
+                }
+                else {
+                    $("input:checkbox").prop('checked', false);
+                }
+            }
+
+            $("#datepicker").on("changeDate", function (event) {
+                $("#my_hidden_input_date").val($("#datepicker").datepicker('getFormattedDate'));
+            });
+            $("#chkAll").click(function () { checkALL(this); });
+
+            $("#FormPLPresidenciaFinanceiro2").submit(function (event) {
+                if ($("input:checked").length > 0){
+                    return;
+                }
+                $('#pleaseWaitDialog').modal('toggle');
+                event.preventDefault();
+            });
+        });
+
+    </script>
+
+</div>

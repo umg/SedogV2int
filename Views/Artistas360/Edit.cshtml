@@ -1,0 +1,324 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel-heading text-center">
+                <h2>
+                    Editar Projeto 360º
+                </h2>
+                @ViewBag.Error
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="col-md-1">
+                    @Html.ActionLink("Voltar", "Index", null, new { @class = "link" })
+                </div>
+                <div class="col-md-3">
+                    <h4>ID: @Model.ID_PROJNRI</h4>
+                </div>
+                <div class="col-md-4">
+                    <h4>Artista: @Model.ARTISTA</h4>
+                </div>
+                <div class="col-md-4">
+                    <h4>Projeto: @Model.PROJETO</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row setup-content">
+            <div class="col-md-12">
+                @using (Html.BeginForm("EditDetalhes360", "Artistas360", FormMethod.Post))
+                {
+                    <input type="hidden" name="idProjNri" value="@Model.ID_PROJNRI" />
+                    <input type="hidden" name="idArtista" value="@Model.ID_ARTISTA" />
+                    <div class="row">
+                        <h3 class="text-center">Detalhes do Projeto NRI</h3>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nomeDoProjeto">Nome do Projeto</label>
+                                <input type="text" id="nomeDoProjeto" name="nomeDoProjeto" class="form-control input-lg" placeholder="Digite um nome para este projeto" value="@Model.PROJETO" aria-describedby="basic-addon2">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nomeDoArtista">Artista</label>
+                                <input type="text" id="nomeDoArtista" name="nomeDoArtista" class="form-control input-lg" placeholder="Digite o nome do artista" value="@Model.ARTISTA" aria-describedby="basic-addon2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nomeDoProjeto">BU</label>
+                                <input type="text" id="buProjeto" name="buProjeto" class="form-control input-lg" placeholder="BU do projeto" value="@Model.BU" aria-describedby="basic-addon2">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nomeDoArtista">Data de início</label>
+                                <input type="text" id="lancamento" name="lancamento" class="form-control input-lg" placeholder="Data de início" value="@Model.DATA_INICIO.ToString("yyyy-MM-dd")" aria-describedby="basic-addon2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nomeDoArtista">Data de expiração</label>
+                                <input type="text" id="expiracao" name="expiracao" class="form-control input-lg" placeholder="Data de expiração" value="@Model.DATA_EXPIRACAO.ToString("yyyy-MM-dd")" aria-describedby="basic-addon2">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nomeDoProjeto">Observações</label>
+                                <input type="text" id="obs" name="obs" class="form-control input-lg" placeholder="Observações do projeto" value="@Model.OBS" aria-describedby="basic-addon2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" value="Save" class="btn btn-default pull-right" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row setup-content">
+            <div class="col-md-12">
+                <div class="detalhesBody">
+                    <h4 data-toggle="collapse" data-target="#tblAnexos" class="clickRotateIcon">Anexos:<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
+                    <div id="tblAnexos" class="collapse in">
+                        @using (Html.BeginForm("AddAnexoProjeto", "Artistas360", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <table class="table">
+                                <tr>
+                                    <th>Arquivo</th>
+                                    <th>Observações</th>
+                                    <th><input type="hidden" name="idProjNri" value="@Url.RequestContext.RouteData.Values["id"]" /></th>
+                                    <th></th>
+                                </tr>
+                                <tr style="background-color:rgba(125,125,125,0.2)">
+                                    <th><input type="file" name="arquivo" class="input-sm" value="Arquivo"></th>
+                                    <th colspan="2"><input type="text" name="obs" class="input-sm" size="40" /></th>
+                                    <th><div class="col-md-12"><input type="submit" name="salvar" class="btn btn-default pull-right" value="Incluir" /></div></th>
+                                </tr>
+                                @foreach (NRIProjetosAnexosViewModel item in Model.ANEXOS)
+                                {
+                                    <tr>
+                                        <td>@item.NOME_ARQUIVO</td>
+                                        <td>@item.OBS</td>
+                                        <td><a href="@Url.Action("RemoveAnexoProjeto", "Artistas360", new { @id = item.ID_PROJNRI, @fileName = item.NOME_ARQUIVO })" class="linkRemove" data-title="Remover Anexo" data-query="Tem certeza que deseja remover o arquivo @item.NOME_ARQUIVO ?"><i class="fa fa-remove"></i> Remover</a></td>
+                                        <td><a href="~/Anexos/@item.ID_PROJNRI/@item.NOME_ARQUIVO"><i class="fa fa-download"></i> Baixar</a></td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row setup-content">
+            <div class="col-md-12">
+                <div class="detalhesBody">
+                    <h4 data-toggle="collapse" data-target="#tblContratos" class="clickRotateIcon">Contratos:<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
+                    <div id="tblContratos" class="collapse in">
+                    @using (Html.BeginForm("AddContrato", "Artistas360", FormMethod.Post))
+                    {
+                        <table class="table">
+                            <tr>
+                                <th>Tipo do Contrato</th>
+                                <th>Descrição</th>
+                                <th><input type="hidden" name="idProjNri" value="@Url.RequestContext.RouteData.Values["id"]" /></th>
+                            </tr>
+                            <tr style="background-color:rgba(125,125,125,0.2)">
+                                <th>
+                                    <select class="input-sm" name="contrato">
+                                        @foreach (NRITipoContrato item in ViewBag.NRITipoContrato)
+                                        {
+                                            <option value="@item.ID_TIPO_CONTRATO">@item.TIPO_CONTRATO</option>
+                                        }
+                                    </select>
+                                </th>
+                                <th><input type="text" name="descricao" class="input-sm" /></th>
+                                <th><div class="col-md-12"><input type="submit" name="salvar" class="btn btn-default pull-right" value="Incluir" /></div></th>
+                            </tr>
+                            @foreach (NRIProjetosContrato item in Model.CONTRATOS)
+                            {
+                                <tr>
+                                    <td>@item.TIPO_CONTRATO</td>
+                                    <td>@item.DESCRICAO</td>
+                                    <td><a href="@Url.Action("RemoveContrato", "Artistas360", new { @id = item.ID_PROJNRI, @idTipoContrato = item.ID_TIPO_CONTRATO })" class="linkRemove" data-title="Remover Contrato" data-query="Tem certeza que deseja remover o item @item.TIPO_CONTRATO/ @item.DESCRICAO_TIPO_CONTRATO?"><i class="fa fa-remove"></i> Remover</a></td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row setup-content">
+            <div class="col-md-12">
+                <div class="detalhesBody">
+                    <h4 data-toggle="collapse" data-target="#tblReceitas" class="clickRotateIcon">Receitas:<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
+                    <div id="tblReceitas" class="collapse in">
+                    @using (Html.BeginForm("AddReceita", "Artistas360", FormMethod.Post))
+                    {
+                        <table class="table">
+                            <tr>
+                                <th>Alerta</th>
+                                <th>Tipo</th>
+                                <th>Responsável</th>
+                                <th>Percentual</th>
+                                <th>Acordo</th>
+                                <th>Quantidade</th>
+                                <th>Saldo</th>
+                                <th>OBS</th>
+                                <th><input type="hidden" name="idProjNri" value="@Url.RequestContext.RouteData.Values["id"]" /></th>
+                            </tr>
+                            <tr style="background-color:rgba(125,125,125,0.2)">
+                                <th>
+                                    <input type="checkbox" name="emailCobranca"/>
+                                </th>
+                                <th>
+                                    <select class="input-sm" name="receita">
+                                        @foreach (NRITipoReceita item in ViewBag.NRITipoReceita)
+                                        {
+                                            <option value="@item.ID_TIPO_RECEITA">@item.TIPO_RECEITA</option>
+                                        }
+                                    </select>
+                                </th>
+                                <th>
+                                    <select class="input-sm" name="responsavel">
+                                        @foreach (NRIResponsavel item in ViewBag.NRIResponsavel)
+                                        {
+                                            <option value="@item.ID_RESPONSAVEL">@item.RESPONSAVEL</option>
+                                        }
+                                    </select>
+                                </th>
+                                <th><input type="number" name="percent" class="input-sm" style="width:100px" /></th>
+                                <th><input type="text" name="acordo" class="input-sm" /></th>
+                                <th><input type="number" name="quantidade" class="input-sm" style="width:100px" /></th>
+                                <th><input type="number" name="saldo" class="input-sm" style="width:100px" /></th>
+                                <th><input type="text" name="obs" class="input-sm" /></th>
+                                <th><div class="col-md-12"><input type="submit" name="salvar" class="btn btn-default pull-right" value="Incluir" /></div></th>
+                            </tr>
+                            @foreach (NRIProjetosReceitas item in Model.RECEITAS)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("MudaEmailAlertaCobranca", "Artistas360", new { @id = item.ID_PROJNRI, @ID_SEQ = item.ID_SEQ })" class="">
+                                            @if (item.EMAIL_COBRANCA == 1)
+                                            {
+                                                <span>Sim</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Não</span>
+                                            }
+                                        </a>
+                                    </td>
+                                    <td>@item.TIPO_RECEITA</td>
+                                    <td>@item.RESPONSAVEL</td>
+                                    <td>@item.PERCENT</td>
+                                    <td>@item.ACORDO</td>
+                                    <td>@item.QUANTIDADE</td>
+                                    <td>@item.SALDO</td>
+                                    <td>@item.OBS_RECEITA</td>
+                                    <td>
+                                        <a href="@Url.Action("HistoricoNRIShows", "Artistas360", new { @id = item.ID_SEQ })" class="">Receitas</a><span> |</span>
+                                        <a href="@Url.Action("HistoricoNRICobranca", "Artistas360", new { @id = item.ID_SEQ })" class="">Cobranças</a> |
+                                        <a href="@Url.Action("RemoveReceita", "Artistas360", new { @id = item.ID_PROJNRI, @idTipoReceita = item.ID_TIPO_RECEITA, @idSeq = item.ID_SEQ })" class="linkRemove" data-title="Remover Contrato" data-query="Tem certeza que deseja remover o item @item.TIPO_RECEITA ?">Remover</a>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="myModalEditProjetos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default hidden" id="salvarAltProjetoSedog">Salvar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModalRemoveEditProjetos" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" href="#" id="followLinkRemove">Sim</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#lancamento, #expiracao").datepicker({
+            format: "yyyy-mm-dd",
+            language: "pt-BR",
+            orientation: "auto",
+            autoclose: true
+        });
+
+
+        $(".linkRemove").click(function (e) {
+            $("#followLinkRemove").attr('href', $(this).attr('href'));
+            $("#myModalRemoveEditProjetos .modal-title").html($(this).data("title"));
+            $("#myModalRemoveEditProjetos .modal-body").html($(this).data("query"));
+            $("#myModalRemoveEditProjetos").modal("show");
+            e.preventDefault();
+        });
+
+        $("#followLinkRemove").click(function () {
+            $("#myModalRemoveEditProjetos").modal("toggle");
+            $('#pleaseWaitDialog').modal({
+                backdrop: 'static'
+            });
+        });
+    });
+</script>

@@ -1,0 +1,345 @@
+﻿@using System.Configuration;
+@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    Performance GTS
+                </h2>
+                @ViewBag.Error
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="col-md-1">
+                    @Html.ActionLink("Voltar", "Index", null, new { @class = "link" })
+                </div>
+                <div class="col-md-7">
+                    <h4>Artista: @Model.Infos.Artista</h4>
+                </div>
+                <div class="col-md-4">
+                    <h4>Mês/Ano:  @((Model.Infos.Mes == 0) ? " - " : Model.Infos.Mes)<span>/</span> @((Model.Infos.Ano == 0) ? " - " : Model.Infos.Ano)</h4>
+                </div>
+
+                <div class="col-md-3" style="display:none;">
+                    <h4>ID: @Model.Infos.IDArtista</h4>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="container col-md-12 col-xs-12 col-sm-12" id="containment-wrapper">
+
+
+            <div class="row col-md-12 col-xs-12 col-sm-12 rowFlexNew">
+
+
+                <div id="dPresidencia" class="dashboardDiv ui-sortable active" style="display: flex;">
+
+
+
+                    <div class="col-lg-3 col-md-3 col-xs-3">
+
+                        <div class="col-lg-12 col-md-12 col-xs-12 hvr-float-shadow text-align multiobj">
+                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-star"></i>&nbsp;Artista</h4>
+                            <div class="graficoContainer">
+                                <div id="carouselArtistas" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        @{ string[] ids = Model.Infos.IDArtista.Split('|');
+                                            bool _first = true;}
+                                        @for (int i = 0; i < ids.Length; i++)
+                                        {
+                                            if (i == 0)
+                                            {
+                                                <li data-target="#carouselArtistas" data-slide-to="@i" class="active"></li>
+                                            }
+                                            else
+                                            {
+                                                <li data-target="#carouselArtistas" data-slide-to="@i" class=""></li>
+                                            }
+                                        }
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        @foreach (string item in ids)
+                                        {
+                                            if (_first)
+                                            {
+                                                <div class="item active">                                                    
+                                                    <img src="@string.Concat(ConfigurationManager.AppSettings["IMAGEPATH"], item.Trim(), ".png")" alt="@item">
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="item ">
+                                                    <img src="@string.Concat(ConfigurationManager.AppSettings["IMAGEPATH"], item.Trim(), ".png")" alt="@item">
+                                                </div>
+                                            }
+                                            _first = false;
+                                        }
+                                            <a class="left carousel-control" href="#carouselArtistas" data-slide="prev">
+                                                <span class="fa fa-chevron-left"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#carouselArtistas" data-slide="next">
+                                                <span class="fa fa-chevron-right"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align">
+                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-bar-chart"></i>&nbsp;Histórico de Receita dos Últimos 12 Meses</h4>
+
+
+                            <div class="graficoContainer">
+                                <canvas id="GTSReceita12Meses"></canvas>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align">
+                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-star"></i>&nbsp;Mapa de Shows</h4>
+                            <div class="graficoContainer">
+                                <canvas class="MapaRegiao" data-sudeste="@Model.regiaoSudesteQTDShow" data-sul="@Model.regiaoSulQTDShow" data-centrooeste="@Model.regiaoCentroOesteQTDShow" data-exterior="@Model.regiaoExteriorQTDShow" data-norte="@Model.regiaoNorteQTDShow" data-nordeste="@Model.regiaoNordesteQTDShow" data-percent="True" width="321" height="329"></canvas>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align">
+                            <h4 class="barraTitulo ui-sortable-handle">
+                                <i class="fa fa-thermometer-three-quarters"></i>&nbsp;Score Operação
+                                <div class="pull-right text-small">
+                                    Fcast<label class="switch">
+                                        <input type="checkbox" class="switchCheckBox">
+                                        <div class="slider"></div>
+                                    </label>&nbsp;Plan
+                                </div>
+                            </h4>
+                            <div class="graficoContainer">
+                                <div class="hud futuristic text-center">
+                                    <h5>Margin GTS</h5>
+                                    <canvas class="tanque" data-total="@Model.tanqueMargendataTotal" data-atual="@Model.tanqueMargendataAtual" data-provisao="@Model.tanqueMargendataProvisao" data-totalplan="@Model.tanqueMargendataTotalPlan" data-provisaoplan="@Model.tanqueMargendataProvisaoPlan" width="139" height="278"></canvas>
+                                </div>
+                                <div class="hud futuristic text-center">
+                                    <h5>Receita GTS</h5>
+                                    <canvas class="tanque" data-total="@Model.tanqueReceitadataTotal" data-atual="@Model.tanqueReceitadataAtual" data-provisao="@Model.tanqueReceitadataProvisao" data-totalplan="@Model.tanqueReceitadataTotalPlan" data-provisaoplan="@Model.tanqueReceitadataProvisaoPlan" width="139" height="278"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-9 col-md-9 col-xs-9 hvr-float-shadow text-align grafico">
+                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-star"></i>&nbsp;Detalhes do Artista</h4>
+                            <div class="graficoContainer">
+                                <table class="fontGiant">
+                                    <tbody>
+                                        <tr>
+                                            <th>Cachê Médio</th>
+                                            <th>Números de Shows</th>
+                                            <th>Total da Receita</th>
+                                            <th>Saldo em Aberto</th>
+                                        </tr>
+                                        <tr>
+                                            <td>@string.Format("{0:N}", Model.detalhesCacheMedioMes)</td>
+                                            <td>@string.Format("{0:N0}", Model.detalhesNumeroShowsMes)</td>
+                                            <td>@string.Format("{0:N}", Model.detalhesTotalReceitaMes)</td>
+                                            <td>@string.Format("{0:N}", Model.detalhesSaldoAberto)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="fontGiant">
+                                    <tbody>
+                                        <tr>
+                                            <th>Margin</th>
+                                            <th>Participação GTS</th>
+                                            <th>Participação ARTISTA</th>
+                                            <th>Participação LIVE</th>
+                                        </tr>
+                                        <tr>
+                                            <td>@string.Format("{0:N}", Model.detalhesMarginMes)</td>
+                                            <td>@string.Format("{0:N}", Model.detalhesParticipacaoGTS)</td>
+                                            <td>@string.Format("{0:N}", Model.detalhesParticipacaoArtista)</td>
+                                            <td>@string.Format("{0:N}", Model.detalhesParticipacaoLIVE)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var dataGTSReceita12Meses = {
+            labels: [  @Html.Raw(Model.labelGTSReceita12Meses)],
+            datasets: [{
+                type: 'bar', label: 'Total', hidden: false, backgroundColor: 'rgba(125, 125, 125, 1)',
+                data: [  @Html.Raw(Model.dataGTSReceita12Meses)]
+
+
+            }, ]
+        };
+        var ctxGTSReceita12Meses = $("#GTSReceita12Meses");
+        var chartGTSReceita12Meses = new Chart(ctxGTSReceita12Meses,
+            {
+                type: 'bar',
+                data: dataGTSReceita12Meses,
+                options: {
+                    responsive: true,
+                    legend: { display: true },
+                    scales: {
+                        xAxes: [{ ticks: {} }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                stepSize: 100000,
+                                userCallback: function (value, index, values) {
+                                    value = Math.round(value).toString();
+                                    value = value.split(/(?=(?:...)*$)/);
+                                    value = value.join('.'); return value;
+                                }
+                            }
+                        }]
+                    }, tooltips: {
+                        enabled: true,
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || 'Other';
+                                tooltipItem.yLabel = Math.round(tooltipItem.yLabel).toString();
+                                tooltipItem.yLabel = tooltipItem.yLabel.split(/(?=(?:...)*$)/);
+                                tooltipItem.yLabel = tooltipItem.yLabel.join('.');
+                                return datasetLabel + ': ' + tooltipItem.yLabel;
+                            }
+                        }
+                    }
+                }
+            });
+
+
+        $(document).ready(function () {
+
+            $(".MapaRegiao").MapaRegiao();
+
+            $('.dashNavPils li a').on('click', function (e) {
+                e.preventDefault();
+                $('.dashboardDiv').css("display", "flex").hide();
+
+                $($(this).attr('href')).show();
+
+                $('.grafico').find('.switchCheckBox').each(function () {
+                    var checked = $(this).is(":checked");
+                    $(this).closest('.grafico').find('.tanque').bombaCombustivel({
+                        plan: checked
+                    });
+                });
+
+            });
+
+            Number.prototype.formatMoney = function (places, symbol, thousand, decimal, divided) {
+                places = !isNaN(places = Math.abs(places)) ? places : 0;
+                symbol = symbol !== undefined ? symbol : "$";
+                thousand = thousand || ".";
+                decimal = decimal || ",";
+                divided = divided || 1000;
+                var number = this,
+                    negative = number < 0 ? "-" : "",
+                    i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + "",
+                    j = (j = i.length) > 3 ? j % 3 : 0;
+                return negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
+            };
+
+            function hex2rgb(hex) {
+                var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16),
+                    rgb: parseInt(result[1], 16) + ", " + parseInt(result[2], 16) + ", " + parseInt(result[3], 16)
+                } : null;
+            }
+
+
+
+            var checked = $("#switchCheckBox").is(":checked");
+            $('.tanque').bombaCombustivel({
+                plan: checked
+            });
+
+            $(".MetricHorizontalBar").MetricHorizontalBar();
+
+            window.onresize = function () {
+                var checked = $("#switchCheckBox").is(":checked");
+                $('.tanque').bombaCombustivel({
+                    plan: checked
+                });
+                var checked2 = $("#switchCheckBoxExtra").is(":checked");
+                $('.MetricHorizontalBar').MetricHorizontalBar({
+                    isPlan: checked2
+                });
+
+                $(".ZeroMiddleBar").ZeroMiddleBar();
+                $(".MapaRegiao").MapaRegiao();
+            };
+
+            $('.switchCheckBox').change(function (e) {
+                var checked = $(this).is(":checked");
+                $(this).closest('.grafico').find('.tanque').bombaCombustivel({
+                    plan: checked
+                });
+            });
+
+            $('.switchCheckBoxExtra').change(function (e) {
+                var checked = $(this).is(":checked");
+                $(this).closest('.grafico').find('.MetricHorizontalBar').MetricHorizontalBar({
+                    isPlan: checked
+                });
+            });
+
+            $('.dashNavPils li:first-child').addClass('active');
+            $('.row .dashboardDiv:not(:first-child)').hide();
+            //$('.dashNavPils').addClass('pull-left');
+
+
+
+
+        });
+
+
+
+
+    </script>
+
+
+

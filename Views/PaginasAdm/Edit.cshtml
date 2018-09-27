@@ -1,0 +1,57 @@
+﻿@using SEDOGv2.Helpers;
+@model SEDOGv2.Models.PagesViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    Page Edit
+                </h2>
+            </div>
+        </div>
+
+
+        <div class="col-md-12" runat="server" id="divAlert">
+            @ViewBag.Error
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(model => model.ID)
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Page Edit</h4></div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <h5>Page:</h5>
+                                @Html.EditorFor(model => model.PAGE, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>Path:</h5>
+                                @Html.EditorFor(model => model.PATH, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>Description:</h5>
+                                @Html.EditorFor(model => model.DESCRICAO, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>Menu:</h5>
+                                @Html.DropDownListFor(model => model.IDSUBTITLE, new SelectList(ViewBag.PagesHeaders, "ID", "DESC"), new { @class = "form-control" })
+                                
+                                <br />
+                                <input type="submit" name="salvar" value="Save" class="btn btn-default pull-right" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-right">
+                    @Html.ActionLink("Back to list", "Index", "PaginasAdm", null, new { @class = "link" })
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

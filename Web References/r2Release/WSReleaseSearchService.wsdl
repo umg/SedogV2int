@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tns3="http://xml.util.rms.umusic.com" xmlns:intf="http://search.ws.rms.umusic.com" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:tns2="http://common.ws.rms.umusic.com" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:impl="http://search.ws.rms.umusic.com" targetNamespace="http://search.ws.rms.umusic.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://search.ws.rms.umusic.com">
+      <xsd:import namespace="http://xml.util.rms.umusic.com" />
+      <xsd:import namespace="http://common.ws.rms.umusic.com" />
+      <xsd:element name="getIdByUPCResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getIdByUPCReturn" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getBySearch">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="wsReleaseSearch" nillable="true" type="impl:WSReleaseSearch" />
+            <xsd:element name="wsSearchOption" nillable="true" type="tns2:WSSearchOption" />
+            <xsd:element name="accountScope" nillable="true" type="tns2:AccountScope" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getBySearchResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getBySearchReturn" nillable="true" type="impl:WSReleaseSearchResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getTrackList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="releaseId" nillable="true" type="xsd:string" />
+            <xsd:element name="upc" nillable="true" type="xsd:string" />
+            <xsd:element name="companyId" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getTrackListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getTrackListReturn" nillable="true" type="impl:WSGetTrackListResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getResourceLinks">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="releaseId" nillable="true" type="xsd:string" />
+            <xsd:element name="upc" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getResourceLinksResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getResourceLinksReturn" nillable="true" type="impl:WSGetResourceLinksResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getByUPC">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="upc" nillable="true" type="xsd:string" />
+            <xsd:element name="wsSearchOption" nillable="true" type="tns2:WSSearchOption" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getByUPCResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getByUPCReturn" nillable="true" type="impl:WSReleaseResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getLocalList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="releaseId" nillable="true" type="xsd:string" />
+            <xsd:element name="upc" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getLocalListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getLocalListReturn" nillable="true" type="impl:WSReleaseSearchResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getXML">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="upc" nillable="true" type="xsd:string" />
+            <xsd:element name="releaseId" nillable="true" type="xsd:string" />
+            <xsd:element name="companyId" nillable="true" type="xsd:string" />
+            <xsd:element name="xmlControl" nillable="true" type="tns3:XMLControlBean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getXMLResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getXMLReturn" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getContributions">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="releaseId" nillable="true" type="xsd:string" />
+            <xsd:element name="primaryIndicator" nillable="true" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getContributionsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getContributionsReturn" nillable="true" type="impl:WSReleaseContributionResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getByContext">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="uniqueIdList" nillable="true" type="impl:ArrayOf_xsd_nillable_string" />
+            <xsd:element name="contextRepertoireType" nillable="true" type="tns2:RepertoireType" />
+            <xsd:element name="wsSearchOption" nillable="true" type="tns2:WSSearchOption" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getByContextResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getByContextReturn" nillable="true" type="impl:WSReleaseSearchResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getByIdList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="releaseIdArray" nillable="true" type="impl:ArrayOf_xsd_nillable_string" />
+            <xsd:element name="wsSearchOption" nillable="true" type="tns2:WSSearchOption" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getByIdListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getByIdListReturn" nillable="true" type="impl:ArrayOfWSRelease" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getById">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="releaseId" nillable="true" type="xsd:string" />
+            <xsd:element name="wsSearchOption" nillable="true" type="tns2:WSSearchOption" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getByIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getByIdReturn" nillable="true" type="impl:WSRelease" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getIdByUPC">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="upc" nillable="true" type="xsd:string" />
+            <xsd:element name="digitalEquivalentOnly" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="WSReleaseSearch">
+        <xsd:sequence>
+          <xsd:element name="aliasesFlag1" type="xsd:boolean" />
+          <xsd:element name="aliasesFlag2" type="xsd:boolean" />
+          <xsd:element name="aliasesFlag3" type="xsd:boolean" />
+          <xsd:element name="catalogNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="catalogNumberOption" nillable="true" type="tns2:SearchOption" />
+          <xsd:element name="closedCaptioningIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="configGroup" nillable="true" type="tns2:ConfigGroup" />
+          <xsd:element name="configId" nillable="true" type="xsd:string" />
+          <xsd:element name="contextType" nillable="true" type="xsd:string" />
+          <xsd:element name="contributionPrimaryIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="dti" nillable="true" type="xsd:string" />
+          <xsd:element name="externalKeyType" nillable="true" type="xsd:string" />
+          <xsd:element name="externalKeyValue" nillable="true" type="xsd:string" />
+          <xsd:element name="externalKeyOption" nillable="true" type="tns2:SearchOption" />
+          <xsd:element name="genre" nillable="true" type="xsd:string" />
+          <xsd:element name="grid" nillable="true" type="xsd:string" />
+          <xsd:element name="gridList" nillable="true" type="impl:ArrayOf_xsd_nillable_string" />
+          <xsd:element name="isrc" nillable="true" type="xsd:string" />
+          <xsd:element name="multiFieldIndicator" type="xsd:boolean" />
+          <xsd:element name="originatingIndicator" type="xsd:boolean" />
+          <xsd:element name="PNoticeCompilation" nillable="true" type="tns2:NoticeCompilation" />
+          <xsd:element name="releaseType" nillable="true" type="tns2:ReleaseType" />
+          <xsd:element name="releasingCompanyId" nillable="true" type="xsd:string" />
+          <xsd:element name="releasingCountryId" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceId" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceTitleExtension" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceTitleExtensionOption" nillable="true" type="tns2:SearchOption" />
+          <xsd:element name="resourceTitleOption" nillable="true" type="tns2:SearchOption" />
+          <xsd:element name="resourceVersionTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceVersionTitleOption" nillable="true" type="tns2:SearchOption" />
+          <xsd:element name="roleGroup1" nillable="true" type="tns2:RoleGroup" />
+          <xsd:element name="roleGroup2" nillable="true" type="tns2:RoleGroup" />
+          <xsd:element name="roleGroup3" nillable="true" type="tns2:RoleGroup" />
+          <xsd:element name="roleNo1" nillable="true" type="xsd:string" />
+          <xsd:element name="roleNo2" nillable="true" type="xsd:string" />
+          <xsd:element name="roleNo3" nillable="true" type="xsd:string" />
+          <xsd:element name="soundtrackIndicator" nillable="true" type="tns2:YesNoUnspecifiedIndicator" />
+          <xsd:element name="status" nillable="true" type="tns2:ReleaseStatus" />
+          <xsd:element name="talentNameId1" nillable="true" type="xsd:string" />
+          <xsd:element name="talentNameId2" nillable="true" type="xsd:string" />
+          <xsd:element name="talentNameId3" nillable="true" type="xsd:string" />
+          <xsd:element name="talentNameMask" nillable="true" type="xsd:string" />
+          <xsd:element name="talentOperator" nillable="true" type="tns2:Operator" />
+          <xsd:element name="title" nillable="true" type="xsd:string" />
+          <xsd:element name="titleOption" nillable="true" type="tns2:SearchOption" />
+          <xsd:element name="upc" nillable="true" type="xsd:string" />
+          <xsd:element name="upcOption" nillable="true" type="tns2:SearchOption" />
+          <xsd:element name="upcList" nillable="true" type="impl:ArrayOf_xsd_nillable_string" />
+          <xsd:element name="versionTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="versionTitleOption" nillable="true" type="tns2:SearchOption" />
+          <xsd:element name="workAliasesFlag" type="xsd:boolean" />
+          <xsd:element name="workId" nillable="true" type="xsd:string" />
+          <xsd:element name="workOriginalTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="workOriginalTitleOption" nillable="true" type="tns2:SearchOption" />
+          <xsd:element name="workRoleNo" nillable="true" type="xsd:string" />
+          <xsd:element name="workTalentNameId" nillable="true" type="xsd:string" />
+          <xsd:element name="workTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="workTitleOption" nillable="true" type="tns2:SearchOption" />
+          <xsd:element name="CNoticeYear" nillable="true" type="xsd:string" />
+          <xsd:element name="PNoticeYear" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOf_xsd_nillable_string">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WSReleaseSearchResult">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns2:WSSearchResult">
+            <xsd:sequence>
+              <xsd:element name="result" nillable="true" type="impl:ArrayOfWSRelease" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="WSRelease">
+        <xsd:sequence>
+          <xsd:element name="accountId" nillable="true" type="xsd:string" />
+          <xsd:element name="accountName" nillable="true" type="xsd:string" />
+          <xsd:element name="artistList" nillable="true" type="xsd:string" />
+          <xsd:element name="artistOverride" nillable="true" type="xsd:string" />
+          <xsd:element name="availabilityOverrideReason" nillable="true" type="xsd:string" />
+          <xsd:element name="available" nillable="true" type="xsd:string" />
+          <xsd:element name="boxSetIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="catalogNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="classicalCategory" nillable="true" type="xsd:string" />
+          <xsd:element name="classicalCategoryDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="classicalSubcategory" nillable="true" type="xsd:string" />
+          <xsd:element name="classicalSubcategoryDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="closedCaptioningIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="closedCaptioningReason" nillable="true" type="xsd:string" />
+          <xsd:element name="closedCaptioningReasonDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="CNoticeCompanyDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="CNoticeCompanyId" nillable="true" type="xsd:string" />
+          <xsd:element name="CNoticeExtension" nillable="true" type="xsd:string" />
+          <xsd:element name="CNoticeYear" nillable="true" type="xsd:string" />
+          <xsd:element name="companyDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="companyId" nillable="true" type="xsd:string" />
+          <xsd:element name="companyNotes" nillable="true" type="xsd:string" />
+          <xsd:element name="configDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="configGroupId" nillable="true" type="xsd:string" />
+          <xsd:element name="configId" nillable="true" type="xsd:string" />
+          <xsd:element name="contextReleaseId" nillable="true" type="xsd:string" />
+          <xsd:element name="contextType" nillable="true" type="xsd:string" />
+          <xsd:element name="countryId" nillable="true" type="xsd:string" />
+          <xsd:element name="craProjectId" nillable="true" type="xsd:string" />
+          <xsd:element name="createDate" nillable="true" type="xsd:string" />
+          <xsd:element name="digitalFormat" nillable="true" type="xsd:string" />
+          <xsd:element name="digitalFormatDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="distributionDealIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="divestedDate" nillable="true" type="xsd:string" />
+          <xsd:element name="divisionDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="divisionId" nillable="true" type="xsd:string" />
+          <xsd:element name="downstreamUse" nillable="true" type="xsd:string" />
+          <xsd:element name="downstreamUseDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="dqStatus" nillable="true" type="xsd:string" />
+          <xsd:element name="dqStatusDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="EMarketingTag" nillable="true" type="xsd:string" />
+          <xsd:element name="equivalentReleaseId" nillable="true" type="xsd:string" />
+          <xsd:element name="EReleaseLabel" nillable="true" type="xsd:string" />
+          <xsd:element name="formattedCNotice" nillable="true" type="xsd:string" />
+          <xsd:element name="formattedPNotice" nillable="true" type="xsd:string" />
+          <xsd:element name="formattedOverrideTime" nillable="true" type="xsd:string" />
+          <xsd:element name="formattedTime" nillable="true" type="xsd:string" />
+          <xsd:element name="formattedTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="genre" nillable="true" type="xsd:string" />
+          <xsd:element name="genreDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="grid" nillable="true" type="xsd:string" />
+          <xsd:element name="issuingEmployeeDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="issuingEmployeeNo" nillable="true" type="xsd:string" />
+          <xsd:element name="labelDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="labelId" nillable="true" type="xsd:string" />
+          <xsd:element name="miscellaneousCredits" nillable="true" type="xsd:string" />
+          <xsd:element name="mobileArtist" nillable="true" type="xsd:string" />
+          <xsd:element name="mobileLock" type="xsd:boolean" />
+          <xsd:element name="mobileTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="musicType" nillable="true" type="xsd:string" />
+          <xsd:element name="musicTypeDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="notes" nillable="true" type="xsd:string" />
+          <xsd:element name="npsc" nillable="true" type="xsd:string" />
+          <xsd:element name="origin" nillable="true" type="xsd:string" />
+          <xsd:element name="originDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="originCountryId" nillable="true" type="xsd:string" />
+          <xsd:element name="originCountryName" nillable="true" type="xsd:string" />
+          <xsd:element name="originalProgramming" nillable="true" type="xsd:string" />
+          <xsd:element name="originalProjectId" nillable="true" type="xsd:string" />
+          <xsd:element name="originatingIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="overrideTime" nillable="true" type="xsd:string" />
+          <xsd:element name="overrideTrackCount" nillable="true" type="xsd:string" />
+          <xsd:element name="packageIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="packagingDefinition" nillable="true" type="xsd:string" />
+          <xsd:element name="PNoticeCompanyDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="PNoticeCompanyId" nillable="true" type="xsd:string" />
+          <xsd:element name="PNoticeCompilation" nillable="true" type="xsd:string" />
+          <xsd:element name="PNoticeCompilationDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="PNoticeExtension" nillable="true" type="xsd:string" />
+          <xsd:element name="PNoticeYear" nillable="true" type="xsd:string" />
+          <xsd:element name="productionCompanyDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="productionCompanyId" nillable="true" type="xsd:string" />
+          <xsd:element name="releaseDate" nillable="true" type="xsd:string" />
+          <xsd:element name="releaseDateDay" nillable="true" type="xsd:string" />
+          <xsd:element name="releaseDateMonth" nillable="true" type="xsd:string" />
+          <xsd:element name="releaseDateYear" nillable="true" type="xsd:string" />
+          <xsd:element name="releaseId" nillable="true" type="xsd:string" />
+          <xsd:element name="releaseLocalId" nillable="true" type="xsd:string" />
+          <xsd:element name="releaseType" nillable="true" type="xsd:string" />
+          <xsd:element name="releaseTypeDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="resolutionType" nillable="true" type="xsd:string" />
+          <xsd:element name="resolutionTypeDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="royaltyAdmin" nillable="true" type="xsd:string" />
+          <xsd:element name="royaltyAdminDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="scope" nillable="true" type="xsd:string" />
+          <xsd:element name="searchInformation" nillable="true" type="xsd:string" />
+          <xsd:element name="seriesDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="seriesId" nillable="true" type="xsd:string" />
+          <xsd:element name="soundtrackIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="status" nillable="true" type="xsd:string" />
+          <xsd:element name="statusDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="thematicCategory" nillable="true" type="xsd:string" />
+          <xsd:element name="thematicCategoryDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="title" nillable="true" type="xsd:string" />
+          <xsd:element name="titleOverride" nillable="true" type="xsd:string" />
+          <xsd:element name="trackCount" nillable="true" type="xsd:string" />
+          <xsd:element name="translationIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="uniqueIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="upc" nillable="true" type="xsd:string" />
+          <xsd:element name="upcType" nillable="true" type="xsd:string" />
+          <xsd:element name="versionTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="versionTitleOverride" nillable="true" type="xsd:string" />
+          <xsd:element name="versionType" nillable="true" type="xsd:string" />
+          <xsd:element name="versionTypeDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="videoLongDescription" nillable="true" type="xsd:string" />
+          <xsd:element name="videoNetwork" nillable="true" type="xsd:string" />
+          <xsd:element name="videoNetworkDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="videoOriginalReleaseYear" nillable="true" type="xsd:string" />
+          <xsd:element name="videoRating" nillable="true" type="xsd:string" />
+          <xsd:element name="videoRatingDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="videoSeasonId" nillable="true" type="xsd:string" />
+          <xsd:element name="videoShortDescription" nillable="true" type="xsd:string" />
+          <xsd:element name="videoType" nillable="true" type="xsd:string" />
+          <xsd:element name="videoTypeDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="vodType" nillable="true" type="xsd:string" />
+          <xsd:element name="vodTypeDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="workflowStatus" nillable="true" type="xsd:string" />
+          <xsd:element name="workflowStatusDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="discOnDemandIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="originalReleaseDate" nillable="true" type="xsd:string" />
+          <xsd:element name="VNotice" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfWSRelease">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="WSRelease" nillable="true" type="impl:WSRelease" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WSGetTrackListResult">
+        <xsd:sequence>
+          <xsd:element name="result" nillable="true" type="impl:ArrayOfWSTrack" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WSTrack">
+        <xsd:sequence>
+          <xsd:element name="artistOverride" nillable="true" type="xsd:string" />
+          <xsd:element name="availableIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="contributorList" nillable="true" type="xsd:string" />
+          <xsd:element name="dti" nillable="true" type="xsd:string" />
+          <xsd:element name="formattedPauseTime" nillable="true" type="xsd:string" />
+          <xsd:element name="formattedTime" nillable="true" type="xsd:string" />
+          <xsd:element name="formattedTrackTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="ghostIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="imageIsrc" nillable="true" type="xsd:string" />
+          <xsd:element name="imageResourceId" nillable="true" type="xsd:string" />
+          <xsd:element name="isrc" nillable="true" type="xsd:string" />
+          <xsd:element name="licensingCredit" nillable="true" type="xsd:string" />
+          <xsd:element name="matrixId" nillable="true" type="xsd:string" />
+          <xsd:element name="notes" nillable="true" type="xsd:string" />
+          <xsd:element name="pauseTime" nillable="true" type="xsd:string" />
+          <xsd:element name="printMedleyIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceGroupId" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceId" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceIndexGroupId" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceTitleExtension" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceType" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceVersionTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="sequenceNo" nillable="true" type="xsd:string" />
+          <xsd:element name="sourceCatalogNumber" nillable="true" type="xsd:string" />
+          <xsd:element name="sourceSequenceNo" nillable="true" type="xsd:string" />
+          <xsd:element name="time" nillable="true" type="xsd:string" />
+          <xsd:element name="titleExtensionOverride" nillable="true" type="xsd:string" />
+          <xsd:element name="titleOverride" nillable="true" type="xsd:string" />
+          <xsd:element name="trackGroupId" nillable="true" type="xsd:string" />
+          <xsd:element name="trackGroupSequenceNo" nillable="true" type="xsd:string" />
+          <xsd:element name="trackGroupTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="trackGroupVersionTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="trackId" nillable="true" type="xsd:string" />
+          <xsd:element name="trackReleaseIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="useTitleExtensionIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="useVersionTitleIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="versionTitleOverride" nillable="true" type="xsd:string" />
+          <xsd:element name="versionTypeDisplay" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfWSTrack">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="WSTrack" nillable="true" type="impl:WSTrack" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WSGetResourceLinksResult">
+        <xsd:sequence>
+          <xsd:element name="result" nillable="true" type="impl:ArrayOfWSResourceLink" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WSResourceLink">
+        <xsd:sequence>
+          <xsd:element name="artistList" nillable="true" type="xsd:string" />
+          <xsd:element name="availableIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="category" nillable="true" type="xsd:string" />
+          <xsd:element name="isrc" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceType" nillable="true" type="xsd:string" />
+          <xsd:element name="title" nillable="true" type="xsd:string" />
+          <xsd:element name="versionTitle" nillable="true" type="xsd:string" />
+          <xsd:element name="versionType" nillable="true" type="xsd:string" />
+          <xsd:element name="primaryIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceId" nillable="true" type="xsd:string" />
+          <xsd:element name="categoryDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="colorMode" nillable="true" type="xsd:string" />
+          <xsd:element name="colorModeDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="format" nillable="true" type="xsd:string" />
+          <xsd:element name="formatDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="height" nillable="true" type="xsd:string" />
+          <xsd:element name="measurement" nillable="true" type="xsd:string" />
+          <xsd:element name="measurementDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="resolution" nillable="true" type="xsd:string" />
+          <xsd:element name="resolutionDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="resourceTypeDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="versionTypeDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="width" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfWSResourceLink">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="WSResourceLink" nillable="true" type="impl:WSResourceLink" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WSReleaseResult">
+        <xsd:sequence>
+          <xsd:element name="result" nillable="true" type="impl:ArrayOfWSRelease" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WSReleaseContributionResult">
+        <xsd:sequence>
+          <xsd:element name="result" nillable="true" type="impl:ArrayOf_tns2_nillable_WSContribution" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOf_tns2_nillable_WSContribution">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="WSContribution" nillable="true" type="tns2:WSContribution" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://common.ws.rms.umusic.com">
+      <xsd:complexType name="WSRMSException">
+        <xsd:sequence>
+          <xsd:element name="errorCode" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="WSRMSException" nillable="true" type="tns2:WSRMSException" />
+      <xsd:simpleType name="SearchOption">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="CONTAINS" />
+          <xsd:enumeration value="EXACT_MATCH" />
+          <xsd:enumeration value="STARTS_WITH" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ConfigGroup">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ALL_" />
+          <xsd:enumeration value="8T" />
+          <xsd:enumeration value="ANL" />
+          <xsd:enumeration value="BR" />
+          <xsd:enumeration value="HY" />
+          <xsd:enumeration value="SW" />
+          <xsd:enumeration value="CA" />
+          <xsd:enumeration value="CC" />
+          <xsd:enumeration value="CD" />
+          <xsd:enumeration value="DC" />
+          <xsd:enumeration value="DK" />
+          <xsd:enumeration value="DP" />
+          <xsd:enumeration value="DT" />
+          <xsd:enumeration value="DVD" />
+          <xsd:enumeration value="EL" />
+          <xsd:enumeration value="LD" />
+          <xsd:enumeration value="MC" />
+          <xsd:enumeration value="MD" />
+          <xsd:enumeration value="MED" />
+          <xsd:enumeration value="MOB" />
+          <xsd:enumeration value="MX" />
+          <xsd:enumeration value="OR" />
+          <xsd:enumeration value="SCD" />
+          <xsd:enumeration value="UMD" />
+          <xsd:enumeration value="VC" />
+          <xsd:enumeration value="VI" />
+          <xsd:enumeration value="GENM" />
+          <xsd:enumeration value="MER" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="NoticeCompilation">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ALL_" />
+          <xsd:enumeration value="MLTART" />
+          <xsd:enumeration value="NONEXX" />
+          <xsd:enumeration value="SNGART" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ReleaseType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ALL_" />
+          <xsd:enumeration value="COMMER" />
+          <xsd:enumeration value="HISTLP" />
+          <xsd:enumeration value="PREMIU" />
+          <xsd:enumeration value="PROMOT" />
+          <xsd:enumeration value="THRDPT" />
+          <xsd:enumeration value="LICOUT" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="RoleGroup">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ALL_" />
+          <xsd:enumeration value="ACTOR_" />
+          <xsd:enumeration value="DIRECT_" />
+          <xsd:enumeration value="ARRANG" />
+          <xsd:enumeration value="ARTIST" />
+          <xsd:enumeration value="ARTWRK" />
+          <xsd:enumeration value="MUSSYN" />
+          <xsd:enumeration value="MUSENS" />
+          <xsd:enumeration value="WRITER" />
+          <xsd:enumeration value="VIDPRO" />
+          <xsd:enumeration value="PRODCR" />
+          <xsd:enumeration value="OTHER" />
+          <xsd:enumeration value="MUSWOO" />
+          <xsd:enumeration value="MUSVOC" />
+          <xsd:enumeration value="MUSSTR" />
+          <xsd:enumeration value="MUSPER" />
+          <xsd:enumeration value="OTHER2" />
+          <xsd:enumeration value="WRITR2" />
+          <xsd:enumeration value="GRAPHA" />
+          <xsd:enumeration value="PHOTOG" />
+          <xsd:enumeration value="MUSOTH" />
+          <xsd:enumeration value="MUSKEY" />
+          <xsd:enumeration value="ENGIN" />
+          <xsd:enumeration value="MIXER" />
+          <xsd:enumeration value="MSTENG" />
+          <xsd:enumeration value="MUSBRS" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="YesNoUnspecifiedIndicator">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ALL_" />
+          <xsd:enumeration value="Y" />
+          <xsd:enumeration value="N" />
+          <xsd:enumeration value="U" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ReleaseStatus">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ALL_" />
+          <xsd:enumeration value="DRAFT" />
+          <xsd:enumeration value="QUALITY" />
+          <xsd:enumeration value="AVAILABLE" />
+          <xsd:enumeration value="FINAL" />
+          <xsd:enumeration value="CANCELLED" />
+          <xsd:enumeration value="INACTIVE" />
+          <xsd:enumeration value="TERMINATED" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Operator">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="AND" />
+          <xsd:enumeration value="OR" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="WSSearchOption">
+        <xsd:sequence>
+          <xsd:element name="companyId" nillable="true" type="xsd:string" />
+          <xsd:element name="countryId" nillable="true" type="xsd:string" />
+          <xsd:element name="maxResultRows" nillable="true" type="xsd:string" />
+          <xsd:element name="verbose" type="xsd:boolean" />
+          <xsd:element name="direction" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="AccountScope">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ALL" />
+          <xsd:enumeration value="OWNED" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="WSSearchResult">
+        <xsd:sequence>
+          <xsd:element name="duration" type="xsd:long" />
+          <xsd:element name="searchType" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="WSContribution">
+        <xsd:sequence>
+          <xsd:element name="contributionId" nillable="true" type="xsd:string" />
+          <xsd:element name="labelCopyCredit" nillable="true" type="xsd:string" />
+          <xsd:element name="primaryIndicator" nillable="true" type="xsd:string" />
+          <xsd:element name="musicianContractCategory" nillable="true" type="xsd:string" />
+          <xsd:element name="musicianContractCategoryDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="note" nillable="true" type="xsd:string" />
+          <xsd:element name="repertoireType" nillable="true" type="xsd:string" />
+          <xsd:element name="roleDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="roleGroup" nillable="true" type="xsd:string" />
+          <xsd:element name="roleGroupDisplay" nillable="true" type="xsd:string" />
+          <xsd:element name="roleNo" nillable="true" type="xsd:string" />
+          <xsd:element name="sequenceNo" nillable="true" type="xsd:string" />
+          <xsd:element name="sessionId" nillable="true" type="xsd:string" />
+          <xsd:element name="talentName" nillable="true" type="xsd:string" />
+          <xsd:element name="talentNameId" nillable="true" type="xsd:string" />
+          <xsd:element name="uniqueId" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="RepertoireType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="RESOURCE" />
+          <xsd:enumeration value="RELEASE" />
+          <xsd:enumeration value="PROJECT" />
+          <xsd:enumeration value="PEOPLE" />
+          <xsd:enumeration value="WORK" />
+          <xsd:enumeration value="COMPANY" />
+          <xsd:enumeration value="RESOURCE_GROUP" />
+          <xsd:enumeration value="SERIES" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xml.util.rms.umusic.com">
+      <xsd:complexType name="XMLControlBean">
+        <xsd:sequence>
+          <xsd:element name="includePackageComponents" type="xsd:boolean" />
+          <xsd:element name="includeReleaseAssociations" type="xsd:boolean" />
+          <xsd:element name="includeReleases" type="xsd:boolean" />
+          <xsd:element name="includeReleaseTracks" type="xsd:boolean" />
+          <xsd:element name="includeResourceAssociations" type="xsd:boolean" />
+          <xsd:element name="includeResourceLinks" type="xsd:boolean" />
+          <xsd:element name="includeResources" type="xsd:boolean" />
+          <xsd:element name="includeSecondaryContributions" type="xsd:boolean" />
+          <xsd:element name="includeWorkPublishers" type="xsd:boolean" />
+          <xsd:element name="includeWorks" type="xsd:boolean" />
+          <xsd:element name="verboseMode" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getByIdResponse">
+    <wsdl:part name="parameters" element="impl:getByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="getByContextResponse">
+    <wsdl:part name="parameters" element="impl:getByContextResponse" />
+  </wsdl:message>
+  <wsdl:message name="getBySearchResponse">
+    <wsdl:part name="parameters" element="impl:getBySearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTrackListRequest">
+    <wsdl:part name="parameters" element="impl:getTrackList" />
+  </wsdl:message>
+  <wsdl:message name="getByUPCRequest">
+    <wsdl:part name="parameters" element="impl:getByUPC" />
+  </wsdl:message>
+  <wsdl:message name="getByUPCResponse">
+    <wsdl:part name="parameters" element="impl:getByUPCResponse" />
+  </wsdl:message>
+  <wsdl:message name="getContributionsResponse">
+    <wsdl:part name="parameters" element="impl:getContributionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getIdByUPCResponse">
+    <wsdl:part name="parameters" element="impl:getIdByUPCResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTrackListResponse">
+    <wsdl:part name="parameters" element="impl:getTrackListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getByIdRequest">
+    <wsdl:part name="parameters" element="impl:getById" />
+  </wsdl:message>
+  <wsdl:message name="getIdByUPCRequest">
+    <wsdl:part name="parameters" element="impl:getIdByUPC" />
+  </wsdl:message>
+  <wsdl:message name="getXMLResponse">
+    <wsdl:part name="parameters" element="impl:getXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="getBySearchRequest">
+    <wsdl:part name="parameters" element="impl:getBySearch" />
+  </wsdl:message>
+  <wsdl:message name="getByIdListRequest">
+    <wsdl:part name="parameters" element="impl:getByIdList" />
+  </wsdl:message>
+  <wsdl:message name="getByContextRequest">
+    <wsdl:part name="parameters" element="impl:getByContext" />
+  </wsdl:message>
+  <wsdl:message name="getContributionsRequest">
+    <wsdl:part name="parameters" element="impl:getContributions" />
+  </wsdl:message>
+  <wsdl:message name="getResourceLinksRequest">
+    <wsdl:part name="parameters" element="impl:getResourceLinks" />
+  </wsdl:message>
+  <wsdl:message name="WSRMSException">
+    <wsdl:part name="fault" element="tns2:WSRMSException" />
+  </wsdl:message>
+  <wsdl:message name="getXMLRequest">
+    <wsdl:part name="parameters" element="impl:getXML" />
+  </wsdl:message>
+  <wsdl:message name="getLocalListResponse">
+    <wsdl:part name="parameters" element="impl:getLocalListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLocalListRequest">
+    <wsdl:part name="parameters" element="impl:getLocalList" />
+  </wsdl:message>
+  <wsdl:message name="getByIdListResponse">
+    <wsdl:part name="parameters" element="impl:getByIdListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getResourceLinksResponse">
+    <wsdl:part name="parameters" element="impl:getResourceLinksResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WSReleaseSearchService">
+    <wsdl:operation name="getIdByUPC">
+      <wsdl:input name="getIdByUPCRequest" message="impl:getIdByUPCRequest" />
+      <wsdl:output name="getIdByUPCResponse" message="impl:getIdByUPCResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+    <wsdl:operation name="getBySearch">
+      <wsdl:input name="getBySearchRequest" message="impl:getBySearchRequest" />
+      <wsdl:output name="getBySearchResponse" message="impl:getBySearchResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+    <wsdl:operation name="getTrackList">
+      <wsdl:input name="getTrackListRequest" message="impl:getTrackListRequest" />
+      <wsdl:output name="getTrackListResponse" message="impl:getTrackListResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+    <wsdl:operation name="getResourceLinks">
+      <wsdl:input name="getResourceLinksRequest" message="impl:getResourceLinksRequest" />
+      <wsdl:output name="getResourceLinksResponse" message="impl:getResourceLinksResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+    <wsdl:operation name="getByUPC">
+      <wsdl:input name="getByUPCRequest" message="impl:getByUPCRequest" />
+      <wsdl:output name="getByUPCResponse" message="impl:getByUPCResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+    <wsdl:operation name="getLocalList">
+      <wsdl:input name="getLocalListRequest" message="impl:getLocalListRequest" />
+      <wsdl:output name="getLocalListResponse" message="impl:getLocalListResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+    <wsdl:operation name="getXML">
+      <wsdl:input name="getXMLRequest" message="impl:getXMLRequest" />
+      <wsdl:output name="getXMLResponse" message="impl:getXMLResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+    <wsdl:operation name="getContributions">
+      <wsdl:input name="getContributionsRequest" message="impl:getContributionsRequest" />
+      <wsdl:output name="getContributionsResponse" message="impl:getContributionsResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+    <wsdl:operation name="getByContext">
+      <wsdl:input name="getByContextRequest" message="impl:getByContextRequest" />
+      <wsdl:output name="getByContextResponse" message="impl:getByContextResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+    <wsdl:operation name="getByIdList">
+      <wsdl:input name="getByIdListRequest" message="impl:getByIdListRequest" />
+      <wsdl:output name="getByIdListResponse" message="impl:getByIdListResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+    <wsdl:operation name="getById">
+      <wsdl:input name="getByIdRequest" message="impl:getByIdRequest" />
+      <wsdl:output name="getByIdResponse" message="impl:getByIdResponse" />
+      <wsdl:fault name="WSRMSException" message="impl:WSRMSException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSReleaseSearchServiceSoapBinding" type="impl:WSReleaseSearchService">
+    <wsaw:UsingAddressing wsdl:required="false" />
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getIdByUPC">
+      <wsdlsoap:operation soapAction="getIdByUPC" />
+      <wsdl:input name="getIdByUPCRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getIdByUPCResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getBySearch">
+      <wsdlsoap:operation soapAction="getBySearch" />
+      <wsdl:input name="getBySearchRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getBySearchResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTrackList">
+      <wsdlsoap:operation soapAction="getTrackList" />
+      <wsdl:input name="getTrackListRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getTrackListResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getResourceLinks">
+      <wsdlsoap:operation soapAction="getResourceLinks" />
+      <wsdl:input name="getResourceLinksRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getResourceLinksResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getByUPC">
+      <wsdlsoap:operation soapAction="getByUPC" />
+      <wsdl:input name="getByUPCRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getByUPCResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getLocalList">
+      <wsdlsoap:operation soapAction="getLocalList" />
+      <wsdl:input name="getLocalListRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getLocalListResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getXML">
+      <wsdlsoap:operation soapAction="getXML" />
+      <wsdl:input name="getXMLRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getXMLResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getContributions">
+      <wsdlsoap:operation soapAction="getContributions" />
+      <wsdl:input name="getContributionsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getContributionsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getByContext">
+      <wsdlsoap:operation soapAction="getByContext" />
+      <wsdl:input name="getByContextRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getByContextResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getByIdList">
+      <wsdlsoap:operation soapAction="getByIdList" />
+      <wsdl:input name="getByIdListRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getByIdListResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getById">
+      <wsdlsoap:operation soapAction="getById" />
+      <wsdl:input name="getByIdRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getByIdResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WSRMSException">
+        <wsdlsoap:fault use="literal" name="WSRMSException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSReleaseSearchServiceService">
+    <wsdl:port name="WSReleaseSearchService" binding="impl:WSReleaseSearchServiceSoapBinding">
+      <wsdlsoap:address location="https://r2.umusic.net:443/r2/Release/services/WSReleaseSearchService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

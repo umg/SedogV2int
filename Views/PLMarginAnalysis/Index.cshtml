@@ -1,0 +1,204 @@
+﻿@using SEDOGv2.Helpers;
+
+@{
+    ViewBag.Title = "Margin Analysis";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    @using (Html.BeginForm("Index", "PLMarginAnalysis", FormMethod.Post))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+
+            <div class="col-md-12" id="divAlert">
+                @Html.Raw(Model.Message)
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4 text-right">
+                    <div class="form-group">
+                        <h4>Escolha o ano:</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control" name="ano" id="ano">
+                            <option value="00"> -- Todos --</option>
+                            @for (int ano = 0; ano < 7; ano++)
+                            {
+                                <option value="@DateTime.Now.AddYears(-ano).ToString("yy")">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" name="Pesquisar" value="Pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+    @if (Model.PLMarginAnalysis.Count > 0)
+            {
+        <div class="panel panel-success panel-report">
+
+@using (Html.BeginForm("ExportReports", "PLMarginAnalysis", FormMethod.Post, new { @id = "Export" }))
+{
+
+
+    <div class="row">
+        <div class="col-md-1">
+            Exportar para
+        </div>
+        <div class="col-md-1">
+            @*<input type="button" class="fa fa-file-excel-o" id="btnExportExcel"/>*@
+            <button type="submit" class="btn btn-default" id="btnExportToEXCEL">
+                <i class="fa fa-file-excel-o"></i>
+            </button>
+        </div>
+
+        <div class="col-md-1">
+            @*<input type="button" class="fa fa-file-excel-o" id="btnExportExcel"/>*@
+            <button type="submit" class="btn btn-default" id="btnExportToPDF">
+                <i class="fa fa-file-pdf-o"></i>
+            </button>
+        </div>
+
+        <div class="col-md-1">
+            <input type="hidden" id="dadosTable" name="dadosTable" />
+            <input type="hidden" id="doctype" name="doctype" />
+            <input type="hidden" id="reportName" name="reportName" value="MarginAnalysis.rpt" />
+            <input type="hidden" id="printName" name="printName" value="MarginAnalysis" />
+        </div>
+        <div class="col-md-8 text-right">
+            <h3>@ViewBag.Ano</h3>
+        </div>
+    </div>
+}
+
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    @foreach (SEDOGv2.Models.PLMarginAnalysis itemDistinct in Model.DistinctRelease)
+                    {
+                        var aux = Model.GetMarginByRelease(itemDistinct.ID_TIPO_RELEASE);
+                        if (aux != null && aux.Count > 0)
+                        {
+                            <div>
+                                <ul class="nav nav-tabs">
+                                    <li role="presentation" class="active"><a href="#">@itemDistinct.TIPO_RELEASE</a></li>
+                                    <li role="presentation" class="showMoreTablePLMargin"><a href="#"><i class="fa fa-plus"></i>&nbsp;Colunas</a></li>
+                                </ul>
+                                <table class="table table-bordered tablePLMargin">
+                                    <tr class="bg-default reportHeader">
+                                        <th>Artist</th>
+                                        <th>Album</th>
+                                        <th class="colHiddenTablePLMargin hidden">Physical Income</th>
+                                        <th class="colHiddenTablePLMargin hidden">Digital Income</th>
+                                        <th class="colHiddenTablePLMargin hidden">Broadcast Income</th>
+                                        <th class="colHiddenTablePLMargin hidden">360 / GTS Income</th>
+                                        <th>Total Income</th>
+                                        <th class="colHiddenTablePLMargin hidden">Physical Margin</th>
+                                        <th class="colHiddenTablePLMargin hidden">Digital Margin</th>
+                                        <th class="colHiddenTablePLMargin hidden">Broadcast Margin</th>
+                                        <th class="colHiddenTablePLMargin hidden">360 / GTS Margin</th>
+                                        <th>Total Margin</th>
+                                        <th>Marketing + Initial Costs</th>
+                                        <th>Recording Costs</th>
+                                        <th>Profit / Loss</th>
+                                        <th>%</th>
+                                    </tr>
+                                    @foreach (SEDOGv2.Models.PLMarginAnalysis item in aux)
+                                    {
+                                        <tr>
+                                            <td>@item.Artista</td>
+                                            <td>@item.Projeto</td>
+                                            <td class="colHiddenTablePLMargin hidden">@string.Format("{0:N0}", @item.FISICAL_INCOME)</td>
+                                            <td class="colHiddenTablePLMargin hidden">@string.Format("{0:N0}", @item.DIGITAL_INCOME)</td>
+                                            <td class="colHiddenTablePLMargin hidden">@string.Format("{0:N0}", @item.BROADCAST_INCOME)</td>
+                                            <td class="colHiddenTablePLMargin hidden">@string.Format("{0:N0}", @item.NB_INCOME)</td>
+                                            <td>@string.Format("{0:N0}", @item.TOTAL_INCOME)</td>
+                                            <td class="colHiddenTablePLMargin hidden">@string.Format("{0:N0}", @item.FISICAL_MARGIN)</td>
+                                            <td class="colHiddenTablePLMargin hidden">@string.Format("{0:N0}", @item.DIGITAL_MARGIN)</td>
+                                            <td class="colHiddenTablePLMargin hidden">@string.Format("{0:N0}", @item.BROADCAST_MARGIN)</td>
+                                            <td class="colHiddenTablePLMargin hidden">@string.Format("{0:N0}", @item.NB_MARGIN)</td>
+                                            <td>@string.Format("{0:N0}", @item.TOTAL_MARGIN)</td>
+                                            <td>@string.Format("{0:N0}", @item.MARKETING_INITIAL_COSTS)</td>
+                                            <td>@string.Format("{0:N0}", @item.RECORDING_COSTS)</td>
+                                            <td>@string.Format("{0:N0}", @item.PROFIT_LOSS)</td>
+                                            <td>@string.Format("{0:P1}", @item.Percent)</td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+        </div>
+    }
+
+
+    <script type="text/javascript">
+
+    $(function () {
+        $("#btnExportToPDF").click(function () {
+
+            $("#doctype").val("pdf");
+            $("#Export").submit();
+        });
+    });
+
+
+
+    $(function () {
+        $("#btnExportToEXCEL").click(function () {
+            /*var HeaderReport;
+            HeaderReport = "<b><table >";
+            HeaderReport = HeaderReport + "<tr><td colspan='3'>";
+            HeaderReport = HeaderReport + "PERÍODO: " + $("#IDPeriodo").text();
+            HeaderReport = HeaderReport + "</td></tr>";
+            HeaderReport = HeaderReport + "<tr><td colspan='3'>";
+            HeaderReport = HeaderReport + "Mês: " + $("#IDMes").text();
+            HeaderReport = HeaderReport + "</td></tr>";
+            HeaderReport = HeaderReport + "</table></b><br >";*/
+
+
+            //var dados = encodeURI($("#tbExcel").html());
+
+            $("#doctype").val("xls");
+            //$("#dadosTable").val(dados);
+
+            $("#Export").submit();
+        });
+    });
+
+    $(document).ready(function () {
+        $(".showMoreTablePLMargin").click(function () {
+            $(this).find('a i').toggleClass('fa-plus');
+            $(this).find('a i').toggleClass('fa-minus');
+            $(this).parent().parent().find('.colHiddenTablePLMargin').toggleClass('hidden');
+            $(this).parent().parent().find('table, table th, table tbody td').toggleClass('fontSmall');
+        });
+    });
+
+    </script>
+
+
+</div>

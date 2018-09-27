@@ -1,0 +1,27 @@
+﻿@using SEDOGv2.Models;
+@{
+    ViewBag.Title = "ProcuraProjetosPorISRCs";
+    //Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+<div id="mainContent">
+    <div class="input-group">
+        <input type="text" class="form-control input-md" id="pesquisaProjetoPorISRCs" placeholder="ISRCS List" />
+        <span class="input-group-btn">
+            <button class="btn btn-default btn-md" type="button" id="btnProcuraProjetosPorISRCs"><i class="fa fa-search"></i></button>
+        </span>
+    </div>
+    <p>&nbsp;</p>
+    <div id="tableSortPaggingDivProj">
+        <table class="table table-striped table-bordered table-inline tableSortPaggingDivProj" cellspacing="0" width="100%">
+            <thead>
+                <tr class="bg-default">
+                    <th>Artist Code</th>
+                    <th>Artist</th>
+                    <th>Project Code</th>
+                    <th>Project</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>

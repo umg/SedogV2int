@@ -1,0 +1,294 @@
+﻿@using SEDOGv2.Helpers;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+    int c = 0;
+}
+
+<div class="container-fluid">
+
+    @using (Html.BeginForm("Index", "DespesaDeMarketingPorArtista", FormMethod.Post, new { id = "FormDespesaDeMarketingPorArtista1" }))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+            <div class="col-md-12" runat="server" id="divAlert">
+                @Html.Raw(Model.Message)
+            </div>
+
+            <div class="row">
+                <div class="col-md-1 text-right">
+                    <div class="form-group">
+                        <h4>Período:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="selTipo">
+                            <option value="ANO">Ano Corrente</option>
+                            <option value="LAN">Desde o Lançamento</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1 text-right">
+                    <div class="form-group">
+                        <h4>Até:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="selMes">
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2 text-right">
+                    <div class="form-group">
+                        <h4>Artista:</h4>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input type="text" name="txtArtistaProduto" class="form-control" placeholder="Digite o artista ou projeto" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input type="submit" name="btnGerarRelatorios" value="pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+
+    @if (Model.DespesaDeMarketingPorArtistaReport.Count > 0)
+    {
+        <div class="panel panel-success panel-report">
+            <div class="row reportHeader">
+                <div class="col-md-11 text-left"><h2>@ViewBag.Artista</h2></div>
+                <div class="col-md-1 text-right">
+                    <button type="submit" class="btn btn-default printPDF">
+                        <i class="fa fa-file-pdf-o fa-4"></i>
+                    </button>
+                    <button type="submit" class="btn btn-default printExcel">
+                        <i class="fa fa-file-excel-o fa-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-striped text-small">
+                        <tr class="bg-default">
+                            <th>Artista</th>
+                            <th>Projeto</th>
+                            <th>Custo Inicial</th>
+                            <th>TV</th>
+                            <th>Rádio</th>
+                            <th>Mídia Online</th>
+                            <th>Imprensa</th>
+                            <th>Merchandising</th>
+                            <th>Outros</th>
+                            <th>Amostras</th>
+                            <th>Ações Promo/Outros</th>
+                            <th>Videoclips</th>
+                            <th>Freelancers</th>
+                            <th>Clipping</th>
+                            <th>NBD</th>
+                            <th>Digital</th>
+                            <th>Publicidade Online</th>
+                        </tr>
+                        @foreach (SEDOGv2.Models.DespesasDeMarketingPorArtista item in Model.DespesaDeMarketingPorArtistaReport)
+                        {
+                            <tr>
+                                <td>@item.ARTISTA)</td>
+                                <td>@item.MCDL01</td>
+                                <td>@string.Format("{0:C2}", item.CUSTO_INICIAL)</td>
+                                <td>@string.Format("{0:C2}", item.TV)</td>
+                                <td>@string.Format("{0:C2}", item.RADIO)</td>
+                                <td>@string.Format("{0:C2}", item.MIDIA_ON_LINE)</td>
+                                <td>@string.Format("{0:C2}", item.IMPRENSA)</td>
+                                <td>@string.Format("{0:C2}", item.MERCHANDISING)</td>
+                                <td>@string.Format("{0:C2}", item.OUTROS)</td>
+                                <td>@string.Format("{0:C2}", item.AMOSTRAS)</td>
+                                <td>@string.Format("{0:C2}", item.ACAO_PROMO_OUTROS)</td>
+                                <td>@string.Format("{0:C2}", item.VIDEOCLIPS)</td>
+                                <td>@string.Format("{0:C2}", item.FREELANCERS)</td>
+                                <td>@string.Format("{0:C2}", item.CLIPPING)</td>
+                                <td>@string.Format("{0:C2}", item.NBD)</td>
+                                <td>@string.Format("{0:C2}", item.DIGITAL)</td>
+                                <td>@string.Format("{0:C2}", item.PUBLICIDADE_ON_LINE)</td>
+                            </tr>
+                        }
+                        <tr>
+                            <th colspan="2" class="text-right">Total:</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotCUSTO_INICIAL)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotTV)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotRADIO)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotMIDIA_ON_LINE)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotIMPRENSA)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotMERCHANDISING)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotOUTROS)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotAMOSTRAS)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotACAO_PROMO_OUTROS)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotVIDEOCLIPS)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotFREELANCERS)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotCLIPPING)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotNBD)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotDIGITAL)</th>
+                            <th>@string.Format("{0:C2}", ViewBag.TotPUBLICIDADE_ON_LINE)</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="print" style="display:none">
+            <table class="table table-bordered" width="100%" style="width:100%">
+                <tr>
+                    <td colspan="17" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                </tr>
+                <tr>
+                    <td colspan="17" style="text-align:center"><h2 style="text-align:center" class="bold">RELATÓRIO DE DESPESA DE MARKETING POR ARTISTA</h2></td>
+                </tr>
+                <tr>
+                    <td colspan="17"><h2 style="text-align:center" class="bold">@ViewBag.Artista</h2></td>
+                </tr>
+                <tr>
+                    <td colspan="17" style="text-align:center" class="bold"></td>
+                </tr>
+                <tr>
+                    <th class="box">Artista</th>
+                    <th class="box">Projeto</th>
+                    <th class="box">Custo Inicial</th>
+                    <th class="box">TV</th>
+                    <th class="box">Rádio</th>
+                    <th class="box">Mídia Online</th>
+                    <th class="box">Imprensa</th>
+                    <th class="box">Merchandising</th>
+                    <th class="box">Outros</th>
+                    <th class="box">Amostras</th>
+                    <th class="box">Ações Promo/Outros</th>
+                    <th class="box">Videoclips</th>
+                    <th class="box">Freelancers</th>
+                    <th class="box">Clipping</th>
+                    <th class="box">NBD</th>
+                    <th class="box">Digital</th>
+                    <th class="box">Publicidade Online</th>
+                </tr>
+                @foreach (SEDOGv2.Models.DespesasDeMarketingPorArtista item in Model.DespesaDeMarketingPorArtistaReport)
+                {
+                    <tr>
+                        <td class="altRow_@(c % 2)">@item.ARTISTA</td>
+                        <td class="altRow_@(c % 2)">@item.MCDL01</td>
+                        <td class="altRow_@(c % 2)">@item.CUSTO_INICIAL</td>
+                        <td class="altRow_@(c % 2)">@item.TV</td>
+                        <td class="altRow_@(c % 2)">@item.RADIO</td>
+                        <td class="altRow_@(c % 2)">@item.MIDIA_ON_LINE</td>
+                        <td class="altRow_@(c % 2)">@item.IMPRENSA</td>
+                        <td class="altRow_@(c % 2)">@item.MERCHANDISING</td>
+                        <td class="altRow_@(c % 2)">@item.OUTROS</td>
+                        <td class="altRow_@(c % 2)">@item.AMOSTRAS</td>
+                        <td class="altRow_@(c % 2)">@item.ACAO_PROMO_OUTROS</td>
+                        <td class="altRow_@(c % 2)">@item.VIDEOCLIPS</td>
+                        <td class="altRow_@(c % 2)">@item.FREELANCERS</td>
+                        <td class="altRow_@(c % 2)">@item.CLIPPING</td>
+                        <td class="altRow_@(c % 2)">@item.NBD</td>
+                        <td class="altRow_@(c % 2)">@item.DIGITAL</td>
+                        <td class="altRow_@(c % 2)">@item.PUBLICIDADE_ON_LINE</td>
+                    </tr>
+                    c++;
+                }
+                <tr>
+                    <td colspan="2" class="bold">Total:</td>
+                    <td class="bold">@ViewBag.TotCUSTO_INICIAL</td>
+                    <td class="bold">@ViewBag.TotTV</td>
+                    <td class="bold">@ViewBag.TotRADIO</td>
+                    <td class="bold">@ViewBag.TotMIDIA_ON_LINE</td>
+                    <td class="bold">@ViewBag.TotIMPRENSA</td>
+                    <td class="bold">@ViewBag.TotMERCHANDISING</td>
+                    <td class="bold">@ViewBag.TotOUTROS</td>
+                    <td class="bold">@ViewBag.TotAMOSTRAS</td>
+                    <td class="bold">@ViewBag.TotACAO_PROMO_OUTROS</td>
+                    <td class="bold">@ViewBag.TotVIDEOCLIPS</td>
+                    <td class="bold">@ViewBag.TotFREELANCERS</td>
+                    <td class="bold">@ViewBag.TotCLIPPING</td>
+                    <td class="bold">@ViewBag.TotNBD</td>
+                    <td class="bold">@ViewBag.TotDIGITAL</td>
+                    <td class="bold">@ViewBag.TotPUBLICIDADE_ON_LINE</td>
+                </tr>
+            </table>
+
+        </div>
+    }
+
+    @using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+    {
+        <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+        <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $("#datepicker").datepicker({
+                language: 'pt-BR',
+                orientation: 'auto top',
+                autoclose: true,
+                clearBtn: true,
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years",
+                clearBtn:true
+            });
+            //$('#datepicker').datepicker('setDate', new Date(@DateTime.Now.Year.ToString(), 1, 1));
+            //$("#my_hidden_input_date").val($("#datepicker").datepicker('getFormattedDate'));
+            function checkALL(x) {
+
+                if (x.checked) {
+                    $("input:checkbox").prop('checked', true);
+                }
+                else {
+                    $("input:checkbox").prop('checked', false);
+                }
+            }
+
+            $("#datepicker").on("changeDate", function (event) {
+                $("#my_hidden_input_date").val($("#datepicker").datepicker('getFormattedDate'));
+            });
+            $("#chkAll").click(function () { checkALL(this); });
+
+            $("#FormDigitalCustomerUsageType2").submit(function (event) {
+                if ($("input:checked").length > 0){
+                    return;
+                }
+                $('#pleaseWaitDialog').modal('toggle');
+                event.preventDefault();
+            });
+        });
+
+    </script>
+
+</div>

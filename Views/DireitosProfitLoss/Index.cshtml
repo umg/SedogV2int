@@ -1,0 +1,190 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@{
+    ViewBag.Title = "Profit & Loss";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<style type="text/css">
+    .li-loading {
+        float: right;
+        margin-right: 6px;
+        margin-top: -23px;
+        position: relative;
+        z-index: 2;
+    }
+</style>
+
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+    <!-- Default panel contents -->
+    <div class="row">
+        <div class="panel-heading  text-center">
+            <h2>
+                @appSettings.pageName()
+            </h2>
+        </div>
+    </div>
+
+    <div class="col-md-12 alertMessage" runat="server" id="divAlert">
+        @Html.Raw(ViewBag.Message)
+    </div>
+
+    @using (Html.BeginForm("Index", "DireitosProfitLoss", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <br />
+                    <input type="radio" id="contratoTodos"
+                           name="contrato" value="0|Todos" checked="@(ViewBag.contrato == "0")">
+                    <label for="contratoTodos">Todos</label>
+                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    <input type="radio" id="contratoUMG"
+                           name="contrato" value="1|Universal Music" checked="@(ViewBag.contrato == "1")">
+                    <label for="contratoUMG">Universal Music</label>
+                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    <input type="radio" id="contratoJV"
+                           name="contrato" value="2|Joint Venture" checked="@(ViewBag.contrato == "2")">
+                    <label for="contratoJV">Joint Venture</label>
+                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    <input type="radio" id="contratoProjeto"
+                           name="contrato" value="3|Projeto" checked="@(ViewBag.contrato == "3")">
+                    <label for="contratoProjeto">Projeto</label>
+                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+
+            <div id="spanProjeto" style="visibility:visible;">
+                <div class="col-md-1">
+
+                    <div class="form-group">
+                        <label style="font-size:18px; font-weight: bold;">Projeto</label>
+                    </div>
+
+                </div>
+
+                <div class="col-md-8">
+
+                    <div class="form-group">
+                        <input class="typeahead form-control" placeholder="Artista" id="typeAheadArtista" name="nomeArtista" value="" /><i id="loading" class="fa fa-cog fa-spin fa-fw hidden li-loading"></i>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <input type="submit" name="buscar" value="Gerar Relatório" class="btn btn-default btn-lg btn-block" />
+            </div>
+
+        </div>
+
+        <div class="row" id="spanContratos" style="visibility:hidden;">
+            <div class="col-md-12">
+                <h4>Projetos</h4>
+            </div>
+                @if (Model != null)
+                {
+                    foreach (SEDOGv2.Models.PL_Projeto_Sedog item in Model._PLProjetos)
+                    {
+                        <div class="col-md-3" data-contrato="@item.ID_TIPO_CONTRATO">
+                            <label data-contrato="@item.ID_TIPO_CONTRATO" for="@item.IDPROJ_SEDOG"><input type="checkbox" id="@item.IDPROJ_SEDOG" name="chkProjetos" value="@string.Concat(item.IDPROJ_SEDOG, '|', item.PROJETO)" data-contrato="@item.ID_TIPO_CONTRATO" />&nbsp;@item.PROJETO</label>
+                        </div>
+                    }
+                }
+        </div>
+
+    }
+
+
+                    <script>
+                        $("input[name*='contrato']").on('change', function (e) {
+                            if (this.value.includes("3")) //3|Projeto
+                            {
+                                $("#spanProjeto").css('visibility', 'visible');
+                                $("#spanContratos").css('visibility', 'hidden');
+
+                                $("input[name*='buscar']").attr('value', 'Gerar Relatório');
+                            }
+                            else {
+                                $("#spanProjeto").css('visibility', 'hidden');
+                                $("#spanContratos").css('visibility', 'visible');
+
+                                $("input[name*='buscar']").attr('value', 'Enviar e-mail');
+                            }
+
+                            if (this.value.includes("0"))
+                            {
+                               // $("label[data-contrato='1']").css('visibility', 'visible');
+                                //$("label[data-contrato='2']").css('visibility', 'visible');
+
+                                $("div[data-contrato='1']").show();
+                                $("div[data-contrato='2']").show();
+                                $("input[name='chkProjetos']").prop('checked', true);
+                            }
+                            else if(this.value.includes("1"))
+                            {
+                                //$("label[data-contrato='1']").css('visibility', 'visible');
+                                //$("label[data-contrato='2']").css('visibility', 'hidden');
+                                $("div[data-contrato='1']").show();
+                                $("div[data-contrato='2']").hide();
+
+                                $("input[name='chkProjetos'][data-contrato='1']").prop('checked', true);
+                                $("input[name='chkProjetos'][data-contrato='2']").prop('checked', false);
+                            }
+                            else if (this.value.includes("2")) {
+                               // $("label[data-contrato='2']").css('visibility', 'visible');
+                                // $("label[data-contrato='1']").css('visibility', 'hidden');
+                                $("div[data-contrato='2']").show();
+                                $("div[data-contrato='1']").hide();
+                                $("input[name='chkProjetos'][data-contrato='2']").prop('checked', true);
+                                $("input[name='chkProjetos'][data-contrato='1']").prop('checked', false);
+                            }
+
+                        });
+
+
+
+
+                        /*Começa a rodar o script somente depois que o documento esteja pronto*/
+                        $(document).ready(function () {
+
+                            /*Procura os projetos do artista selecionado*/
+                            /*Procura artista autocomplete - inicio*/
+                            var uriServico = "@Url.Action("ProjetoLookup", "DireitosProfitLoss")";
+                            $('#typeAheadArtista').typeahead(
+                        {
+                            hint: true,
+                            highlight: true,
+                            minLength: 3
+                        },
+                        {
+                            name: 'artistas',
+                            source: function (query, process) {
+                                $('#loading').removeClass('hidden');
+                                var artistas = [];
+                                map = {};
+                                return $.post(uriServico, { term: query }, function (data) {
+                                    $.each(data, function (i, artist) {
+                                        map[artist.ARTISTNAME] = artist;
+                                        artistas.push({ value: artist.IDProj_SEDOG + " - " + artist.ProjectName + "", id: artist.IDProj_SEDOG, });
+                                    });
+                                    process(artistas);
+                                    $('#loading').addClass('hidden');
+                                });
+                            }
+                        }).on("click", function (e) {
+                            var s = $('#typeAheadArtista.tt-input').val().split(' -')[0];
+                            $('#typeAheadArtista').attr("placeholder", s);
+                            $('#typeAheadArtista').val('');
+                        });
+                            /*Procura artista autocomplete - fim*/
+                        });
+                    </script>
+
+
+
+                </div>
+            </div>

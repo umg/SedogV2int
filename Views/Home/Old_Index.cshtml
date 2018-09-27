@@ -1,0 +1,544 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+<style>
+     #containment-wrapper .barraTitulo {
+        cursor: move;
+    }
+    .portlet-placeholder {
+        border: 1px dotted black;
+        margin: 0 1em 1em 0;
+        height: 50px;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="container col-md-12 col-xs-12 col-sm-12" id="containment-wrapper">
+            <div class="row col-md-12 col-xs-12 col-sm-12 rowFlex">
+                <div class="col-md-5 grafico hvr-float-shadow text-align">
+                    <h4 class="barraTitulo"><i class="fa fa-thermometer-three-quarters"></i>&nbsp;A&R</h4>
+                    <div class="graficoContainer">
+                        <table class="table table-condensed tblProgress">
+                            @foreach (TopProfitLossHomeViewModel item in ViewBag.TopPL)
+                            {
+                                <tr>
+                                    <td>@item.PROJETO</td>
+                                    @if (item.PROFIT_LOSS_YTD / item.PROFIT_LOSS_RTD > 0)
+                                    {
+                                        <td>
+                                            <div class="progress" style="width:100%">
+                                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                    <span class="sr-only">40% Complete (success)</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="progress" style="width:100%">
+                                                @if (Math.Round(100 * (item.PROFIT_LOSS_YTD / item.PROFIT_LOSS_RTD)) > 100)
+                                                {
+                                                    <span><i class="fa fa-exclamation-triangle"></i></span>
+                                                }
+                                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: @Math.Round(100*(item.PROFIT_LOSS_YTD / item.PROFIT_LOSS_RTD))%">
+                                                    
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <div class="progress" style="width:100%">
+                                                @if (Math.Round(-100 * (item.PROFIT_LOSS_YTD / item.PROFIT_LOSS_RTD)) > 100)
+                                                {
+                                                    <span accesskey=""><i class="fa fa-exclamation-triangle"></i></span>
+                                                }
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: @Math.Round(-100*(item.PROFIT_LOSS_YTD / item.PROFIT_LOSS_RTD))%; display: block; float: right;">
+                                                    
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="progress" style="width:100%">
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                    <span class="sr-only"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-5 grafico hvr-float-shadow text-align">
+                    <h4 class="barraTitulo"><i class="fa fa-thermometer-three-quarters"></i>&nbsp;A&R</h4>
+                    <div class="graficoContainer">
+                        <table class="table table-condensed table-striped table-hover">
+                            <tr>
+                                <th></th>
+                                <th>Artista</th>
+                                <th>Projeto</th>
+                                <th>P&amp;L YTD</th>
+                                <th>P&amp;L RTD</th>
+                            </tr>
+                            @foreach (TopProfitLossHomeViewModel item in ViewBag.TopPL)
+                            {
+                                <tr>
+                                    @if (item.PROFIT_LOSS_RTD > 0)
+                                    {   
+                                        <td style="color:#86bf86"><i class="fa fa-thumbs-up"></i></td>
+                                    }
+                                    else
+                                    {
+                                        <td style="color:#FF0000"><i class="fa fa-thumbs-down"></i></td>
+                                    }
+                                    <td>@item.ARTISTA</td>
+                                    <td>@item.PROJETO</td>
+                                    @if (item.PROFIT_LOSS_YTD > 0)
+                                    {
+                                        <td>@string.Format("{0:C2}", item.PROFIT_LOSS_YTD)</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="color:#ff0000">@string.Format("{0:C2}", item.PROFIT_LOSS_YTD)</td>
+                                    }
+                                    @if (item.PROFIT_LOSS_RTD > 0)
+                                    {
+                                        <td>@string.Format("{0:C2}", item.PROFIT_LOSS_RTD)</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="color:#ff0000">@string.Format("{0:C2}", item.PROFIT_LOSS_RTD)</td>
+                                    }
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-7 grafico hvr-float-shadow text-align">
+                    <h4 class="barraTitulo"><i class="fa fa-thermometer-three-quarters"></i>&nbsp;Scoreboard<div class="pull-right">Fcast<label class="switch"><input type="checkbox" class="switchCheckBox" id="switchCheckBox"><div class="slider"></div></label>&nbsp;Plan</div></h4>
+                    <div class="graficoContainer">
+                        <div class="hud futuristic text-center">
+                            <h5>Receita</h5>
+                            <canvas class="tanque" data-total="@ViewBag.TanqueReceita.TOTAL_ANO" data-atual="@ViewBag.TanqueReceita.YTD_REAL" data-provisao="@ViewBag.TanqueReceita.YTD" data-totalplan="@ViewBag.TanqueReceita.TOTAL_ANO_PLAN" data-provisaoplan="@ViewBag.TanqueReceita.YTD_PLAN"></canvas>
+                        </div>
+                        <div class="hud futuristic text-center">
+                            <h5>EBITDA</h5>
+                            <canvas class="tanque" data-total="@ViewBag.TanqueEbtida.TOTAL_ANO" data-atual="@ViewBag.TanqueEbtida.YTD_REAL" data-provisao="@ViewBag.TanqueEbtida.YTD" data-totalplan="@ViewBag.TanqueEbtida.TOTAL_ANO_PLAN" data-provisaoplan="@ViewBag.TanqueEbtida.YTD_PLAN"></canvas>
+                        </div>
+                        <div class="hud futuristic text-center">
+                            <h5>Gravação</h5>
+                            <canvas class="tanque" data-total="@ViewBag.TanqueGravacao.TOTAL_ANO" data-atual="@ViewBag.TanqueGravacao.YTD_REAL" data-provisao="@ViewBag.TanqueGravacao.YTD" data-totalplan="@ViewBag.TanqueGravacao.TOTAL_ANO_PLAN" data-provisaoplan="@ViewBag.TanqueGravacao.YTD_PLAN"></canvas>
+                        </div>
+                        <div class="hud futuristic text-center">
+                            <h5>Marketing</h5>
+                            <canvas class="tanque" data-total="@ViewBag.TanqueMarketing.TOTAL_ANO" data-atual="@ViewBag.TanqueMarketing.YTD_REAL" data-provisao="@ViewBag.TanqueMarketing.YTD" data-totalplan="@ViewBag.TanqueMarketing.TOTAL_ANO_PLAN" data-provisaoplan="@ViewBag.TanqueMarketing.YTD_PLAN"></canvas>
+                        </div>
+                        <div class="hud futuristic text-center">
+                            <h5>Overhead</h5>
+                            <canvas class="tanque" data-total="@ViewBag.TanqueOverHead.TOTAL_ANO" data-atual="@ViewBag.TanqueOverHead.YTD_REAL" data-provisao="@ViewBag.TanqueOverHead.YTD" data-totalplan="@ViewBag.TanqueOverHead.TOTAL_ANO_PLAN" data-provisaoplan="@ViewBag.TanqueOverHead.YTD_PLAN"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 grafico hvr-float-shadow">
+                    <h4 class="barraTitulo"><i class="fa fa-fire"></i>&nbsp;TOP 10 Profit & Loss</h4>
+                    <div class="graficoContainer">
+                        <table class="table table-condensed table-striped table-hover">
+                            <tr>
+                                <th>Artista</th>
+                                <th>Projeto</th>
+                                <th>P&amp;L YTD</th>
+                                <th>P&amp;L RTD</th>
+                            </tr>
+                            @foreach (TopProfitLossHomeViewModel item in ViewBag.TopPL)
+                            {
+                                <tr>
+                                    <td>@item.ARTISTA</td>
+                                    <td>@item.PROJETO</td>
+                                    @if (item.PROFIT_LOSS_YTD > 0)
+                                    {
+                                        <td>@string.Format("{0:C2}", item.PROFIT_LOSS_YTD)</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="color:#ff0000">@string.Format("{0:C2}", item.PROFIT_LOSS_YTD)</td>
+                                    }
+                                    @if (item.PROFIT_LOSS_RTD > 0)
+                                    {
+                                        <td>@string.Format("{0:C2}", item.PROFIT_LOSS_RTD)</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="color:#ff0000">@string.Format("{0:C2}", item.PROFIT_LOSS_RTD)</td>
+                                    }
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            @*</div>
+            <div class="row col-md-12 col-xs-12 col-sm-12">*@
+                <div class="col-md-3 grafico hvr-float-shadow">
+                    <h4 class="barraTitulo"><i class="fa fa-pie-chart"></i>&nbsp;TOP 5 Clientes </h4>
+                    <div class="graficoContainer">
+                        <canvas id="grafTopCLiente"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6 grafico hvr-float-shadow">
+                    <h4 class="barraTitulo"><i class="fa fa-line-chart"></i>&nbsp;TOP @ViewBag.TopParceirosQtd Parceiros digitais dos últimos 12 meses</h4>
+                    <div class="graficoContainer">
+                        <canvas id="grafTopParceiros"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-3 grafico hvr-float-shadow">
+                    <h4 class="barraTitulo"><i class="fa fa-pie-chart"></i>&nbsp;Digital YTD</h4>
+                    <div class="graficoContainer">
+                        <canvas id="grafTipoYTD"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container col-md-12 col-xs-12 col-sm-12">
+            <div class="row col-md-12 col-xs-12 col-sm-12">
+
+                <div class="row homeTitle"><h3 class="page-header white"><i class="fa fa-link"></i>&nbsp;Favoritos.</h3></div>
+                @foreach (var menu in appSettings._User.Menus)
+                {
+                    foreach (var smenu in menu.SubMenus.Where(d => d.Path != ""))
+                    {
+                        <div class="col-md-3 col-xs-3 col-sm-3">
+                            <div class="square hvr-float-shadow">
+                                <a href="@smenu.Path">
+                                    <div class="square-title">
+                                        <h4><i class="fa @menu.Icone"></i> @smenu.Title</h4>
+                                    </div>
+                                    <div class="body">
+                                        <p>@smenu.Descricao</p>
+                                    </div>
+                                    <div class="footer"><i class="fa fa-link"></i></div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    var dataParceiros = {
+        labels: [@Html.Raw(ViewBag.Meses)],
+
+        datasets: [
+            {
+                type: 'bar',
+                label: 'Total',
+                hidden: true,
+                data: [@ViewBag.TotalMes],
+            },
+            @foreach(var tp in ViewBag.TopParceirosGrafico)
+            {
+                <text>
+            {
+                type: 'line',
+                label: "@Html.Raw(tp.Customer)",
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: "@tp.Color",
+                borderColor: "@tp.Color",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "@tp.Color",
+                pointBackgroundColor: "@tp.Color",
+                pointBorderWidth: 1,
+                pointHoverRadius: 8,
+                pointHoverBackgroundColor: "@tp.Color",
+                pointHoverBorderColor: "@tp.Color",
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                spanGaps: false,
+                data: [@string.Join(",", tp.NetRevenue.ToArray())]
+            },
+                </text>
+            }
+
+        ]
+    };
+
+
+    var ctxParceiros = $("#grafTopParceiros");
+    var myLineTopParceirosChart = new Chart(ctxParceiros, {
+        type: 'bar',
+        data: dataParceiros,
+        options: {
+            legend: {
+                display: true
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {}
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1000000,
+                        userCallback: function (value, index, values) {
+                            value = value.toString();
+                            value = value.split(/(?=(?:...)*$)/);
+                            value = value.join('.');
+                            return '$' + value;
+                        }
+                    }
+                }]
+            },
+            tooltips: {
+                enabled: true,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || 'Other';
+                        tooltipItem.yLabel = tooltipItem.yLabel.toString();
+                        tooltipItem.yLabel = tooltipItem.yLabel.split(/(?=(?:...)*$)/);
+                        tooltipItem.yLabel = tooltipItem.yLabel.join('.');
+                        return datasetLabel + ': $' + tooltipItem.yLabel;
+                    }
+                }
+            }
+        }
+    });
+
+
+    var ctxTipoYTD = $("#grafTipoYTD");
+    var myTipoYTDChart = new Chart(ctxTipoYTD, {
+        type: 'doughnut',
+        data: {
+            labels: ["@ViewBag.TotalTypeYTD[0].TYPE", "@ViewBag.TotalTypeYTD[1].TYPE"],
+            datasets: [
+                {
+                    data: [@ViewBag.TotalTypeYTD[0].NETREVENUE, @ViewBag.TotalTypeYTD[1].NETREVENUE],
+                    backgroundColor: [
+                        "#FFA500",
+                        "#004846"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FFA500",
+                        "#004846"
+                    ]
+                }]
+        },
+        options: {
+            legend: {
+                display: true
+            },
+            tooltips: {
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        //get the concerned dataset
+                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                        //calculate the total of this data set
+                        var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                            return previousValue + currentValue;
+                        });
+                        //get the current items value
+                        var currentValue = dataset.data[tooltipItem.index];
+                        //calculate the precentage based on the total and current item, also this does a rough rounding to give a whole number
+                        var precentage = Math.floor(((currentValue / total) * 100) + 0.5);
+
+                        return precentage + "%";
+                    }
+                }
+            }
+        }
+    });
+
+
+    var ctxUTActual = $("#grafTopCLiente");
+    var myUTActualChart = new Chart(ctxUTActual, {
+        type: 'pie',
+        data: {
+            labels: [@Html.Raw(string.Join(",", ((List<TopClientesViewModel>)ViewBag.TopGraficoCliente).Select(d => string.Format("\"{0}\"", d.CLIENTE))))],
+            datasets: [
+                {
+                    label: "Clientes",
+                    backgroundColor: "#36A2EB",
+                    pointBorderColor: "#fff",
+                    pointHoverBackgroundColor: "#fff",
+                    data: [@string.Join(",", ((List<TopClientesViewModel>)ViewBag.TopGraficoCliente).Select(d => d.PERC_RECEITA_YTD.ToString().Replace(",",".")))],
+                    backgroundColor: [
+                        "rgba(0, 72, 70,1)","rgba(23,123,172,1)","rgba(255,165,0,1)","rgba(255,0,0,1)","rgba(120,120,120,1)"
+                    ]
+                }
+            ]
+        },
+        options: {
+            legend: {
+                display: true
+            },
+            tooltips: {
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                        //get the current items value
+                        var precentage = dataset.data[tooltipItem.index];
+                        return precentage + "%";
+                    }
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+
+        var checked = $("#switchCheckBox").is(":checked");
+        $('.tanque').bombaCombustivel({
+            plan:checked
+        });
+
+        //testes
+        
+
+
+        //$( ".grafico" ).draggable();
+        //$( ".grafico" ).draggable({ containment: "#containment-wrapper", scroll: false })
+
+        /*$( "#containment-wrapper .grafico" ).draggable({
+            handle: ".barraTitulo" ,
+            stack: "#containment-wrapper .grafico" ,
+            containment: "#containment-wrapper",
+            scroll: false
+        });
+        */
+        $( "#containment-wrapper .row" ).sortable({
+            connectWith: "#containment-wrapper",
+            handle: ".barraTitulo",
+            placeholder: "portlet-placeholder"
+        });
+        $( "#containment-wrapper" ).disableSelection();
+
+        //testes
+
+
+
+        /*var gravacao = $('#grafGravacao').bombaCombustivel({
+            total: @ViewBag.TanqueGravacao.TOTAL_ANO,
+            atual: @ViewBag.TanqueGravacao.YTD_REAL,
+            provisao: @ViewBag.TanqueGravacao.YTD,
+            totalPlan: @ViewBag.TanqueGravacao.TOTAL_ANO_PLAN,
+            provisaoPlan:@ViewBag.TanqueGravacao.YTD_PLAN,
+            speed: 5,
+            width: 150,
+            color: "#FFA500",
+            colorText: "#000000",
+            colorToal: "#FFFFFF",
+            colorLimitText: "#FFFFFF",
+            corlorLimite: "#FF0000",
+            colorTextTotal: "#000000",
+            type:"futuristic",
+            mostrarSempre: true
+        });
+        var marketing = $('#grafMarketing').bombaCombustivel({
+            total: @ViewBag.TanqueMarketing.TOTAL_ANO,
+            atual: @ViewBag.TanqueMarketing.YTD_REAL,
+            provisao: @ViewBag.TanqueMarketing.YTD,
+            totalPlan: @ViewBag.TanqueMarketing.TOTAL_ANO_PLAN,
+            provisaoPlan:@ViewBag.TanqueMarketing.YTD_PLAN,
+            speed: 5,
+            width: 150,
+            color: "#FFA500",
+            colorText: "#000000",
+            colorToal: "#FFFFFF",
+            colorLimitText: "#FFFFFF",
+            corlorLimite: "#FF0000",
+            colorTextTotal: "#000000",
+            type:"futuristic",
+            mostrarSempre: true
+        });
+        var receita = $('#grafReceita').bombaCombustivel({
+            total: @ViewBag.TanqueReceita.TOTAL_ANO,
+            atual: @ViewBag.TanqueReceita.YTD_REAL,
+            provisao: @ViewBag.TanqueReceita.YTD,
+            totalPlan: @ViewBag.TanqueReceita.TOTAL_ANO_PLAN,
+            provisaoPlan:@ViewBag.TanqueReceita.YTD_PLAN,
+            speed: 5,
+            width: 150,
+            color: "#FFA500",
+            colorText: "#000000",
+            colorToal: "#FFFFFF",
+            colorLimitText: "#FFFFFF",
+            corlorLimite: "#FF0000",
+            colorTextTotal: "#000000",
+            type:"futuristic",
+            mostrarSempre: true
+        });
+        var ebitida = $('#grafEBITDA').bombaCombustivel({
+            total: @ViewBag.TanqueEbtida.TOTAL_ANO,
+            atual: @ViewBag.TanqueEbtida.YTD_REAL,
+            provisao: @ViewBag.TanqueEbtida.YTD,
+            totalPlan: @ViewBag.TanqueEbtida.TOTAL_ANO_PLAN,
+            provisaoPlan:@ViewBag.TanqueEbtida.YTD_PLAN,
+            speed: 5,
+            width: 150,
+            color: "#FFA500",
+            colorText: "#000000",
+            colorToal: "#FFFFFF",
+            colorLimitText: "#FFFFFF",
+            corlorLimite: "#FF0000",
+            colorTextTotal: "#000000",
+            type:"futuristic",
+            mostrarSempre: true
+        });
+        var overhead = $('#grafOVERHEAD').bombaCombustivel({
+            total: @ViewBag.TanqueOverHead.TOTAL_ANO,
+            atual: @ViewBag.TanqueOverHead.YTD_REAL,
+            provisao: @ViewBag.TanqueOverHead.YTD,
+            totalPlan: @ViewBag.TanqueOverHead.TOTAL_ANO_PLAN,
+            provisaoPlan:@ViewBag.TanqueOverHead.YTD_PLAN,
+            speed: 5,
+            width: 150,
+            color: "#FFA500",
+            colorText: "#000000",
+            colorToal: "#FFFFFF",
+            colorLimitText: "#FFFFFF",
+            corlorLimite: "#FF0000",
+            colorTextTotal: "#000000",
+            type:"futuristic",
+            mostrarSempre: true
+        });*/
+
+        window.onresize = function(){
+            var checked = $("#switchCheckBox").is(":checked");
+            $('.tanque').bombaCombustivel({
+                plan:checked
+            });
+        };
+
+        $('.switchCheckBox').change(function(e){
+            var checked = $(this).is(":checked");
+            $('.tanque').bombaCombustivel({
+                plan:checked
+            });
+            /*gravacao.redraw(checked);
+            marketing.redraw(checked);
+            receita.redraw(checked);
+            ebitida.redraw(checked);
+            overhead.redraw(checked);*/
+        });
+    });
+
+</script>
+
+
+
+

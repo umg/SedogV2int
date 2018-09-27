@@ -1,0 +1,192 @@
+﻿@using SEDOGv2.Helpers;
+
+
+
+@{
+    ViewBag.Title = "Profit Loss";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+    decimal total = 0;
+}
+
+
+
+
+
+<div class="container-fluid">
+    @using (Html.BeginForm("Index", "TOPProfitLoss", FormMethod.Post))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+
+            <div class="col-md-12" id="divAlert">
+                @Html.Raw(Model.Message)
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4 text-right">
+                    <div class="form-group">
+                        <h4>Escolha o ano:</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control" name="ano" id="ano">
+                            <option value="00"> -- Todos --</option>
+                            @for (int ano = 0; ano < 7; ano++)
+                            {
+                                <option value="@DateTime.Now.AddYears(-ano).ToString("yy")">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" name="Pesquisar" value="Pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+    @if (Model.TOPProfitLoss.Count > 0)
+            {
+        <div class="panel panel-success panel-report">
+
+@using (Html.BeginForm("ExportReports", "TOPProfitLoss", FormMethod.Post, new { @id = "Export" }))
+{
+
+    <div class="row">
+        <div class="col-md-1">
+            Exportar para
+        </div>
+        <div class="col-md-1">
+            @*<input type="button" class="fa fa-file-excel-o" id="btnExportExcel"/>*@
+            <button type="submit" class="btn btn-default" id="btnExportToEXCEL">
+                <i class="fa fa-file-excel-o"></i>
+            </button>
+        </div>
+
+        <div class="col-md-1">
+            @*<input type="button" class="fa fa-file-excel-o" id="btnExportExcel"/>*@
+            <button type="submit" class="btn btn-default" id="btnExportToPDF">
+                <i class="fa fa-file-pdf-o"></i>
+            </button>
+        </div>
+
+        <div class="col-md-1">
+            <input type="hidden" id="dadosTable" name="dadosTable" />
+            <input type="hidden" id="doctype" name="doctype" />
+            <input type="hidden" id="reportName" name="reportName" value="TOPProfitLoss.rpt" />
+            <input type="hidden" id="printName" name="printName" value="TOPProfitLoss" />
+        </div>
+        <div class="col-md-8 text-right">
+            <h3>@ViewBag.Ano</h3>
+        </div>
+
+
+    </div>
+}
+
+
+            <div class="row">
+
+                <div class="col-md-12" id="tbExcel">
+                    <table class="table table-sm">
+                        <tr class="bg-default reportHeader">
+                            <th>ID Projeto</th>
+                            <th>Artista</th>
+                            <th>Projeto</th>
+                            <th>Profit Loss</th>
+                            @if (ViewBag.Ano != "- Todos -") {
+                                <th>Profit Loss RTD</th>
+                            }
+
+                        </tr>
+
+                        @foreach (SEDOGv2.Models.TOPProfitLoss item in Model.TOPProfitLoss)
+                        {
+                            total += item.Profit_Loss;
+                            <tr>
+                                <td>@item.IDProj_SEDOG</td>
+                                <td>@item.Artista</td>
+                                <td>@item.Projeto</td>
+                                @if (item.Profit_Loss > 0)
+                                {
+                                    <td>@string.Format("{0:c2}", @item.Profit_Loss)</td>
+                                }
+                                else
+                                {
+                                    <td style="color:#ff0000">@string.Format("{0:c2}", @item.Profit_Loss)</td>
+                                }
+                                @if (ViewBag.Ano != "- Todos -")
+                                {
+                                    if (item.Profit_Loss_RTD > 0)
+                                    {
+                                        <td>@string.Format("{0:c2}", @item.Profit_Loss_RTD)</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="color:#ff0000">@string.Format("{0:c2}", @item.Profit_Loss_RTD)</td>
+                                    }
+                                }
+                            </tr>
+                        }
+                        <tr class="bg-default reportHeader">
+                            <td colspan="3">Total</td>
+                            @if (total > 0)
+                            {
+                                <td>@string.Format("{0:c2}", total)</td>
+                            }
+                            else
+                            {
+                                <td style="color:#ff0000">@string.Format("{0:c2}", total)</td>
+                            }
+
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+    <script type="text/javascript">
+
+        $(function () {
+            $("#btnExportToPDF").click(function () {
+
+                $("#doctype").val("pdf");
+                $("#Export").submit();
+            });
+        });
+
+
+    $(function () {
+        $("#btnExportToEXCEL").click(function () {
+
+            var dados = encodeURI($("#tbExcel").html());
+            
+            $("#doctype").val("xls");
+            $("#dadosTable").val(dados);
+
+            $("#Export").submit();
+        });
+    });
+
+    </script>
+
+
+</div>

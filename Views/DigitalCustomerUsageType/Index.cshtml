@@ -1,0 +1,262 @@
+﻿@using SEDOGv2.Helpers;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+    int c = 0;
+}
+
+
+<div class="container-fluid">
+
+    @using (Html.BeginForm("Index", "DigitalCustomerUsageType", FormMethod.Post, new { id = "FormDigitalCustomerUsageType1" }))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+            <div class="col-md-12" runat="server" id="divAlert">
+                @Html.Raw(Model.Message)
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 text-right">
+                    <div class="form-group">
+                        <h4>Artist/Project:</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" name="txtArtistaProduto" class="form-control" placeholder="Type artist or project name" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" name="Pesquisar" value="Search" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+
+    @if (Model.PLProjetos.Count > 0)
+    {
+        using (Html.BeginForm("Index", "DigitalCustomerUsageType", FormMethod.Post, new { id = "FormDigitalCustomerUsageType2" }))
+        {
+            <div class="panel panel-success">
+
+                <div class="row">
+
+                    <div class="col-md-9">
+                        <table class="table">
+                            <tr class="bg-default">
+                                <th></th>
+                                <th>Project ID</th>
+                                <th>Project</th>
+                                <th>Artist ID</th>
+                                <th>Artist</th>
+                                <th>Release</th>
+
+                            </tr>
+                            @foreach (SEDOGv2.Models.PLProjeto item in Model.PLProjetos)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="selProduto" value="@item.IDProj_SEDOG" />
+                                    </td>
+                                    <td>@item.IDProj_SEDOG</td>
+                                    <td>@item.Projeto</td>
+                                    <td>@item.IDArtista</td>
+                                    <td>@item.Artista</td>
+                                    <td>@item.DataLancamento.ToString("yyyy-MM-dd")</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="row hidden">
+                            <div id="datepicker"></div>
+                            <input type="hidden" runat="server" id="my_hidden_input_date" />
+                        </div>
+                        <div class="row">
+                            <input type="submit" id="btnGerarRelatorios" name="btnGerarRelatorios" value="Generate Report" class="btn btn-lg btn-default btn-block" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+
+    @if (Model.DigitalReport.Count > 0)
+    {
+        <div class="panel panel-success panel-report">
+            @using (Html.BeginForm("Index", "DigitalCustomerUsageType", FormMethod.Post, new { id = "FormDigitalCustomerUsageType3" }))
+            {
+                <div class="row text-right">
+                    <input type="hidden" name="idProjeto" id="idProjeto" value="@ViewBag.IDProjetoSedog" />
+                    <select name="selAno" id="selAno">
+                        <option value="0">ALL</option>
+                        @for (int ano = 0; ano <= DateTime.Now.Year - 2010; ano++)
+                        {
+                            <option value="@(DateTime.Now.AddYears(-ano).ToString("yy"))">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                        }
+                    </select>
+                    <input type="submit" class="btn btn-default" value="Filter" />
+                </div>
+            }
+            <div class="row reportHeader">
+                <div class="col-md-9 text-left"><h2>@Model.DigitalReport[0].PROJECTNAME</h2></div>
+                <div class="col-md-2 text-right">Year: @ViewBag.Ano</div>
+                <div class="col-md-1 text-right">
+                    <button type="submit" class="btn btn-default printPDF">
+                        <i class="fa fa-file-pdf-o fa-4"></i>
+                    </button>
+                    <button type="submit" class="btn btn-default printExcel">
+                        <i class="fa fa-file-excel-o fa-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <tr class="bg-default reportHeader">
+                            <th>YearMonth</th>
+                            <th>Code</th>
+                            <th>Partner</th>
+                            <th>Usagetype</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Quantity</th>
+                        </tr>
+                        @foreach (SEDOGv2.Models.DigitalCustomerUsageType item in Model.DigitalReport)
+                        {
+                            <tr>
+                                <td>@item.ACCOUNTINGYEARMONTH</td>
+                                <td>@item.CUSTOMERCODE</td>
+                                <td>@item.CUSTOMERNAME</td>
+                                <td>@item.USAGETYPE</td>
+                                <td>@item.DESCRICAO</td>
+                                <td>@string.Format("{0:c2}", item.VALOR)</td>
+                                <td>@string.Format("{0:N0}", item.QTDE)</td>
+                            </tr>
+                        }
+                        <tr class="bg-default reportHeader">
+                            <td colspan="5">Total:</td>
+                            <td>@string.Format("{0:c2}", ViewBag.VALOR)</td>
+                            <td>@string.Format("{0:N0}", ViewBag.QTDE)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="print" style="display:none">
+            <table class="table table-bordered" width="100%" style="width:100%">
+                <tr>
+                    <td colspan="7" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                </tr>
+                <tr>
+                    <td colspan="7" style="text-align:center"><h2 style="text-align:center" class="bold">Total by Partner and Usagetype Report</h2></td>
+                </tr>
+                <tr>
+                    <td colspan="7"><h2 style="text-align:center" class="bold">@Model.DigitalReport[0].PROJECTNAME</h2></td>
+                </tr>
+                <tr>
+                    <td colspan="7" style="text-align:center" class="bold">Year: @ViewBag.Ano</td>
+                </tr>
+                <tr>
+                    <td colspan="7" style="text-align:center" class="bold"></td>
+                </tr>
+                <tr>
+                    <th>YearMonth</th>
+                    <th>Code</th>
+                    <th>Partner</th>
+                    <th>Usagetype</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Quantity</th>
+                </tr>
+                @foreach (SEDOGv2.Models.DigitalCustomerUsageType item in Model.DigitalReport)
+                {
+                    <tr>
+                        <td class="altRow_@(c % 2)">@item.ACCOUNTINGYEARMONTH</td>
+                        <td class="altRow_@(c % 2)">@item.CUSTOMERCODE</td>
+                        <td class="altRow_@(c % 2)">@item.CUSTOMERNAME</td>
+                        <td class="altRow_@(c % 2)">@item.USAGETYPE</td>
+                        <td class="altRow_@(c % 2)">@item.DESCRICAO</td>
+                        <td class="altRow_@(c % 2)">@string.Format("{0:c2}", item.VALOR)</td>
+                        <td class="altRow_@(c % 2)">@string.Format("{0:N0}", item.QTDE)</td>
+                    </tr>
+                    c++;
+                }
+                <tr class="RDLast">
+                    <td colspan="5" style="text-align:left">Total:</td>
+                    <td>@string.Format("{0:c2}", ViewBag.VALOR)</td>
+                    <td>@string.Format("{0:N0}", ViewBag.QTDE)</td>
+                </tr>
+            </table>
+
+        </div>
+    }
+
+    @using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+    {
+        <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+        <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $("#datepicker").datepicker({
+                language: 'pt-BR',
+                orientation: 'auto top',
+                autoclose: true,
+                clearBtn: true,
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years",
+                clearBtn:true
+            });
+            //$('#datepicker').datepicker('setDate', new Date(@DateTime.Now.Year.ToString(), 1, 1));
+            //$("#my_hidden_input_date").val($("#datepicker").datepicker('getFormattedDate'));
+            function checkALL(x) {
+
+                if (x.checked) {
+                    $("input:checkbox").prop('checked', true);
+                }
+                else {
+                    $("input:checkbox").prop('checked', false);
+                }
+            }
+
+            $("#datepicker").on("changeDate", function (event) {
+                $("#my_hidden_input_date").val($("#datepicker").datepicker('getFormattedDate'));
+            });
+            $("#chkAll").click(function () { checkALL(this); });
+
+            $("#FormDigitalCustomerUsageType2").submit(function (event) {
+                if ($("input:checked").length > 0){
+                    return;
+                }
+                $('#pleaseWaitDialog').modal('toggle');
+                event.preventDefault();
+            });
+        });
+
+    </script>
+
+</div>

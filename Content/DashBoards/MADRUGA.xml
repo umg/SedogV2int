@@ -1,0 +1,274 @@
+﻿<dashboards>
+  <dashboard name="Dashboard" id="dPresidencia">
+    <obj type="scoreboard" name="Score" icon="fa fa-thermometer-three-quarters" forcastPlan="true" class="col-lg-7 col-md-7 col-xs-7 grafico hvr-float-shadow text-align" rowFlex="true">
+      <tanque name="Receita" tipo="receita" procedure="SEL_TANQUE" class="hud futuristic text-center">
+        <YTD>36568336</YTD>
+        <YTD_PLAN>38890021</YTD_PLAN>
+        <YTD_REAL>36430613</YTD_REAL>
+        <TOTAL_ANO>174696059</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>175182973</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque name="EBITDA" tipo="ebtida" procedure="SEL_TANQUE" class="hud futuristic text-center">
+        <YTD>3823356</YTD>
+        <YTD_PLAN>3488867</YTD_PLAN>
+        <YTD_REAL>3979155</YTD_REAL>
+        <TOTAL_ANO>31323058</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>31319677</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque name="Gravação" tipo="gravacao" procedure="SEL_TANQUE" class="hud futuristic text-center">
+        <YTD>2159477</YTD>
+        <YTD_PLAN>3436399</YTD_PLAN>
+        <YTD_REAL>2313732</YTD_REAL>
+        <TOTAL_ANO>7268200</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>7268196</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque name="Marketing" tipo="marketing" procedure="SEL_TANQUE" class="hud futuristic text-center">
+        <YTD>3664690</YTD>
+        <YTD_PLAN>3959349</YTD_PLAN>
+        <YTD_REAL>3649719</YTD_REAL>
+        <TOTAL_ANO>13834101</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>13834095</TOTAL_ANO_PLAN>
+      </tanque>
+      <tanque name="Overhead" tipo="overhead" procedure="SEL_TANQUE" class="hud futuristic text-center">
+        <YTD>0</YTD>
+        <YTD_PLAN>0</YTD_PLAN>
+        <YTD_REAL>0</YTD_REAL>
+        <TOTAL_ANO>0</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>0</TOTAL_ANO_PLAN>
+      </tanque>
+    </obj>
+    <obj type="table" name="Top 10 Profit &amp; Loss" icon="fa fa-fire" forcastPlan="false" class="col-lg-5 col-md-5 col-xs-5 grafico hvr-float-shadow text-align" rowFlex="false">
+      <table name="TOP 10 Profit &amp; Loss" tipo="top10" procedure="SLT_TOP_GRAFICO_PROFIT_LOSS" class="table table-condensed table-striped table-hover">
+        <header>
+          <ARTISTA>Artista</ARTISTA>
+          <PROJETO>Projeto</PROJETO>
+          <PROFIT_LOSS_YTD>P&amp;L YTD</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>P&amp;L RTD</PROFIT_LOSS_RTD>
+        </header>
+        <row>
+          <ARTISTA>Simone &amp; Simaria</ARTISTA>
+          <PROJETO>Simone &amp; Simaria - Live</PROJETO>
+          <PROFIT_LOSS_YTD>252.039</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>72.822</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Matheus &amp; Kauan</ARTISTA>
+          <PROJETO>Face a Face</PROJETO>
+          <PROFIT_LOSS_YTD>248.945</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>1.287.532</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Matheus &amp; Kauan</ARTISTA>
+          <PROJETO>Na Praia</PROJETO>
+          <PROFIT_LOSS_YTD>246.519</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>449.395</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Projota</ARTISTA>
+          <PROJETO>3FS Ao Vivo</PROJETO>
+          <PROFIT_LOSS_YTD>231.447</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>165.113</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Justin Bieber</ARTISTA>
+          <PROJETO>Purpose - Deluxe</PROJETO>
+          <PROFIT_LOSS_YTD>191.987</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>2.132.155</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Ariana Grande</ARTISTA>
+          <PROJETO>Dangerous Woman</PROJETO>
+          <PROFIT_LOSS_YTD>131.351</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>592.445</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Drake</ARTISTA>
+          <PROJETO>Views</PROJETO>
+          <PROFIT_LOSS_YTD>120.347</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>703.044</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>DJ Snake</ARTISTA>
+          <PROJETO>Encore</PROJETO>
+          <PROFIT_LOSS_YTD>112.337</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>281.090</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>IveteSangalo</ARTISTA>
+          <PROJETO>Acústico em Trancoso</PROJETO>
+          <PROFIT_LOSS_YTD>105.409</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>-1.202.689</PROFIT_LOSS_RTD>
+        </row>
+        <row>
+          <ARTISTA>Rihanna</ARTISTA>
+          <PROJETO>Anti - Deluxe</PROJETO>
+          <PROFIT_LOSS_YTD>105.394</PROFIT_LOSS_YTD>
+          <PROFIT_LOSS_RTD>910.325</PROFIT_LOSS_RTD>
+        </row>
+      </table>
+    </obj>
+    <obj type="pieChartSimple" name="Top 5 Clientes" icon="fa fa-pie-chart" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <pieChartSimple name="Top5Clientes" tipo="pie" procedure="SLT_TOP_GRAFICO_CLIENTE" class="" label="Top 5" show="percentual">
+        <labels>
+          <label>Spotify</label>
+          <label>Apple</label>
+          <label>Deezer</label>
+          <label>Vevo</label>
+          <label>Grupo Carso-IMK</label>
+        </labels>
+        <datas>
+          <data color="rgba(0, 72, 70,1)">12986388.14</data>
+          <data color="rgba(23,123,172,1)">4219202.34</data>
+          <data color="rgba(255,165,0,1)">4109317.86</data>
+          <data color="rgba(255,0,0,1)">3618434.85</data>
+          <data color="rgba(120,120,120,1)">1123644.16</data>
+        </datas>
+      </pieChartSimple >
+    </obj>
+    <obj type="barChartComplex" name="Top 5 Parceiros Digitais Últimos 12 Meses" icon="fa fa-bar-chart" forcastPlan="false" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
+      <barChartComplex name="TopParceirosDigitais12Meses" class="" step="1000000" procedure="SLT_TOPGRAFICO_PARCEIROS_DIGITAL">
+        <labels>
+          <label>Abr</label>
+          <label>Mai</label>
+          <label>Jun</label>
+          <label>Jul</label>
+          <label>Ago</label>
+          <label>Set</label>
+          <label>Out</label>
+          <label>Nov</label>
+          <label>Dez</label>
+          <label>Jan</label>
+          <label>Fev</label>
+          <label>Mar</label>
+        </labels>
+        <datasets>
+          <dataset tipo="bar" label="'Total'" hidden="true" barColor="'rgba(125, 125, 125, 0.5)'">
+            <data>10182446</data>
+            <data>7805505</data>
+            <data>8101907</data>
+            <data>7634642</data>
+            <data>8059442</data>
+            <data>7430136</data>
+            <data>7356349</data>
+            <data>7739373</data>
+            <data>9033120</data>
+            <data>13260155</data>
+            <data>9754746</data>
+            <data>8830828</data>
+          </dataset>
+          <dataset tipo="line" label="SPOTIFY" color="rgba(0, 72, 70,1)">
+            <data>2764139</data>
+            <data>2887356</data>
+            <data>2981412</data>
+            <data>3256667</data>
+            <data>3238496</data>
+            <data>3307909</data>
+            <data>3614917</data>
+            <data>3820442</data>
+            <data>3927310</data>
+            <data>4142606</data>
+            <data>4346801</data>
+            <data>4496980</data>
+          </dataset>
+          <dataset tipo="line" label="VEVO" color="rgba(255,0,0,1)">
+            <data>794509</data>
+            <data>1027909</data>
+            <data>954853</data>
+            <data>1117508</data>
+            <data>1147807</data>
+            <data>968314</data>
+            <data>1104190</data>
+            <data>925208</data>
+            <data>817901</data>
+            <data>1281884</data>
+            <data>1610252</data>
+            <data>726297</data>
+          </dataset>
+          <dataset tipo="line" label="DEEZER" color="rgba(255,165,0,1)">
+            <data>775716</data>
+            <data>372027</data>
+            <data>372465</data>
+            <data>350822</data>
+            <data>73742</data>
+            <data>624306</data>
+            <data>338050</data>
+            <data>4368</data>
+            <data>346746</data>
+            <data>1606314</data>
+            <data>825638</data>
+            <data>1677364</data>
+          </dataset>
+          <dataset tipo="line" label="NAPSTER" color="rgba(120,120,120,1)">
+            <data>378253</data>
+            <data>350814</data>
+            <data>359922</data>
+            <data>539753</data>
+            <data>364909</data>
+            <data>366139</data>
+            <data>349283</data>
+            <data>355625</data>
+            <data>337693</data>
+            <data>322524</data>
+            <data>325037</data>
+            <data>314490</data>
+          </dataset>
+          <dataset tipo="line" label="APPLE" color="rgba(23,123,172,1)">
+            <data>1494137</data>
+            <data>1746373</data>
+            <data>1526802</data>
+            <data>1328405</data>
+            <data>1627852</data>
+            <data>1171365</data>
+            <data>1293856</data>
+            <data>1522527</data>
+            <data>1289320</data>
+            <data>1583845</data>
+            <data>1443241</data>
+            <data>1157552</data>
+          </dataset>
+        </datasets>
+      </barChartComplex>
+    </obj>
+    <obj type="pieChartSimple" name="Digital YTD" icon="fa fa-pie-chart" forcastPlan="false" class="hidden col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <pieChartSimple name="DigitalYTD" tipo="doughnut" procedure="SLT_TOTAL_TIPO_YTD" class="" label="Top 5" show="percentual">
+        <labels>
+          <label>NAC</label>
+          <label>INT</label>
+        </labels>
+        <datas>
+          <data color="rgba(255, 165, 0,1)">31687560</data>
+          <data color="rgba(0, 72, 70,1)">73499654</data>
+        </datas>
+      </pieChartSimple>
+    </obj>
+    <obj type="tableIRP" name="Índice Resultado de Projeto" icon="fa fa-thumbs-up" forcastPlan="false" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
+      <tableIRP name="Manage Meeting YTD" tipo="top10" procedure="SLT_GRAFICO_IRP_TOTAL" class="table table-condensed table-striped table-hover">
+        <header>
+          <IRP>IRP</IRP>
+          <PROJETOS>Projetos</PROJETOS>
+          <PERCENTUAL>%</PERCENTUAL>
+        </header>
+        <row>
+          <IRP>2</IRP>
+          <PROJETOS>87</PROJETOS>
+          <PERCENTUAL>60,41%</PERCENTUAL>
+        </row>
+        <row>
+          <IRP>1,25</IRP>
+          <PROJETOS>1</PROJETOS>
+          <PERCENTUAL>0,69%</PERCENTUAL>
+        </row>
+        <row>
+          <IRP>1,15</IRP>
+          <PROJETOS>5</PROJETOS>
+          <PERCENTUAL>3,47%</PERCENTUAL>
+        </row>
+        <row>
+          <IRP>0,99</IRP>
+          <PROJETOS>51</PROJETOS>
+          <PERCENTUAL>35,41%</PERCENTUAL>
+        </row>
+      </tableIRP>
+    </obj>
+  </dashboard>
+</dashboards>

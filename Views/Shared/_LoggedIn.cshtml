@@ -1,0 +1,481 @@
+﻿@using SEDOGv2.Helpers;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@appSettings.pageName()</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/datepicker.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/simple-sidebar.css" rel="stylesheet" />
+    <link href="~/Content/typeaheadjs.css" rel="stylesheet" />
+    <link href="~/Content/hover.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/colReorder.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/fixedColumns.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/scroller.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/keyTable.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.jqueryui.min.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/RowGroup-1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet" />
+
+    <link href="~/Content/themes/base/draggable.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+
+    @*<script src="~/Scripts/jquery-1.9.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.pt-BR.min.js"></script>
+    <script src="~/Scripts/sidebar_menu.js"></script>
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/Scripts/Chart.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/RowGroup-1.0.2/js/dataTables.rowGroup.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.fixedColumns.min.js"></script>
+    <script src="~/Scripts/pump/bomba_Grafico.js"></script>
+    <script src="~/Scripts/HorizontalMetric/HorizontalMetric.js"></script>
+    <script src="~/Scripts/ZeroBar/ZeroBar.js"></script>
+    <script src="~/Scripts/MapaRegiao/MapaRegiao.js"></script>
+    <script src="~/Scripts/bootstrap3-editable/js/bootstrap-editable.js"></script>
+    <!--[if lt IE 9]>
+     <script src="~/Scripts/html5shiv.js" type="text/javascript"></script>
+     <script src="~/Scripts/respond.min.js" type="text/javascript"></script>
+    <![endif]-->
+
+
+    <script>
+        $(document).ready(function () {
+            $('a.link, .showModal, input:submit, .square a, .btnShowModal').click(function (e) {
+                $('#pleaseWaitDialog').modal({
+                    backdrop: 'static'
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="modal fade" id="pleaseWaitDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>Loading...</h1><span class="messageDialog"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModalShowInfo" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div id="dots" class="absolute"></div>
+        <nav class="navbar navbar-default no-margin">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header fixed-brand">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")"><i class="fa fa-pie-chart fa-4"></i> SEDOG <spam class="logoFontImpact"><img src="~/2_0.svg" class="logoFontImpact" /></spam></a>
+            </div><!-- navbar-header-->
+            <p class="navbar-text navbar-right"><i class="glyphicon glyphicon-user"></i><label>&nbsp;@appSettings._User.Nome&nbsp;</label></p>
+        </nav>
+        <div id="wrapper">
+            <!-- Sidebar -->
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+                        <li>
+                            <a href="@Url.Action("Index", "Home")" class="link"><span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x "></i></span> Home</a>
+                        </li>
+
+
+                        @foreach (var menu in appSettings._User.Menus)
+                        {
+                            <li>
+                                <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa @menu.Icone fa-stack-1x "></i></span> @menu.Title</a>
+                                @if (menu.SubMenus.Count > 0)
+                                {
+                                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                                        @foreach (var smenu in menu.SubMenus)
+                                        {
+                                            if (smenu.Path != "")
+                                            {
+                                            <li><a href="@smenu.Path" class="link">@smenu.Title</a></li>
+                                            }
+                                            else
+                                            {
+                                            <li><a href="#" class="linkDisabled">@smenu.Title</a></li>
+                                            }
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                        <li>
+                            <a href="@Url.Action("Logout", "Login")" class="link"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span> Exit</a>
+                        </li>
+                    </ul>
+                </div><!-- /#sidebar-wrapper -->
+                <!-- Page Content -->
+                <div id="page-content-wrapper">
+                    <div class="container-fluid xyz">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /#page-content-wrapper -->
+            </div><!-- /#wrapper -->
+
+    <script>
+
+        jQuery.fn.dataTableExt.oSort['numeric-comma-asc'] = function (a, b) {
+            //remove the dots (.) from the string and then replaces the comma with a dot
+            var x = (a == "-") ? 0 : a.replace(/\./g, "").replace(/,/, ".");
+            var y = (b == "-") ? 0 : b.replace(/\./g, "").replace(/,/, ".");
+            x = parseFloat(x);
+            y = parseFloat(y);
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        };
+
+        jQuery.fn.dataTableExt.oSort['numeric-comma-desc'] = function (a, b) {
+            var x = (a == "-") ? 0 : a.replace(/\./g, "").replace(/,/, ".");
+            var y = (b == "-") ? 0 : b.replace(/\./g, "").replace(/,/, ".");
+            x = parseFloat(x);
+            y = parseFloat(y);
+            return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+        };
+
+        //numeric comma autodetect
+        jQuery.fn.dataTableExt.aTypes.unshift(
+                    function (sData) {
+                        //include the dot in the sValidChars string (don't place it in the last position)
+                        var sValidChars = "0123456789-.,";
+                        var Char;
+                        var bDecimal = false;
+
+                        /* Check the numeric part */
+                        for (i = 0 ; i < sData.length ; i++) {
+                            Char = sData.charAt(i);
+                            if (sValidChars.indexOf(Char) == -1) {
+                                return null;
+                            }
+
+                            /* Only allowed one decimal place... */
+                            if (Char == ",") {
+                                if (bDecimal) {
+                                    return null;
+                                }
+                                bDecimal = true;
+                            }
+                        }
+
+                        return 'numeric-comma';
+                    }
+                );
+
+        //Mantem a sessão ativa
+        $(function () {
+            setInterval(KeepSessionAlive, 60000);
+        });
+        //Mantem a sessão ativa
+        function KeepSessionAlive() {
+            $.post("@appSettings.KeepMeAlive", null, function () {
+            });
+        }
+
+        $(document).ready(function () {
+            $(".printPDF, .printExcel").on("click", function (e) {
+                $(".RD:last-of-type").removeClass("RD").addClass("RDLast");
+                $(".RD:last-of-type td").addClass("underline").addClass("upperline").addClass("paddingTD7");
+                $('#pleaseWaitDialog').modal({
+                    backdrop: 'static'
+                });
+                if ($(this).hasClass("printPDF")) {
+                    $("#PrintHtmlType").val("PDF");
+                }
+                else {
+                    $("#PrintHtmlType").val("Excel");
+                }
+                $("#PrintHtmlContent").val($('.print').html());
+                $("#printForm").submit();
+                setTimeout(function () {
+                    $('#pleaseWaitDialog').modal('toggle');
+                }, 2000);
+                $(".RDLast:last-of-type").removeClass("RDLast").addClass("RD");
+            });
+
+            $('.tableSortPaggingGrupoConta').DataTable({
+                "bSortCellsTop": true,
+                "aaSorting": [[5, 'desc']],
+                "scrollX": true,
+                "scrollCollapse": true,
+                "fixedColumns": {
+                    "leftColumns": '1'
+                },
+                "paging": true,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "Nada encontrado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum registro disponível",
+                    "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                    "search": "Procurar:",
+                    "paginate": {
+                        "first": '«',
+                        "previous": '‹',
+                        "next": '›',
+                        "last": '»'
+                    },
+                    "aria": {
+                        "paginate": {
+                            "first": 'Início',
+                            "previous": 'Anterior',
+                            "next": 'Próximo',
+                            "last": 'Último'
+                        }
+                    }
+                },
+                "fixedHeader": {
+                    "header": true,
+                    "footer": true
+                }
+            });
+
+            $('.tableSortPaggingGrupo').DataTable({
+                "bSortCellsTop": true,
+                "aaSorting": [[4, 'desc']],
+                "scrollX": true,
+                "scrollCollapse": true,
+                "fixedColumns": {
+                    "leftColumns": '4'
+                },
+                "paging": true,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "Nada encontrado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum registro disponível",
+                    "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                    "search": "Procurar:",
+                    "paginate": {
+                        "first": '«',
+                        "previous": '‹',
+                        "next": '›',
+                        "last": '»'
+                    },
+                    "aria": {
+                        "paginate": {
+                            "first": 'Início',
+                            "previous": 'Anterior',
+                            "next": 'Próximo',
+                            "last": 'Último'
+                        }
+                    }
+                },
+                "fixedHeader": {
+                    "header": true,
+                    "footer": true
+                }
+            });
+
+
+
+
+            $('.DireitostableSortPagging').DataTable({
+                "bSortCellsTop": true,
+                "pageLength": 25,
+                "aaSorting": [[4, 'desc']],
+                "scrollX": true,
+                "scrollCollapse": true,
+                "fixedColumns": {
+                    "leftColumns": '2'
+                },
+                "paging": true,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "Nada encontrado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum registro disponível",
+                    "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                    "search": "Procurar:",
+                    "paginate": {
+                        "first": '«',
+                        "previous": '‹',
+                        "next": '›',
+                        "last": '»'
+                    },
+                    "aria": {
+                        "paginate": {
+                            "first": 'Início',
+                            "previous": 'Anterior',
+                            "next": 'Próximo',
+                            "last": 'Último'
+                        }
+                    }
+                },
+                "fixedHeader": {
+                    "header": true
+                }
+            });
+
+
+
+
+            $('.tableSortPagging').DataTable({
+                "bSortCellsTop": true,
+                "aaSorting": [],
+                "scrollX": true,
+                "scrollCollapse": true,
+                "fixedColumns": {
+                    "leftColumns": '2',
+                    "rightColumns": '3'
+                },
+                "paging": true,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "Nada encontrado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum registro disponível",
+                    "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                    "search": "Procurar:",
+                    "paginate": {
+                        "first": '«',
+                        "previous": '‹',
+                        "next": '›',
+                        "last": '»'
+                    },
+                    "aria": {
+                        "paginate": {
+                            "first": 'Início',
+                            "previous": 'Anterior',
+                            "next": 'Próximo',
+                            "last": 'Último'
+                        }
+                    }
+                },
+                "fixedHeader": {
+                    "header": true,
+                    "footer": true
+                }
+            });
+
+            $('.tableSortPaggingControle').DataTable({
+                "dom": '<l<"groupSearch dataTables_length">f<t>ip>',
+                order: [],
+                "columnDefs": [
+                    { "visible": false, "targets": [0 , 1] }
+                ],
+                rowGroup: {
+                    startRender: function (rows, group) {
+                        return group;
+                    },
+                    endRender: null,
+                    dataSrc: 0
+                },
+                "pageLength": 100,
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "Nada encontrado",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Nenhum registro disponível",
+                    "infoFiltered": "(filtrado de _MAX_ registros no total)",
+                    "search": "Procurar:",
+                    "paginate": {
+                        "first": '«',
+                        "previous": '‹',
+                        "next": '›',
+                        "last": '»'
+                    },
+                    "aria": {
+                        "paginate": {
+                            "first": 'Início',
+                            "previous": 'Anterior',
+                            "next": 'Próximo',
+                            "last": 'Último'
+                        }
+                    }
+                },
+                "fixedHeader": {
+                    "header": true,
+                    "footer": true
+                },
+                "initComplete": function () {
+                    var dataTableItem = $(this);
+                    var dataTableID = $(this).attr('id');
+
+                    this.api().columns(0).every(function () {
+                        var column = this;
+
+                        var lbl = $('<label>&nbsp;|&nbsp;Selecionar Grupo&nbsp;</label>');
+                        var select = $('<select><option value=""></option></select>');
+
+                        column.data().unique().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+
+                        select.appendTo(lbl);
+                        //alert("#" + dataTableItem + "_wrapper .groupSearch");
+                        lbl.appendTo($("#" + dataTableID + "_wrapper .groupSearch"));
+
+                        select.on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column.search(val ? '^' + val + '$' : '', true, false).draw();
+                        });
+                    });
+                    $('.tableSortPaggingControle').width('100%');
+                    
+                }
+            });
+
+            $(".tableSortPaggingControle").each(function (a) {
+                var tableDataTable = $(this).DataTable();
+                tableDataTable.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var data = this.data();
+                    data[2] = "<a href=\"Artistas360/HistoricoNRICobrancaReceita/" + data[1] + "\" class=\"lnkShowInModal\" data-title=\"" + data[2] + " - " + data[0] + "\">" + data[2] + "" + "</a>";
+                    this.data(data);
+                });
+            });
+            $(document).on('click', '.lnkShowInModal', function (e) {
+                e.preventDefault;
+                $("#myModalShowInfo .modal-title").html($(this).data("title"));
+                $("#myModalShowInfo .modal-body").html("<p><i class=\"fa fa-cog fa-spin fa-fw\"></i>Carregando...</p>").load($(this).attr('href') + " #mainContent", function () {
+
+                });
+                $("#myModalShowInfo").modal("show");
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

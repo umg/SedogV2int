@@ -1,0 +1,107 @@
+﻿@using SEDOGv2.Helpers;
+@model IEnumerable<SEDOGv2.Models.PagesViewModel>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_LoggedIn.cshtml";
+    }
+
+    <div class="container-fluid">
+        @using (Html.BeginForm())
+        {
+            <div class="panel panel-success">
+                <!-- Default panel contents -->
+                <div class="row">
+                    <div class="panel-heading  text-center">
+                        <h2>
+                            @appSettings.pageName()
+                        </h2>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12" runat="server" id="divAlert">
+                    @ViewBag.Error
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4>New Page</h4></div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <h5>Page:</h5>
+                                    <input type="text" name="txtPage" class="form-control" placeholder="Page Name" />
+                                    <h5>Path:</h5>
+                                    <input type="text" name="txtPath" class="form-control" placeholder="Path to Page" />
+                                    <h5>Description:</h5>
+                                    <input type="text" name="txtDescricao" class="form-control" placeholder="Page Description" />
+                                    <h5>Menu:</h5>
+                                    <select name="selMenu" class="form-control">
+                                        @foreach (var dept in ViewBag.PagesHeaders)
+                                        {
+                                            <option value="@dept.ID">@dept.DESC</option>
+                                        }
+                                    </select>
+                                    <br />
+                                    <input type="submit" name="inserir" value="Add" class="btn btn-default pull-right" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="panel panel-success panel-report">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Menu
+                            </th>
+                            <th>
+                                Page
+                            </th>
+                            <th>
+                                Path
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MENU)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PAGE)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PATH)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DESCRICAO)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

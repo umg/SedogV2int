@@ -1,0 +1,426 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <!-- Default panel contents -->
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    @appSettings.pageName()
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-md-12 alertMessage" runat="server" id="divAlert">
+            @Html.Raw(ViewBag.Message)
+        </div>
+
+
+
+        @using (Html.BeginForm("Index", "DireitosMarginAnalysis", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-5 text-left">
+                    <div class="form-group">
+                        <br />
+                        
+                        <input type="radio" id="contratoTodos"
+                               name="contrato" value="0">
+                        <label for="contratoTodos">Todos</label>
+
+                        <input type="radio" id="contratoUMG"
+                               name="contrato" value="1">
+                        <label for="contratoUMG">Universal Music</label>
+
+                        <input type="radio" id="contratoJV"
+                               name="contrato" value="2">
+                        <label for="contratoJV">Joy Venture</label>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="submit" name="buscar" value="Buscar" class="btn btn-default btn-lg btn-block" />
+                    </div>
+                </div>
+
+                <div class="col-md-2"></div>
+            </div>
+        }
+
+
+
+
+
+        @if (Model != null)
+        {
+            decimal FisicaVendaLiquida = 0;
+            decimal FisicaCustodeFabricacao = 0;
+            decimal FisicaDireitosAutorais = 0;
+            decimal FisicaDistribuicao = 0;
+            decimal FisicaDireitosArtisticos = 0;
+            decimal FisicaMargemVenda = 0;
+            decimal DigitalReceitaVenda = 0;
+            decimal DigitalCustosdeDistribuicao = 0;
+            decimal DigitalCustosdeDigitalizacao = 0;
+            decimal DigitalDireitosArtisticos = 0;
+            decimal DigitalDireitosAutorais = 0;
+            decimal DigitalOutrosCustosDireitos = 0;
+            decimal DigitalMargemVenda = 0;
+            decimal ReceitadeLicenciamento = 0;
+            decimal Direitos = 0;
+            decimal MargemLicenciamento = 0;
+            decimal NovosNegociosReceita = 0;
+            decimal NovosNegociosCustosdeFabricacao = 0;
+            decimal NovosNegociosCustosdeDistribuicao = 0;
+            decimal NovosNegociosDireitosArtisticos = 0;
+            decimal NovosNegociosDireitosAutorais = 0;
+            decimal NovosNegociosOutrosCustosDireitos = 0;
+            decimal NovosNegociosMargem = 0;
+            decimal ResultadoCustoInicial = 0;
+            decimal ResultadoMarketing = 0;
+            decimal ResultadoCustodeGravacao = 0;
+            decimal ResultadoProvisaoDevedoresDuvidosos = 0;
+            decimal ResultadoProvisaodeDevolução = 0;
+            decimal ResultadoProvisaodeObsolescencia = 0;
+            decimal ResultadoComissaodeVendas = 0;
+            decimal ResultadoValorParceiroJV = 0;
+            decimal ResultadoLiquido = 0;
+            <div class="panel panel-success panel-report">
+                <div class="row">
+                    <div class="col-md-10 text-right">
+                        Exportar para
+                    </div>
+                    <div class="col-md-1 text-center">
+                        <button type="submit" class="btn btn-default printPDF">
+                            <i class="fa fa-file-pdf-o fa-4"></i>
+                        </button>
+                        <button type="submit" class="btn btn-default printExcel">
+                            <i class="fa fa-file-excel-o fa-4"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12" id="tbExcel">
+                        <table class="table table-striped table-bordered table-inline DireitostableSortPagging" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Projeto</th>
+                                    <th>Artista</th>
+                                    <th>Release</th>
+                                    <th>Venda Líquida Física</th>
+                                    <th>Custo de Fabricação</th>
+                                    <th>Direitos Autorais</th>
+                                    <th>Distribuição</th>
+                                    <th>Direitos Artísticos</th>
+                                    <th>Margem Venda Física</th>
+                                    <th>Receita Venda Digital</th>
+                                    <th>Custos de Distribuição</th>
+                                    <th>Custos de Digitalização</th>
+                                    <th>Direitos Artísticos</th>
+                                    <th>Direitos Autorais</th>
+                                    <th>Outros Custos Direitos</th>
+                                    <th>Margem Venda Digital</th>
+                                    <th>Receita de Licenciamento</th>
+                                    <th>Direitos</th>
+                                    <th>Margem Licenciamento</th>
+                                    <th>Receita Novos Negócios</th>
+                                    <th>Custos de Fabricação</th>
+                                    <th>Custos de Distribuição</th>
+                                    <th>Direitos Artísticos</th>
+                                    <th>Direitos Autorais</th>
+                                    <th>Outros Custos Direitos</th>
+                                    <th>Margem Novos Negócios</th>
+                                    <th>Custo Inicial</th>
+                                    <th>Marketing</th>
+                                    <th>Custo de Gravação</th>
+                                    <th>Provisão Devedores Duvidosos</th>
+                                    <th>Provisão de Devolução</th>
+                                    <th>Provisão de Obsolescência</th>
+                                    <th>Comissão de Vendas</th>
+                                    <th>Valor a ser pago para parceiro JV</th>
+                                    <th>Resultado Líquido</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Projeto</td>
+                                    <td>@item.Artista</td>
+                                    <td>@item.Release.ToString("dd/MM/yyyy")</td>
+                                    <td>@string.Format("{0:C2}", item.FisicaVendaLiquida)</td>
+                                    <td>@string.Format("{0:C2}", item.FisicaCustodeFabricacao)</td>
+                                    <td>@string.Format("{0:C2}", item.FisicaDireitosAutorais)</td>
+                                    <td>@string.Format("{0:C2}", item.FisicaDistribuicao)</td>
+                                    <td>@string.Format("{0:C2}", item.FisicaDireitosArtisticos)</td>
+                                    <td>@string.Format("{0:C2}", item.FisicaMargemVenda)</td>
+                                    <td>@string.Format("{0:C2}", item.DigitalReceitaVenda)</td>
+                                    <td>@string.Format("{0:C2}", item.DigitalCustosdeDistribuicao)</td>
+                                    <td>@string.Format("{0:C2}", item.DigitalCustosdeDigitalizacao)</td>
+                                    <td>@string.Format("{0:C2}", item.DigitalDireitosArtisticos)</td>
+                                    <td>@string.Format("{0:C2}", item.DigitalDireitosAutorais)</td>
+                                    <td>@string.Format("{0:C2}", item.DigitalOutrosCustosDireitos)</td>
+                                    <td>@string.Format("{0:C2}", item.DigitalMargemVenda)</td>
+                                    <td>@string.Format("{0:C2}", item.ReceitadeLicenciamento)</td>
+                                    <td>@string.Format("{0:C2}", item.Direitos)</td>
+                                    <td>@string.Format("{0:C2}", item.MargemLicenciamento)</td>
+                                    <td>@string.Format("{0:C2}", item.NovosNegociosReceita)</td>
+                                    <td>@string.Format("{0:C2}", item.NovosNegociosCustosdeFabricacao)</td>
+                                    <td>@string.Format("{0:C2}", item.NovosNegociosCustosdeDistribuicao)</td>
+                                    <td>@string.Format("{0:C2}", item.NovosNegociosDireitosArtisticos)</td>
+                                    <td>@string.Format("{0:C2}", item.NovosNegociosDireitosAutorais)</td>
+                                    <td>@string.Format("{0:C2}", item.NovosNegociosOutrosCustosDireitos)</td>
+                                    <td>@string.Format("{0:C2}", item.NovosNegociosMargem)</td>
+                                    <td>@string.Format("{0:C2}", item.ResultadoCustoInicial)</td>
+                                    <td>@string.Format("{0:C2}", item.ResultadoMarketing)</td>
+                                    <td>@string.Format("{0:C2}", item.ResultadoCustodeGravacao)</td>
+                                    <td>@string.Format("{0:C2}", item.ResultadoProvisaoDevedoresDuvidosos)</td>
+                                    <td>@string.Format("{0:C2}", item.ResultadoProvisaodeDevolução)</td>
+                                    <td>@string.Format("{0:C2}", item.ResultadoProvisaodeObsolescencia)</td>
+                                    <td>@string.Format("{0:C2}", item.ResultadoComissaodeVendas)</td>
+                                    <td>@string.Format("{0:C2}", item.ResultadoValorParceiroJV)</td>
+                                    <td>@string.Format("{0:C2}", item.ResultadoLiquido)</td>
+                                </tr>
+                                FisicaVendaLiquida += Convert.ToDecimal(item.FisicaVendaLiquida);
+                                FisicaCustodeFabricacao += Convert.ToDecimal(item.FisicaCustodeFabricacao);
+                                FisicaDireitosAutorais += Convert.ToDecimal(item.FisicaDireitosAutorais);
+                                FisicaDistribuicao += Convert.ToDecimal(item.FisicaDistribuicao);
+                                FisicaDireitosArtisticos += Convert.ToDecimal(item.FisicaDireitosArtisticos);
+                                FisicaMargemVenda += Convert.ToDecimal(item.FisicaMargemVenda);
+                                DigitalReceitaVenda += Convert.ToDecimal(item.DigitalReceitaVenda);
+                                DigitalCustosdeDistribuicao += Convert.ToDecimal(item.DigitalCustosdeDistribuicao);
+                                DigitalCustosdeDigitalizacao += Convert.ToDecimal(item.DigitalCustosdeDigitalizacao);
+                                DigitalDireitosArtisticos += Convert.ToDecimal(item.DigitalDireitosArtisticos);
+                                DigitalDireitosAutorais += Convert.ToDecimal(item.DigitalDireitosAutorais);
+                                DigitalOutrosCustosDireitos += Convert.ToDecimal(item.DigitalOutrosCustosDireitos);
+                                DigitalMargemVenda += Convert.ToDecimal(item.DigitalMargemVenda);
+                                ReceitadeLicenciamento += Convert.ToDecimal(item.ReceitadeLicenciamento);
+                                Direitos += Convert.ToDecimal(item.Direitos);
+                                MargemLicenciamento += Convert.ToDecimal(item.MargemLicenciamento);
+                                NovosNegociosReceita += Convert.ToDecimal(item.NovosNegociosReceita);
+                                NovosNegociosCustosdeFabricacao += Convert.ToDecimal(item.NovosNegociosCustosdeFabricacao);
+                                NovosNegociosCustosdeDistribuicao += Convert.ToDecimal(item.NovosNegociosCustosdeDistribuicao);
+                                NovosNegociosDireitosArtisticos += Convert.ToDecimal(item.NovosNegociosDireitosArtisticos);
+                                NovosNegociosDireitosAutorais += Convert.ToDecimal(item.NovosNegociosDireitosAutorais);
+                                NovosNegociosOutrosCustosDireitos += Convert.ToDecimal(item.NovosNegociosOutrosCustosDireitos);
+                                NovosNegociosMargem += Convert.ToDecimal(item.NovosNegociosMargem);
+                                ResultadoCustoInicial += Convert.ToDecimal(item.ResultadoCustoInicial);
+                                ResultadoMarketing += Convert.ToDecimal(item.ResultadoMarketing);
+                                ResultadoCustodeGravacao += Convert.ToDecimal(item.ResultadoCustodeGravacao);
+                                ResultadoProvisaoDevedoresDuvidosos += Convert.ToDecimal(item.ResultadoProvisaoDevedoresDuvidosos);
+                                ResultadoProvisaodeDevolução += Convert.ToDecimal(item.ResultadoProvisaodeDevolução);
+                                ResultadoProvisaodeObsolescencia += Convert.ToDecimal(item.ResultadoProvisaodeObsolescencia);
+                                ResultadoComissaodeVendas += Convert.ToDecimal(item.ResultadoComissaodeVendas);
+                                ResultadoValorParceiroJV += Convert.ToDecimal(item.ResultadoValorParceiroJV);
+                                ResultadoLiquido += Convert.ToDecimal(item.ResultadoLiquido);
+
+                            }
+                            <tfoot>
+                                <tr style="font-weight:bold">
+                                    <td colspan="2">
+                                        Total
+                                    </td>
+                                    <td></td>
+                                    <td>@string.Format("{0:C2}", FisicaVendaLiquida)</td>
+                                    <td>@string.Format("{0:C2}", FisicaCustodeFabricacao)</td>
+                                    <td>@string.Format("{0:C2}", FisicaDireitosAutorais)</td>
+                                    <td>@string.Format("{0:C2}", FisicaDistribuicao)</td>
+                                    <td>@string.Format("{0:C2}", FisicaDireitosArtisticos)</td>
+                                    <td>@string.Format("{0:C2}", FisicaMargemVenda)</td>
+                                    <td>@string.Format("{0:C2}", DigitalReceitaVenda)</td>
+                                    <td>@string.Format("{0:C2}", DigitalCustosdeDistribuicao)</td>
+                                    <td>@string.Format("{0:C2}", DigitalCustosdeDigitalizacao)</td>
+                                    <td>@string.Format("{0:C2}", DigitalDireitosArtisticos)</td>
+                                    <td>@string.Format("{0:C2}", DigitalDireitosAutorais)</td>
+                                    <td>@string.Format("{0:C2}", DigitalOutrosCustosDireitos)</td>
+                                    <td>@string.Format("{0:C2}", DigitalMargemVenda)</td>
+                                    <td>@string.Format("{0:C2}", ReceitadeLicenciamento)</td>
+                                    <td>@string.Format("{0:C2}", Direitos)</td>
+                                    <td>@string.Format("{0:C2}", MargemLicenciamento)</td>
+                                    <td>@string.Format("{0:C2}", NovosNegociosReceita)</td>
+                                    <td>@string.Format("{0:C2}", NovosNegociosCustosdeFabricacao)</td>
+                                    <td>@string.Format("{0:C2}", NovosNegociosCustosdeDistribuicao)</td>
+                                    <td>@string.Format("{0:C2}", NovosNegociosDireitosArtisticos)</td>
+                                    <td>@string.Format("{0:C2}", NovosNegociosDireitosAutorais)</td>
+                                    <td>@string.Format("{0:C2}", NovosNegociosOutrosCustosDireitos)</td>
+                                    <td>@string.Format("{0:C2}", NovosNegociosMargem)</td>
+                                    <td>@string.Format("{0:C2}", ResultadoCustoInicial)</td>
+                                    <td>@string.Format("{0:C2}", ResultadoMarketing)</td>
+                                    <td>@string.Format("{0:C2}", ResultadoCustodeGravacao)</td>
+                                    <td>@string.Format("{0:C2}", ResultadoProvisaoDevedoresDuvidosos)</td>
+                                    <td>@string.Format("{0:C2}", ResultadoProvisaodeDevolução)</td>
+                                    <td>@string.Format("{0:C2}", ResultadoProvisaodeObsolescencia)</td>
+                                    <td>@string.Format("{0:C2}", ResultadoComissaodeVendas)</td>
+                                    <td>@string.Format("{0:C2}", ResultadoValorParceiroJV)</td>
+                                    <td>@string.Format("{0:C2}", ResultadoLiquido)</td>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="print" style="display:none;">
+                <table cellspacing="0px" style="width:100%">
+                    <tr>
+                        <td colspan="6" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="text-align:center"><h2 style="text-align:center" class="bold underline">@appSettings.pageName()</h2></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="text-align:center" class="bgRed">Filtro: @ViewBag.contrato</td>
+                    </tr>
+
+                    <tr>
+                        <th>Projeto</th>
+                        <th>Artista</th>
+                        <th>Release</th>
+                        <th class="bold">Venda Líquida Física</th>
+                        <th>Custo de Fabricação</th>
+                        <th>Direitos Autorais</th>
+                        <th>Distribuição</th>
+                        <th>Direitos Artísticos</th>
+                        <th class="bgGrayBold">Margem Venda Física</th>
+                        <th class="bold">Receita Venda Digital</th>
+                        <th>Custos de Distribuição</th>
+                        <th>Custos de Digitalização</th>
+                        <th>Direitos Artísticos</th>
+                        <th>Direitos Autorais</th>
+                        <th>Outros Custos Direitos</th>
+                        <th class="bgGrayBold">Margem Venda Digital</th>
+                        <th class="bold">Receita de Licenciamento</th>
+                        <th>Direitos</th>
+                        <th class="bgGrayBold">Margem Licenciamento</th>
+                        <th class="bold">Receita Novos Negócios</th>
+                        <th>Custos de Fabricação</th>
+                        <th>Custos de Distribuição</th>
+                        <th>Direitos Artísticos</th>
+                        <th>Direitos Autorais</th>
+                        <th>Outros Custos Direitos</th>
+                        <th class="bgGrayBold">Margem Novos Negócios</th>
+                        <th>Custo Inicial</th>
+                        <th>Marketing</th>
+                        <th>Custo de Gravação</th>
+                        <th>Provisão Devedores Duvidosos</th>
+                        <th>Provisão de Devolução</th>
+                        <th>Provisão de Obsolescência</th>
+                        <th>Comissão de Vendas</th>
+                        <th>Valor a ser pago para parceiro JV</th>
+                        <th class="bgGrayBold">Resultado Líquido</th>
+                    </tr>
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Projeto</td>
+                            <td>@item.Artista</td>
+                            <td>@item.Release.ToString("dd/MM/yyyy")</td>
+                            <td class="bold">@string.Format("{0:C2}", item.FisicaVendaLiquida)</td>
+                            <td>@string.Format("{0:C2}", item.FisicaCustodeFabricacao)</td>
+                            <td>@string.Format("{0:C2}", item.FisicaDireitosAutorais)</td>
+                            <td>@string.Format("{0:C2}", item.FisicaDistribuicao)</td>
+                            <td>@string.Format("{0:C2}", item.FisicaDireitosArtisticos)</td>
+                            <td class="bgGrayBold">@string.Format("{0:C2}", item.FisicaMargemVenda)</td>
+                            <td class="bold">@string.Format("{0:C2}", item.DigitalReceitaVenda)</td>
+                            <td>@string.Format("{0:C2}", item.DigitalCustosdeDistribuicao)</td>
+                            <td>@string.Format("{0:C2}", item.DigitalCustosdeDigitalizacao)</td>
+                            <td>@string.Format("{0:C2}", item.DigitalDireitosArtisticos)</td>
+                            <td>@string.Format("{0:C2}", item.DigitalDireitosAutorais)</td>
+                            <td>@string.Format("{0:C2}", item.DigitalOutrosCustosDireitos)</td>
+                            <td class="bgGrayBold">@string.Format("{0:C2}", item.DigitalMargemVenda)</td>
+                            <td class="bold">@string.Format("{0:C2}", item.ReceitadeLicenciamento)</td>
+                            <td>@string.Format("{0:C2}", item.Direitos)</td>
+                            <td class="bgGrayBold">@string.Format("{0:C2}", item.MargemLicenciamento)</td>
+                            <td class="bold">@string.Format("{0:C2}", item.NovosNegociosReceita)</td>
+                            <td>@string.Format("{0:C2}", item.NovosNegociosCustosdeFabricacao)</td>
+                            <td>@string.Format("{0:C2}", item.NovosNegociosCustosdeDistribuicao)</td>
+                            <td>@string.Format("{0:C2}", item.NovosNegociosDireitosArtisticos)</td>
+                            <td>@string.Format("{0:C2}", item.NovosNegociosDireitosAutorais)</td>
+                            <td>@string.Format("{0:C2}", item.NovosNegociosOutrosCustosDireitos)</td>
+                            <td class="bgGrayBold">@string.Format("{0:C2}", item.NovosNegociosMargem)</td>
+                            <td>@string.Format("{0:C2}", item.ResultadoCustoInicial)</td>
+                            <td>@string.Format("{0:C2}", item.ResultadoMarketing)</td>
+                            <td>@string.Format("{0:C2}", item.ResultadoCustodeGravacao)</td>
+                            <td>@string.Format("{0:C2}", item.ResultadoProvisaoDevedoresDuvidosos)</td>
+                            <td>@string.Format("{0:C2}", item.ResultadoProvisaodeDevolução)</td>
+                            <td>@string.Format("{0:C2}", item.ResultadoProvisaodeObsolescencia)</td>
+                            <td>@string.Format("{0:C2}", item.ResultadoComissaodeVendas)</td>
+                            <td>@string.Format("{0:C2}", item.ResultadoValorParceiroJV)</td>
+                            <td class="bgGrayBold">@string.Format("{0:C2}", item.ResultadoLiquido)</td>
+                        </tr>
+                    }
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">
+                                Total
+                            </td>
+                            <td></td>
+                            <td class="bold">@string.Format("{0:C2}", FisicaVendaLiquida)</td>
+                            <td>@string.Format("{0:C2}", FisicaCustodeFabricacao)</td>
+                            <td>@string.Format("{0:C2}", FisicaDireitosAutorais)</td>
+                            <td>@string.Format("{0:C2}", FisicaDistribuicao)</td>
+                            <td>@string.Format("{0:C2}", FisicaDireitosArtisticos)</td>
+                            <td class="bgGrayBold">@string.Format("{0:C2}", FisicaMargemVenda)</td>
+                            <td class="bold">@string.Format("{0:C2}", DigitalReceitaVenda)</td>
+                            <td>@string.Format("{0:C2}", DigitalCustosdeDistribuicao)</td>
+                            <td>@string.Format("{0:C2}", DigitalCustosdeDigitalizacao)</td>
+                            <td>@string.Format("{0:C2}", DigitalDireitosArtisticos)</td>
+                            <td>@string.Format("{0:C2}", DigitalDireitosAutorais)</td>
+                            <td>@string.Format("{0:C2}", DigitalOutrosCustosDireitos)</td>
+                            <td class="bgGrayBold">@string.Format("{0:C2}", DigitalMargemVenda)</td>
+                            <td class="bold">@string.Format("{0:C2}", ReceitadeLicenciamento)</td>
+                            <td>@string.Format("{0:C2}", Direitos)</td>
+                            <td class="bgGrayBold">@string.Format("{0:C2}", MargemLicenciamento)</td>
+                            <td class="bold">@string.Format("{0:C2}", NovosNegociosReceita)</td>
+                            <td>@string.Format("{0:C2}", NovosNegociosCustosdeFabricacao)</td>
+                            <td>@string.Format("{0:C2}", NovosNegociosCustosdeDistribuicao)</td>
+                            <td>@string.Format("{0:C2}", NovosNegociosDireitosArtisticos)</td>
+                            <td>@string.Format("{0:C2}", NovosNegociosDireitosAutorais)</td>
+                            <td>@string.Format("{0:C2}", NovosNegociosOutrosCustosDireitos)</td>
+                            <td class="bgGrayBold">@string.Format("{0:C2}", NovosNegociosMargem)</td>
+                            <td>@string.Format("{0:C2}", ResultadoCustoInicial)</td>
+                            <td>@string.Format("{0:C2}", ResultadoMarketing)</td>
+                            <td>@string.Format("{0:C2}", ResultadoCustodeGravacao)</td>
+                            <td>@string.Format("{0:C2}", ResultadoProvisaoDevedoresDuvidosos)</td>
+                            <td>@string.Format("{0:C2}", ResultadoProvisaodeDevolução)</td>
+                            <td>@string.Format("{0:C2}", ResultadoProvisaodeObsolescencia)</td>
+                            <td>@string.Format("{0:C2}", ResultadoComissaodeVendas)</td>
+                            <td>@string.Format("{0:C2}", ResultadoValorParceiroJV)</td>
+                            <td class="bgGrayBold">@string.Format("{0:C2}", ResultadoLiquido)</td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+        }
+
+
+
+
+
+    </div>
+
+</div>
+
+@using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+{
+    <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+    <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+}

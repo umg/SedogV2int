@@ -1,0 +1,60 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@{
+    ViewBag.Title = "AddProdutoFisico";
+}
+<div id="mainContent">
+    @if (((List<NRIHsitoricoCobrancaViewModel>)Model).Count > 0)
+    {
+        <h4>Cobranças:</h4>
+        <table class="table table-condensed table-bordered">
+            <tr>
+                <th>Contato</th>
+                <th>Comentários</th>
+                <th>Data</th>
+                <th>Valor</th>
+            </tr>
+            @foreach (NRIHsitoricoCobrancaViewModel item in Model)
+            {
+                <tr>
+                    <th>@item.CONTATO</th>
+                    <th>@item.COMENTARIOS</th>
+                    <th>@string.Format("{0:d}", item.DATA_COBRANCA)</th>
+                    <th>@string.Format("{0:C}", item.VALOR)</th>
+                </tr>
+            }
+        </table>
+
+    }
+    else
+    {
+        <h4>Nenuma Cobrança encontrada</h4>
+    }
+    @if (((List<NRIHsitoricoShowViewModel>)ViewBag.Shows).Count > 0)
+    {
+
+        <h4>Receitas:</h4>
+        <table class="table table-condensed table-bordered">
+            <tr>
+                <th>OBS</th>
+                <th>Data</th>
+                <th>Valor</th>
+            </tr>
+
+            @foreach (NRIHsitoricoShowViewModel item in ViewBag.Shows)
+            {
+                <tr>
+                    <th>@item.OBS</th>
+                    <th>@string.Format("{0:d}", item.DATA_REGISTRO)</th>
+                    <th>@string.Format("{0:C}", item.VALOR)</th>
+                </tr>
+            }
+        </table>
+
+    }
+    else
+    {
+        <h4>Nenuma Receita encontrada</h4>
+    }
+    </div>

@@ -1,0 +1,150 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    @using (Html.BeginForm("Index", "AtualizaProjeto", FormMethod.Post))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+            <div class="col-md-12" id="divAlert">
+                @Html.Raw(Model.Message)
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right">
+                    <div class="form-group">
+                        <h4>Artista ou projeto:</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" name="pesquisa" class="form-control" placeholder="Digite o artista ou projeto" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" name="Pesquisar" value="Pesquisar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("AtualizaDataReferencia", "AtualizaProjeto", FormMethod.Post))
+    {
+        <div class="panel panel-success">
+            <div class="row">
+                <div class="col-md-4 text-right">
+                    <div class="form-group">
+                        <h4>Data de Referência:</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" name="data" class="form-control" id="dtPicker" placeholder="@ViewBag.DataRef" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" name="updData" value="Atualizar Data" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+@using (Html.BeginForm("AtualizaProjetos", "AtualizaProjeto", FormMethod.Post, new { id = "FormAtualizaProjetos" }))
+{
+    <div class="panel panel-success">
+
+        <div class="row">
+
+            <div class="col-md-9">
+                <table class="table">
+                    <tr class="bg-default">
+                        <th><input type="checkbox" name="seltodos" id="chkAll" /></th>
+                        <th>ID Projeto</th>
+                        <th>Projeto</th>
+                        <th>ID Artista</th>
+                        <th>Artista</th>
+
+                    </tr>
+                    @foreach (PLProjeto item in Model.Dados)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="selProdutos" value="@item.IDProj_SEDOG" />
+                            </td>
+                            <td>@item.IDProj_SEDOG</td>
+                            <td>@item.Projeto</td>
+                            <td>@item.IDArtista</td>
+                            <td>@item.Artista</td>
+                        </tr>
+
+                    }
+                </table>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="row">
+                    <input type="button" id="btnAtualizar" name="btnAtualizar" value="Atualizar Selecionados" class="btn btn-lg btn-default btn-block btnShowModal" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+@using (Html.BeginForm("AtualizaProjetos", "AtualizaProjeto", FormMethod.Post, new { id = "FormAtualizaProjetosTodos" }))
+{
+}
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#dtPicker").datepicker({
+            format: 'yyyy-mm-dd',
+            language: "pt-BR",
+            orientation: "top auto",
+            autoclose: true
+        });
+           
+            function checkALL(x) {
+
+                if (x.checked) {
+                    $("input:checkbox").prop('checked', true);
+                }
+                else {
+                    $("input:checkbox").prop('checked', false);
+                }
+            }
+
+            $("#chkAll").click(function () { checkALL(this); });
+
+            $("#FormAtualizaProjetos").submit(function (event) {
+                if ($("input:checked").length > 0){
+                    return;
+                }
+                $('#pleaseWaitDialog').modal('toggle');
+                event.preventDefault();
+            });
+            $("#btnAtualizar").click(function () {
+                if ($("#chkAll").prop('checked')) {
+                    $("#FormAtualizaProjetosTodos").submit(); 
+                } else {
+                    $("#FormAtualizaProjetos").submit();
+                }
+            });
+        });
+
+</script>
