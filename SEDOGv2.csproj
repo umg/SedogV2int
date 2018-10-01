@@ -584,6 +584,8 @@
     <Content Include="Content\themes\base\datepicker.css" />
     <Content Include="Content\themes\base\dialog.css" />
     <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\fundo_sedog.jpg" />
+    <Content Include="Content\themes\base\images\fundo_sedog2.jpg" />
     <Content Include="Content\themes\base\images\loading.gif" />
     <Content Include="Content\images\pdficon.ico" />
     <Content Include="Content\report.css" />
@@ -663,6 +665,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="References\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="References\Microsoft.Web.Services3.dll" />
+    <Content Include="References\UsernameAssertionLibrary.dll" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />

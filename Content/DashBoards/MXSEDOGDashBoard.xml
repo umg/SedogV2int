@@ -2,23 +2,23 @@
   <dashboard name="Digital" id="dDigital">
     <obj type="scoreboard" name="" icon="fa fa-thermometer-three-quarters" forcastPlan="true" mesAnoSelect="true" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
       <tanque id="TanqueDigitalIncome" name="Digital Income" tipo="digitalincome" procedure="SEL_TANQUE_DIGITAL_INCOME" class="hud futuristic text-center">
-        <YTD>63069536</YTD>
-        <YTD_PLAN>60407406</YTD_PLAN>
+        <YTD>114226211</YTD>
+        <YTD_PLAN>112581719</YTD_PLAN>
         <YTD_REAL>60383573</YTD_REAL>
         <TOTAL_ANO>153254525</TOTAL_ANO>
         <TOTAL_ANO_PLAN>153086640</TOTAL_ANO_PLAN>
-        <YTD_MES>12695071</YTD_MES>
-        <YTD_PLAN_MES>12574066</YTD_PLAN_MES>
+        <YTD_MES>12698912</YTD_MES>
+        <YTD_PLAN_MES>13037553</YTD_PLAN_MES>
         <YTD_REAL_MES>0</YTD_REAL_MES>
       </tanque>
       <tanque id="TanqueDigitalSubscribers" name="Subscribers" tipo="digitalsubscribers" procedure="SEL_TANQUE_DIGITAL_SUBSCRIBERS" class="hud futuristic text-center">
-        <YTD>5530235</YTD>
-        <YTD_PLAN>5528931</YTD_PLAN>
-        <YTD_REAL>0</YTD_REAL>
-        <TOTAL_ANO>5532917</TOTAL_ANO>
-        <TOTAL_ANO_PLAN>6067423</TOTAL_ANO_PLAN>
-        <YTD_MES>5530235</YTD_MES>
-        <YTD_PLAN_MES>5528931</YTD_PLAN_MES>
+        <YTD>9872000</YTD>
+        <YTD_PLAN>9864000</YTD_PLAN>
+        <YTD_REAL>9876536</YTD_REAL>
+        <TOTAL_ANO>9872000</TOTAL_ANO>
+        <TOTAL_ANO_PLAN>9864000</TOTAL_ANO_PLAN>
+        <YTD_MES>0</YTD_MES>
+        <YTD_PLAN_MES>0</YTD_PLAN_MES>
         <YTD_REAL_MES>0</YTD_REAL_MES>
       </tanque>
     </obj>
@@ -32,62 +32,62 @@
         </header>
         <row>
           <NOMEGRUPO>SPOTIFY USA INC</NOMEGRUPO>
-          <NETREVENUE_MES>37M</NETREVENUE_MES>
-          <NETREVENUE_YTD>180M</NETREVENUE_YTD>
-          <PERCENT>54</PERCENT>
+          <NETREVENUE_MES>40M</NETREVENUE_MES>
+          <NETREVENUE_YTD>335M</NETREVENUE_YTD>
+          <PERCENT>53</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>APPLE</NOMEGRUPO>
-          <NETREVENUE_MES>11M</NETREVENUE_MES>
-          <NETREVENUE_YTD>50M</NETREVENUE_YTD>
+          <NETREVENUE_MES>9M</NETREVENUE_MES>
+          <NETREVENUE_YTD>91M</NETREVENUE_YTD>
           <PERCENT>15</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>YOU TUBE</NOMEGRUPO>
-          <NETREVENUE_MES>8M</NETREVENUE_MES>
-          <NETREVENUE_YTD>40M</NETREVENUE_YTD>
-          <PERCENT>12</PERCENT>
+          <NETREVENUE_MES>9M</NETREVENUE_MES>
+          <NETREVENUE_YTD>83M</NETREVENUE_YTD>
+          <PERCENT>13</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>VEVO</NOMEGRUPO>
-          <NETREVENUE_MES>7M</NETREVENUE_MES>
-          <NETREVENUE_YTD>39M</NETREVENUE_YTD>
-          <PERCENT>12</PERCENT>
+          <NETREVENUE_MES>6M</NETREVENUE_MES>
+          <NETREVENUE_YTD>68M</NETREVENUE_YTD>
+          <PERCENT>11</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>GOOGLE</NOMEGRUPO>
           <NETREVENUE_MES>3M</NETREVENUE_MES>
-          <NETREVENUE_YTD>14M</NETREVENUE_YTD>
+          <NETREVENUE_YTD>25M</NETREVENUE_YTD>
           <PERCENT>4</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>GRUPO CARSO</NOMEGRUPO>
-          <NETREVENUE_MES>234,625</NETREVENUE_MES>
-          <NETREVENUE_YTD>6M</NETREVENUE_YTD>
+          <NETREVENUE_MES>2M</NETREVENUE_MES>
+          <NETREVENUE_YTD>14M</NETREVENUE_YTD>
           <PERCENT>2</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>DEEZER</NOMEGRUPO>
-          <NETREVENUE_MES>679,972</NETREVENUE_MES>
-          <NETREVENUE_YTD>3M</NETREVENUE_YTD>
+          <NETREVENUE_MES>681,090</NETREVENUE_MES>
+          <NETREVENUE_YTD>6M</NETREVENUE_YTD>
           <PERCENT>1</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>ENERGIZER</NOMEGRUPO>
-          <NETREVENUE_MES>82,352</NETREVENUE_MES>
-          <NETREVENUE_YTD>831,655</NETREVENUE_YTD>
+          <NETREVENUE_MES>175,789</NETREVENUE_MES>
+          <NETREVENUE_YTD>1M</NETREVENUE_YTD>
           <PERCENT>0</PERCENT>
         </row>
         <row>
-          <NOMEGRUPO>TIDAL</NOMEGRUPO>
-          <NETREVENUE_MES>450,619</NETREVENUE_MES>
-          <NETREVENUE_YTD>450,619</NETREVENUE_YTD>
+          <NOMEGRUPO>MUSICAL.LY</NOMEGRUPO>
+          <NETREVENUE_MES>130,776</NETREVENUE_MES>
+          <NETREVENUE_YTD>732,239</NETREVENUE_YTD>
           <PERCENT>0</PERCENT>
         </row>
         <row>
-          <NOMEGRUPO>MOVISTAR</NOMEGRUPO>
-          <NETREVENUE_MES>2,276</NETREVENUE_MES>
-          <NETREVENUE_YTD>63,686</NETREVENUE_YTD>
+          <NOMEGRUPO>FRESHPLANET</NOMEGRUPO>
+          <NETREVENUE_MES>12,385</NETREVENUE_MES>
+          <NETREVENUE_YTD>113,831</NETREVENUE_YTD>
           <PERCENT>0</PERCENT>
         </row>
       </table>
@@ -118,12 +118,12 @@
         <row>
           <ANO>2018</ANO>
           <MES>Abr</MES>
-          <PERCENT>0.0</PERCENT>
+          <PERCENT>25.4</PERCENT>
         </row>
         <row>
           <ANO>2018</ANO>
           <MES>Mar</MES>
-          <PERCENT>0.0</PERCENT>
+          <PERCENT>25.3</PERCENT>
         </row>
         <row>
           <ANO>2018</ANO>
@@ -188,14 +188,14 @@
         <row>
           <ANO>2018</ANO>
           <MES>Abr</MES>
-          <PREMIUM>0.00</PREMIUM>
-          <GRATUITO>0.00</GRATUITO>
+          <PREMIUM>1.72</PREMIUM>
+          <GRATUITO>0.08</GRATUITO>
         </row>
         <row>
           <ANO>2018</ANO>
           <MES>Mar</MES>
-          <PREMIUM>0.00</PREMIUM>
-          <GRATUITO>0.00</GRATUITO>
+          <PREMIUM>1.70</PREMIUM>
+          <GRATUITO>0.08</GRATUITO>
         </row>
         <row>
           <ANO>2018</ANO>
@@ -262,10 +262,6 @@
     <obj type="barChartComplex" name="Streaming Revenue" icon="fa fa-bar-chart" forcastPlan="false" mesAnoSelect="false" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
       <barChartMultiBarAndLine id="BarChartMultiBarAndLineDigitalStreamingRevenue" name="digitalStreamingRevenue" class="" step="1000000" procedure="SLT_GRAFICO_DIGITAL_VENDAS_STREAMING2">
         <labels>
-          <label>jun.</label>
-          <label>jul.</label>
-          <label>ago.</label>
-          <label>sep.</label>
           <label>oct.</label>
           <label>nov.</label>
           <label>dic.</label>
@@ -274,6 +270,10 @@
           <label>mar.</label>
           <label>abr.</label>
           <label>may.</label>
+          <label>jun.</label>
+          <label>jul.</label>
+          <label>ago.</label>
+          <label>sep.</label>
         </labels>
         <datasets>
           <dataset tipo="multiBar">
@@ -328,10 +328,6 @@
     <obj type="barChartComplex" name="Subscribers by Plan" icon="fa fa-bar-chart" forcastPlan="false" mesAnoSelect="false" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
       <barChartMultiBarAndLine id="BarChartMultiBarAndLineDigitalAssinantesPorPlano" name="digitalAssinantesPorPlano" class="" step="500000" procedure="SLT_GRAFICO_ASSINANTES_DIGITAL2">
         <labels>
-          <label>jun.</label>
-          <label>jul.</label>
-          <label>ago.</label>
-          <label>sep.</label>
           <label>oct.</label>
           <label>nov.</label>
           <label>dic.</label>
@@ -340,6 +336,10 @@
           <label>mar.</label>
           <label>abr.</label>
           <label>may.</label>
+          <label>jun.</label>
+          <label>jul.</label>
+          <label>ago.</label>
+          <label>sep.</label>
         </labels>
         <datasets>
           <dataset tipo="multiBar">
