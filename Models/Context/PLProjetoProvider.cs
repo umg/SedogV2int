@@ -36,6 +36,27 @@ namespace SEDOGv2.Models.Context
 
             return resp;
         }
+        public List<AtualizaAssinantesViewModel> SLT_ASSINANTES(int ano)
+        {
+            List<AtualizaAssinantesViewModel> ret = new List<AtualizaAssinantesViewModel>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_ANO", ano));
+                string procedure = AddScheme("SLT_ASSINANTES");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<AtualizaAssinantesViewModel>();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
         public long INS_PL_LOTE(string chamada)
         {
 

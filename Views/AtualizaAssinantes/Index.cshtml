@@ -1,0 +1,137 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <!-- Default panel contents -->
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    @appSettings.pageName()
+                </h2>
+                @ViewBag.Error
+            </div>
+        </div>
+        <div class="row">
+            @using (Html.BeginForm())
+            {
+                <div class="col-md-7 text-right">
+                    <div class="form-group">
+                        <h4>Year:</h4>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="ano" id="ano" value="@DateTime.Now.Year" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input type="submit" name="Listar" value="List" class="btn btn-default btn-lg" />
+                    </div>
+                </div>
+
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover table-bordered updateTotalTable">
+                    <tr>
+                        <th>Year</th>
+                        <th>Month</th>
+                        <th>Individual</th>
+                        <th>Family</th>
+                        <th>Promo</th>
+                    </tr>
+                    @foreach (AtualizaAssinantesViewModel item in Model)
+                    {
+                        <tr class="saveLine">
+                            <td hidden class="anomesVal">@item.ANOMES</td>
+                            <td class="anoVal">@item.ANO</td>
+                            <td class="mesVal">@item.MES</td>
+                            <td><a href="#" class="editable individVal" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.INDIVID.ToString("#0.#0")</a></td>
+                            <td><a href="#" class="editable familiaVal" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.FAMILIA.ToString("#0.#0")</a></td>
+                            <td><a href="#" class="editable promoVal" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.PROMO.ToString("#0.#0")</a></td>
+                        </tr>
+                    }
+                </table>
+                <input type="button" id="btnUpdate" value="Update" class="btn btn-default pull-right hidden btnShowModal" />
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+
+    Number.prototype.format = function () {
+        return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+    };
+
+    $(".editable").editable().on('shown', function (e, editable) {
+        editable.input.$input.val(editable.input.$input.val().replace(/[\.]+/g, ''))
+        editable.input.$input.keydown(function (e) {
+            if ($.inArray(e.keyCode, [188]) !== -1) {
+                if (editable.input.$input.val().indexOf(',') > -1) {
+                    e.preventDefault();
+                    return;
+                }
+            }
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 188]) !== -1 ||
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                return;
+            }
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+    }).on('hidden', function (e, reason) {
+        if (reason === 'save') {
+            $('#btnUpdate').removeClass('hidden');
+        }
+    });
+
+    $('#btnUpdate').click(function () {
+        var linhas = [];
+        $('.updateTotalTable .saveLine').each(function (i, e) {
+            var linha =
+                        {
+                            ANOMES: $(this).find('.anomesVal').html(),
+                            ANO: $(this).find('.anoVal').html(),
+                            MES: $(this).find('.mesVal').html(),
+                            INDIVID: Number($(this).find('.individVal').html().replace(/[\,]+/g, '.')),
+                            FAMILIA: Number($(this).find('.familiaVal').html().replace(/[\,]+/g, '.')),
+                            PROMO: Number($(this).find('.promoVal').html().replace(/[\,]+/g, '.'))
+        };
+            linhas.push(linha);
+        });
+
+        $.ajax({
+            url: "AtualizaAssinantes/UpdateAssinantes",
+            type: "POST",
+            data: JSON.stringify({ 'valores': linhas }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                $('#pleaseWaitDialog .messageDialog').html(response.responseText);
+                setTimeout(
+                    function () {
+                        $('#pleaseWaitDialog').modal('toggle');
+                        $('#pleaseWaitDialog .messageDialog').html('');
+                    }, 5000);
+            },
+            error: function (response) {
+                $('#pleaseWaitDialog').modal('toggle');
+                alert("Erro.");
+            }
+        });
+    });
+
+</script>
