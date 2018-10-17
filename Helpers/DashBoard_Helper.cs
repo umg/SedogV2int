@@ -1337,8 +1337,17 @@ namespace SEDOGv2.Helpers
 
                             for (int i = 0; i < 12; i++)
                             {
+                                
                                 XmlNode xLabel = xDoc.CreateElement("label");
-                                xLabel.InnerText = dtAnterior.AddMonths(i).ToString("MMM");
+                                if (element.Attributes["useJanToDec"] != null)
+                                {
+                                    if (element.Attributes["useJanToDec"].Value == "True")
+                                    {
+                                        xLabel.InnerText = new DateTime(DateTime.Now.Year, 1, 1).AddMonths(i).ToString("MMM");
+                                    }
+                                }
+                                else
+                                    xLabel.InnerText = dtAnterior.AddMonths(i).ToString("MMM");
                                 xLabels.AppendChild(xLabel);
                             }
                             foreach (DataTable tbl in GetTables(procedure, parameters.ToArray()))

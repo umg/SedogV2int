@@ -117,6 +117,31 @@
         </header>
         <row>
           <ANO>2018</ANO>
+          <MES>Set</MES>
+          <PERCENT>20.0</PERCENT>
+        </row>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Ago</MES>
+          <PERCENT>20.0</PERCENT>
+        </row>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Jul</MES>
+          <PERCENT>25.0</PERCENT>
+        </row>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Jun</MES>
+          <PERCENT>24.0</PERCENT>
+        </row>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Mai</MES>
+          <PERCENT>25.5</PERCENT>
+        </row>
+        <row>
+          <ANO>2018</ANO>
           <MES>Abr</MES>
           <PERCENT>25.4</PERCENT>
         </row>
@@ -150,31 +175,6 @@
           <MES>Out</MES>
           <PERCENT>26.1</PERCENT>
         </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Set</MES>
-          <PERCENT>26.0</PERCENT>
-        </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Ago</MES>
-          <PERCENT>26.2</PERCENT>
-        </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Jul</MES>
-          <PERCENT>26.2</PERCENT>
-        </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Jun</MES>
-          <PERCENT>26.8</PERCENT>
-        </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Mai</MES>
-          <PERCENT>27.4</PERCENT>
-        </row>
       </table>
     </obj>
     <obj type="table" name="ARPU" icon="fa fa-users" forcastPlan="false" mesAnoSelect="false" class="col-lg-2 col-md-2 col-xs-2 grafico hvr-float-shadow text-align" rowFlex="false">
@@ -185,6 +185,36 @@
           <PREMIUM>Prem.</PREMIUM>
           <GRATUITO>Free</GRATUITO>
         </header>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Set</MES>
+          <PREMIUM>1.72</PREMIUM>
+          <GRATUITO>0.00</GRATUITO>
+        </row>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Ago</MES>
+          <PREMIUM>1.72</PREMIUM>
+          <GRATUITO>1.00</GRATUITO>
+        </row>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Jul</MES>
+          <PREMIUM>1.70</PREMIUM>
+          <GRATUITO>0.09</GRATUITO>
+        </row>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Jun</MES>
+          <PREMIUM>1.71</PREMIUM>
+          <GRATUITO>0.08</GRATUITO>
+        </row>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Mai</MES>
+          <PREMIUM>1.73</PREMIUM>
+          <GRATUITO>0.09</GRATUITO>
+        </row>
         <row>
           <ANO>2018</ANO>
           <MES>Abr</MES>
@@ -225,36 +255,6 @@
           <ANO>2017</ANO>
           <MES>Out</MES>
           <PREMIUM>1.61</PREMIUM>
-          <GRATUITO>0.10</GRATUITO>
-        </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Set</MES>
-          <PREMIUM>1.55</PREMIUM>
-          <GRATUITO>0.10</GRATUITO>
-        </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Ago</MES>
-          <PREMIUM>1.63</PREMIUM>
-          <GRATUITO>0.10</GRATUITO>
-        </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Jul</MES>
-          <PREMIUM>1.65</PREMIUM>
-          <GRATUITO>0.10</GRATUITO>
-        </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Jun</MES>
-          <PREMIUM>1.80</PREMIUM>
-          <GRATUITO>0.10</GRATUITO>
-        </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Mai</MES>
-          <PREMIUM>1.84</PREMIUM>
           <GRATUITO>0.10</GRATUITO>
         </row>
       </table>
@@ -326,11 +326,8 @@
       </barChartMultiBarAndLine>
     </obj>
     <obj type="barChartComplex" name="Subscribers by Plan" icon="fa fa-bar-chart" forcastPlan="false" mesAnoSelect="false" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
-      <barChartMultiBarAndLine id="BarChartMultiBarAndLineDigitalAssinantesPorPlano" name="digitalAssinantesPorPlano" class="" step="500000" procedure="SLT_GRAFICO_ASSINANTES_DIGITAL2">
+      <barChartMultiBarAndLine id="BarChartMultiBarAndLineDigitalAssinantesPorPlano" name="digitalAssinantesPorPlano" class="" step="5000" procedure="SLT_GRAFICO_ASSINANTES_DIGITAL2" useJanToDec="True">
         <labels>
-          <label>oct.</label>
-          <label>nov.</label>
-          <label>dic.</label>
           <label>ene.</label>
           <label>feb.</label>
           <label>mar.</label>
@@ -340,18 +337,73 @@
           <label>jul.</label>
           <label>ago.</label>
           <label>sep.</label>
+          <label>oct.</label>
+          <label>nov.</label>
+          <label>dic.</label>
         </labels>
         <datasets>
           <dataset tipo="multiBar">
-            <multibar label="INDIVIDUAL" barColor="rgba(255,165,0,1)" />
+            <multibar label="INDIVIDUAL" barColor="rgba(255,165,0,1)">
+              <data>1</data>
+              <data>2</data>
+              <data>3</data>
+              <data>4</data>
+              <data>5</data>
+              <data>6</data>
+              <data>7</data>
+              <data>8</data>
+              <data>9</data>
+              <data>10</data>
+              <data>0</data>
+              <data>0</data>
+            </multibar>
           </dataset>
           <dataset tipo="multiBar">
-            <multibar label="FAMILIA" barColor="rgba(0, 72, 70,1)" />
+            <multibar label="FAMILY" barColor="rgba(0, 72, 70,1)">
+              <data>1</data>
+              <data>2</data>
+              <data>3</data>
+              <data>4</data>
+              <data>5</data>
+              <data>6</data>
+              <data>7</data>
+              <data>8</data>
+              <data>9</data>
+              <data>10</data>
+              <data>0</data>
+              <data>0</data>
+            </multibar>
           </dataset>
           <dataset tipo="multiBar">
-            <multibar label="PROMO" barColor="rgba(23,123,172,1)" />
+            <multibar label="PROMO" barColor="rgba(23,123,172,1)">
+              <data>1</data>
+              <data>2</data>
+              <data>3</data>
+              <data>4</data>
+              <data>5</data>
+              <data>6</data>
+              <data>7</data>
+              <data>8</data>
+              <data>9</data>
+              <data>10</data>
+              <data>0</data>
+              <data>0</data>
+            </multibar>
           </dataset>
-          <dataset tipo="line" label="TOTAL" color="rgba(70, 200, 70, 1)" />
+          <dataset tipo="line" label="TOTAL" color="rgba(70, 200, 70, 1)">
+            <data>3</data>
+            <data>6</data>
+            <data>9</data>
+            <data>12</data>
+            <data>15</data>
+            <data>18</data>
+            <data>21</data>
+            <data>24</data>
+            <data>27</data>
+            <data>30</data>
+            <data>0</data>
+            <data>0</data>
+          </dataset>
         </datasets>
       </barChartMultiBarAndLine>
     </obj>
