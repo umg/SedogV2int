@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Web;
+﻿using SEDOGv2.Helpers;
+using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
 using System.Data;
-using SEDOGv2.Helpers;
+using System.Data.OleDb;
+using System.Linq;
 
 
 namespace SEDOGv2.Models.Context
@@ -169,7 +168,7 @@ namespace SEDOGv2.Models.Context
             return ret;
         }
 
-       
+
         public List<DetalhesDeProdutos> SLT_PRODUTOS_HEADER_POR_PROJETO(long idLote)
         {
             List<DetalhesDeProdutos> ret = new List<DetalhesDeProdutos>();
@@ -799,6 +798,26 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
+        public List<DashBoardsPorUsuarioViewModel> SLT_PAGES_POR_OBJETO(string login)
+        {
+            var ret = new List<DashBoardsPorUsuarioViewModel>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_LOGIN", login));
+                string procedure = AddScheme("SLT_PAGES_POR_OBJETO");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<DashBoardsPorUsuarioViewModel>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
         public void DEL_PAGINAS_USUARIO(string login)
         {
             try
@@ -806,6 +825,22 @@ namespace SEDOGv2.Models.Context
                 List<OleDbParameter> parameters = new List<OleDbParameter>();
                 parameters.Add(AddParameter("P_LOGIN", login.ToUpper()));
                 string procedure = AddScheme("DEL_PAGINAS_USUARIO");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void DEL_OBJETO_USUARIO(string login)
+        {
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_LOGIN", login.ToUpper()));
+                string procedure = AddScheme("DEL_OBJETO_USUARIO");
 
                 ExecutaProcedureNoQuery(procedure, parameters.ToArray());
             }
@@ -828,6 +863,40 @@ namespace SEDOGv2.Models.Context
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public void INS_OBJETOS_USUARIO(string login, string idpage, string label)
+        {
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_LOGIN", login.ToUpper()));
+                parameters.Add(AddParameter("P_IDPAGE", idpage));
+                parameters.Add(AddParameter("P_LABEL", label));
+                string procedure = AddScheme("INS_OBJETOS_USUARIO");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<DashBoard> SLT_OBJETOS()
+        {
+            try
+            {
+                var procedure = AddScheme("SLT_OBJETOS");
+
+                var dt = GetTable(procedure);
+
+                return dt.DataTableToList<DashBoard>();
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
         public void DEL_USUARIO(string login)
@@ -1715,7 +1784,7 @@ namespace SEDOGv2.Models.Context
                 DataTable dt = new DataTable();
                 dt = GetTableFromSQLString(sqlTanque);
                 long o = 0;
-                foreach(DataRow row in dt.Rows)
+                foreach (DataRow row in dt.Rows)
                 {
                     ValoresTanqueViewModel r = new ValoresTanqueViewModel();
                     long.TryParse(row["FORE"].ToString(), out o);
@@ -1922,7 +1991,7 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
-        public void UPD_NRI_PROJETOS(long idProjetoNRI, string idArtista , string artista , string projeto, string bu , string data, string obs, string expiracao)
+        public void UPD_NRI_PROJETOS(long idProjetoNRI, string idArtista, string artista, string projeto, string bu, string data, string obs, string expiracao)
         {
             List<NRIProjetosReceitas> ret = new List<NRIProjetosReceitas>();
             try
@@ -2102,7 +2171,7 @@ namespace SEDOGv2.Models.Context
                 throw ex;
             }
         }
-        public void INS_NRI_PROJETOS_RECEITA(long idProjetoNRI, long idTipoReceita, long idResponsavel,decimal percent,string acordo, int quantidade, int saldo, string obs, int emailCobranca)
+        public void INS_NRI_PROJETOS_RECEITA(long idProjetoNRI, long idTipoReceita, long idResponsavel, decimal percent, string acordo, int quantidade, int saldo, string obs, int emailCobranca)
         {
             try
             {
@@ -2142,7 +2211,7 @@ namespace SEDOGv2.Models.Context
                 throw ex;
             }
         }
-        public void INS_NRI_PROJETOS (long idArtista , string artista, string projeto, string bu, DateTime dtInicial, string obs)
+        public void INS_NRI_PROJETOS(long idArtista, string artista, string projeto, string bu, DateTime dtInicial, string obs)
         {
             try
             {
@@ -2206,7 +2275,7 @@ namespace SEDOGv2.Models.Context
             return ret;
         }
 
-        public void INS_NRI_HISTORICO_SHOWS(long id_seq,decimal valor, string obs, string data)
+        public void INS_NRI_HISTORICO_SHOWS(long id_seq, decimal valor, string obs, string data)
         {
             try
             {

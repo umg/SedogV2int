@@ -1,19 +1,17 @@
-﻿using System;
-using System.Xml;
-using System.Text;
-using System.IO;
+﻿using SEDOGv2.Models;
+using SEDOGv2.Models.Context;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Globalization;
-using SEDOGv2.Models;
-using SEDOGv2.Models.Context;
+using System.Text;
 using System.Text.RegularExpressions;
-using SEDOGv2.Helpers;
+using System.Xml;
 
 namespace SEDOGv2.Helpers
 {
-    public class DashBoard_Helper: Conn
+    public class DashBoard_Helper : Conn
     {
         private string sHtml;
         private string sScriptArea;
@@ -61,7 +59,7 @@ namespace SEDOGv2.Helpers
                 {
 
                     bool loadObject = false;
-                    
+
                     foreach (XmlNode detalhe in obj.ChildNodes)
                     {
                         if (detalhe.Name == "twoColumn")
@@ -71,7 +69,8 @@ namespace SEDOGv2.Helpers
                         }
                         if (detalhe.Attributes != null)
                         {
-                            if (detalhe.Attributes["id"] != null) {
+                            if (detalhe.Attributes["id"] != null)
+                            {
                                 if (user.IDsObjetosDashboard.Exists(e => e.Contains(detalhe.Attributes["id"].Value)))
                                 {
                                     loadObject = true;
@@ -82,7 +81,7 @@ namespace SEDOGv2.Helpers
 
                     if (!loadObject) continue;
 
-                    if(obj.Attributes["type"].Value== "scoreboard")
+                    if (obj.Attributes["type"].Value == "scoreboard")
                     {
                         int totalDeObjetosReais = 0;
                         foreach (XmlNode detalhe in obj.ChildNodes)
@@ -94,7 +93,7 @@ namespace SEDOGv2.Helpers
                         }
                         if (obj.ChildNodes.Count != totalDeObjetosReais)
                         {
-                            switch(totalDeObjetosReais)
+                            switch (totalDeObjetosReais)
                             {
                                 case 1:
                                     obj.Attributes["class"].Value = rgx.Replace(obj.Attributes["class"].Value, "").Insert(0, "col-lg-2 col-md-2 col-xs-2");
@@ -289,7 +288,7 @@ namespace SEDOGv2.Helpers
                                             switch (subDetalhe.Name)
                                             {
                                                 case "image":
-                                                    sbRet.Append("<img src=\""+ subDetalhe["src"].InnerText + "\" alt=\"\">");
+                                                    sbRet.Append("<img src=\"" + subDetalhe["src"].InnerText + "\" alt=\"\">");
                                                     break;
                                                 case "carousel":
                                                     int car = 0;
@@ -305,7 +304,7 @@ namespace SEDOGv2.Helpers
 
                                                     sbRet.Append("<div class=\"carousel-inner\">");
                                                     car = 0;
-                                                    foreach(XmlNode subImg in subDetalhe.ChildNodes)
+                                                    foreach (XmlNode subImg in subDetalhe.ChildNodes)
                                                     {
                                                         sbRet.Append("<div class=\"item" + (car == 0 ? " active" : "") + "\">");
                                                         sbRet.Append("<img src=\"" + subImg["src"].InnerText + "\" alt=\"\">");
@@ -669,7 +668,7 @@ namespace SEDOGv2.Helpers
 
                                                     sbRet_scriptArea.Append("var ctx" + subDetalhe.Attributes["name"].Value + " = $(\"#" + subDetalhe.Attributes["name"].Value + "\");");
                                                     sbRet_scriptArea.Append("var chart" + subDetalhe.Attributes["name"].Value + " = new Chart(ctx" + subDetalhe.Attributes["name"].Value + ", { type: '" + subDetalhe.Attributes["tipo"].Value + "', data: data" + subDetalhe.Attributes["name"].Value);
-                                                    sbRet_scriptArea.Append(", options:{ responsive: true"+ /*", scale: {ticks: {stepSize: 20,beginAtZero: true,max: 100}}"+*/ ",tooltips: {callbacks: {label: function (tooltipItem, data) {var subDataset = data.datasets[tooltipItem.datasetIndex];var precentage = parseFloat(subDataset.data[tooltipItem.index]);return precentage.formatMoney() + '%';}}}}");
+                                                    sbRet_scriptArea.Append(", options:{ responsive: true" + /*", scale: {ticks: {stepSize: 20,beginAtZero: true,max: 100}}"+*/ ",tooltips: {callbacks: {label: function (tooltipItem, data) {var subDataset = data.datasets[tooltipItem.datasetIndex];var precentage = parseFloat(subDataset.data[tooltipItem.index]);return precentage.formatMoney() + '%';}}}}");
                                                     sbRet_scriptArea.Append("});");
                                                     break;
                                             }
@@ -688,9 +687,9 @@ namespace SEDOGv2.Helpers
                                 sbRet.Append("<canvas class=\"MapaRegiao\" ");
                                 foreach (XmlNode col in detalhe.SelectSingleNode("datas").ChildNodes)
                                 {
-                                    sbRet.Append("data-" + col.Attributes["id"].Value.Trim().Replace(" ","").ToLower() + "=\"" + col.InnerText + "\" ");
+                                    sbRet.Append("data-" + col.Attributes["id"].Value.Trim().Replace(" ", "").ToLower() + "=\"" + col.InnerText + "\" ");
                                 }
-                                sbRet.Append("data-percent=\""+ detalhe.Attributes["percent"].Value + "\"></canvas>");
+                                sbRet.Append("data-percent=\"" + detalhe.Attributes["percent"].Value + "\"></canvas>");
                                 break;
                             case "tanque":
                                 sbRet.Append("<div class=\"" + detalhe.Attributes["class"].Value + "\">");
@@ -1044,7 +1043,7 @@ namespace SEDOGv2.Helpers
 
                                 sbRet_scriptArea.Append("var ctx" + detalhe.Attributes["name"].Value + " = $(\"#" + detalhe.Attributes["name"].Value + "\");");
                                 sbRet_scriptArea.Append("var chart" + detalhe.Attributes["name"].Value + " = new Chart(ctx" + detalhe.Attributes["name"].Value + ", { type: '" + detalhe.Attributes["tipo"].Value + "', data: data" + detalhe.Attributes["name"].Value);
-                                sbRet_scriptArea.Append(", options:{ responsive: true"+ /*", scale: {ticks: {stepSize: 20,beginAtZero: true,max: 100}}"+*/ ",tooltips: {callbacks: {label: function (tooltipItem, data) {var subDataset = data.datasets[tooltipItem.datasetIndex];var precentage = parseFloat(subDataset.data[tooltipItem.index]);return precentage.formatMoney() + '%';}}}}");
+                                sbRet_scriptArea.Append(", options:{ responsive: true" + /*", scale: {ticks: {stepSize: 20,beginAtZero: true,max: 100}}"+*/ ",tooltips: {callbacks: {label: function (tooltipItem, data) {var subDataset = data.datasets[tooltipItem.datasetIndex];var precentage = parseFloat(subDataset.data[tooltipItem.index]);return precentage.formatMoney() + '%';}}}}");
                                 sbRet_scriptArea.Append("});");
                                 break;
                         }
@@ -1068,7 +1067,7 @@ namespace SEDOGv2.Helpers
             {
                 decimal o = 0;
                 XmlDocument xDoc = new XmlDocument();
-                xDoc.Load(path + @"\Content\DashBoards\"+ appSettings.Ambiente + "DashBoardDataBase.xml");
+                xDoc.Load(path + @"\Content\DashBoards\" + appSettings.Ambiente + "DashBoardDataBase.xml");
 
                 DateTime dtAnterior = new DateTime(anoAtual, mesAtual, 1).AddMonths(-11);
                 DateTime dtAntual = new DateTime(anoAtual, mesAtual, 1);
@@ -1927,7 +1926,7 @@ namespace SEDOGv2.Helpers
             XmlDocument xInput = new XmlDocument();
             xInput.Load(path + @"\Content\DashBoards\" + appSettings.Ambiente + "DashBoardDataBase.xml");
 
-            XmlDocument xOutput= new XmlDocument();
+            XmlDocument xOutput = new XmlDocument();
             xOutput.Load(path + @"\Content\DashBoards\" + appSettings.Ambiente + "DashBoard.xml");
 
             foreach (XmlNode nodeInput in xInput.SelectNodes("//*[@id]"))//["elements"].ChildNodes)
@@ -1943,6 +1942,59 @@ namespace SEDOGv2.Helpers
 
             }
             xOutput.Save(path + @"\Content\DashBoards\" + appSettings.Ambiente + "DashBoard.xml");
+        }
+
+        public List<DashBoardsPorUsuarioViewModel> LoadDashBoardInfo(List<DashBoardsPorUsuarioViewModel> dashBoards)
+        {
+            var dashboardsPorUsuario = new List<DashBoardsPorUsuarioViewModel>();
+
+            var xDoc = new XmlDocument();
+            xDoc.Load(path + $@"\Content\DashBoards\{appSettings.Ambiente}DashBoard.xml");
+
+            foreach (XmlNode item in xDoc["dashboards"].ChildNodes)
+            {
+                var dashboardName = item.Attributes["name"].Value;
+                var dashboardId = item.Attributes["id"].Value;
+
+                foreach (XmlNode obj in item.ChildNodes)
+                {
+                    foreach (XmlNode detalhe in obj.ChildNodes)
+                    {
+                        if (detalhe.Name == "twoColumn")
+                        {
+                            foreach (XmlNode left in detalhe.ChildNodes)
+                            {
+                                foreach (XmlNode objet in left.ChildNodes)
+                                {
+                                    var detalheName = objet.Attributes["name"].Value;
+                                    foreach (XmlNode carousel in objet.ChildNodes)
+                                    {
+                                        var detalheId = carousel.Attributes["id"].Value;
+
+                                        var db = dashBoards.Find(x => x.Id.Equals(detalheId));
+                                        db.Menu = dashboardName;
+                                    }
+                                }
+                            }
+                        }
+                        if (detalhe.Attributes != null)
+                        {
+                            if (detalhe.Attributes["id"] != null)
+                            {
+                                var detalheName = detalhe.Attributes["name"].Value;
+                                var detalheId = detalhe.Attributes["id"].Value;
+                                if (dashBoards.Exists(x => x.Id.Equals(detalheId)))
+                                {
+                                    var db = dashBoards.Find(x => x.Id.Equals(detalheId));
+                                    db.Menu = dashboardName;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return dashBoards;
         }
     }
 }

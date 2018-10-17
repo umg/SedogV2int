@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using SEDOGv2.Helpers;
 using SEDOGv2.Models;
 using SEDOGv2.Models.Context;
-using SEDOGv2.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 
 namespace SEDOGv2.Controllers.Cadastros
@@ -58,6 +57,7 @@ namespace SEDOGv2.Controllers.Cadastros
 
                 model = provider.SLT_USUARIOS(login).First();
                 model.Paginas = provider.SLT_PAGES_POR_USUARIO(login);
+                model.DashBoards = BuscaDashBoards(login);
                 ViewBag.Departamentos = provider.SEL_DEPARTAMENTOS();
 
             }
@@ -79,9 +79,17 @@ namespace SEDOGv2.Controllers.Cadastros
                 {
                     provider.UPD_USUARIO(collection["LOGIN"], collection["NOME"], collection["EMAIL"], collection["DEPTO"]);
                     provider.DEL_PAGINAS_USUARIO(collection["LOGIN"]);
+                    provider.DEL_OBJETO_USUARIO(collection["LOGIN"]);
                     foreach (var idPag in collection["chkPaginas"].Split(','))
                     {
                         provider.INS_PAGINAS_USUARIO(collection["LOGIN"], long.Parse(idPag));
+                    }
+
+                    var dashBoards = provider.SLT_OBJETOS();
+                    foreach (var item in collection["chkDashBoard"].Split(','))
+                    {
+                        provider.INS_OBJETOS_USUARIO(collection["LOGIN"], item,
+                            dashBoards.Where(x => x.Id.Equals(item)).Select(x => x.Label).FirstOrDefault());
                     }
                 }
             }
@@ -183,6 +191,16 @@ namespace SEDOGv2.Controllers.Cadastros
                 ViewBag.Error = ex.Message;
             }
             return RedirectToAction("Index");
+        }
+
+        public List<DashBoardsPorUsuarioViewModel> BuscaDashBoards(string login)
+        {
+            var provider = new PLProjetoProvider();
+            var dashBoards = provider.SLT_PAGES_POR_OBJETO(login);
+
+            var dbHelper = new DashBoard_Helper();
+            dbHelper.path = Server.MapPath("~");
+            return dbHelper.LoadDashBoardInfo(dashBoards);
         }
     }
 }
