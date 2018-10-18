@@ -681,8 +681,7 @@
     <None Include="App_Data\VendasDireitos.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\PublishProfiles\Custom.pubxml" />
-    <None Include="Properties\PublishProfiles\Sedog2.pubxml" />
+    <None Include="Properties\PublishProfiles\SEDOGv2.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
