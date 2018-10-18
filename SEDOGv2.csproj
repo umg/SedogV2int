@@ -267,9 +267,7 @@
     <Compile Include="Models\CamposTanqueViewModel.cs" />
     <Compile Include="Models\Context\Conn.cs" />
     <Compile Include="Models\Context\LoginProvider.cs" />
-    <Compile Include="Models\Context\PLProjetoPrivider_ext.cs" />
     <Compile Include="Models\Context\PLProjetoProvider.cs" />
-    <Compile Include="Models\Context\PLProjetoProvider_ext.cs" />
     <Compile Include="Models\DashBoard.cs" />
     <Compile Include="Models\DashBoardsPorUsuarioViewModel.cs" />
     <Compile Include="Models\Departamento.cs" />

@@ -31,7 +31,7 @@ namespace SEDOGv2.Controllers.Uploads
                     int _mes = Convert.ToInt32(collection["mes"]);
                     if (_mes > 0)
                     {
-                        Models.Context.PLProjetoProvider_ext conn = new Models.Context.PLProjetoProvider_ext();
+                        Models.Context.PLProjetoProvider conn = new Models.Context.PLProjetoProvider();
 
                         string path = Server.MapPath("~/temp/forcast.xls");
                         file.SaveAs(path);
@@ -121,7 +121,7 @@ namespace SEDOGv2.Controllers.Uploads
             if (file.ContentLength > 0)
             {
 
-                Models.Context.PLProjetoProvider_ext conn = new Models.Context.PLProjetoProvider_ext();
+                Models.Context.PLProjetoProvider conn = new Models.Context.PLProjetoProvider();
 
                 string path = Server.MapPath("~/temp/generico.xls");
                 file.SaveAs(path);
@@ -193,7 +193,7 @@ namespace SEDOGv2.Controllers.Uploads
                     }
                    
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                 }
 

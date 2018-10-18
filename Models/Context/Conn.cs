@@ -14,7 +14,6 @@ namespace SEDOGv2.Models.Context
     {
         protected OleDbCommand Command;
         OleDbConnection _odbCon;
-        private string _connectionString;
         protected string connectionString
         {
             get
@@ -22,8 +21,7 @@ namespace SEDOGv2.Models.Context
                 return Helpers.appSettings.ConnectionString;
             }
         }
-
-        private string _ambiente;
+        
         /// <summary>
         /// Ele busca no WEB.CONFIG baseado no Pais passado na session.
         /// </summary>

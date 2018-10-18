@@ -638,7 +638,6 @@ namespace SEDOGv2.Helpers
                                                             case "datas":
                                                                 //sbRet_scriptArea.Append("datasets: [{ ");
                                                                 tempS = "";
-                                                                string colors = "";
 
                                                                 subdatasets += ("{label: \"" + subItens.Attributes["label"].Value + "\",");
 
@@ -1013,7 +1012,6 @@ namespace SEDOGv2.Helpers
                                         case "datas":
                                             //sbRet_scriptArea.Append("datasets: [{ ");
                                             tempS = "";
-                                            string colors = "";
 
                                             datasets += ("{label: \"" + itens.Attributes["label"].Value + "\",");
 
@@ -1337,7 +1335,7 @@ namespace SEDOGv2.Helpers
 
                             for (int i = 0; i < 12; i++)
                             {
-                                
+
                                 XmlNode xLabel = xDoc.CreateElement("label");
                                 if (element.Attributes["useJanToDec"] != null)
                                 {

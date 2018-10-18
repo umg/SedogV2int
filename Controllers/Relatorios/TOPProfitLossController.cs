@@ -63,7 +63,6 @@ namespace SEDOGv2.Controllers.Relatorios
                 case "xls":
                     rpt = export.ExportToEXCEL(reportModelPath, reportSavePath, printName, auxPL, new List<Helpers.ReportParamValues>() { }, new List<System.Data.DataTable>() { });
                     return File(rpt, contentType, string.Concat(printName, ".", docType));
-                    break;
                 case "pdf":
                     reportName = collection["reportName"].ToString();
                     printName = collection["printName"].ToString();
@@ -72,10 +71,8 @@ namespace SEDOGv2.Controllers.Relatorios
                     contentType = "application/pdf";
                     rpt = export.ExportToPDF(reportModelPath, reportSavePath, printName, auxPL, new List<Helpers.ReportParamValues>() { }, new List<System.Data.DataTable>() { });
                     return File(rpt, contentType, string.Concat(printName, ".", docType));
-                    break;
                 default:
                     return RedirectToAction("Index");
-                    break;
             }
 
         }

@@ -185,7 +185,6 @@ namespace SEDOGv2.Helpers
                 //string table = string.Concat("<ul class='nav navbar-nav'><li><a href='", path, "'>Home</a></li>");
                 string table = "";
                 int t = 0;
-                int st = 0;
 
                 for (int i = 0; i <= _User.Pages.Count - 1; i++)
                 {
