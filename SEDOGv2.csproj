@@ -223,6 +223,7 @@
     <Compile Include="Controllers\KeepMeAliveController.cs" />
     <Compile Include="Controllers\LoginCobrancaNRIController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManagementMeetingController.cs" />
     <Compile Include="Controllers\MarketingTools\DespesaDeMarketingPorArtistaController.cs" />
     <Compile Include="Controllers\MarketingTools\DespesaDeMarketingPorArtistaProjetoController.cs" />
     <Compile Include="Controllers\MarketingTools\DespesasDeMarketingPorContaController.cs" />
@@ -288,6 +289,7 @@
     <Compile Include="Models\ISRCs.cs" />
     <Compile Include="Models\JsonDataHeader.cs" />
     <Compile Include="Models\LucrosEPerdas.cs" />
+    <Compile Include="Models\ManagementMeeting.cs" />
     <Compile Include="Models\ManutencaoProjetoViewModel.cs" />
     <Compile Include="Models\MarketShareViewModel.cs" />
     <Compile Include="Models\Menu.cs" />
@@ -943,6 +945,10 @@
     <Content Include="Views\DireitosProfitLoss\Index.cshtml" />
     <Content Include="Views\ARControleDespesa\Index.cshtml" />
     <Content Include="Views\AtualizaAssinantes\Index.cshtml" />
+    <Content Include="Views\ManagementMeeting\Index.cshtml" />
+    <Content Include="Views\ManagementMeeting\_ModalUploadManagementMeetingFilePartial.cshtml" />
+    <Content Include="Views\ManagementMeeting\_ListManagementMeetingPartial.cshtml" />
+    <Content Include="Views\Shared\_AlertMessagePartial.cshtml" />
     <None Include="Web References\net.umusic.catalogueservices\SecureDataServices.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

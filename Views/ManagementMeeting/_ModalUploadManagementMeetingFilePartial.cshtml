@@ -1,0 +1,76 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <button type="button" class="brn btn-default btn-lg" data-toggle="modal" data-target="#uploadFileModal">
+            Send File
+            <i class="glyphicon glyphicon-upload"></i>
+        </button>
+    </div>
+</div>
+
+<div class="modal fate" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @using (Html.BeginForm("Index", "ManagementMeeting", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title text-bold" id="uploadFileModalLabel">Send File</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="nome" name="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="descricao" name="descricao"></textarea>
+                    </div>
+
+                    <h5 class="text-bold">File:</h5>
+                    <div class="input-group">
+                        <label class="input-group-btn" id="file">
+                            <span class="btn btn-default">
+                                Search&hellip; <input type="file" name="file" class="form-control" style="display: none;" multiple>
+                            </span>
+                        </label>
+                        <input type="text" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="salvarArquivo" class="btn btn-default">Save</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function()
+    {
+        $(document).on('change', ':file', function()
+        {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready( function()
+        {
+            $(':file').on('fileselect', function(event, numFiles, label)
+            {
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if( input.length )
+                {
+                    input.val(log);
+                }
+                else
+                {
+                    if( log ) alert(log);
+                }
+            });
+        });
+    });
+</script>

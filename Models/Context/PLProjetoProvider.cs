@@ -2395,5 +2395,38 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
+
+        public void INS_MANAGEMENT_MEETING(ManagementMeeting managementMeeting)
+        {
+            var parametros = new List<OleDbParameter>();
+
+            parametros.Add(AddParameter("P_NOME", managementMeeting.Nome));
+            parametros.Add(AddParameter("P_DESCRICAO", managementMeeting.Descricao));
+            parametros.Add(AddParameter("P_DATA_CADASTRO", managementMeeting.DataCadastro));
+            parametros.Add(AddParameter("P_CAMINHO_ARQUIVO", managementMeeting.FilePath));
+            parametros.Add(AddParameter("P_EXTENCAO_ARQUIVO", managementMeeting.FileExtension));
+
+            var procedure = AddScheme("INS_MANAGEMENT_MEETING");
+            ExecutaProcedureNoQuery(procedure, parametros.ToArray());
+        }
+
+        public List<ManagementMeeting> SEL_MANAGEMENT_MEETING()
+        {
+            var procedure = AddScheme("SEL_MANAGEMENT_MEETING");
+
+            var datatable = GetTable(procedure);
+
+            return datatable.DataTableToList<ManagementMeeting>();
+        }
+
+        public void DEL_MANAGEMENT_MEETING(int id)
+        {
+            var parametros = new List<OleDbParameter>();
+
+            parametros.Add(AddParameter("P_ID", id));
+
+            var procedure = AddScheme("DEL_MANAGEMENT_MEETING");
+            ExecutaProcedureNoQuery(procedure, parametros.ToArray());
+        }
     }
 }
