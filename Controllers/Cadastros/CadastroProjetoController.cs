@@ -67,7 +67,8 @@ namespace SEDOGv2.Controllers.Adm
                 new ArtistaProjeto() {ARTISTNAME="Pixinguinha" , IDARTISTA="20000151521"},
                 new ArtistaProjeto() {ARTISTNAME="Alamir", IDARTISTA="30023394095" } ,
                 new ArtistaProjeto() {ARTISTNAME="Simone & Simaria", IDARTISTA="31799642302" },
-                new ArtistaProjeto() {ARTISTNAME="JonasVilar", IDARTISTA="31498692873" }
+                new ArtistaProjeto() {ARTISTNAME="JonasVilar", IDARTISTA="31498692873" },
+                new ArtistaProjeto() {ARTISTNAME="J. Balvin", IDARTISTA="30493972162" }
             };
 
             ret = ret.Where(d => d.ARTISTNAME.ToUpper().Contains(term.ToUpper())).ToList();
@@ -82,7 +83,7 @@ namespace SEDOGv2.Controllers.Adm
         public JsonResult ProjectsByArtistCodeBrDigital(string artistcode)
         {
             PLProjetoProvider provider = new PLProjetoProvider();
-            List<ProjetosBrdigitalPorArtistCode> ret = provider.SLT_PROJETOS_POR_ARTISTA(artistcode);
+            List<ProjetosBrdigitalPorArtistCode> ret = provider.SLT_PROJETOS_POR_ARTISTA(artistcode, 1);
             return Json(ret, JsonRequestBehavior.AllowGet);
         }
 

@@ -216,7 +216,7 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
-        public List<ProjetosBrdigitalPorArtistCode> SLT_PROJETOS_POR_ARTISTA(string artistcode)
+        public List<ProjetosBrdigitalPorArtistCode> SLT_PROJETOS_POR_ARTISTA(string artistcode, int p_optional = 0)
         {
             List<ProjetosBrdigitalPorArtistCode> ret = new List<ProjetosBrdigitalPorArtistCode>();
             try
@@ -224,6 +224,7 @@ namespace SEDOGv2.Models.Context
                 DataTable dt = new DataTable();
                 List<OleDbParameter> parameters = new List<OleDbParameter>();
                 parameters.Add(AddParameter("P_ARTISTCODE", artistcode));
+                parameters.Add(AddParameter("P_OPTIONAL", p_optional));
                 string procedure = AddScheme("SLT_PROJETOS_POR_ARTISTA ");
 
                 dt = GetTable(procedure, parameters.ToArray());
@@ -237,6 +238,7 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
+
         public List<ProdutoFisico> SEL_PRODUTO_FISICO_POR_ARTISTA(string artist)
         {
             List<ProdutoFisico> ret = new List<ProdutoFisico>();

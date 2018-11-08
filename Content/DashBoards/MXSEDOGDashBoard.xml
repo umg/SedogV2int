@@ -2,13 +2,13 @@
   <dashboard name="Digital" id="dDigital">
     <obj type="scoreboard" name="" icon="fa fa-thermometer-three-quarters" forcastPlan="true" mesAnoSelect="true" class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align" rowFlex="false">
       <tanque id="TanqueDigitalIncome" name="Digital Income" tipo="digitalincome" procedure="SEL_TANQUE_DIGITAL_INCOME" class="hud futuristic text-center">
-        <YTD>114226211</YTD>
-        <YTD_PLAN>112581719</YTD_PLAN>
+        <YTD>127205125</YTD>
+        <YTD_PLAN>125985916</YTD_PLAN>
         <YTD_REAL>60383573</YTD_REAL>
         <TOTAL_ANO>153254525</TOTAL_ANO>
         <TOTAL_ANO_PLAN>153086640</TOTAL_ANO_PLAN>
-        <YTD_MES>12698912</YTD_MES>
-        <YTD_PLAN_MES>13037553</YTD_PLAN_MES>
+        <YTD_MES>12978914</YTD_MES>
+        <YTD_PLAN_MES>13404197</YTD_PLAN_MES>
         <YTD_REAL_MES>0</YTD_REAL_MES>
       </tanque>
       <tanque id="TanqueDigitalSubscribers" name="Subscribers" tipo="digitalsubscribers" procedure="SEL_TANQUE_DIGITAL_SUBSCRIBERS" class="hud futuristic text-center">
@@ -32,62 +32,62 @@
         </header>
         <row>
           <NOMEGRUPO>SPOTIFY USA INC</NOMEGRUPO>
-          <NETREVENUE_MES>40M</NETREVENUE_MES>
-          <NETREVENUE_YTD>335M</NETREVENUE_YTD>
-          <PERCENT>53</PERCENT>
+          <NETREVENUE_MES>41M</NETREVENUE_MES>
+          <NETREVENUE_YTD>377M</NETREVENUE_YTD>
+          <PERCENT>54</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>APPLE</NOMEGRUPO>
           <NETREVENUE_MES>9M</NETREVENUE_MES>
-          <NETREVENUE_YTD>91M</NETREVENUE_YTD>
-          <PERCENT>15</PERCENT>
+          <NETREVENUE_YTD>100M</NETREVENUE_YTD>
+          <PERCENT>14</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>YOU TUBE</NOMEGRUPO>
-          <NETREVENUE_MES>9M</NETREVENUE_MES>
-          <NETREVENUE_YTD>83M</NETREVENUE_YTD>
+          <NETREVENUE_MES>10M</NETREVENUE_MES>
+          <NETREVENUE_YTD>93M</NETREVENUE_YTD>
           <PERCENT>13</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>VEVO</NOMEGRUPO>
-          <NETREVENUE_MES>6M</NETREVENUE_MES>
-          <NETREVENUE_YTD>68M</NETREVENUE_YTD>
+          <NETREVENUE_MES>7M</NETREVENUE_MES>
+          <NETREVENUE_YTD>74M</NETREVENUE_YTD>
           <PERCENT>11</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>GOOGLE</NOMEGRUPO>
           <NETREVENUE_MES>3M</NETREVENUE_MES>
-          <NETREVENUE_YTD>25M</NETREVENUE_YTD>
+          <NETREVENUE_YTD>27M</NETREVENUE_YTD>
           <PERCENT>4</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>GRUPO CARSO</NOMEGRUPO>
           <NETREVENUE_MES>2M</NETREVENUE_MES>
-          <NETREVENUE_YTD>14M</NETREVENUE_YTD>
+          <NETREVENUE_YTD>16M</NETREVENUE_YTD>
           <PERCENT>2</PERCENT>
         </row>
         <row>
           <NOMEGRUPO>DEEZER</NOMEGRUPO>
-          <NETREVENUE_MES>681,090</NETREVENUE_MES>
-          <NETREVENUE_YTD>6M</NETREVENUE_YTD>
+          <NETREVENUE_MES>714,075</NETREVENUE_MES>
+          <NETREVENUE_YTD>7M</NETREVENUE_YTD>
           <PERCENT>1</PERCENT>
         </row>
         <row>
-          <NOMEGRUPO>ENERGIZER</NOMEGRUPO>
-          <NETREVENUE_MES>175,789</NETREVENUE_MES>
-          <NETREVENUE_YTD>1M</NETREVENUE_YTD>
-          <PERCENT>0</PERCENT>
-        </row>
-        <row>
           <NOMEGRUPO>MUSICAL.LY</NOMEGRUPO>
-          <NETREVENUE_MES>130,776</NETREVENUE_MES>
+          <NETREVENUE_MES>0</NETREVENUE_MES>
           <NETREVENUE_YTD>732,239</NETREVENUE_YTD>
           <PERCENT>0</PERCENT>
         </row>
         <row>
+          <NOMEGRUPO>MIXUP</NOMEGRUPO>
+          <NETREVENUE_MES>0</NETREVENUE_MES>
+          <NETREVENUE_YTD>534,650</NETREVENUE_YTD>
+          <PERCENT>0</PERCENT>
+        </row>
+        <row>
           <NOMEGRUPO>FRESHPLANET</NOMEGRUPO>
-          <NETREVENUE_MES>12,385</NETREVENUE_MES>
-          <NETREVENUE_YTD>113,831</NETREVENUE_YTD>
+          <NETREVENUE_MES>12,190</NETREVENUE_MES>
+          <NETREVENUE_YTD>126,021</NETREVENUE_YTD>
           <PERCENT>0</PERCENT>
         </row>
       </table>
@@ -115,6 +115,11 @@
           <MES>Month</MES>
           <PERCENT>%</PERCENT>
         </header>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Out</MES>
+          <PERCENT>0.0</PERCENT>
+        </row>
         <row>
           <ANO>2018</ANO>
           <MES>Set</MES>
@@ -170,11 +175,6 @@
           <MES>Nov</MES>
           <PERCENT>25.9</PERCENT>
         </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Out</MES>
-          <PERCENT>26.1</PERCENT>
-        </row>
       </table>
     </obj>
     <obj type="table" name="ARPU" icon="fa fa-users" forcastPlan="false" mesAnoSelect="false" class="col-lg-2 col-md-2 col-xs-2 grafico hvr-float-shadow text-align" rowFlex="false">
@@ -185,6 +185,12 @@
           <PREMIUM>Prem.</PREMIUM>
           <GRATUITO>Free</GRATUITO>
         </header>
+        <row>
+          <ANO>2018</ANO>
+          <MES>Out</MES>
+          <PREMIUM>0.00</PREMIUM>
+          <GRATUITO>0.00</GRATUITO>
+        </row>
         <row>
           <ANO>2018</ANO>
           <MES>Set</MES>
@@ -251,18 +257,11 @@
           <PREMIUM>1.63</PREMIUM>
           <GRATUITO>0.09</GRATUITO>
         </row>
-        <row>
-          <ANO>2017</ANO>
-          <MES>Out</MES>
-          <PREMIUM>1.61</PREMIUM>
-          <GRATUITO>0.10</GRATUITO>
-        </row>
       </table>
     </obj>
     <obj type="barChartComplex" name="Streaming Revenue" icon="fa fa-bar-chart" forcastPlan="false" mesAnoSelect="false" class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align" rowFlex="false">
       <barChartMultiBarAndLine id="BarChartMultiBarAndLineDigitalStreamingRevenue" name="digitalStreamingRevenue" class="" step="1000000" procedure="SLT_GRAFICO_DIGITAL_VENDAS_STREAMING2">
         <labels>
-          <label>oct.</label>
           <label>nov.</label>
           <label>dic.</label>
           <label>ene.</label>
@@ -274,6 +273,7 @@
           <label>jul.</label>
           <label>ago.</label>
           <label>sep.</label>
+          <label>oct.</label>
         </labels>
         <datasets>
           <dataset tipo="multiBar">
