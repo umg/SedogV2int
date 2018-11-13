@@ -68,7 +68,8 @@ namespace SEDOGv2.Controllers.Adm
                 new ArtistaProjeto() {ARTISTNAME="Alamir", IDARTISTA="30023394095" } ,
                 new ArtistaProjeto() {ARTISTNAME="Simone & Simaria", IDARTISTA="31799642302" },
                 new ArtistaProjeto() {ARTISTNAME="JonasVilar", IDARTISTA="31498692873" },
-                new ArtistaProjeto() {ARTISTNAME="J. Balvin", IDARTISTA="30493972162" }
+                new ArtistaProjeto() {ARTISTNAME="J. Balvin", IDARTISTA="30493972162" },
+                new ArtistaProjeto() {ARTISTNAME="Molotov", IDARTISTA="20000296965" }
             };
 
             ret = ret.Where(d => d.ARTISTNAME.ToUpper().Contains(term.ToUpper())).ToList();
