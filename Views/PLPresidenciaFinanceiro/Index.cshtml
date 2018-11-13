@@ -182,12 +182,44 @@
                                 </div>
                             </td>
                         </tr>
-
                         <tr>
-                            <td colspan="8" class="text-right"><button class="btn btn-default" data-toggle="collapse" data-target="#tdProdutos">Produtos</button>&nbsp;<button class="btn btn-default" data-toggle="collapse" data-target="#tdBUs">BUs</button></td>
+                            <td colspan="8" class="text-right"><button class="btn btn-default" data-toggle="collapse" data-target="#tdISRCS">Projetos/ISRCs</button>&nbsp;<button class="btn btn-default" data-toggle="collapse" data-target="#tdProdutos">Produtos</button>&nbsp;<button class="btn btn-default" data-toggle="collapse" data-target="#tdBUs">BUs</button></td>
                         </tr>
                         <tr>
                             <td colspan="8">
+                                <div id="tdISRCS" class="collapse row">
+                                    <div class="modal-header">Projetos/ISRCs&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdISRCS">fechar</button></div>
+                                    <div class="modal-body">
+                                        <table>
+                                            <tr>
+                                                <th style="padding-left: 15px;"><b>ProjectCode:</b></th>
+                                                <th style="padding-left: 15px;"><b>Projeto:</b></th>
+                                                <th style="padding-left: 15px;"><b>ISRC:</b></th>
+                                                <th style="padding-left: 15px;"><b>Title:</b> </th>
+                                                <th style="padding-left: 15px;"><b>Receita:</b> </th>
+                                            </tr>
+                                            @foreach (SEDOGv2.Models.ISRCs i in Model.isrc)
+                                            {
+                                                <tr>
+                                                    <td style="padding-left: 15px;"> @i.ProjectCode</td>
+                                                    <td style="padding-left: 15px;"> @i.Projeto</td>
+                                                    @if (!string.IsNullOrEmpty(i.ISRC))
+                                                    {
+                                                        <td style="padding-left: 15px;">@i.ISRC</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td style="padding-left: 15px;"> No Music Product</td>
+                                                    }
+                                                    <td style="padding-left: 15px;">@i.Title</td>
+                                                    <td style="padding-left: 15px;">@string.Format("{0:C2}", i.Receita) </td>
+                                                </tr>
+                                            }
+                                        </table>
+                                    </div>
+                                </div>
+
+
                                 <div id="tdProdutos" class="collapse row">
                                     <div class="modal-header">Produtos&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdProdutos">fechar</button></div>
                                     <div class="modal-body">
@@ -200,10 +232,19 @@
                                 <div id="tdBUs" class="collapse row">
                                     <div class="modal-header">BUs&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdBUs">fechar</button></div>
                                     <div class="modal-body">
-                                        @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesDosProdutos)
-                                        {
-                                            <p>BU's:@prd.BUS</p>
-                                        }
+                                        @{string strProjs = "B|";}
+                                        <p>
+                                            BU's:
+                                            @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesDosProdutos)
+                                            {
+                                                if (!strProjs.Contains(prd.IDPROJ_SEDOG.ToString()))
+                                                {
+                                                    @prd.BUS
+                                                    strProjs = string.Concat(strProjs, prd.IDPROJ_SEDOG, "|");
+                                                }
+
+                                            }
+                                        </p>
                                     </div>
                                 </div>
                             </td>

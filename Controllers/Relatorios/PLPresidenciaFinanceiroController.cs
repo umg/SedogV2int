@@ -146,6 +146,7 @@ namespace SEDOGv2.Controllers.Relatorios
 
                 model.DetalhesHeaderDosProdutos = provider.SLT_PRODUTOS_HEADER_POR_PROJETO(IDLote);
                 model.DetalhesDosProdutos = provider.SLT_PRODUTOS_POR_PROJETO(IDLote);
+                model.isrc = provider.SLT_ISRC_RECEITA_TITULO_POR_PROJETO(IDLote);
 
                 decimal despesa = 0;
                 decimal receita = 0;
