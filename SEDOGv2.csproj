@@ -205,6 +205,7 @@
     <Compile Include="Controllers\KeepMeAliveController.cs" />
     <Compile Include="Controllers\LoginCobrancaNRIController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManagementMeetingController.cs" />
     <Compile Include="Controllers\MarketingTools\DespesaDeMarketingPorArtistaController.cs" />
     <Compile Include="Controllers\MarketingTools\DespesaDeMarketingPorArtistaProjetoController.cs" />
     <Compile Include="Controllers\MarketingTools\DespesasDeMarketingPorContaController.cs" />
@@ -248,9 +249,7 @@
     <Compile Include="Models\CamposTanqueViewModel.cs" />
     <Compile Include="Models\Context\Conn.cs" />
     <Compile Include="Models\Context\LoginProvider.cs" />
-    <Compile Include="Models\Context\PLProjetoPrivider_ext.cs" />
     <Compile Include="Models\Context\PLProjetoProvider.cs" />
-    <Compile Include="Models\Context\PLProjetoProvider_ext.cs" />
     <Compile Include="Models\DashBoard.cs" />
     <Compile Include="Models\DashBoardsPorUsuarioViewModel.cs" />
     <Compile Include="Models\Departamento.cs" />
@@ -270,6 +269,7 @@
     <Compile Include="Models\ISRCs.cs" />
     <Compile Include="Models\JsonDataHeader.cs" />
     <Compile Include="Models\LucrosEPerdas.cs" />
+    <Compile Include="Models\ManagementMeeting.cs" />
     <Compile Include="Models\ManutencaoProjetoViewModel.cs" />
     <Compile Include="Models\MarketShareViewModel.cs" />
     <Compile Include="Models\Menu.cs" />

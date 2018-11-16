@@ -946,39 +946,27 @@ namespace SEDOGv2.Models.Context
             }
         }
 
-        public void INS_OBJETOS_USUARIO(string login, string idpage, string label)
+        public List<DashBoardsPorUsuarioViewModel> SLT_LOAD_DASHBOARD_INFO(string login)
         {
+            var ret = new List<DashBoardsPorUsuarioViewModel>();
             try
             {
+                DataTable dt = new DataTable();
                 List<OleDbParameter> parameters = new List<OleDbParameter>();
-                parameters.Add(AddParameter("P_LOGIN", login.ToUpper()));
-                parameters.Add(AddParameter("P_IDPAGE", idpage));
-                parameters.Add(AddParameter("P_LABEL", label));
-                string procedure = AddScheme("INS_OBJETOS_USUARIO");
+                parameters.Add(AddParameter("P_LOGIN", login));
+                string procedure = AddScheme("SLT_LOAD_DASHBOARD_INFO");
 
-                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<DashBoardsPorUsuarioViewModel>();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return ret;
         }
 
-        public List<DashBoard> SLT_OBJETOS()
-        {
-            try
-            {
-                var procedure = AddScheme("SLT_OBJETOS");
-
-                var dt = GetTable(procedure);
-
-                return dt.DataTableToList<DashBoard>();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
         public void DEL_USUARIO(string login)
         {
             try
@@ -3103,12 +3091,12 @@ namespace SEDOGv2.Models.Context
                     VendasDireitos vendasDigital = new Models.VendasDireitos();
                     VendasDireitos vendasFisica = new Models.VendasDireitos();
 
-                    vendasDigital.Vendas = "Digitais";
+                    vendasDigital.Vendas = "Digital";
                     vendasDigital.Qtde = (!string.IsNullOrEmpty(row["QTDDIGITAL"].ToString())) ? Convert.ToInt32(row["QTDDIGITAL"].ToString()) : 0;
                     vendasDigital.Valor = (!string.IsNullOrEmpty(row["RECEITA_DIGITAL"].ToString())) ? Convert.ToDecimal(row["RECEITA_DIGITAL"].ToString()) : 0;
 
 
-                    vendasFisica.Vendas = "Físicas";
+                    vendasFisica.Vendas = "Physical";
                     vendasFisica.Qtde = (!string.IsNullOrEmpty(row["QTDFISICA"].ToString())) ? Convert.ToInt32(row["QTDFISICA"].ToString()) : 0;
                     vendasFisica.Valor = (!string.IsNullOrEmpty(row["RECEITA_FISICA"].ToString())) ? Convert.ToDecimal(row["RECEITA_FISICA"].ToString()) : 0;
 
@@ -3307,7 +3295,7 @@ namespace SEDOGv2.Models.Context
                     regioes.Add(regiao);
 
                 }
-
+                
                 /*foreach(GTSReceitaShows aux in ret)
                 {
                     GTSRegiaoReceitaShows regiao = new GTSRegiaoReceitaShows();
