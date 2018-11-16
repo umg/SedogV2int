@@ -251,6 +251,9 @@ namespace SEDOGv2.Controllers.Adm
                     }
                     StepMessage = "INS_PL_PARAMETROS_DIREITOS: " + dpercArt.ToString() + " | " + dpercAut.ToString();
                     model.Includes.Add(provider.INS_PL_PARAMETROS_DIREITOS(idProjetoSedog, dpercArt, dpercAut));
+
+                    // atualiza titulos dos fonogramas dos projetos
+                    Helpers.functions.ISRCSummaryUpdate(idProjetoSedog);
                 }
             }
             catch (Exception ex){

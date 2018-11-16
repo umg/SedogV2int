@@ -94,6 +94,10 @@ namespace SEDOGv2.Controllers.Cadastros
                     if (prj.Length > 1)
                         provider.INS_PL_PROJETO(idProjSedog, prj[0].Trim(), prj[1].Trim());
                 }
+
+                // atualiza titulos dos fonogramas dos projetos
+                Helpers.functions.ISRCSummaryUpdate(idProjSedog);
+
             }
             return RedirectToAction("Edit", new { id = collection["idProjSedog"] });
         }
@@ -241,6 +245,10 @@ namespace SEDOGv2.Controllers.Cadastros
                 provider.UPD_PL_PROJETOS_SEDOG(idProjetoSedog, nomeDoProjeto, idArtista, nomeDoArtista, obs, tipoContrato, tipoProcesso, tipoRelease, lancamento, origem, ebtidaProjetada, receitaProjetada, responsavel, idGeneroMusical , idMedidorKPI);
 
                 provider.UPD_PL_PARAMETROS_DIREITOS(idProjetoSedog, dpercArt, dpercAut);
+
+                // atualiza titulos dos fonogramas dos projetos
+                Helpers.functions.ISRCSummaryUpdate(idProjetoSedog);
+
             }
             return RedirectToAction("Edit", new { id = collection["idProjSedog"] });
         }

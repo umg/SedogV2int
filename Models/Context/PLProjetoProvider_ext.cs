@@ -116,6 +116,49 @@ namespace SEDOGv2.Models.Context
             }
             return listDepartamento;
         }
+
+        public List<DashBoardsPorUsuarioViewModel> SLT_PAGES_POR_OBJETO(string login)
+        {
+            var ret = new List<DashBoardsPorUsuarioViewModel>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_LOGIN", login));
+                string procedure = AddScheme("SLT_PAGES_POR_OBJETO");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<DashBoardsPorUsuarioViewModel>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
+
+        public List<DashBoardsPorUsuarioViewModel> SLT_LOAD_DASHBOARD_INFO(string login)
+        {
+            var ret = new List<DashBoardsPorUsuarioViewModel>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_LOGIN", login));
+                string procedure = AddScheme("SLT_LOAD_DASHBOARD_INFO");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<DashBoardsPorUsuarioViewModel>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
+
         //ParametrosDireitosProduto
         public ParametrosDireitosProduto SEL_PARAMETROS_DIREITOS_PRODUTO(int IDProj_SEDOG, string CodProduto, string Packing)
         {
@@ -609,12 +652,12 @@ namespace SEDOGv2.Models.Context
                     VendasDireitos vendasDigital = new Models.VendasDireitos();
                     VendasDireitos vendasFisica = new Models.VendasDireitos();
 
-                    vendasDigital.Vendas = "Digitais";
+                    vendasDigital.Vendas = "Digital";
                     vendasDigital.Qtde = (!string.IsNullOrEmpty(row["QTDDIGITAL"].ToString())) ? Convert.ToInt32(row["QTDDIGITAL"].ToString()) : 0 ;
                     vendasDigital.Valor = (!string.IsNullOrEmpty(row["RECEITA_DIGITAL"].ToString())) ? Convert.ToDecimal(row["RECEITA_DIGITAL"].ToString()) : 0 ;
 
 
-                    vendasFisica.Vendas = "Físicas";
+                    vendasFisica.Vendas = "Physical";
                     vendasFisica.Qtde = (!string.IsNullOrEmpty(row["QTDFISICA"].ToString())) ? Convert.ToInt32(row["QTDFISICA"].ToString()) : 0;
                     vendasFisica.Valor = (!string.IsNullOrEmpty(row["RECEITA_FISICA"].ToString())) ? Convert.ToDecimal(row["RECEITA_FISICA"].ToString()) : 0;
 

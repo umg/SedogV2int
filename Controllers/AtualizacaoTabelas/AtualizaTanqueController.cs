@@ -91,7 +91,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             {
                 return Json(new { success = false, responseText = ex.Message }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { success = true, responseText = "Atualizado!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, responseText = "Updated!" }, JsonRequestBehavior.AllowGet);
         }
         [ActionFilter_CheckLogin]
         [HttpPost]
@@ -214,12 +214,12 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
 
                 }
 
-                ViewBag.Error = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, "Atualização realizada com sucesso!");
+                ViewBag.Error = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, "Updated!");
 
             }
             catch (Exception ex)
             {
-                ViewBag.Error = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("Ocorreu um erro na hora de processar a solicitação: ", ex.Message));
+                ViewBag.Error = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("There was an error processing the request: ", ex.Message));
             }
 
 

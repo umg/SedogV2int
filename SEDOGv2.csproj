@@ -251,6 +251,8 @@
     <Compile Include="Models\Context\PLProjetoPrivider_ext.cs" />
     <Compile Include="Models\Context\PLProjetoProvider.cs" />
     <Compile Include="Models\Context\PLProjetoProvider_ext.cs" />
+    <Compile Include="Models\DashBoard.cs" />
+    <Compile Include="Models\DashBoardsPorUsuarioViewModel.cs" />
     <Compile Include="Models\Departamento.cs" />
     <Compile Include="Models\DepartamentosViewModel.cs" />
     <Compile Include="Models\DespDepartamentaisViewModel.cs" />
@@ -346,6 +348,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TOPProfitLoss.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service References\R2WS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Web References\net.umusic.catalogueservices\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -828,6 +835,13 @@
     <Content Include="Scripts\ZeroBar\stop.svg" />
     <Content Include="Scripts\ZeroBar\ZeroBar.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Service References\R2WS\R2Info.disco" />
+    <None Include="Service References\R2WS\configuration91.svcinfo" />
+    <None Include="Service References\R2WS\configuration.svcinfo" />
+    <None Include="Service References\R2WS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web References\net.umusic.catalogueservices\ArtistMerchandisingAsset.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
@@ -923,6 +937,25 @@
     <Content Include="Views\DireitosProfitLoss\Index.cshtml" />
     <Content Include="Views\ARControleDespesa\Index.cshtml" />
     <Content Include="Views\AtualizaAssinantes\Index.cshtml" />
+    <None Include="Service References\R2WS\R2Info.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\R2WS\R2Info1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\R2WS\R2Info2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\R2WS\R2Info3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\R2WS\R2InfoServices.wsdl" />
+    <Content Include="Service References\R2WS\SEDOGv2.R2WS.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\R2WS\SEDOGv2.R2WS.ISRC_Information.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web References\net.umusic.catalogueservices\SecureDataServices.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1069,6 +1102,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\R2WS\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

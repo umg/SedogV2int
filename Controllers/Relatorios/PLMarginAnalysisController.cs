@@ -31,7 +31,7 @@ namespace SEDOGv2.Controllers.Relatorios
                 PLProjetoProvider provider = new PLProjetoProvider();
                 string ano = collection["ano"];
                 if (ano == "00")
-                    ViewBag.Ano = "- Todos -";
+                    ViewBag.Ano = "- All -";
                 else
                     ViewBag.Ano = "20" + ano;
                 viewmodel.PLMarginAnalysis = provider.SLT_MARGIN_ANALYSIS(Convert.ToInt32(ano));

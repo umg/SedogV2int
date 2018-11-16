@@ -1,12 +1,12 @@
 <elements>
   <tanque id="TanqueDigitalIncome" name="Digital Income" tipo="digitalincome" procedure="SEL_TANQUE_DIGITAL_INCOME" class="hud futuristic text-center">
-    <YTD>127205125</YTD>
-    <YTD_PLAN>125985916</YTD_PLAN>
+    <YTD>140498464</YTD>
+    <YTD_PLAN>139597682</YTD_PLAN>
     <YTD_REAL>60383573</YTD_REAL>
     <TOTAL_ANO>153254525</TOTAL_ANO>
     <TOTAL_ANO_PLAN>153086640</TOTAL_ANO_PLAN>
-    <YTD_MES>12978914</YTD_MES>
-    <YTD_PLAN_MES>13404197</YTD_PLAN_MES>
+    <YTD_MES>13293339</YTD_MES>
+    <YTD_PLAN_MES>13611766</YTD_PLAN_MES>
     <YTD_REAL_MES>0</YTD_REAL_MES>
   </tanque>
   <tanque id="TanqueDigitalSubscribers" name="Subscribers" tipo="digitalsubscribers" procedure="SEL_TANQUE_DIGITAL_SUBSCRIBERS" class="hud futuristic text-center">
@@ -27,10 +27,10 @@
       <PROFIT_LOSS_RTD>P&amp;L RTD</PROFIT_LOSS_RTD>
     </header>
     <row>
-      <ARTISTA>J. Balvin</ARTISTA>
-      <PROJETO>Mi Gente</PROJETO>
+      <ARTISTA>MOLOTOV</ARTISTA>
+      <PROJETO>MTV UNPLUGGED EL DESCONECT</PROJETO>
       <PROFIT_LOSS_YTD>2M</PROFIT_LOSS_YTD>
-      <PROFIT_LOSS_RTD>6M</PROFIT_LOSS_RTD>
+      <PROFIT_LOSS_RTD>2M</PROFIT_LOSS_RTD>
     </row>
   </table>
   <table id="TableTop10Partners" name="TOP 10 Partners" tipo="top10" procedure="SLT_TOP_GRAFICO_DIGITAL_PARCEIROS_TOP10" class="table table-condensed table-striped table-hover" param="anomes">
@@ -40,66 +40,6 @@
       <NETREVENUE_YTD>YTD</NETREVENUE_YTD>
       <PERCENT>%</PERCENT>
     </header>
-    <row>
-      <NOMEGRUPO>SPOTIFY USA INC</NOMEGRUPO>
-      <NETREVENUE_MES>41M</NETREVENUE_MES>
-      <NETREVENUE_YTD>377M</NETREVENUE_YTD>
-      <PERCENT>54</PERCENT>
-    </row>
-    <row>
-      <NOMEGRUPO>APPLE</NOMEGRUPO>
-      <NETREVENUE_MES>9M</NETREVENUE_MES>
-      <NETREVENUE_YTD>100M</NETREVENUE_YTD>
-      <PERCENT>14</PERCENT>
-    </row>
-    <row>
-      <NOMEGRUPO>YOU TUBE</NOMEGRUPO>
-      <NETREVENUE_MES>10M</NETREVENUE_MES>
-      <NETREVENUE_YTD>93M</NETREVENUE_YTD>
-      <PERCENT>13</PERCENT>
-    </row>
-    <row>
-      <NOMEGRUPO>VEVO</NOMEGRUPO>
-      <NETREVENUE_MES>7M</NETREVENUE_MES>
-      <NETREVENUE_YTD>74M</NETREVENUE_YTD>
-      <PERCENT>11</PERCENT>
-    </row>
-    <row>
-      <NOMEGRUPO>GOOGLE</NOMEGRUPO>
-      <NETREVENUE_MES>3M</NETREVENUE_MES>
-      <NETREVENUE_YTD>27M</NETREVENUE_YTD>
-      <PERCENT>4</PERCENT>
-    </row>
-    <row>
-      <NOMEGRUPO>GRUPO CARSO</NOMEGRUPO>
-      <NETREVENUE_MES>2M</NETREVENUE_MES>
-      <NETREVENUE_YTD>16M</NETREVENUE_YTD>
-      <PERCENT>2</PERCENT>
-    </row>
-    <row>
-      <NOMEGRUPO>DEEZER</NOMEGRUPO>
-      <NETREVENUE_MES>714,075</NETREVENUE_MES>
-      <NETREVENUE_YTD>7M</NETREVENUE_YTD>
-      <PERCENT>1</PERCENT>
-    </row>
-    <row>
-      <NOMEGRUPO>MUSICAL.LY</NOMEGRUPO>
-      <NETREVENUE_MES>0</NETREVENUE_MES>
-      <NETREVENUE_YTD>732,239</NETREVENUE_YTD>
-      <PERCENT>0</PERCENT>
-    </row>
-    <row>
-      <NOMEGRUPO>MIXUP</NOMEGRUPO>
-      <NETREVENUE_MES>0</NETREVENUE_MES>
-      <NETREVENUE_YTD>534,650</NETREVENUE_YTD>
-      <PERCENT>0</PERCENT>
-    </row>
-    <row>
-      <NOMEGRUPO>FRESHPLANET</NOMEGRUPO>
-      <NETREVENUE_MES>12,190</NETREVENUE_MES>
-      <NETREVENUE_YTD>126,021</NETREVENUE_YTD>
-      <PERCENT>0</PERCENT>
-    </row>
   </table>
   <table id="TableMarketShare" name="Market Share" tipo="top10" procedure="SLT_MARKET_SHARE" class="table table-condensed table-striped table-hover" param="" noseoarator="ANO" decimais="1|PERCENT">
     <header>
@@ -264,7 +204,6 @@
   </pieChartSimple>
   <barChartMultiBarAndLine id="BarChartMultiBarAndLineDigitalStreamingRevenue" name="digitalStreamingRevenue" class="" step="100000" procedure="SLT_GRAFICO_DIGITAL_VENDAS_STREAMING2">
     <labels>
-      <label>nov.</label>
       <label>dic.</label>
       <label>ene.</label>
       <label>feb.</label>
@@ -276,6 +215,7 @@
       <label>ago.</label>
       <label>sep.</label>
       <label>oct.</label>
+      <label>nov.</label>
     </labels>
     <datasets>
       <dataset tipo="multiBar">
@@ -326,8 +266,9 @@
       </dataset>
     </datasets>
   </barChartMultiBarAndLine>
-  <barChartMultiBarAndLine id="BarChartMultiBarAndLineDigitalAssinantesPorPlano" name="digitalAssinantesPorPlano" class="" step="50000" procedure="SLT_GRAFICO_ASSINANTES_DIGITAL2" useJanToDec="True">
+  <barChartMultiBarAndLine id="BarChartMultiBarAndLineDigitalAssinantesPorPlano" name="digitalAssinantesPorPlano" class="" step="500000" procedure="SLT_GRAFICO_ASSINANTES_DIGITAL2">
     <labels>
+      <label>dic.</label>
       <label>ene.</label>
       <label>feb.</label>
       <label>mar.</label>
@@ -339,70 +280,69 @@
       <label>sep.</label>
       <label>oct.</label>
       <label>nov.</label>
-      <label>dic.</label>
     </labels>
     <datasets>
       <dataset tipo="multiBar">
         <multibar label="INDIVIDUAL" barColor="rgba(255,165,0,1)">
-          <data>1</data>
-          <data>2</data>
-          <data>3</data>
-          <data>4</data>
-          <data>5</data>
-          <data>6</data>
-          <data>7</data>
-          <data>8</data>
-          <data>9</data>
-          <data>10</data>
-          <data>0</data>
-          <data>0</data>
+          <data>3000</data>
+          <data>6000</data>
+          <data>10000</data>
+          <data>20000</data>
+          <data>30000</data>
+          <data>40000</data>
+          <data>50000</data>
+          <data>60000</data>
+          <data>70000</data>
+          <data>80000</data>
+          <data>90000</data>
+          <data>100000</data>
         </multibar>
       </dataset>
       <dataset tipo="multiBar">
-        <multibar label="FAMILY" barColor="rgba(0, 72, 70,1)">
-          <data>1</data>
-          <data>2</data>
-          <data>3</data>
-          <data>4</data>
-          <data>5</data>
-          <data>6</data>
-          <data>7</data>
-          <data>8</data>
-          <data>9</data>
-          <data>10</data>
-          <data>0</data>
-          <data>0</data>
+        <multibar label="FAMILIA" barColor="rgba(0, 72, 70,1)">
+          <data>8000</data>
+          <data>7000</data>
+          <data>10000</data>
+          <data>20000</data>
+          <data>30000</data>
+          <data>40000</data>
+          <data>50000</data>
+          <data>60000</data>
+          <data>70000</data>
+          <data>80000</data>
+          <data>90000</data>
+          <data>100000</data>
         </multibar>
       </dataset>
       <dataset tipo="multiBar">
         <multibar label="PROMO" barColor="rgba(23,123,172,1)">
-          <data>1</data>
-          <data>2</data>
-          <data>3</data>
-          <data>4</data>
-          <data>5</data>
-          <data>6</data>
-          <data>7</data>
-          <data>8</data>
-          <data>9</data>
-          <data>10</data>
-          <data>0</data>
-          <data>0</data>
+          <data>8000</data>
+          <data>6000</data>
+          <data>10000</data>
+          <data>20000</data>
+          <data>30000</data>
+          <data>40000</data>
+          <data>50000</data>
+          <data>60000</data>
+          <data>70000</data>
+          <data>8000</data>
+          <data>9000</data>
+          <data>10000</data>
         </multibar>
       </dataset>
       <dataset tipo="line" label="TOTAL" color="rgba(70, 200, 70, 1)">
-        <data>3</data>
-        <data>6</data>
-        <data>9</data>
-        <data>12</data>
-        <data>15</data>
-        <data>18</data>
-        <data>21</data>
-        <data>24</data>
-        <data>27</data>
-        <data>30</data>
-        <data>0</data>
-        <data>0</data>
+        <data>19000</data>
+        <data>19000</data>
+        <data>30000</data>
+        <data>60000</data>
+        <data>90000</data>
+        <data>120000</data>
+        <data>150000</data>
+        <data>180000</data>
+        <data>210000</data>
+        <data>168000</data>
+        <data>189000</data>
+        <data>210000</data>
       </dataset>
     </datasets>
   </barChartMultiBarAndLine>

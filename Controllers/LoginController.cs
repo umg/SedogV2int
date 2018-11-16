@@ -51,7 +51,7 @@ namespace SEDOGv2.Controllers
             }
             else
             {
-                ViewBag.Message = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "Você precisa digitar o login e senha");
+                ViewBag.Message = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "You need to type the login and password");
             }
 
             return View();

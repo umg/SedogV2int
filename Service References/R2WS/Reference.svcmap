@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="640c56a6-e318-4102-a69a-21a9d470d389" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://ukbcewvapp076.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="R2Info.disco" MetadataType="Disco" ID="1c6f05b9-d46c-40d3-9ff8-f8f5c2e3a5d7" SourceId="1" SourceUrl="http://ukbcewvapp076.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?disco" />
+    <MetadataFile FileName="R2Info.xsd" MetadataType="Schema" ID="91a55d06-584f-4deb-a091-e6bca0a8f098" SourceId="1" SourceUrl="http://ukbcewvapp076.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?xsd=xsd0" />
+    <MetadataFile FileName="R2InfoServices.wsdl" MetadataType="Wsdl" ID="ab9efc8b-848a-427a-af41-39b5aef18cba" SourceId="1" SourceUrl="http://ukbcewvapp076.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?wsdl" />
+    <MetadataFile FileName="R2Info1.xsd" MetadataType="Schema" ID="50a02d1a-45df-49bf-a484-bab4501e04e8" SourceId="1" SourceUrl="http://ukbcewvapp076.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?xsd=xsd3" />
+    <MetadataFile FileName="R2Info2.xsd" MetadataType="Schema" ID="1f6595c1-2c5d-42a1-984a-e5c3dc84dde4" SourceId="1" SourceUrl="http://ukbcewvapp076.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?xsd=xsd2" />
+    <MetadataFile FileName="R2Info3.xsd" MetadataType="Schema" ID="39a343ce-f930-4d00-955a-6f7f27a61c07" SourceId="1" SourceUrl="http://ukbcewvapp076.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

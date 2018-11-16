@@ -36,6 +36,26 @@ namespace SEDOGv2.Models.Context
 
             return resp;
         }
+        public List<ISRCs> SEL_ISRC_IDPROJ_SEDOG_MISSING(long IDProjetoSEDOG)
+        {
+            List<ISRCs> ret = new List<ISRCs>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_IDPROJ_SEDOG", IDProjetoSEDOG));
+                string procedure = AddScheme("SEL_ISRC_IDPROJ_SEDOG_MISSING");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<ISRCs>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
         public List<AtualizaAssinantesViewModel> SLT_ASSINANTES(int ano)
         {
             List<AtualizaAssinantesViewModel> ret = new List<AtualizaAssinantesViewModel>();
@@ -428,7 +448,7 @@ namespace SEDOGv2.Models.Context
         public Resposta<string> DEL_PL_PROJETO(long P_IDPROJ_SEDOG, string P_IDPROJ, string P_PROJECTNAME)
         {
             Resposta<string> ret = new Resposta<string>();
-            ret.Dados = "Projeto: " + P_IDPROJ + " - " + P_PROJECTNAME;
+            ret.Dados = "Project: " + P_IDPROJ + " - " + P_PROJECTNAME;
             ret.Error = "";
             ret.Message = "";
             try
@@ -452,7 +472,7 @@ namespace SEDOGv2.Models.Context
         public Resposta<string> INS_PL_PROJETO(long P_IDPROJ_SEDOG, string P_IDPROJ, string P_PROJECTNAME)
         {
             Resposta<string> ret = new Resposta<string>();
-            ret.Dados = "Projeto: " + P_IDPROJ + " - " + P_PROJECTNAME;
+            ret.Dados = "Project: " + P_IDPROJ + " - " + P_PROJECTNAME;
             ret.Error = "";
             ret.Message = "";
             try
@@ -476,7 +496,7 @@ namespace SEDOGv2.Models.Context
         public Resposta<string> INS_PRODUTO(long P_IDPROJ_SEDOG, string P_COD_PRODUTO, string P_PACKING)
         {
             Resposta<string> ret = new Resposta<string>();
-            ret.Dados = "Produto: " + P_COD_PRODUTO + " - " + P_PACKING;
+            ret.Dados = "Product: " + P_COD_PRODUTO + " - " + P_PACKING;
             ret.Error = "";
             ret.Message = "";
             try
@@ -500,7 +520,7 @@ namespace SEDOGv2.Models.Context
         public Resposta<string> DEL_PRODUTO(long P_IDPROJ_SEDOG, string P_COD_PRODUTO, string P_PACKING)
         {
             Resposta<string> ret = new Resposta<string>();
-            ret.Dados = "Produto: " + P_COD_PRODUTO + " - " + P_PACKING;
+            ret.Dados = "Product: " + P_COD_PRODUTO + " - " + P_PACKING;
             ret.Error = "";
             ret.Message = "";
             try
@@ -534,9 +554,9 @@ namespace SEDOGv2.Models.Context
         {
             Resposta<string> ret = new Resposta<string>();
             if (P_COD_PRODUTO == "0")
-                ret.Dados = "BU Projeto: " + P_BU;
+                ret.Dados = "Project BU: " + P_BU;
             else
-                ret.Dados = "BU Produto: " + P_COD_PRODUTO + " - " + P_PACKING + " / BU: " + P_BU;
+                ret.Dados = "Product BU: " + P_COD_PRODUTO + " - " + P_PACKING + " / BU: " + P_BU;
             ret.Error = "";
             ret.Message = "";
             try
@@ -562,9 +582,9 @@ namespace SEDOGv2.Models.Context
         {
             Resposta<string> ret = new Resposta<string>();
             if (P_COD_PRODUTO == "0")
-                ret.Dados = "BU Projeto: " + P_BU;
+                ret.Dados = "Project BU: " + P_BU;
             else
-                ret.Dados = "BU Produto: " + P_COD_PRODUTO + " - " + P_PACKING + " / BU: " + P_BU;
+                ret.Dados = "Product BU: " + P_COD_PRODUTO + " - " + P_PACKING + " / BU: " + P_BU;
             ret.Error = "";
             ret.Message = "";
             try
@@ -589,7 +609,7 @@ namespace SEDOGv2.Models.Context
         public Resposta<string> INS_PL_PARAMETROS_DIREITOS(long P_IDPROJ_SEDOG, decimal P_PERCENT_ARTISTICO_DIG, decimal P_PERCENT_AUTORAL_DIG)
         {
             Resposta<string> ret = new Resposta<string>();
-            ret.Dados = "Percentual Artistico/Autoral: " + P_PERCENT_ARTISTICO_DIG.ToString("#.00") + " - " + P_PERCENT_AUTORAL_DIG.ToString("#.00");
+            ret.Dados = "Artistic/Autoral Percentage: " + P_PERCENT_ARTISTICO_DIG.ToString("#.00") + " - " + P_PERCENT_AUTORAL_DIG.ToString("#.00");
             ret.Error = "";
             ret.Message = "";
             try
@@ -610,10 +630,33 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
+        public Resposta<string> INS_ISRC_SUMMARY(string P_VALUEINSERT)
+        {
+            Resposta<string> ret = new Resposta<string>();
+            ret.Dados = "";
+            ret.Error = "";
+            ret.Message = "";
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_VALUEINSERT", P_VALUEINSERT));
+
+                string procedure = AddScheme("INS_ISRC_SUMMARY");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                ret.Error = ex.Source;
+                ret.Message = ex.Message;
+
+            }
+            return ret;
+        }
         public Resposta<string> UPD_PL_PARAMETROS_DIREITOS(long P_IDPROJ_SEDOG, decimal P_PERCENT_ARTISTICO_DIG, decimal P_PERCENT_AUTORAL_DIG)
         {
             Resposta<string> ret = new Resposta<string>();
-            ret.Dados = "Percentual Artistico/Autoral: " + P_PERCENT_ARTISTICO_DIG.ToString("#.00") + " - " + P_PERCENT_AUTORAL_DIG.ToString("#.00");
+            ret.Dados = "Artistic/Autoral Percentage: " + P_PERCENT_ARTISTICO_DIG.ToString("#.00") + " - " + P_PERCENT_AUTORAL_DIG.ToString("#.00");
             ret.Error = "";
             ret.Message = "";
             try
@@ -816,6 +859,57 @@ namespace SEDOGv2.Models.Context
                 throw ex;
             }
         }
+
+        public void DEL_OBJETO_USUARIO(string login)
+        {
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_LOGIN", login.ToUpper()));
+                string procedure = AddScheme("DEL_OBJETO_USUARIO");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void INS_OBJETOS_USUARIO(string login, string idpage, string label)
+        {
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_LOGIN", login.ToUpper()));
+                parameters.Add(AddParameter("P_IDPAGE", idpage));
+                parameters.Add(AddParameter("P_LABEL", label));
+                string procedure = AddScheme("INS_OBJETOS_USUARIO");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<DashBoard> SLT_OBJETOS()
+        {
+            try
+            {
+                var procedure = AddScheme("SLT_OBJETOS");
+
+                var dt = GetTable(procedure);
+
+                return dt.DataTableToList<DashBoard>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void INS_PAGINAS_USUARIO(string login, long idpage)
         {
             try
