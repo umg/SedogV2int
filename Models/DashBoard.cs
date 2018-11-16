@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SEDOGv2.Models
+﻿namespace SEDOGv2.Models
 {
     public class DashBoard
     {

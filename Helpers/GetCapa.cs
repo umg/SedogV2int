@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using UMI.ITDI.CentralCatalogue.WSSecurity.UsernameAssertionLibrary;
-using Microsoft.Web.Services3.Design;
+﻿using Microsoft.Web.Services3.Design;
 using SEDOGv2.net.umusic.catalogueservices;
+using System;
+using System.Collections.Generic;
+using UMI.ITDI.CentralCatalogue.WSSecurity.UsernameAssertionLibrary;
 
 namespace SEDOGv2.Helpers
 {
@@ -93,7 +91,7 @@ namespace SEDOGv2.Helpers
                 p = wse.GetProductById(31629808175);// productid);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -107,7 +105,7 @@ namespace SEDOGv2.Helpers
             r2Release.WSSearchOption wso = new r2Release.WSSearchOption();
             r2Release.XMLControlBean xml = new r2Release.XMLControlBean();
             wsr.Credentials = nc;
-            
+
             string upc;
             upc = FormatUPC(busca);
             try
@@ -131,7 +129,8 @@ namespace SEDOGv2.Helpers
                 var isrc = "";
                 System.Xml.XmlDocument xDoc = new System.Xml.XmlDocument();
                 xDoc.LoadXml(s);
-                foreach (System.Xml.XmlNode rel in xDoc.ChildNodes) {
+                foreach (System.Xml.XmlNode rel in xDoc.ChildNodes)
+                {
                     if (rel.Name.ToUpper() == "RELEASE")
                     {
                         foreach (System.Xml.XmlNode resLinks in rel.ChildNodes)
@@ -164,7 +163,7 @@ namespace SEDOGv2.Helpers
 
                 return ret;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -187,5 +186,5 @@ namespace SEDOGv2.Helpers
             return exists;
         }
     }
-   
+
 }

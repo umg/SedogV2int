@@ -31,7 +31,7 @@ namespace SEDOGv2.Controllers.Overhead
             DespDepartamentaisViewModel viewModel = new DespDepartamentaisViewModel();
             try
             {
-                PLProjetoProvider_ext provider = new Models.Context.PLProjetoProvider_ext();
+                PLProjetoProvider provider = new Models.Context.PLProjetoProvider();
                 viewModel = Load();
 
                 viewModel._Listado = true;
@@ -85,7 +85,7 @@ namespace SEDOGv2.Controllers.Overhead
 
                 viewModel._Listado = false;
 
-                PLProjetoProvider_ext provider = new Models.Context.PLProjetoProvider_ext();
+                PLProjetoProvider provider = new Models.Context.PLProjetoProvider();
                 List<Departamento> Listadepartamentos = provider.SEL_DEPARTAMENTOSJDE();
 
                 string[] ids = collection["emails"].Split(',');
@@ -239,7 +239,7 @@ namespace SEDOGv2.Controllers.Overhead
 
         public DespDepartamentaisViewModel Load()
         {
-            PLProjetoProvider_ext provider = new Models.Context.PLProjetoProvider_ext();
+            PLProjetoProvider provider = new Models.Context.PLProjetoProvider();
 
             DespDepartamentaisViewModel viewModel = new DespDepartamentaisViewModel();
             viewModel._ResponsavelDepartamento = new List<ResponsavelDepartamento>();

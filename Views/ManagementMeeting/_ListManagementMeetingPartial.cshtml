@@ -1,0 +1,85 @@
+﻿@using SEDOGv2.Models;
+
+@model List<ManagementMeeting>
+
+    <br />
+    @if (Model.Count() > 0)
+    {
+        <div class="panel panel-success panel-report">
+            <div class="row">
+                <br />
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-inline">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Creation Date</th>
+                                <th>File</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Nome</td>
+                                    <td>@item.Descricao</td>
+                                    <td>@item.DataCadastro</td>
+                                    <td>
+                                        <button class="btn btn-primary" onclick="location.href='@Url.Action("Download", "ManagementMeeting", new { nomeArquivo = item.Nome + item.FileExtension, caminhoArquivo = item.FilePath })'">
+                                            <i class="glyphicon glyphicon-download"></i>
+                                        </button>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteFileModal" data-managementMeetingId="@item.ManagementMeetingId">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fate" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-bold" id="uploadFileModalLabel">Delete File</h5>
+                    </div>
+                    <div class="modal-body">
+                        <strong>Are you sure you want to delete the file?</strong>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="deletarArquivo" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <script type="text/javascript">
+    $('#deleteFileModal').on('show.bs.modal', function(e)
+    {
+        var managementMeetingId = $(e.relatedTarget).attr('data-managementMeetingId');
+        $(e.currentTarget).find('button[id="deletarArquivo"]').val(managementMeetingId);
+    });
+
+    $('#deletarArquivo').click(function(){
+        var managementMeetingId = document.getElementById("deletarArquivo").value;
+        var baseUrl = window.location;
+        var url = baseUrl + '/DeleteArquivo/' + managementMeetingId;
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            success: function(result) {
+                window.location.href = baseUrl;
+            },
+            error: function(result){
+                window.location.href = baseUrl;
+            }
+        });
+    });
+    </script>

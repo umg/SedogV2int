@@ -1,0 +1,23 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@model List<ManagementMeeting>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel panel-heading text-center">
+                <h2>@appSettings.pageName()</h2>
+            </div>
+        </div>
+
+        @Html.Partial("_AlertMessagePartial")
+        @Html.Partial("_ModalUploadManagementMeetingFilePartial")
+        @Html.Partial("_ListManagementMeetingPartial", Model)
+    </div>
+</div>
+

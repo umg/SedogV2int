@@ -22,7 +22,7 @@ namespace SEDOGv2.Controllers.Relatorios
         {
 
             List<VendasDigitaisJVModel> _viewModel = new List<VendasDigitaisJVModel>();
-            PLProjetoProvider_ext _content = new PLProjetoProvider_ext();
+            PLProjetoProvider _content = new PLProjetoProvider();
 
             try
             {
