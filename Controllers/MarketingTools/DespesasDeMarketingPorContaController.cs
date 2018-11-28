@@ -298,9 +298,9 @@ namespace SEDOGv2.Controllers.MarketingTools
                     origem = "Todos";
                     break;
             }
-            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("pt-br");
+            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo(Helpers.appSettings._User.Culture);
 
-            ViewBag.Header = culture.DateTimeFormat.GetMonthName(mes) + "/" + collection["ano"] + " - Repertório: " + origem;
+            ViewBag.Header = culture.DateTimeFormat.GetMonthName(mes) + "/" + collection["ano"] + " - Repertoire: " + origem;
             PLProjetoProvider provider = new PLProjetoProvider();
             List<DespesasDeMarketingCTBRepertorioPorContasViewModel> lst = provider.RODA_DESPESAS_MARKETING_CTB_MCS_REPERTORIO_CONTAS(mes, ano, collection["origem"]);
 

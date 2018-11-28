@@ -53,7 +53,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             try
             {
                 PLProjetoProvider provider = new PLProjetoProvider();
-                retorno = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, string.Concat("Artista(", term, ") removido com sucesso!"));
+                retorno = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, string.Concat("Artist(", term, ") successfully removed!"));
 
             }
             catch(Exception ex)
@@ -93,7 +93,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                         fs.Write(bytes, 0, bytes.Length);
                     }
                 }
-                retorno = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, string.Concat("Imagem do Artista ( ", artista, " ) salva com sucesso!"));
+                retorno = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, string.Concat("Artist Image ( ", artista, " ) saved!"));
 
 
                 /* PLProjetoProvider provider = new PLProjetoProvider();
@@ -181,7 +181,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                         model._GTSReceitaShows = new List<GTSReceitaShows>();
                         model._GTSRegiaoReceitaShows = provider.SEL_GTS_RECEITA_SHOWS(nomeartista, ano);
                         model.GTSIsReceita = true;
-                        model.Infos.Tipo = "Receita";
+                        model.Infos.Tipo = "Revenue";
 
                         if (model._GTSRegiaoReceitaShows == null || model._GTSRegiaoReceitaShows.Count == 0)
                         {
@@ -207,7 +207,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                     case "4":
                         model._GTSSaldos = new List<GTSSaldos>();
                         model._GTSSaldos = provider.SEL_GTS_SALDOS(nomeartista);
-                        model.Infos.Tipo = "GTS Saldo";
+                        model.Infos.Tipo = "GTS balance";
 
                         if (model._GTSSaldos == null || model._GTSSaldos.Count == 0)
                         {
@@ -219,7 +219,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                     case "5":
                         model._GTSMarginCachePartc = new List<GTSMarginCachePartc>();
                         model._GTSMarginCachePartc = provider.SEL_GTS_MARGEN_CACHE_PARTC(nomeartista, ano);
-                        model.Infos.Tipo = "Margin, Cachê e Participação";
+                        model.Infos.Tipo = "Margin, Cache e Participation";
 
                         if (model._GTSMarginCachePartc == null || model._GTSMarginCachePartc.Count == 0)
                         {
@@ -235,7 +235,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             }
             else
             {
-                TempData["Message"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "Você precisa escolher um artista");
+                TempData["Message"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "You need to choose an artist");
                 return RedirectToAction("Index");
             }
             
@@ -260,7 +260,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             {
                 return Json(new { success = false, responseText = ex.Message }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { success = true, responseText = "Atualizado!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, responseText = "Updated!" }, JsonRequestBehavior.AllowGet);
         }
 
         [ActionFilter_CheckLogin]
@@ -284,7 +284,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             {
                 return Json(new { success = false, responseText = ex.Message }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { success = true, responseText = "Atualizado!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, responseText = "Updated!" }, JsonRequestBehavior.AllowGet);
         }
 
         [ActionFilter_CheckLogin]
@@ -308,7 +308,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             {
                 return Json(new { success = false, responseText = ex.Message }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { success = true, responseText = "Atualizado!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, responseText = "Updated!" }, JsonRequestBehavior.AllowGet);
         }
 
         [ActionFilter_CheckLogin]
@@ -329,7 +329,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             {
                 return Json(new { success = false, responseText = ex.Message }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { success = true, responseText = "Atualizado!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, responseText = "Updated!" }, JsonRequestBehavior.AllowGet);
         }
 
         [ActionFilter_CheckLogin]
@@ -350,7 +350,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
               {
                   return Json(new { success = false, responseText = ex.Message }, JsonRequestBehavior.AllowGet);
               }
-            return Json(new { success = true, responseText = "Atualizado!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, responseText = "Updated!" }, JsonRequestBehavior.AllowGet);
         }
 
         private void ExecuteGTSForecast(string nomeartista, string ano)

@@ -29,11 +29,11 @@ namespace SEDOGv2.Controllers.Adm
 
                 dh.LoadDataBaseDashboard(int.Parse(collection["txtAno"]), int.Parse(collection["txtMes"]));
                 dh.LoadDataToXml();
-                ViewBag.Error = "Atualizado";
+                ViewBag.Error = "Updated";
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Erro: " + ex.Message;
+                ViewBag.Error = "Error: " + ex.Message;
             }
             return View();
         }

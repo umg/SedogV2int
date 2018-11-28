@@ -30,7 +30,7 @@ namespace SEDOGv2.Controllers.MarketingTools
             PLProjetoProvider provider = new PLProjetoProvider();
             try
             {
-                System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("pt-br");
+                System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo(Helpers.appSettings._User.Culture);
 
                 string artista = collection["txtArtistaProduto"];
                 int mes = int.Parse(collection["selMes"]);
@@ -38,7 +38,7 @@ namespace SEDOGv2.Controllers.MarketingTools
                 model.PLProjetos = new List<PLProjeto>();
                 model.DespesaDeMarketingPorArtistaReport = provider.SLT_DESPPESAS_MARKETING_POR_ARTISTA(tipo, mes, artista);
 
-                ViewBag.Artista = "Artista: " + artista.Trim() + " - Período: " + (tipo == "ANO" ? "Ano Corrente" : "Desde o Lançamento") + " até " + culture.DateTimeFormat.GetMonthName(mes);
+                ViewBag.Artista = "Artist: " + artista.Trim() + " - Period: " + (tipo == "ANO" ? "Ano Corrente" : "Desde o Lançamento") + " until " + culture.DateTimeFormat.GetMonthName(mes);
 
                 decimal TotCUSTO_INICIAL = 0;
                 decimal TotTV = 0;

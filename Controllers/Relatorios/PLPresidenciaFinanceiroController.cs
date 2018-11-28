@@ -113,7 +113,7 @@ namespace SEDOGv2.Controllers.Relatorios
                 ViewBag.ValorTotalReceita = receita;
 
                 resultado = receita - despesa;
-                ViewBag.desprec = resultado >= 0 ? "receita" : "despesa";
+                ViewBag.desprec = resultado >= 0 ? "income" : "expense";
                 ViewBag.updown = resultado >= 0 ? "fa-arrow-up" : "fa-arrow-down";
                 ViewBag.despesa = string.Format("{0:c2}", despesa);
                 ViewBag.receita = string.Format("{0:c2}", receita);
@@ -128,7 +128,7 @@ namespace SEDOGv2.Controllers.Relatorios
                 string idProjeto = collection["idProjeto"];
                 string varano = collection["selAno"];
                 if (varano == "0")
-                    ViewBag.Ano = "- Todos -";
+                    ViewBag.Ano = "- All -";
                 else
                     ViewBag.Ano = "20" + collection["selAno"];
 
@@ -146,6 +146,7 @@ namespace SEDOGv2.Controllers.Relatorios
 
                 model.DetalhesHeaderDosProdutos = provider.SLT_PRODUTOS_HEADER_POR_PROJETO(IDLote);
                 model.DetalhesDosProdutos = provider.SLT_PRODUTOS_POR_PROJETO(IDLote);
+                model.isrc = provider.SLT_ISRC_RECEITA_TITULO_POR_PROJETO(IDLote);
 
                 decimal despesa = 0;
                 decimal receita = 0;
@@ -171,7 +172,7 @@ namespace SEDOGv2.Controllers.Relatorios
                 ViewBag.ValorTotalReceita = receita;
 
                 resultado = receita - despesa;
-                ViewBag.desprec = resultado >= 0 ? "receita" : "despesa";
+                ViewBag.desprec = resultado >= 0 ? "income" : "expense";
                 ViewBag.updown = resultado >= 0 ? "fa-arrow-up" : "fa-arrow-down";
                 ViewBag.despesa = string.Format("{0:c2}", despesa);
                 ViewBag.receita = string.Format("{0:c2}", receita);

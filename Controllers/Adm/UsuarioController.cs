@@ -1,10 +1,11 @@
-﻿using SEDOGv2.Helpers;
-using SEDOGv2.Models;
-using SEDOGv2.Models.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using SEDOGv2.Models;
+using SEDOGv2.Models.Context;
+using SEDOGv2.Helpers;
 
 
 namespace SEDOGv2.Controllers.Cadastros
@@ -57,7 +58,7 @@ namespace SEDOGv2.Controllers.Cadastros
 
                 model = provider.SLT_USUARIOS(login).First();
                 model.Paginas = provider.SLT_PAGES_POR_USUARIO(login);
-                model.DashBoards = BuscaDashBoards(login);
+                model.DashBoards = provider.SLT_LOAD_DASHBOARD_INFO(login);
                 ViewBag.Departamentos = provider.SEL_DEPARTAMENTOS();
 
             }
@@ -193,14 +194,6 @@ namespace SEDOGv2.Controllers.Cadastros
             return RedirectToAction("Index");
         }
 
-        public List<DashBoardsPorUsuarioViewModel> BuscaDashBoards(string login)
-        {
-            var provider = new PLProjetoProvider();
-            var dashBoards = provider.SLT_PAGES_POR_OBJETO(login);
-
-            var dbHelper = new DashBoard_Helper();
-            dbHelper.path = Server.MapPath("~");
-            return dbHelper.LoadDashBoardInfo(dashBoards);
-        }
+        
     }
 }

@@ -87,22 +87,22 @@ namespace SEDOGv2.Controllers.Uploads
                             _contador = 0;
                         }
 
-                        TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, "Arquivo processado com sucesso!");
+                        TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, "File successfully processed!");
 
                     }
                     else
                     {
-                        TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "Você precisa escolher o mês do forcast");
+                        TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "You need to choose the forecast month");
                     }
                 }
                 else
                 {
-                    TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "Não foram encontrados arquivos para upload");
+                    TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "No files found for upload");
                 }
             }
             catch(Exception ex)
             {
-                TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("Ocorreu um erro na hora de processar a solicitação: ", ex.Message));
+                TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("There was an error processing the request: ", ex.Message));
             }
             return RedirectToAction("Index");
         }
