@@ -22,7 +22,7 @@ namespace SEDOGv2.Controllers.Relatorios
         {
 
             List<VendasDigitaisJVModel> _viewModel = new List<VendasDigitaisJVModel>();
-            PLProjetoProvider _content = new PLProjetoProvider();
+            PLProjetoProvider_ext _content = new PLProjetoProvider_ext();
 
             try
             {
@@ -34,7 +34,7 @@ namespace SEDOGv2.Controllers.Relatorios
             }
             catch(Exception ex)
             {
-                ViewBag.Message = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("There was an error processing the request: ", ex.Message));
+                ViewBag.Message = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("Ocorreu um erro na hora de processar a solicitação: ", ex.Message));
             }
 
             return View(_viewModel);

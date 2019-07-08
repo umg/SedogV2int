@@ -92,6 +92,8 @@ namespace SEDOGv2.Models
         public long IDPROJ_SEDOG { get; set; }
         public decimal PERCENT_ARTISTICO_DIG { get; set; }
         public decimal PERCENT_AUTORAL_DIG { get; set; }
+        public decimal PERCENT_ROYALTY_OTHER_DIG { get; set; }
+        public decimal PERCENT_ROYALTY_PRODUCER_DIG { get; set; }
     }
     public class PL_Receitas_Extras
     {

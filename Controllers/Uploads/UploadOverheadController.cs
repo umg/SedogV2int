@@ -31,7 +31,7 @@ namespace SEDOGv2.Controllers.Uploads
                     int _mes = Convert.ToInt32(collection["mes"]);
                     if (_mes > 0)
                     {
-                        Models.Context.PLProjetoProvider conn = new Models.Context.PLProjetoProvider();
+                        Models.Context.PLProjetoProvider_ext conn = new Models.Context.PLProjetoProvider_ext();
 
                         string path = Server.MapPath("~/temp/forcast.xls");
                         file.SaveAs(path);
@@ -87,22 +87,22 @@ namespace SEDOGv2.Controllers.Uploads
                             _contador = 0;
                         }
 
-                        TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, "File successfully processed!");
+                        TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, "Arquivo processado com sucesso!");
 
                     }
                     else
                     {
-                        TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "You need to choose the forecast month");
+                        TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "Você precisa escolher o mês do forcast");
                     }
                 }
                 else
                 {
-                    TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "No files found for upload");
+                    TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, "Não foram encontrados arquivos para upload");
                 }
             }
             catch(Exception ex)
             {
-                TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("There was an error processing the request: ", ex.Message));
+                TempData["ForcastMessage"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("Ocorreu um erro na hora de processar a solicitação: ", ex.Message));
             }
             return RedirectToAction("Index");
         }
@@ -121,7 +121,7 @@ namespace SEDOGv2.Controllers.Uploads
             if (file.ContentLength > 0)
             {
 
-                Models.Context.PLProjetoProvider conn = new Models.Context.PLProjetoProvider();
+                Models.Context.PLProjetoProvider_ext conn = new Models.Context.PLProjetoProvider_ext();
 
                 string path = Server.MapPath("~/temp/generico.xls");
                 file.SaveAs(path);
@@ -193,7 +193,7 @@ namespace SEDOGv2.Controllers.Uploads
                     }
                    
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                 }
 

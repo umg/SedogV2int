@@ -6,11 +6,14 @@ html, body{
 }
 
 html {
-    background: url('themes/base/images/bg_mask.png') repeat, url('themes/base/images/fundo_sedog.jpg') no-repeat center center fixed;
+    background: url('themes/base/images/bg_mask.png') repeat;
+    /*, url('themes/base/images/bg.jpg') no-repeat center center fixed;*/
+    background: url('themes/base/images/bg_mask.png') repeat;
     -webkit-background-size: auto, cover;
     -moz-background-size: auto, cover;
     -o-background-size: auto, cover;
     background-size: auto, cover;
+    background-color:#FFFFFF;
 }
 .navbar-default{
     background-color:rgb(0, 143, 146)!important;

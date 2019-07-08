@@ -15,7 +15,7 @@
 
             <div class="row">
                 <div class="col-md-12"><label>Project:</label>  <span>@Model.PROJETO</span></div>
-                <div class="col-md-12"><label>Artis:</label> <span>@Model.ARTISTA</span></div>
+                <div class="col-md-12"><label>Artist:</label> <span>@Model.ARTISTA</span></div>
                 <div class="col-md-12"><label>Title:</label> <span>@Model.TITULO_PRODUTO</span></div>
             </div>
             <br />
@@ -26,11 +26,19 @@
                     </div>
                     <br />
                     <div class="input-group input-group-lg">
-                        <span class="input-group-addon">Artistic Rights:</span>
-                        <input type="text" id="artistico" name="artistico" class="form-control" placeholder="Artistic Rights(%)" value="@Model.ARTISTICO" aria-describedby="basic-addon2">
+                        <span class="input-group-addon">Artistic:</span>
+                        <input type="text" id="artistico" name="artistico" class="form-control" placeholder="Artistic(%)" value="@Model.ARTISTICO" aria-describedby="basic-addon2">
                     </div>
-
-
+                    <br />
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">Producer Royalty:</span>
+                        <input type="text" id="producer" name="producer" class="form-control" placeholder="Producer Royalty(%)" value="@Model.PRODUCER" aria-describedby="basic-addon2">
+                    </div>
+                    <br />
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon">Other Royalty:</span>
+                        <input type="text" id="other" name="other" class="form-control" placeholder="Other Royalty(%)" value="@Model.OTHER" aria-describedby="basic-addon2">
+                    </div>
                     <input type="submit" id="submitEditProjSedog" value="Save" class="btn btn-default" style="display:none;" />
     }
 

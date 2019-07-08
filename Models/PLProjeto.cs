@@ -32,6 +32,8 @@ namespace SEDOGv2.Models
         public string ARTISTA { get; set; }
         public decimal AUTORAL { get; set; }
         public decimal ARTISTICO { get; set; }
+        public decimal PRODUCER { get; set; }
+        public decimal OTHER { get; set; }
     }
 
 }

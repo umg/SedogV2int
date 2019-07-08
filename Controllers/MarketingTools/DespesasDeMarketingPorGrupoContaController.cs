@@ -39,9 +39,9 @@ namespace SEDOGv2.Controllers.MarketingTools
                     origem = "Todos";
                     break;
             }
-            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo(Helpers.appSettings._User.Culture);
+            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("pt-br");
 
-            ViewBag.Header = culture.DateTimeFormat.GetMonthName(mes) + "/" + collection["ano"] + " - Repertoire: " + origem;
+            ViewBag.Header = culture.DateTimeFormat.GetMonthName(mes) + "/" + collection["ano"] + " - Repertório: " + origem;
 
             PLProjetoProvider provider = new PLProjetoProvider();
             ViewBag.TValor = 0;

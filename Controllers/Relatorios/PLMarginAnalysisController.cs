@@ -31,7 +31,7 @@ namespace SEDOGv2.Controllers.Relatorios
                 PLProjetoProvider provider = new PLProjetoProvider();
                 string ano = collection["ano"];
                 if (ano == "00")
-                    ViewBag.Ano = "- All -";
+                    ViewBag.Ano = "- Todos -";
                 else
                     ViewBag.Ano = "20" + ano;
                 viewmodel.PLMarginAnalysis = provider.SLT_MARGIN_ANALYSIS(Convert.ToInt32(ano));
@@ -77,6 +77,7 @@ namespace SEDOGv2.Controllers.Relatorios
                     case "xls":
                         rpt = export.ExportToEXCEL(reportModelPath, reportSavePath, printName, auxPL, new List<Helpers.ReportParamValues>() { }, new List<System.Data.DataTable>() { });
                         return File(rpt, contentType, string.Concat(printName, ".", docType));
+                        break;
                     case "pdf":
                         reportName = collection["reportName"].ToString();
                         printName = collection["printName"].ToString();
@@ -85,6 +86,7 @@ namespace SEDOGv2.Controllers.Relatorios
                         contentType = "application/pdf";
                         rpt = export.ExportToPDF(reportModelPath, reportSavePath, printName, auxPL, new List<Helpers.ReportParamValues>() { }, new List<System.Data.DataTable>() { });
                         return File(rpt, contentType, string.Concat(printName, ".", docType));
+                        break;
                 }
             }
             catch (Exception ex)

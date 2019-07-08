@@ -54,28 +54,6 @@
                                 }
                             }
                             <br />
-                            <h3>DashBoards</h3>
-                            @foreach (var dashBoard in Model.DashBoards)
-                            {
-                                if (string.IsNullOrEmpty(dashBoard.Menu))
-                                {
-                                    dashBoard.Menu = dashBoard.Label;
-                                }
-
-                                if (string.IsNullOrEmpty(dashBoard.Selecionado))
-                                {
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" name="chkDashBoard" value="@dashBoard.Id">@dashBoard.Menu: @dashBoard.Tipo - @dashBoard.Label</label>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" name="chkDashBoard" value="@dashBoard.Id" checked>@dashBoard.Menu: @dashBoard.Tipo - @dashBoard.Label</label>
-                                    </div>
-                                }
-                            }
-                            <br />
                             <input type="submit" name="salvar" value="Save" class="btn btn-default pull-right" />
                         </div>
                     </div>

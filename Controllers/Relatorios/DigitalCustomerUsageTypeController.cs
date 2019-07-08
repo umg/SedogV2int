@@ -74,7 +74,7 @@ namespace SEDOGv2.Controllers.Relatorios
                 {
                     string varano = collection["selAno"];
                     if (varano == "0") {
-                        ViewBag.Ano = "- All -";
+                        ViewBag.Ano = "- Todos -";
                     }
                     else
                     {

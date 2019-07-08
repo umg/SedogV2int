@@ -1338,17 +1338,8 @@ namespace SEDOGv2.Helpers
 
                             for (int i = 0; i < 12; i++)
                             {
-                                
                                 XmlNode xLabel = xDoc.CreateElement("label");
-                                if (element.Attributes["useJanToDec"] != null)
-                                {
-                                    if (element.Attributes["useJanToDec"].Value == "True")
-                                    {
-                                        xLabel.InnerText = new DateTime(DateTime.Now.Year, 1, 1).AddMonths(i).ToString("MMM");
-                                    }
-                                }
-                                else
-                                    xLabel.InnerText = dtAnterior.AddMonths(i).ToString("MMM");
+                                xLabel.InnerText = dtAnterior.AddMonths(i).ToString("MMM");
                                 xLabels.AppendChild(xLabel);
                             }
                             foreach (DataTable tbl in GetTables(procedure, parameters.ToArray()))
@@ -1532,6 +1523,7 @@ namespace SEDOGv2.Helpers
 
                                         xDataDataSet = xDoc.CreateElement("dataset");
 
+
                                         XmlAttribute attributeTipo, attributeLabel, attributeHidden, attributebarColor, attributeColor;
 
                                         switch (row["LABEL"].ToString())
@@ -1540,6 +1532,7 @@ namespace SEDOGv2.Helpers
                                                 attributeTipo = xDoc.CreateAttribute("tipo");
                                                 attributeTipo.Value = "bar";
                                                 xDataDataSet.Attributes.Append(attributeTipo);
+
 
                                                 attributeLabel = xDoc.CreateAttribute("label");
                                                 attributeLabel.Value = "'Total'";
@@ -1558,6 +1551,7 @@ namespace SEDOGv2.Helpers
                                                 attributeTipo.Value = "bar";
                                                 xDataDataSet.Attributes.Append(attributeTipo);
 
+
                                                 attributeLabel = xDoc.CreateAttribute("label");
                                                 attributeLabel.Value = "'Total'";
                                                 xDataDataSet.Attributes.Append(attributeLabel);
@@ -1575,6 +1569,7 @@ namespace SEDOGv2.Helpers
                                                 attributeTipo.Value = "line";
                                                 xDataDataSet.Attributes.Append(attributeTipo);
 
+
                                                 attributeLabel = xDoc.CreateAttribute("label");
                                                 attributeLabel.Value = row["LABEL"].ToString();
                                                 xDataDataSet.Attributes.Append(attributeLabel);
@@ -1589,8 +1584,7 @@ namespace SEDOGv2.Helpers
                                     xData.InnerText = decimal.Parse(row["DATA"].ToString()).ToString("#0");
                                     xDataDataSet.AppendChild(xData);
                                 }
-                                if (xDataDataSet != null)
-                                    xDataDataSets.AppendChild(xDataDataSet);
+                                xDataDataSets.AppendChild(xDataDataSet);
                             }
 
                             element.AppendChild(xLabels);
@@ -1950,6 +1944,5 @@ namespace SEDOGv2.Helpers
             }
             xOutput.Save(path + @"\Content\DashBoards\" + appSettings.Ambiente + "DashBoard.xml");
         }
-
     }
 }

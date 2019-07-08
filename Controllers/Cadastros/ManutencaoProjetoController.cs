@@ -94,10 +94,6 @@ namespace SEDOGv2.Controllers.Cadastros
                     if (prj.Length > 1)
                         provider.INS_PL_PROJETO(idProjSedog, prj[0].Trim(), prj[1].Trim());
                 }
-
-                // atualiza titulos dos fonogramas dos projetos
-                Helpers.functions.ISRCSummaryUpdate(idProjSedog);
-
             }
             return RedirectToAction("Edit", new { id = collection["idProjSedog"] });
         }
@@ -127,15 +123,20 @@ namespace SEDOGv2.Controllers.Cadastros
             int IDProj_SEDOG = Convert.ToInt32(collection["idProjSedog"]);
             string CodProduto = collection["codprod"];
             string Packing = collection["packing"];
+            
             decimal artistico = 0;
             decimal autoral = 0;
+            decimal producer = 0;
+            decimal other = 0;
 
             bool tryartistico = decimal.TryParse(collection["artistico"], out artistico);
             bool tryautoral = decimal.TryParse(collection["autoral"], out autoral);
+            bool tryproducer = decimal.TryParse(collection["producer"], out producer);
+            bool tryother = decimal.TryParse(collection["other"], out other);
 
             if (tryartistico && tryautoral)
             {
-                provider.INS_PARAMETROS_DIREITOS_PRODUTO(IDProj_SEDOG, CodProduto, Packing, artistico, autoral);
+                provider.INS_PARAMETROS_DIREITOS_PRODUTO(IDProj_SEDOG, CodProduto, Packing, artistico, autoral, producer, other);
                 ViewBag.Error = "Parâmetros salvos com sucesso!";
             }
             else
@@ -228,27 +229,31 @@ namespace SEDOGv2.Controllers.Cadastros
 
                 string percAut = collection["percAut"];
                 string percArt = collection["percArt"];
+                string percOther = collection["percOther"];
+                string percProdu = collection["percProdu"];
 
                 int idMedidorKPI = int.Parse(collection["selIdMedidorKPI"]);
 
                 decimal dpercAut = 0;
                 decimal dpercArt = 0;
+                decimal dpercOther = 0;
+                decimal dpercProdu = 0;
                 decimal ebtidaProjetada = 0;
                 decimal receitaProjetada = 0;
 
                 decimal.TryParse(percAut, out dpercAut);
                 decimal.TryParse(percArt, out dpercArt);
+                decimal.TryParse(percOther, out dpercOther);
+                decimal.TryParse(percProdu, out dpercProdu);
 
                 decimal.TryParse(collection["ebtidaProjetada"], out ebtidaProjetada);
                 decimal.TryParse(collection["receitaProjetada"], out receitaProjetada);
 
+                if (string.IsNullOrEmpty(responsavel)) responsavel = "";
+
                 provider.UPD_PL_PROJETOS_SEDOG(idProjetoSedog, nomeDoProjeto, idArtista, nomeDoArtista, obs, tipoContrato, tipoProcesso, tipoRelease, lancamento, origem, ebtidaProjetada, receitaProjetada, responsavel, idGeneroMusical , idMedidorKPI);
 
-                provider.UPD_PL_PARAMETROS_DIREITOS(idProjetoSedog, dpercArt, dpercAut);
-
-                // atualiza titulos dos fonogramas dos projetos
-                Helpers.functions.ISRCSummaryUpdate(idProjetoSedog);
-
+                provider.UPD_PL_PARAMETROS_DIREITOS(idProjetoSedog, dpercArt, dpercAut, dpercOther, dpercProdu);
             }
             return RedirectToAction("Edit", new { id = collection["idProjSedog"] });
         }

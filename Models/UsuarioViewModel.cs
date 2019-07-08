@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace SEDOGv2.Models
 {
@@ -10,6 +13,5 @@ namespace SEDOGv2.Models
         public string DEPTO { get; set; }
         public List<PagesPorUsuarioViewModel> Paginas { get; set; }
         public List<Departamento> _Departamentos { get; set; }
-        public List<DashBoardsPorUsuarioViewModel> DashBoards { get; set; }
     }
 }

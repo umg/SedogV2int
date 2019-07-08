@@ -51,11 +51,11 @@ namespace SEDOGv2.Controllers.Adm
                 else
                     provider.PL_RODA_NEW_SEDOG(0);
 
-                Session["resposta"] = "Updated";
+                Session["resposta"] = "Atualizado";
             }
             catch (Exception ex)
             {
-                Session["resposta"] = "Error: " + ex.Message;
+                Session["resposta"] = "Erro: " + ex.Message;
             }
             return RedirectToAction("Index");
         }

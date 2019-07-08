@@ -29,7 +29,7 @@ namespace SEDOGv2.Controllers.Relatorios
             ViewBag.TituloReport = tipo + " - " + collection["ano"];
 
             if (ano == 0)
-                ViewBag.TituloReport = tipo + " - ALL";
+                ViewBag.TituloReport = tipo + " - Todos";
 
             List<TopDespesasMarketingViewModel> model = provider.SLT_TOP_DESPESAS_MARKETING(ano, tipo);
             return View(model);

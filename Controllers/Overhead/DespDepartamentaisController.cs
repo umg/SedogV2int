@@ -31,7 +31,7 @@ namespace SEDOGv2.Controllers.Overhead
             DespDepartamentaisViewModel viewModel = new DespDepartamentaisViewModel();
             try
             {
-                PLProjetoProvider provider = new Models.Context.PLProjetoProvider();
+                PLProjetoProvider_ext provider = new Models.Context.PLProjetoProvider_ext();
                 viewModel = Load();
 
                 viewModel._Listado = true;
@@ -57,7 +57,7 @@ namespace SEDOGv2.Controllers.Overhead
                 viewModel._DespDepartamento = new List<DespDepartamento>();
                 viewModel._DespDepartamento.AddRange(provider.SLT_DESP_DEPARTAMENTOS(mes, ano, departamento, financeiro));
 
-                ViewBag.MesAtual = new DateTime(ano, mes, 1).ToString("MMM", System.Globalization.CultureInfo.GetCultureInfo(Helpers.appSettings._User.Culture)).ToUpper();
+                ViewBag.MesAtual = new DateTime(ano, mes, 1).ToString("MMM", System.Globalization.CultureInfo.GetCultureInfo("pt-br")).ToUpper();
                 if (viewModel._DespDepartamento.Count > 0)
                 {
                     ViewBag.Forecast = viewModel._DespDepartamento[0].FCAST;
@@ -85,21 +85,21 @@ namespace SEDOGv2.Controllers.Overhead
 
                 viewModel._Listado = false;
 
-                PLProjetoProvider provider = new Models.Context.PLProjetoProvider();
+                PLProjetoProvider_ext provider = new Models.Context.PLProjetoProvider_ext();
                 List<Departamento> Listadepartamentos = provider.SEL_DEPARTAMENTOSJDE();
 
                 string[] ids = collection["emails"].Split(',');
                 int ano = Convert.ToInt32(collection["emailano"]);
                 int mes = Convert.ToInt32(collection["emailmes"]);
                 string financeiro = "0";
-                string mesatual = new DateTime(ano, mes, 1).ToString("MMM", System.Globalization.CultureInfo.GetCultureInfo(Helpers.appSettings._User.Culture)).ToUpper();
+                string mesatual = new DateTime(ano, mes, 1).ToString("MMM", System.Globalization.CultureInfo.GetCultureInfo("pt-br")).ToUpper();
 
                 string css = "";
                 StreamReader strR = new StreamReader(Server.MapPath("~/Content/report.css"));
                 css = strR.ReadToEnd();
                 strR.Close();
 
-                string body = "Attached is the departmental expense files. <br> For the departments that have overflow in the month, please send explanations to the Budget department within 10 days of this date. <br> Regards, SEDOG";
+                string body = "Segue em anexo os arquivos de despesas departamentais. <br> Para os departamentos que apresentarem estouro no mês, por favor,  <br>  enviar explicações ao departamento de Orçamento no prazo de 10 dias desta data. <br> Atenciosamente, SEDOG";
 
                 foreach (string id in ids)
                 {
@@ -137,15 +137,15 @@ namespace SEDOGv2.Controllers.Overhead
                             table = string.Concat(table, "</tr><tr>");
                             table = string.Concat(table, "<td colspan='13' style='text-align:center'><h2 style='text-align:center' class='bold underline'>Overhead</h2></td>");
                             table = string.Concat(table, "</tr><tr>");
-                            table = string.Concat(table, "<td colspan='13' style='text-align:center'><h2 style='text-align:center' class='bold underline'>Departmental Expenses: ", nomeDepartamento, "</h2></td>");
+                            table = string.Concat(table, "<td colspan='13' style='text-align:center'><h2 style='text-align:center' class='bold underline'>Despesas Departamentais: ", nomeDepartamento, "</h2></td>");
                             table = string.Concat(table, "</tr><tr>");
                             table = string.Concat(table, "<td colspan='5'>&nbsp;</td>");
                             table = string.Concat(table, "<td>", DateTime.Now.ToString("MMMM").ToUpper(), "/", DateTime.Now.Year, "</td>");
                             table = string.Concat(table, "<td>", DateTime.Now.ToString("dd/MM/yyyy"), " às ", DateTime.Now.ToString("HH:mm:ss"), "</td>");
                             table = string.Concat(table, "</tr><tr>");
-                            table = string.Concat(table, "<td>Account</td>");
+                            table = string.Concat(table, "<td>Conta</td>");
                             table = string.Concat(table, "<td>Sub</td>");
-                            table = string.Concat(table, "<td>Desrciption</td>");
+                            table = string.Concat(table, "<td>Descrição</td>");
                             table = string.Concat(table, "<td>Act. ", mesatual, "</td>");
                             table = string.Concat(table, "<td>", _despDepartamento[0].FCAST, "</td>");
                             table = string.Concat(table, "<td>Plan ", mesatual, "</td>");
@@ -228,7 +228,7 @@ namespace SEDOGv2.Controllers.Overhead
                     string auxBody = string.Concat("E-mails: ", _responsavel.EMAIL, "<br>", body);
                     Helpers.functions.SendEmail(new string[] { "felipe.santanna@umusic.com" }, new string[] { "felipe.santanna@umusic.com" }, _responsavel.COPIASOCULTA.Split(';'), "Despesas Departamentais Diretoria", auxBody, atts.ToArray());
                 }
-                ViewBag.Message = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, "E-mail sent");
+                ViewBag.Message = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.SUCCESS, "E-mails enviados com sucesso!");
             }
             catch(Exception ex)
             {
@@ -239,7 +239,7 @@ namespace SEDOGv2.Controllers.Overhead
 
         public DespDepartamentaisViewModel Load()
         {
-            PLProjetoProvider provider = new Models.Context.PLProjetoProvider();
+            PLProjetoProvider_ext provider = new Models.Context.PLProjetoProvider_ext();
 
             DespDepartamentaisViewModel viewModel = new DespDepartamentaisViewModel();
             viewModel._ResponsavelDepartamento = new List<ResponsavelDepartamento>();

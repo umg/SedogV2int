@@ -249,7 +249,7 @@ namespace SEDOGv2.Controllers.GTS
             }
             catch (Exception ex)
             {
-                TempData["Message"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("There was an error processing the request: ", ex.Message));
+                TempData["Message"] = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("Ocorreu um erro na hora de processar a solicitação: ", ex.Message));
                 return RedirectToAction("Index");
             }
 

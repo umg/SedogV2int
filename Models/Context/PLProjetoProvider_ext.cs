@@ -116,49 +116,6 @@ namespace SEDOGv2.Models.Context
             }
             return listDepartamento;
         }
-
-        public List<DashBoardsPorUsuarioViewModel> SLT_PAGES_POR_OBJETO(string login)
-        {
-            var ret = new List<DashBoardsPorUsuarioViewModel>();
-            try
-            {
-                DataTable dt = new DataTable();
-                List<OleDbParameter> parameters = new List<OleDbParameter>();
-                parameters.Add(AddParameter("P_LOGIN", login));
-                string procedure = AddScheme("SLT_PAGES_POR_OBJETO");
-
-                dt = GetTable(procedure, parameters.ToArray());
-
-                ret = dt.DataTableToList<DashBoardsPorUsuarioViewModel>();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return ret;
-        }
-
-        public List<DashBoardsPorUsuarioViewModel> SLT_LOAD_DASHBOARD_INFO(string login)
-        {
-            var ret = new List<DashBoardsPorUsuarioViewModel>();
-            try
-            {
-                DataTable dt = new DataTable();
-                List<OleDbParameter> parameters = new List<OleDbParameter>();
-                parameters.Add(AddParameter("P_LOGIN", login));
-                string procedure = AddScheme("SLT_LOAD_DASHBOARD_INFO");
-
-                dt = GetTable(procedure, parameters.ToArray());
-
-                ret = dt.DataTableToList<DashBoardsPorUsuarioViewModel>();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return ret;
-        }
-
         //ParametrosDireitosProduto
         public ParametrosDireitosProduto SEL_PARAMETROS_DIREITOS_PRODUTO(int IDProj_SEDOG, string CodProduto, string Packing)
         {
@@ -185,7 +142,7 @@ namespace SEDOGv2.Models.Context
             return _parametrosDireitosProduto;
         }
 
-        public void INS_PARAMETROS_DIREITOS_PRODUTO(int IDProj_SEDOG, string CodProduto, string Packing, decimal artistico, decimal autoral)
+        public void INS_PARAMETROS_DIREITOS_PRODUTO(int IDProj_SEDOG, string CodProduto, string Packing, decimal artistico, decimal autoral, decimal producer, decimal other)
         {
             try
             {
@@ -196,6 +153,8 @@ namespace SEDOGv2.Models.Context
                 parameters.Add(AddParameter("P_PACKING", Packing));
                 parameters.Add(AddParameter("P_ARTISTICO", artistico));
                 parameters.Add(AddParameter("P_AUTORAL", autoral));
+                parameters.Add(AddParameter("P_PRODUCER", producer));
+                parameters.Add(AddParameter("P_OTHER", other));
                 string procedure = AddScheme("INS_PARAMETROS_DIREITOS_PRODUTO");
 
                 ExecutaProcedureNoQuery(procedure, parameters.ToArray());
@@ -652,12 +611,12 @@ namespace SEDOGv2.Models.Context
                     VendasDireitos vendasDigital = new Models.VendasDireitos();
                     VendasDireitos vendasFisica = new Models.VendasDireitos();
 
-                    vendasDigital.Vendas = "Digital";
+                    vendasDigital.Vendas = "Digitais";
                     vendasDigital.Qtde = (!string.IsNullOrEmpty(row["QTDDIGITAL"].ToString())) ? Convert.ToInt32(row["QTDDIGITAL"].ToString()) : 0 ;
                     vendasDigital.Valor = (!string.IsNullOrEmpty(row["RECEITA_DIGITAL"].ToString())) ? Convert.ToDecimal(row["RECEITA_DIGITAL"].ToString()) : 0 ;
 
 
-                    vendasFisica.Vendas = "Physical";
+                    vendasFisica.Vendas = "Físicas";
                     vendasFisica.Qtde = (!string.IsNullOrEmpty(row["QTDFISICA"].ToString())) ? Convert.ToInt32(row["QTDFISICA"].ToString()) : 0;
                     vendasFisica.Valor = (!string.IsNullOrEmpty(row["RECEITA_FISICA"].ToString())) ? Convert.ToDecimal(row["RECEITA_FISICA"].ToString()) : 0;
 

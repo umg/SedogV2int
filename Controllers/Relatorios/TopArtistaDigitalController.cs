@@ -28,8 +28,8 @@ namespace SEDOGv2.Controllers.Relatorios
             try
             {
                 ViewBag.Message = "";
-                ViewBag.Mes = collection["mes"] == "0" ? "All" : collection["mes"];
-                ViewBag.Ano = collection["ano"] == "0" ? "All" : collection["ano"];
+                ViewBag.Mes = collection["mes"] == "0" ? "Todos" : collection["mes"];
+                ViewBag.Ano = collection["ano"] == "0" ? "Todos" : collection["ano"];
                 PLProjetoProvider provider = new PLProjetoProvider();
                 viewModel = provider.SLT_TOP_ARTISTA_DIGITAL(int.Parse(collection["ano"]), int.Parse(collection["mes"]));
             }

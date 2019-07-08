@@ -44,19 +44,19 @@ namespace SEDOGv2.Controllers.Overhead
                 switch (_viewModel._selectedVisualizacao)
                 {
                     case "mes":
-                        ViewBag.MesAtual = new DateTime(ano, mes, 1).ToString("MMMM", System.Globalization.CultureInfo.GetCultureInfo(Helpers.appSettings._User.Culture)).ToUpper();
-                        ViewBag.MesAnterior = new DateTime(ano, mes, 1).AddMonths(-1).ToString("MMMM", System.Globalization.CultureInfo.GetCultureInfo(Helpers.appSettings._User.Culture)).ToUpper();
+                        ViewBag.MesAtual = new DateTime(ano, mes, 1).ToString("MMMM", System.Globalization.CultureInfo.GetCultureInfo("pt-br")).ToUpper();
+                        ViewBag.MesAnterior = new DateTime(ano, mes, 1).AddMonths(-1).ToString("MMMM", System.Globalization.CultureInfo.GetCultureInfo("pt-br")).ToUpper();
 
                         _viewModel.Overhead = provider.SLT_COMPARATIVO_MENSAL_ANTERIOR(4, mes, ano);
                         break;
                     case "plan":
-                        ViewBag.MesAtual = string.Concat("AC ", new DateTime(ano, mes, 1).ToString("MMMM", System.Globalization.CultureInfo.GetCultureInfo(Helpers.appSettings._User.Culture)).ToUpper());
-                        ViewBag.MesAnterior = string.Concat("PLAN ", new DateTime(ano, mes, 1).ToString("MMMM", System.Globalization.CultureInfo.GetCultureInfo(Helpers.appSettings._User.Culture)).ToUpper());
+                        ViewBag.MesAtual = string.Concat("AC ", new DateTime(ano, mes, 1).ToString("MMMM", System.Globalization.CultureInfo.GetCultureInfo("pt-br")).ToUpper());
+                        ViewBag.MesAnterior = string.Concat("PLAN ", new DateTime(ano, mes, 1).ToString("MMMM", System.Globalization.CultureInfo.GetCultureInfo("pt-br")).ToUpper());
 
                         _viewModel.Overhead = provider.SLT_COMPARATIVO_MENSAL_OVERHEAD(4, mes, ano);
                         break;
                     case "forcast":
-                        ViewBag.MesAtual = new DateTime(ano, mes, 1).ToString("MMMM", System.Globalization.CultureInfo.GetCultureInfo(Helpers.appSettings._User.Culture)).ToUpper();
+                        ViewBag.MesAtual = new DateTime(ano, mes, 1).ToString("MMMM", System.Globalization.CultureInfo.GetCultureInfo("pt-br")).ToUpper();
                         _viewModel.Overhead = provider.SLT_COMPARATIVO_MENSAL_FORCAST(4, mes, ano);
 
                         if (_viewModel.Overhead.Count > 0)
@@ -74,7 +74,7 @@ namespace SEDOGv2.Controllers.Overhead
             }
             catch (Exception ex)
             {
-                ViewBag.Message = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("There was an error processing the request: ",  ex.Message));
+                ViewBag.Message = Helpers.Erros.ShowMessage(Helpers.Erros.MessageType.ERROR, string.Concat("Ocorreu um erro na hora de processar a solicitação: ",  ex.Message));
                 return View(_viewModel);
             }
         }
