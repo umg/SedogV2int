@@ -76,6 +76,14 @@
       <HintPath>packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
       <HintPath>packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
       <Private>True</Private>
@@ -105,14 +113,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Microsoft.Web.Services3.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
       <Private>True</Private>
@@ -212,6 +221,7 @@
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaMarketShareController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaTanqueController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaValoresController.cs" />
+    <Compile Include="Controllers\AtualizacaoTabelas\ImportAIFController.cs" />
     <Compile Include="Controllers\Cadastros\AtualizaProjetoController.cs" />
     <Compile Include="Controllers\Cadastros\CadastroProjetoController.cs" />
     <Compile Include="Controllers\Adm\DepartamentosController.cs" />
@@ -257,6 +267,7 @@
     <Compile Include="Helpers\Erros.cs" />
     <Compile Include="Helpers\functions.cs" />
     <Compile Include="Helpers\GetCapa.cs" />
+    <Compile Include="Helpers\ProcessAIF.cs" />
     <Compile Include="Helpers\Reports.cs" />
     <Compile Include="Models\ARControleDespesaViewModel.cs" />
     <Compile Include="Models\ARPUViewModel.cs" />
@@ -284,6 +295,7 @@
     <Compile Include="Models\DireitosMarginAnalysisViewModel.cs" />
     <Compile Include="Models\DireitosProfitLoss.cs" />
     <Compile Include="Models\Faixa.cs" />
+    <Compile Include="Models\ImportAIF.cs" />
     <Compile Include="Models\ISRCs.cs" />
     <Compile Include="Models\JsonDataHeader.cs" />
     <Compile Include="Models\LucrosEPerdas.cs" />
@@ -946,6 +958,7 @@
     <Content Include="Views\ManagementMeeting\_ModalUploadManagementMeetingFilePartial.cshtml" />
     <Content Include="Views\ManagementMeeting\_ListManagementMeetingPartial.cshtml" />
     <Content Include="Views\Shared\_AlertMessagePartial.cshtml" />
+    <Content Include="Views\ImportAIF\Index.cshtml" />
     <None Include="Web References\net.umusic.catalogueservices\SecureDataServices.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1025,7 +1038,9 @@
     <Folder Include="Views\Print\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

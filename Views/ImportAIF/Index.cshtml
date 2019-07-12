@@ -1,0 +1,128 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+
+    @using (Html.BeginForm("Index", "ImportAIF", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+
+            <div class="col-md-12" runat="server" id="divAlert">
+                @ViewBag.Error
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4 text-right">
+                    <div class="form-group">
+                        <h4>Arquivo:</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="file" name="file" class="form-control" placeholder="Selecione o Arquivo" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" name="enviar" value="Enviar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model != null)
+    {
+        <div class="panel panel-success panel-report">
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        Arquivo Processado: @ViewBag.FileName
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            @*<th>
+                                Linhas Processadas
+                            </th>*@
+                            <th>
+                                Projeto Sedog
+                            </th>
+                            <th>
+                                R2 Project
+                            </th>
+                            <th>
+                                Foreign Income 
+                            </th>
+                            <th>
+                                Artist Royalties
+                            </th>
+                            <th>
+                                Producer Royalties
+                            </th>
+                            <th>
+                                Other Royalty
+                            </th>
+                            <th>
+                                All Royalty 
+                            </th>
+                            <th>
+                                Foreign Margin
+                            </th>
+                            <th>
+                                % AIF Margin
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="9" style="text-align:center;">
+                                @Model.Linhas linhas processadas com sucesso! 
+                            </td>
+                            @*<td>
+                                @Model.R2Projects
+                            </td>
+                            <td>
+                                @Model.ForeignIncome
+                            </td>
+                            <td>
+                                @Model.ArtistRoyalties
+                            </td>
+                            <td>
+                                @Model.ProducerRoyalties
+                            </td>
+                            <td>
+                                @Model.OtherRoyalty
+                            </td>
+                            <td>
+                                @Model.AllRoyalty
+                            </td>
+                            <td>
+                                @Model.ForeignMargin
+                            </td>
+                            <td>
+                                @Model.PercAIFMargin
+                            </td>*@
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
