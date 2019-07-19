@@ -358,7 +358,7 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
-        public long INS_PL_PROJETOS_SEDOG(long P_IDPROJ_SEDOG, string P_PROJETO, string P_IDARTISTA, string P_ARTISTA, string P_OBS, int P_ID_TIPO_CONTRATO, int P_ID_TIPO_PROCESSO, int P_ID_TIPO_RELEASE, string P_DATA_LANCAMENTO, string P_NACIONALIDADE)
+        public long INS_PL_PROJETOS_SEDOG(long P_IDPROJ_SEDOG, string P_PROJETO, string P_IDARTISTA, string P_ARTISTA, string P_OBS, int P_ID_TIPO_CONTRATO, int P_ID_TIPO_PROCESSO, int P_ID_TIPO_RELEASE, string P_DATA_LANCAMENTO, string P_NACIONALIDADE, decimal P_EBITIDA_PROJETADO, string P_LOGIN_REPONSAVEL, int P_ID_GENERO_MUSICAL, decimal P_RECEITA_PROJETADA, int P_ID_MEDIDOR_KPI)
         {
             long ret = 0;
             try
@@ -373,6 +373,11 @@ namespace SEDOGv2.Models.Context
                 parameters.Add(AddParameter("P_ID_TIPO_RELEASE", P_ID_TIPO_RELEASE));
                 parameters.Add(AddParameter("P_DATA_LANCAMENTO", P_DATA_LANCAMENTO));
                 parameters.Add(AddParameter("P_NACIONALIDADE", P_NACIONALIDADE));
+                parameters.Add(AddParameter("P_EBITIDA_PROJETADO", P_EBITIDA_PROJETADO));
+                parameters.Add(AddParameter("P_LOGIN_REPONSAVEL", P_LOGIN_REPONSAVEL));
+                parameters.Add(AddParameter("P_ID_GENERO_MUSICAL", P_ID_GENERO_MUSICAL));
+                parameters.Add(AddParameter("P_RECEITA_PROJETADA", P_RECEITA_PROJETADA));
+                parameters.Add(AddParameter("P_ID_MEDIDOR_KPI", P_ID_MEDIDOR_KPI));
                 parameters.Add(AddParameter("P_IDPROJ_SEDOG", P_IDPROJ_SEDOG, ParameterDirection.Output));
 
                 string procedure = AddScheme("INS_PL_PROJETOS_SEDOG");
@@ -381,7 +386,7 @@ namespace SEDOGv2.Models.Context
 
                 ExecutaProcedureNoQuery(procedure, parametersClone);
 
-                ret = long.Parse(parametersClone[9].Value.ToString());
+                ret = long.Parse(parametersClone[14].Value.ToString());
 
             }
             catch (Exception ex)

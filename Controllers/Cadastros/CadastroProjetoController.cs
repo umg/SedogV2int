@@ -22,6 +22,9 @@ namespace SEDOGv2.Controllers.Adm
             model._TipoContrato = provider.SEL_PL_TIPO_CONTRATO();
             model._TipoProcesso= provider.SEL_PL_TIPO_PROCESSO();
             model._TipoRelease = provider.SEL_PL_TIPO_RELEASE();
+            model._Usuario = provider.SEL_USUARIOS_POR_DEPTO("#IT##FINANCE#"); 
+            model._Genero = provider.SEL_GENERO_MUSICAL();
+            model._Kpi = provider.SEL_PL_MEDIDOR_KPI();
 
             return View(model);
         }
@@ -111,6 +114,10 @@ namespace SEDOGv2.Controllers.Adm
                 cadastroVM._TipoProcesso = provider.SEL_PL_TIPO_PROCESSO();
                 StepMessage = "Seleciona tipo release";
                 cadastroVM._TipoRelease = provider.SEL_PL_TIPO_RELEASE();
+                StepMessage = "Seleciona tipo genero musical";
+                cadastroVM._Genero = provider.SEL_GENERO_MUSICAL();
+                StepMessage = "Seleciona tipo genero KPI";
+                cadastroVM._Kpi = provider.SEL_PL_MEDIDOR_KPI();
 
 
                 StepMessage = "Carrega idArtista";
@@ -126,6 +133,13 @@ namespace SEDOGv2.Controllers.Adm
                 string nomeDoProjeto = collection["nomeDoProjeto"];
                 StepMessage = "Carrega NomeArtista";
                 string nomeDoArtista = collection["nomeDoArtista"];
+
+                StepMessage = "Carrega NomeResponsavel";
+                string nomeDoResponsavel = collection["nomeDoResponsavel"];
+                StepMessage = "Carrega TipoGenero";
+                int tipoGenero = int.Parse(collection["selGeneroMusical"]);
+
+
                 StepMessage = "Carrega Bus Adicionais";
                 string[] _busAdicionaisProjeto = collection["busAdicionaisProjeto"].Split(',');
                 StepMessage = "Carrega Obs";
@@ -134,15 +148,31 @@ namespace SEDOGv2.Controllers.Adm
                 string origem = collection["selOrigem"];
                 StepMessage = "Carrega TipoContrato";
                 int tipoContrato = int.Parse(collection["selTipoContrato"]);
+
+                StepMessage = "Carrega ebtida";
+                string ebtida = collection["ebtidaProjetada"];
+                StepMessage = "Verifica ebtida";
+                decimal debtida = 0;
+                decimal.TryParse(ebtida, out debtida);
+
                 StepMessage = "Carrega TipoRelease";
                 int tipoRelease = int.Parse(collection["selTipoRelease"]);
                 StepMessage = "Carrega TipoProcesso";
                 int tipoProcesso = int.Parse(collection["selTipoProcesso"]);
 
+                StepMessage = "Carrega receita";
+                string receita = collection["receitaProjetada"];
+                StepMessage = "Verifica receita";
+                decimal dreceita = 0;
+                decimal.TryParse(receita, out dreceita);
+
+                StepMessage = "Carrega TipoKPI";
+                int tipoKpi = int.Parse(collection["selIdMedidorKPI"]);
+
                 StepMessage = "Carrega PercentualAutoral";
-                string percAut = collection["percAut"];
+                string percAut = collection["_percAut"];
                 StepMessage = "Carrega PercentualArtistico";
-                string percArt = collection["percArt"];
+                string percArt = collection["_percArt"];
 
                 StepMessage = "Carrega Gospel";
                 string gos = collection["GOS"];
@@ -182,7 +212,8 @@ namespace SEDOGv2.Controllers.Adm
                 string lancamento = dtAtual.ToString("yyyy-MM-dd");
 
                 StepMessage = "INS_PL_PROJETOS_SEDOG";
-                idProjetoSedog = provider.INS_PL_PROJETOS_SEDOG(idProjetoSedog, nomeDoProjeto, idArtista, nomeDoArtista, obs, tipoContrato, tipoProcesso, tipoRelease, lancamento, origem);
+                //idProjetoSedog = provider.INS_PL_PROJETOS_SEDOG(idProjetoSedog, nomeDoProjeto, idArtista, nomeDoArtista, obs, tipoContrato, tipoProcesso, tipoRelease, lancamento, origem);
+                idProjetoSedog = provider.INS_PL_PROJETOS_SEDOG(idProjetoSedog, nomeDoProjeto, idArtista, nomeDoArtista, obs, tipoContrato, tipoProcesso, tipoRelease, lancamento, origem, debtida,nomeDoResponsavel, tipoGenero, dreceita, tipoKpi);
 
                 model.IdProjetoSedog = idProjetoSedog.ToString();
                 model.NomeDoProjeto = nomeDoProjeto;
