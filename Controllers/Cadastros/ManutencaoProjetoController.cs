@@ -53,7 +53,7 @@ namespace SEDOGv2.Controllers.Cadastros
             ret.plProdutoBus = provider.SEL_PL_PRODUTO_BUS(id);
             ret.plReceitasExtras = provider.SEL_PL_RECEITAS_EXTRAS(id);
             ret.plParametrosDireitos = provider.SEL_PL_PARAMETROS_DIREITOS(id);
-            ret._Usuarios = provider.SEL_USUARIOS_POR_DEPTO("#A&R##GOSPEL#");
+            ret._Usuarios = provider.SEL_USUARIOS_POR_DEPTO("#IT##FINANCE#");
             ret._MedidorKPI = provider.SEL_PL_MEDIDOR_KPI();
 
             return View(ret);

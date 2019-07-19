@@ -132,79 +132,252 @@
                             <div class="col-xs-12">
                                 <div class="col-md-12 well text-center">
                                     <h1 class="text-center">Additional Detail</h1>
-                                    <h3 class="text-center">Add aditional detail for projec</h3>
+                                    <h3 class="text-center">Add aditional detail for project</h3>
                                     <div id="ProdutosBus" class="col-md-12 text-center">
                                         <button id="btnStep4" class="btn btn-default btn-lg disabled" type="button">Ready!</button><p>&nbsp;</p>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Project Name</span>
-                                            <input type="text" id="nomeDoProjeto" name="nomeDoProjeto" class="form-control input-lg" placeholder="Type a name for the project" aria-describedby="basic-addon2">
-                                        </div><p>&nbsp;</p>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Artist Name</span>
-                                            <input type="text" id="nomeDoArtista" name="nomeDoArtista" class="form-control input-lg" placeholder="" aria-describedby="basic-addon2">
-                                        </div><p>&nbsp;</p>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Release date</span>
-                                            <input type="text" id="lancamento" name="lancamento" class="form-control input-lg" placeholder="Release Date" aria-describedby="basic-addon2">
-                                        </div><p>&nbsp;</p>
-                                        <div class="input-group col-lg-12">
-                                            <div class="text-left col-md-6">
-                                                <label><input type="checkbox" name="obs[]" value="DIG" class="chkBoxObs" />Digital</label>
-                                                <label><input type="checkbox" name="obs[]" value="FIS" class="chkBoxObs" />Physical</label>
-                                                <label><input type="checkbox" name="obs[]" value="CD" class="chkBoxObs" />CD</label>
-                                                <label><input type="checkbox" name="obs[]" value="DV" class="chkBoxObs" />DV</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="NomeProjeto" class="control-label">Project Name</label>
+                                                    <input type="text" id="nomeDoProjeto" name="nomeDoProjeto" class="form-control input-lg" placeholder="Type a name for a project" aria-describedby="basic-addon2">
+                                                </div>
                                             </div>
-                                            <div class="text-right col-md-6">
-                                                <label><input type="checkbox" name="GOS" value="GOS" class="chkBoxGOS" />Gospel</label>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="NomeArtista" class="control-label">Artist Name</label>
+                                                    <input type="text" id="nomeDoArtista" name="nomeDoArtista" class="form-control input-lg" placeholder="" aria-describedby="basic-addon2">
+                                                </div>
                                             </div>
-                                        </div><p>&nbsp;</p>
-                                        <div class="input-group col-lg-12">
-                                            <div class="col-lg-3">
-                                                <label for="selTipoRelease" class="control-label">Release Type:</label>
-                                                <select class="form-control" id="selTipoRelease" name="selTipoRelease">
-                                                    @foreach (TipoRelease item in Model._TipoRelease)
-                                                    {
-                                                        <option value="@item.ID_TIPO_RELEASE">@item.TIPO_RELEASE</option>
-                                                    }
-                                                </select>
-                                                <input type="hidden" id="selOrigem" name="selOrigem" />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="DataLancamento" class="control-label">Release Date</label>
+                                                    <input type="text" id="lancamento" name="lancamento" class="form-control input-lg" placeholder="Release Date" aria-describedby="basic-addon2">
+                                                </div>
                                             </div>
-                                            <div class="col-lg-1">
-                                                <label for="percArt" class="control-label">% Digital Artistic:</label>
-                                                <input type="text" id="_percArt" class="form-control input-lg" placeholder="" aria-describedby="basic-addon2" style="width:80px;height:34px" />
-                                                <input type="hidden" id="percArt" name="percArt" />
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="selResponsavel" class="control-label">Responsible</label>
+                                                    <select class="form-control input-lg" id="nomeDoResponsavel" name="nomeDoResponsavel">
+                                                        @foreach (Usuario item in Model._Usuario)
+                                                        {
+                                                            <option value="@item.Nome">@item.Nome</option>
+                                                        }
+                                                    </select>
+
+                                                </div>
                                             </div>
-                                            <div class="col-lg-1">
-                                                <label for="percArt" class="control-label">% Digital Copyright:</label>
-                                                <input type="text" id="_percAut" class="form-control input-lg" placeholder="" aria-describedby="basic-addon2" style="width:80px;height:34px" />
-                                                <input type="hidden" id="percAut" name="percAut" />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label><input type="checkbox" name="obs[]" value="DIG" class="chkBoxObs" />Digtal</label>
+                                                    <label><input type="checkbox" name="obs[]" value="FIS" class="chkBoxObs" />Physical</label>
+                                                    <label><input type="checkbox" name="obs[]" value="CD" class="chkBoxObs" />CD</label>
+                                                    <label><input type="checkbox" name="obs[]" value="DV" class="chkBoxObs" />DV</label>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-1">
+
+                                            <div class="col-md-1">
+                                                <div class="form-group">
+
+                                                    <label for="percArt" class="control-label">% Artistic Digital:</label>
+                                                    <input type="text" id="_percArt" name="_percArt" class="form-control input-lg" placeholder="%" aria-describedby="basic-addon2" style="width:80px;height:34px" />
+                                                    @*<input type="hidden" id="percArt" name="percArt" value="@Model.plParametrosDireitos.PERCENT_ARTISTICO_DIG" />*@
+
+                                                </div>
                                             </div>
-                                            <div class="col-lg-3">
-                                                <label for="selTipoContrato" class="control-label">Contract Type:</label>
-                                                <select class="form-control" id="selTipoContrato" name="selTipoContrato">
+                                            <div class="col-md-1">
+
+                                                <div class="form-group">
+                                                    <label for="percArt" class="control-label">% Digital Authoring:</label>
+                                                    <input type="text" id="_percAut" name="_percAut" class="form-control input-lg" placeholder="%" aria-describedby="basic-addon2" style="width:80px;height:34px" />
+                                                    @*<input type="hidden" id="percAut" name="percAut" value="@Model.plParametrosDireitos.PERCENT_AUTORAL_DIG" />*@
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+
+                                                <div class="form-group">
+                                                    <label><input type="checkbox" name="GOS" value="GOS" class="chkBoxGOS" />Gospel</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="selTipoRelease" class="control-label">Release Type:</label>
+                                                    <select class="form-control input-lg" id="selTipoRelease" name="selTipoRelease">
+                                                        @foreach (TipoRelease item in Model._TipoRelease)
+                                                        {
+                                                            <option value="@item.ID_TIPO_RELEASE">@item.TIPO_RELEASE</option>
+                                                        }
+                                                    </select>
+                                                    <input type="hidden" id="selOrigem" name="selOrigem" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label for="selGeneroMusical" class="control-label">Musical Genre</label>
+                                                    <select class="form-control input-lg" id="selGeneroMusical" name="selGeneroMusical">
+                                                        @foreach (Genero_Musical item in Model._Genero)
+                                                        {
+                                                            <option value="@item.ID_GENERO_MUSICAL">@item.GENERO</option>
+                                                        }
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+
+                                                <label for="selTipoContrato" class="control-label">Contract Type</label>
+                                                <select class="form-control input-lg" id="selTipoContrato" name="selTipoContrato">
                                                     @foreach (TipoContrato item in Model._TipoContrato)
                                                     {
                                                         <option value="@item.ID_TIPO_CONTRATO">@item.TIPO_CONTRATO</option>
                                                     }
                                                 </select>
+
+
+
                                             </div>
-                                            <div class="col-lg-3">
-                                                <label for="selTipoProcesso" class="control-label">Process Type:</label>
-                                                <select class="form-control" id="selTipoProcesso" name="selTipoProcesso">
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label for="ebtidaProjetada" class="control-label">Projected Ebtida</label>
+                                                    <input type="text" id="ebtidaProjetada" name="ebtidaProjetada" class="form-control input-lg" placeholder="%" value="" aria-describedby="basic-addon2" />
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <label for="selTipoProcesso" class="control-label">Process Type</label>
+                                                <select class="form-control input-lg" id="selTipoProcesso" name="selTipoProcesso">
                                                     @foreach (TipoProcesso item in Model._TipoProcesso)
                                                     {
                                                         <option value="@item.ID_TIPO_PROCESSO">@item.TIPO_PROCESSO</option>
                                                     }
                                                 </select>
+
                                             </div>
-                                        </div><p>&nbsp;</p>
-                                        <div class="input-group">
-                                            <span class="input-group-addon" id="basic-addon1">Project BUs</span>
-                                            <input type="text" id="busAdicionaisProjeto" name="busAdicionaisProjeto" class="form-control input-lg" placeholder="type the BUs separated by commas (,)" aria-describedby="basic-addon2">
                                         </div>
-                                    </div>
+                                        <div class="row">
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label for="receitaProjetada" class="control-label">Projected Income</label>
+                                                    <input type="text" id="receitaProjetada" name="receitaProjetada" class="form-control input-lg" placeholder="%" value="" aria-describedby="basic-addon2" />
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label for="receitaProjetada" class="control-label">KPI</label>
+                                                    <select class="form-control input-lg" id="selIdMedidorKPI" name="selIdMedidorKPI">
+                                                        @foreach (Medidor_KPI _MedidorKPI in Model._Kpi)
+                                                        {
+                                                            <option value="@_MedidorKPI.ID_MEDIDOR_KPI">@_MedidorKPI.MEDIDOR_KPI</option>
+                                                        }
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+
+                                            @*<div class="col-md-6">
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="basic-addon1">Bu's do Projeto</span>
+                                                    <input type="text" id="busAdicionaisProjeto" name="busAdicionaisProjeto" class="form-control input-lg" placeholder="digite os Bu's separados por vírgulas (,)" aria-describedby="basic-addon2">
+                                                </div>
+                                            </div>*@
+
+                                        </div>
+                                        
+
+
+                                            @*<div class="input-group">
+                <span class="input-group-addon">Project Name</span>
+                <input type="text" id="nomeDoProjeto" name="nomeDoProjeto" class="form-control input-lg" placeholder="Type a name for the project" aria-describedby="basic-addon2">
+            </div><p>&nbsp;</p>
+            <div class="input-group">
+                <span class="input-group-addon">Artist Name</span>
+                <input type="text" id="nomeDoArtista" name="nomeDoArtista" class="form-control input-lg" placeholder="" aria-describedby="basic-addon2">
+            </div><p>&nbsp;</p>
+            <div class="input-group">
+                <span class="input-group-addon">Release date</span>
+                <input type="text" id="lancamento" name="lancamento" class="form-control input-lg" placeholder="Release Date" aria-describedby="basic-addon2">
+            </div><p>&nbsp;</p>
+            <div class="input-group col-lg-12">
+                <div class="text-left col-md-6">
+                    <label><input type="checkbox" name="obs[]" value="DIG" class="chkBoxObs" />Digital</label>
+                    <label><input type="checkbox" name="obs[]" value="FIS" class="chkBoxObs" />Physical</label>
+                    <label><input type="checkbox" name="obs[]" value="CD" class="chkBoxObs" />CD</label>
+                    <label><input type="checkbox" name="obs[]" value="DV" class="chkBoxObs" />DV</label>
+                </div>
+                <div class="text-right col-md-6">
+                    <label><input type="checkbox" name="GOS" value="GOS" class="chkBoxGOS" />Gospel</label>
+                </div>
+            </div><p>&nbsp;</p>
+            <div class="input-group col-lg-12">
+                <div class="col-lg-3">
+                    <label for="selTipoRelease" class="control-label">Release Type:</label>
+                    <select class="form-control" id="selTipoRelease" name="selTipoRelease">
+                        @foreach (TipoRelease item in Model._TipoRelease)
+                        {
+                            <option value="@item.ID_TIPO_RELEASE">@item.TIPO_RELEASE</option>
+                        }
+                    </select>
+                    <input type="hidden" id="selOrigem" name="selOrigem" />
+                </div>
+                <div class="col-lg-1">
+                    <label for="percArt" class="control-label">% Digital Artistic:</label>
+                    <input type="text" id="_percArt" class="form-control input-lg" placeholder="" aria-describedby="basic-addon2" style="width:80px;height:34px" />
+                    <input type="hidden" id="percArt" name="percArt" />
+                </div>
+                <div class="col-lg-1">
+                    <label for="percArt" class="control-label">% Digital Copyright:</label>
+                    <input type="text" id="_percAut" class="form-control input-lg" placeholder="" aria-describedby="basic-addon2" style="width:80px;height:34px" />
+                    <input type="hidden" id="percAut" name="percAut" />
+                </div>
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-3">
+                    <label for="selTipoContrato" class="control-label">Contract Type:</label>
+                    <select class="form-control" id="selTipoContrato" name="selTipoContrato">
+                        @foreach (TipoContrato item in Model._TipoContrato)
+                        {
+                            <option value="@item.ID_TIPO_CONTRATO">@item.TIPO_CONTRATO</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <label for="selTipoProcesso" class="control-label">Process Type:</label>
+                    <select class="form-control" id="selTipoProcesso" name="selTipoProcesso">
+                        @foreach (TipoProcesso item in Model._TipoProcesso)
+                        {
+                            <option value="@item.ID_TIPO_PROCESSO">@item.TIPO_PROCESSO</option>
+                        }
+                    </select>
+                </div>
+            </div><p>&nbsp;</p>*@
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="basic-addon1">Project BUs</span>
+                                                <input type="text" id="busAdicionaisProjeto" name="busAdicionaisProjeto" class="form-control input-lg" placeholder="type the BUs separated by commas (,)" aria-describedby="basic-addon2">
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>
