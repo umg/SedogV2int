@@ -618,6 +618,8 @@
     <Content Include="Content\themes\base\datepicker.css" />
     <Content Include="Content\themes\base\dialog.css" />
     <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\fundo_sedog.jpg" />
+    <Content Include="Content\themes\base\images\fundo_sedog2.jpg" />
     <Content Include="Content\themes\base\images\loading.gif" />
     <Content Include="Content\images\pdficon.ico" />
     <Content Include="Content\report.css" />
