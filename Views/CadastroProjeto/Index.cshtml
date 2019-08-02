@@ -284,7 +284,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
 
-                                                    <label for="receitaProjetada" class="control-label">KPI</label>
+                                                    <label for="selIdMedidorKPI" class="control-label">KPI</label>
                                                     <select class="form-control input-lg" id="selIdMedidorKPI" name="selIdMedidorKPI">
                                                         @foreach (Medidor_KPI _MedidorKPI in Model._Kpi)
                                                         {
@@ -760,9 +760,14 @@
             });
             strResumo += "<tr style='background-color:#ccc; color:#fff; font-size:14px;'><td colspan='2'>Data</td></tr>";
 
+            strResumo += "<tr><td>Responsible</td><td>" + $('#nomeDoResponsavel').val() + "</td></tr>";
+            strResumo += "<tr><td>Genre</td><td>" + $('#selGeneroMusical option:selected').text() + "</td></tr>";
+            strResumo += "<tr><td>Project Ebtida</td><td>" + $('#ebtidaProjetada').val() + "</td></tr>";
+            strResumo += "<tr><td>Project Income</td><td>" + $('#receitaProjetada').val() + "</td></tr>";
+            strResumo += "<tr><td>Kpi</td><td>" + $('#selIdMedidorKPI option:selected').text() + "</td></tr>";
             strResumo += "<tr><td>Source</td><td>" + $('#selOrigem').val() + "</td></tr>";
-            strResumo += "<tr><td>%Artistic</td><td>" + $('#percArt').val() + "</td></tr>";
-            strResumo += "<tr><td>%Copyright</td><td>" + $('#percAut').val() + "</td></tr>";
+            strResumo += "<tr><td>%Artistic</td><td>" + $('#_percArt').val() + "</td></tr>";
+            strResumo += "<tr><td>%Copyright</td><td>" + $('#_percAut').val() + "</td></tr>";
             strResumo += "<tr><td>Contract</td><td>" + $('#selTipoContrato option:selected').text() + "</td></tr>";
             strResumo += "<tr><td>Release</td><td>" + $('#selTipoRelease option:selected').text() + "</td></tr>";
             strResumo += "<tr><td>Process</td><td>" + $('#selTipoProcesso option:selected').text() + "</td></tr>";

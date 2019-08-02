@@ -14,12 +14,14 @@ namespace SEDOGv2.Helpers
 {
     public class ProcessAIF
     {
-        public ImportAIF ProcessAif(string filepath)
+        public DataTable ProcessAif(string filepath)
         {
-            string insertHeader = "INSERT INTO MXDIGITAL . AIF_INCOMING VALUES";
+            string insertHeader = "INSERT INTO MXSEDOG . AIF_INCOMING VALUES";
             //string deleteHeader = "DELETE FROM BRDIGITAL . STREAMCHART";
 
-            ImportAIF ret = new ImportAIF();
+            // List<ImportAIF> listAif = new List<ImportAIF>();
+            DataTable dt = new DataTable();
+
 
             using (var stream = File.Open(filepath, FileMode.Open, FileAccess.Read))
             {
@@ -46,7 +48,7 @@ namespace SEDOGv2.Helpers
 
                             int c = 0;
 
-                            ret.Linhas = totalRows - 4;
+                            //ret.Linhas = totalRows - 4;
 
                             StringBuilder sb = new StringBuilder();
                             {
@@ -91,23 +93,55 @@ namespace SEDOGv2.Helpers
                                         //sb.Append(totalStreamTable.Rows[r][12].ToString() + " , ");
                                         //sb.Append(totalStreamTable.Rows[r][13].ToString() + ") , ");
 
+
+                                        
+
+
+                                        //ImportAIF ret = new ImportAIF();
+
+                                        //ret.IdProjetoSedog = totalStreamTable.Rows[r][2].ToString();
+                                        //ret.R2Projects = totalStreamTable.Rows[r][3].ToString();
+                                        //ret.ForeignIncome = totalStreamTable.Rows[r][4].ToString();
+                                        //ret.ArtistRoyalties = totalStreamTable.Rows[r][5].ToString();
+                                        //ret.ProducerRoyalties = totalStreamTable.Rows[r][6].ToString();
+                                        //ret.OtherRoyalty = totalStreamTable.Rows[r][7].ToString();
+                                        //ret.AllRoyalty = totalStreamTable.Rows[r][8].ToString();
+                                        //ret.ForeignMargin = totalStreamTable.Rows[r][9].ToString();
+                                        //ret.PercAIFMargin = totalStreamTable.Rows[r][10].ToString();
+
+                                        
+
                                         db.ExecuteCommandSQL(insertHeader + sb.ToString());
                                         c++;
+
+                                        //listAif.Add(ret);
+
                                         sb.Clear();
-                                    }                                                                                                     //sb.Append(totalStreamTable.Rows[r][10].ToString() + "  ");
-                                
+                                        
+                                    }
+                                   
+
+
+                                    //sb.Append(totalStreamTable.Rows[r][10].ToString() + "  ");
+
                                 }
                                 //if (c > 0)
                                 //{
-                                    //db.ExecuteCommandSQL(insertHeader + sb.ToString(0, sb.Length - 2));
-                                   // db.ExecuteCommandSQL(insertHeader + sb.ToString());
-                               // }
+                                //db.ExecuteCommandSQL(insertHeader + sb.ToString(0, sb.Length - 2));
+                                // db.ExecuteCommandSQL(insertHeader + sb.ToString());
+                                // }
+
+                                string selRetorno = "SELECT AIF.IDPROJ_SEDOG, PRJ.PROJETO, R2_PROJECT, FOREIGN_INCOME, ARTIST_ROYALTIES, PRODUCER_ROYALTY, OTHER_ROYALTY, ALL_ROYALTIES, FOREIGN_MARGIN, PERC_AIF_MARGIN FROM MXDIGITAL . AIF_INCOMING AIF INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON AIF.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
+
+
+                                dt = db.GetTableFromSQLString(selRetorno);
+
                             }
                         }
                     }
                 }
             }
-            return ret;
+            return dt;
         }
     }
 }

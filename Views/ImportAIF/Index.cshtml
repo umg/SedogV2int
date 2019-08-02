@@ -64,10 +64,14 @@
                                 Linhas Processadas
                             </th>*@
                             <th>
-                                Projeto Sedog
+                                Project Sedog
                             </th>
                             <th>
-                                R2 Project
+                                Project name
+                            </th>
+
+                            <th>
+                                R2 projects
                             </th>
                             <th>
                                 Foreign Income 
@@ -91,35 +95,46 @@
                                 % AIF Margin
                             </th>
                         </tr>
+@foreach (var i in @ViewBag.processedList)
+{
                         <tr>
-                            <td colspan="9" style="text-align:center;">
-                                @Model.Linhas linhas processadas com sucesso! 
-                            </td>
-                            @*<td>
-                                @Model.R2Projects
-                            </td>
-                            <td>
-                                @Model.ForeignIncome
-                            </td>
-                            <td>
-                                @Model.ArtistRoyalties
-                            </td>
-                            <td>
-                                @Model.ProducerRoyalties
-                            </td>
-                            <td>
-                                @Model.OtherRoyalty
-                            </td>
-                            <td>
-                                @Model.AllRoyalty
-                            </td>
-                            <td>
-                                @Model.ForeignMargin
-                            </td>
-                            <td>
-                                @Model.PercAIFMargin
-                            </td>*@
+                           
+                                <td>
+                                    @i.IdProjetoSedog
+                                </td>
+                                <td>
+                                    @i.Projeto
+                                </td>
+                                <td>
+                                    @i.R2Projects
+                                </td>
+                                <td>
+                                    @i.ForeignIncome
+                                </td>
+                                <td>
+                                    @i.ArtistRoyalties
+                                </td>
+                                <td>
+                                    @i.ProducerRoyalties
+                                </td>
+                                <td>
+                                    @i.OtherRoyalty
+                                </td>
+                                <td>
+                                    @i.AllRoyalty
+                                </td>
+                                <td>
+                                    @i.ForeignMargin
+                                </td>
+                                <td>
+                                    @i.PercAIFMargin
+                                </td>
+
+
+
+
                         </tr>
+                            }
                     </table>
                 </div>
             </div>

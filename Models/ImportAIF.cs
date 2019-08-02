@@ -8,6 +8,8 @@ namespace SEDOGv2.Models
     public class ImportAIF
     {
         public int Linhas { get; set; }
+        public string IdProjetoSedog { get; set; }
+        public string Projeto { get; set; }
         public string R2Projects { get; set; }
         public string ForeignIncome { get; set; }
         public string ArtistRoyalties { get; set; }
