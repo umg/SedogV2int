@@ -80,21 +80,33 @@ namespace SEDOGv2.Helpers
                                         sb.Clear();
                                     } else
                                     {
-                                        sb.Append(" (' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][2])) + "' , ");
-                                        sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][3])) + "' , ");
-                                        sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][4]) ) /1000 + "' , ");
-                                        sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][5]) ) /1000 + "' , ");
-                                        sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][6]) ) /1000 + "' , ");
-                                        sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][7]) ) /1000 + "' , ");
-                                        sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][8]) ) /1000 + "' , ");
-                                        sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][9]) ) /1000 + "' , ");
-                                        sb.Append(" ' " + System.Convert.ToDecimal(totalStreamTable.Rows[r][10]) * 100 + "' ) ") ;
+                                        //sb.Append(" (' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][2])) + "' , ");
+                                        //sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][3])) + "' , ");
+                                        //sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][4]) ) /1000 + "' , ");
+                                        //sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][5]) ) /1000 + "' , ");
+                                        //sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][6]) ) /1000 + "' , ");
+                                        //sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][7]) ) /1000 + "' , ");
+                                        //sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][8]) ) /1000 + "' , ");
+                                        //sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][9]) ) /1000 + "' , ");
+                                        //sb.Append(" ' " + System.Convert.ToDecimal(totalStreamTable.Rows[r][10]) * 100 + "' ) ") ;
+
                                         //sb.Append("'" + totalStreamTable.Rows[r][11].ToString().Replace("'", "''") + "' , ");
                                         //sb.Append(totalStreamTable.Rows[r][12].ToString() + " , ");
                                         //sb.Append(totalStreamTable.Rows[r][13].ToString() + ") , ");
 
+                                        sb.Append(" (' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][2])) + "' , ");
+                                        sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][3])) + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][4] +  "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][5] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][6] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][7] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][8] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][9] + "' , ");
+                                        sb.Append(" ' " + System.Convert.ToDecimal(totalStreamTable.Rows[r][10]) * 100 + "' ) ");
 
-                                        
+
+
+
 
 
                                         //ImportAIF ret = new ImportAIF();
@@ -109,7 +121,7 @@ namespace SEDOGv2.Helpers
                                         //ret.ForeignMargin = totalStreamTable.Rows[r][9].ToString();
                                         //ret.PercAIFMargin = totalStreamTable.Rows[r][10].ToString();
 
-                                        
+
 
                                         db.ExecuteCommandSQL(insertHeader + sb.ToString());
                                         c++;
