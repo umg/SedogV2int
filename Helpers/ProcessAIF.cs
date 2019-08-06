@@ -48,6 +48,8 @@ namespace SEDOGv2.Helpers
 
                             int c = 0;
 
+                            db.ExecuteCommandSQL("DELETE MXSEDOG . AIF_INCOMING");
+
                             //ret.Linhas = totalRows - 4;
 
                             StringBuilder sb = new StringBuilder();
@@ -143,7 +145,7 @@ namespace SEDOGv2.Helpers
                                 // db.ExecuteCommandSQL(insertHeader + sb.ToString());
                                 // }
 
-                                string selRetorno = "SELECT AIF.IDPROJ_SEDOG, PRJ.PROJETO, R2_PROJECT, FOREIGN_INCOME, ARTIST_ROYALTIES, PRODUCER_ROYALTY, OTHER_ROYALTY, ALL_ROYALTIES, FOREIGN_MARGIN, PERC_AIF_MARGIN FROM MXDIGITAL . AIF_INCOMING AIF INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON AIF.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
+                                string selRetorno = "SELECT AIF.IDPROJ_SEDOG, PRJ.PROJETO, R2_PROJECT, FOREIGN_INCOME, ARTIST_ROYALTIES, PRODUCER_ROYALTY, OTHER_ROYALTY, ALL_ROYALTIES, FOREIGN_MARGIN, PERC_AIF_MARGIN FROM MXSEDOG . AIF_INCOMING AIF INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON AIF.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
 
 
                                 dt = db.GetTableFromSQLString(selRetorno);
