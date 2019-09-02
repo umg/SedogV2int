@@ -13,7 +13,7 @@
         <div class="row">
             <div class="panel-heading text-center">
                 <h2>
-                    Editar Projeto 360º
+                    Edit Project 360º
                 </h2>
                 @ViewBag.Error
             </div>
@@ -46,13 +46,13 @@
                         <h3 class="text-center">Detalhes do Projeto NRI</h3>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nomeDoProjeto">Nome do Projeto</label>
+                                <label for="nomeDoProjeto">Project Name</label>
                                 <input type="text" id="nomeDoProjeto" name="nomeDoProjeto" class="form-control input-lg" placeholder="Digite um nome para este projeto" value="@Model.PROJETO" aria-describedby="basic-addon2">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nomeDoArtista">Artista</label>
+                                <label for="nomeDoArtista">Artist</label>
                                 <input type="text" id="nomeDoArtista" name="nomeDoArtista" class="form-control input-lg" placeholder="Digite o nome do artista" value="@Model.ARTISTA" aria-describedby="basic-addon2">
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nomeDoArtista">Data de início</label>
+                                <label for="nomeDoArtista">Start Date</label>
                                 <input type="text" id="lancamento" name="lancamento" class="form-control input-lg" placeholder="Data de início" value="@Model.DATA_INICIO.ToString("yyyy-MM-dd")" aria-describedby="basic-addon2">
                             </div>
                         </div>
@@ -74,13 +74,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nomeDoArtista">Data de expiração</label>
+                                <label for="nomeDoArtista">Expiration Date</label>
                                 <input type="text" id="expiracao" name="expiracao" class="form-control input-lg" placeholder="Data de expiração" value="@Model.DATA_EXPIRACAO.ToString("yyyy-MM-dd")" aria-describedby="basic-addon2">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nomeDoProjeto">Observações</label>
+                                <label for="nomeDoProjeto">Notes</label>
                                 <input type="text" id="obs" name="obs" class="form-control input-lg" placeholder="Observações do projeto" value="@Model.OBS" aria-describedby="basic-addon2">
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                                     <th></th>
                                 </tr>
                                 <tr style="background-color:rgba(125,125,125,0.2)">
-                                    <th><input type="file" name="arquivo" class="input-sm" value="Arquivo"></th>
+                                    <th><input type="file" name="arquivo" class="input-sm" value="File"></th>
                                     <th colspan="2"><input type="text" name="obs" class="input-sm" size="40" /></th>
                                     <th><div class="col-md-12"><input type="submit" name="salvar" class="btn btn-default pull-right" value="Incluir" /></div></th>
                                 </tr>
@@ -142,8 +142,8 @@
                     {
                         <table class="table">
                             <tr>
-                                <th>Tipo do Contrato</th>
-                                <th>Descrição</th>
+                                <th>Contract Type</th>
+                                <th>Description</th>
                                 <th><input type="hidden" name="idProjNri" value="@Url.RequestContext.RouteData.Values["id"]" /></th>
                             </tr>
                             <tr style="background-color:rgba(125,125,125,0.2)">
@@ -182,13 +182,13 @@
                     {
                         <table class="table">
                             <tr>
-                                <th>Alerta</th>
-                                <th>Tipo</th>
-                                <th>Responsável</th>
+                                <th>Alert</th>
+                                <th>Type</th>
+                                <th>Responsable</th>
                                 <th>Percentual</th>
-                                <th>Acordo</th>
-                                <th>Quantidade</th>
-                                <th>Saldo</th>
+                                <th>Deal</th>
+                                <th>Amount</th>
+                                <th>Balance</th>
                                 <th>OBS</th>
                                 <th><input type="hidden" name="idProjNri" value="@Url.RequestContext.RouteData.Values["id"]" /></th>
                             </tr>
@@ -226,11 +226,11 @@
                                         <a href="@Url.Action("MudaEmailAlertaCobranca", "Artistas360", new { @id = item.ID_PROJNRI, @ID_SEQ = item.ID_SEQ })" class="">
                                             @if (item.EMAIL_COBRANCA == 1)
                                             {
-                                                <span>Sim</span>
+                                                <span>Yes</span>
                                             }
                                             else
                                             {
-                                                <span>Não</span>
+                                                <span>No</span>
                                             }
                                         </a>
                                     </td>
