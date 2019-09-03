@@ -28,17 +28,17 @@
             <div class="row">
                 <div class="col-md-4 text-right">
                     <div class="form-group">
-                        <h4>Artista ou projeto:</h4>
+                        <h4>Artost or Project:</h4>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="text" name="txtArtistaProduto" class="form-control" placeholder="Digite o artista ou projeto" />
+                        <input type="text" name="txtArtistaProduto" class="form-control" placeholder="Type Artist or Project" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="submit" name="Pesquisar" value="Pesquisar" class="btn btn-default" />
+                        <input type="submit" name="Pesquisar" value="search" class="btn btn-default" />
                     </div>
                 </div>
             </div>
@@ -59,11 +59,11 @@
                         <table class="table">
                             <tr class="bg-default">
                                 <th></th>
-                                <th>ID Projeto</th>
-                                <th>Projeto</th>
-                                <th>ID Artista</th>
-                                <th>Artista</th>
-                                <th>Lançamento</th>
+                                <th>Project ID</th>
+                                <th>Project</th>
+                                <th>Artist ID</th>
+                                <th>Artist</th>
+                                <th>Release</th>
 
                             </tr>
                             @foreach (SEDOGv2.Models.PLProjeto item in Model.PLProjetos)
@@ -84,8 +84,8 @@
 
                     <div class="col-md-2">
                         <select class="form-control" name="selTipo">
-                            <option value="CONSOLIDADO">Consolidado</option>
-                            <option value="MENSAL">Mensal</option>
+                            <option value="CONSOLIDADO">Consolidated</option>
+                            <option value="MENSAL">Monthly</option>
                         </select>
                     </div>
                     <div class="col-md-2">
@@ -93,7 +93,7 @@
                             <div id="datepicker"></div>
                             <input type="hidden" runat="server" id="my_hidden_input_date" />
                         </div>
-                        <input type="submit" id="btnGerarRelatorios" name="btnGerarRelatorios" value="Gerar Relatório" class="btn btn-lg btn-default btn-block" />
+                        <input type="submit" id="btnGerarRelatorios" name="btnGerarRelatorios" value="Generate Report" class="btn btn-lg btn-default btn-block" />
                     </div>
 
                 </div>
@@ -111,19 +111,19 @@
                     </div>
                     <div class="col-md-2">
                         <select class="form-control" name="selTipo">
-                            <option value="CONSOLIDADO">Consolidado</option>
-                            <option value="MENSAL">Mensal</option>
+                            <option value="CONSOLIDADO">Consolidated</option>
+                            <option value="MENSAL">Monthly</option>
                         </select>
                     </div>
                     <div class="col-md-2">
                         <input type="hidden" name="selProduto" id="idProjeto" value="@ViewBag.IDProjetoSedog" />
-                        <input type="submit" id="btnGerarRelatorios" name="btnGerarRelatorios" value="Gerar Relatório" class="btn btn-lg btn-default btn-block" />
+                        <input type="submit" id="btnGerarRelatorios" name="btnGerarRelatorios" value="Generate Report" class="btn btn-lg btn-default btn-block" />
                     </div>
                 </div>
             }
             <div class="row reportHeader">
                 <div class="col-md-9 text-left"><h2>@ViewBag.Artista - @ViewBag.Projeto</h2></div>
-                <div class="col-md-2 text-right">Tipo: @ViewBag.Ano</div>
+                <div class="col-md-2 text-right">Type: @ViewBag.Ano</div>
                 <div class="col-md-1 text-right">
                     <button type="submit" class="btn btn-default printPDF">
                         <i class="fa fa-file-pdf-o fa-4"></i>
@@ -138,18 +138,18 @@
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr class="bg-default reportHeader">
-                            <th>TIPO</th>
+                            <th>TYPE</th>
                             <th>BU</th>
-                            <th>DESCRIÇÃO BU</th>
-                            <th>CONTA</th>
+                            <th>BU DESCRIPTION</th>
+                            <th>ACCOUNT</th>
                             <th>SUB</th>
-                            <th>DESCRIÇÃO</th>
+                            <th>DESCRIPTION</th>
                             @if (!ViewBag.Hide)
                             {
-                            <th>ANO</th>
-                            <th>MÊS</th>
+                            <th>YEAR</th>
+                            <th>MONTH</th>
                             }
-                            <th>DESPESA</th>
+                            <th>EXPENSES</th>
                         </tr>
                         @foreach (SEDOGv2.Models.DespesasDeMarketingTotalPorArtista item in Model.DespesasDeMarketingTotalPorArtistaReport)
                         {
@@ -194,30 +194,30 @@ else
                     <td colspan="@ViewBag.Columns" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
                 </tr>
                 <tr>
-                    <td colspan="@ViewBag.Columns" style="text-align:center"><h2 style="text-align:center" class="bold">RELATÓRIO DE DESPESAS DE MARKETING POR PROJETO</h2></td>
+                    <td colspan="@ViewBag.Columns" style="text-align:center"><h2 style="text-align:center" class="bold">PROJECT MARKETING EXPENDITURE REPORT</h2></td>
                 </tr>
                 <tr>
                     <td colspan="@ViewBag.Columns"><h2 style="text-align:center" class="bold">@ViewBag.Artista - @ViewBag.Projeto</h2></td>
                 </tr>
                 <tr>
-                    <td colspan="@ViewBag.Columns" style="text-align:center" class="bold">Tipo: @ViewBag.Ano</td>
+                    <td colspan="@ViewBag.Columns" style="text-align:center" class="bold">Type: @ViewBag.Ano</td>
                 </tr>
                 <tr>
                     <td colspan="@ViewBag.Columns" style="text-align:center" class="bold"></td>
                 </tr>
                 <tr>
-                    <th class="box">TIPO</th>
+                    <th class="box">TYPE</th>
                     <th class="box">BU</th>
-                    <th class="box">DESCRIÇÃO BU</th>
-                    <th class="box">CONTA</th>
+                    <th class="box">BU DESCRIPTION</th>
+                    <th class="box">ACCOUNT</th>
                     <th class="box">SUB</th>
-                    <th class="box">DESCRIÇÃO</th>
+                    <th class="box">DESCRIPTION</th>
                     @if (!ViewBag.Hide)
                     {
-                    <th class="box">ANO</th>
-                    <th class="box">MÊS</th>
+                    <th class="box">YEAR</th>
+                    <th class="box">MONTH</th>
                     }
-                    <th class="box">DESPESA</th>
+                    <th class="box">EXPENSES</th>
                 </tr>
                 @foreach (SEDOGv2.Models.DespesasDeMarketingTotalPorArtista item in Model.DespesasDeMarketingTotalPorArtistaReport)
                 {

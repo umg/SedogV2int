@@ -14,7 +14,7 @@
         <div class="row">
             <div class="panel-heading  text-center">
                 <h2>
-                    Performance GTS
+                    GTS Performance
                 </h2>
                 @ViewBag.Error
             </div>
@@ -25,10 +25,10 @@
                     @Html.ActionLink("Voltar", "Index", null, new { @class = "link" })
                 </div>
                 <div class="col-md-7">
-                    <h4>Artista: @Model.Infos.Artista</h4>
+                    <h4>Artist: @Model.Infos.Artista</h4>
                 </div>
                 <div class="col-md-4">
-                    <h4>Mês/Year:  @((Model.Infos.Mes == 0) ? " - " : Model.Infos.Mes)<span>/</span> @((Model.Infos.Ano == 0) ? " - " : Model.Infos.Ano)</h4>
+                    <h4>Month/Year:  @((Model.Infos.Mes == 0) ? " - " : Model.Infos.Mes)<span>/</span> @((Model.Infos.Ano == 0) ? " - " : Model.Infos.Ano)</h4>
                 </div>
 
                 <div class="col-md-3" style="display:none;">
@@ -58,7 +58,7 @@
                     <div class="col-lg-3 col-md-3 col-xs-3">
 
                         <div class="col-lg-12 col-md-12 col-xs-12 hvr-float-shadow text-align multiobj">
-                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-star"></i>&nbsp;Artista</h4>
+                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-star"></i>&nbsp;Artist</h4>
                             <div class="graficoContainer">
                                 <div id="carouselArtistas" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
@@ -110,7 +110,7 @@
 
 
                         <div class="col-lg-6 col-md-6 col-xs-6 grafico hvr-float-shadow text-align">
-                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-bar-chart"></i>&nbsp;Histórico de Receita dos Últimos 12 Meses</h4>
+                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-bar-chart"></i>&nbsp;Last 12 Month Revenue History</h4>
 
 
                             <div class="graficoContainer">
@@ -121,7 +121,7 @@
 
 
                         <div class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align">
-                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-star"></i>&nbsp;Mapa de Shows</h4>
+                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-star"></i>&nbsp;Shows Map</h4>
                             <div class="graficoContainer">
                                 <canvas class="MapaRegiao" data-sudeste="@Model.regiaoSudesteQTDShow" data-sul="@Model.regiaoSulQTDShow" data-centrooeste="@Model.regiaoCentroOesteQTDShow" data-exterior="@Model.regiaoExteriorQTDShow" data-norte="@Model.regiaoNorteQTDShow" data-nordeste="@Model.regiaoNordesteQTDShow" data-percent="True" width="321" height="329"></canvas>
                             </div>
@@ -130,7 +130,7 @@
 
                         <div class="col-lg-3 col-md-3 col-xs-3 grafico hvr-float-shadow text-align">
                             <h4 class="barraTitulo ui-sortable-handle">
-                                <i class="fa fa-thermometer-three-quarters"></i>&nbsp;Score Operação
+                                <i class="fa fa-thermometer-three-quarters"></i>&nbsp;Score Operation
                                 <div class="pull-right text-small">
                                     Fcast<label class="switch">
                                         <input type="checkbox" class="switchCheckBox">
@@ -151,15 +151,15 @@
                         </div>
 
                         <div class="col-lg-9 col-md-9 col-xs-9 hvr-float-shadow text-align grafico">
-                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-star"></i>&nbsp;Detalhes do Artista</h4>
+                            <h4 class="barraTitulo ui-sortable-handle"><i class="fa fa-star"></i>&nbsp;Artist Detail</h4>
                             <div class="graficoContainer">
                                 <table class="fontGiant">
                                     <tbody>
                                         <tr>
-                                            <th>Cachê Médio</th>
-                                            <th>Números de Shows</th>
-                                            <th>Total da Receita</th>
-                                            <th>Saldo em Aberto</th>
+                                            <th>Medium Cache</th>
+                                            <th>Show Numbers</th>
+                                            <th>Total Revenue</th>
+                                            <th>Outstanding Balance</th>
                                         </tr>
                                         <tr>
                                             <td>@string.Format("{0:N}", Model.detalhesCacheMedioMes)</td>
@@ -174,9 +174,9 @@
                                     <tbody>
                                         <tr>
                                             <th>Margin</th>
-                                            <th>Participação GTS</th>
-                                            <th>Participação ARTISTA</th>
-                                            <th>Participação LIVE</th>
+                                            <th>GTS Participation</th>
+                                            <th>ARTIST Participation</th>
+                                            <th>LIVE Participation</th>
                                         </tr>
                                         <tr>
                                             <td>@string.Format("{0:N}", Model.detalhesMarginMes)</td>

@@ -39,7 +39,7 @@
                 <div class="">
                     <div class="itm">
                         <div class="detalhesBody">
-                            <h4 data-toggle="collapse" data-target="#lsResposanveisDepartamento" class="clickRotateIcon">Remover Artistas da GTS:<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
+                            <h4 data-toggle="collapse" data-target="#lsResposanveisDepartamento" class="clickRotateIcon">Remove Artist from GTS:<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
                             <div id="lsResposanveisDepartamento" class="collapse out" style="padding-left:5px;padding-right:5px;padding-bottom:5px;">
 
 
@@ -47,8 +47,8 @@
                                     <table class="table" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="bg-default reportHeader">
-                                                <th>ID Artista</th>
-                                                <th>Artista</th>
+                                                <th>Artist ID</th>
+                                                <th>Artist</th>
                                                 <th>Avatar</th>
                                                 <th></th>
                                             </tr>
@@ -63,8 +63,8 @@
                                                 <td>@item.ARTISTNAME</td>
                                                 <td><img src="@Url.Content(@item.IMAGEPATH)" alt="Image" style="width: 42px; height: 42px;" data-idartista="@item.IDARTISTA" /></td>
                                                 <td>
-                                                    <a href="" class="actremove" title="Remover a artista: @item.ARTISTNAME" data-idartista="@item.IDARTISTA" data-artista="@item.ARTISTNAME">Remover</a>&nbsp;&nbsp;|
-                                                    &nbsp;&nbsp; <a href="" class="actUploadImage" data-idartista="@item.IDARTISTA" data-artista="@item.ARTISTNAME" title="Para uma melhor resolução é recomendado uma imagem quadrada">Adicionar Imagem</a>
+                                                    <a href="" class="actremove" title="Remover a artista: @item.ARTISTNAME" data-idartista="@item.IDARTISTA" data-artista="@item.ARTISTNAME">Remove</a>&nbsp;&nbsp;|
+                                                    &nbsp;&nbsp; <a href="" class="actUploadImage" data-idartista="@item.IDARTISTA" data-artista="@item.ARTISTNAME" title="For a best resolution it is recommended to use a square image">Add Image</a>
                                                     &nbsp;&nbsp; <input type="file" id="fileUpload" name="fileUpload" onchange="javascritp:fileOnChange(this, @item.IDARTISTA);" data-idartista="@item.IDARTISTA" data-artista="@item.ARTISTNAME" class="fileactUploadImage" style="visibility: hidden;" />
                                                 </td>
                                             </tr>
@@ -87,7 +87,7 @@
             <div class="">
                 <div class="itm" style="overflow-x: inherit;">
                     <div class="detalhesBody">
-                        <h4 data-toggle="collapse" class="clickRotateIcon">Atualizar Tabelas GTS<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
+                        <h4 data-toggle="collapse" class="clickRotateIcon">Update GTS Table<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
                         <div id="lsAtualizaGTS" style="padding-left:5px;padding-right:5px;padding-bottom:5px;">
 
 
@@ -105,24 +105,24 @@
                                         <div class="form-group">
                                             <select class="form-control" name="selTipo" id="selTipo">
                                                 <option value="1" selected="@("1" == ViewBag.IDTipo)">Forecast & Plan</option>
-                                                <option value="2" selected="@("2" == ViewBag.IDTipo)">Receita</option>
+                                                <option value="2" selected="@("2" == ViewBag.IDTipo)">Revenue</option>
                                                 <option value="3" selected="@("3" == ViewBag.IDTipo)">Shows</option>
-                                                <option value="4" selected="@("4" == ViewBag.IDTipo)">GTS Saldo</option>
-                                                <option value="5" selected="@("5" == ViewBag.IDTipo)">Margin, Cachê e Participação</option>
+                                                <option value="4" selected="@("4" == ViewBag.IDTipo)">GTS Balance</option>
+                                                <option value="5" selected="@("5" == ViewBag.IDTipo)">Margin, Cahce e Share</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-md-1 text-left">
                                         <div class="form-group">
-                                            <label style="font-size:18px; font-weight: bold;">Artista:</label>
+                                            <label style="font-size:18px; font-weight: bold;">Artist:</label>
                                         </div>
 
                                     </div>
                                     <div class="col-md-3">
 
                                         <div class="form-group">
-                                            <input class="typeahead form-control" placeholder="Artista" id="typeAheadArtista" name="nomeArtista" value="@ViewBag.consultaNomeCodArtista" /><i id="loading" class="fa fa-cog fa-spin fa-fw hidden li-loading"></i>
+                                            <input class="typeahead form-control" placeholder="Artist" id="typeAheadArtista" name="nomeArtista" value="@ViewBag.consultaNomeCodArtista" /><i id="loading" class="fa fa-cog fa-spin fa-fw hidden li-loading"></i>
                                         </div>
 
                                     </div>
@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <input type="submit" name="buscar" value="Buscar" class="btn btn-default btn-lg btn-block" />
+                                            <input type="submit" name="buscar" value="Search" class="btn btn-default btn-lg btn-block" />
                                         </div>
                                     </div>
                                 </div>
@@ -151,11 +151,11 @@
                                 <div class="row">
                                     <div class="col-md-12 text-center">
                                         <div class="col-md-4">
-                                            <h4>Tipo: @Model.Infos.Tipo</h4>
+                                            <h4>Type: @Model.Infos.Tipo</h4>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <h4>Artista: @Model.Infos.Nome</h4>
+                                            <h4>Artist: @Model.Infos.Nome</h4>
                                         </div>
 
                                         <div class="col-md-4">
@@ -179,20 +179,20 @@
                                     <div class="col-md-12">
                                         <table class="table table-hover table-bordered updateTotalTable1">
                                             <tr>
-                                                <th>Mês</th>
-                                                <th>Valor FCast Receita</th>
-                                                <th>Valor Plan Receita</th>
-                                                <th>Valor FCast Margin</th>
-                                                <th>Valor Plan Margin</th>
+                                                <th>Month</th>
+                                                <th>FCast Revenuw Value</th>
+                                                <th>Plan Revenuw Value</th>
+                                                <th>FCast Revenuw Margin</th>
+                                                <th>Plan Revenuw Margin</th>
                                             </tr>
                                             @foreach (GTSForecast item in Model._GTSForecast)
                                             {
                                                 <tr class="saveLine1">
                                                     <td class="mesVAL">@item.MES</td>
-                                                    <td><a href="#" class="editable1 fcastReceitaVAL" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_FCAST_RECEITA.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
-                                                    <td><a href="#" class="editable1 planReceitaVAL" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_PLAN_RECEITA.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
-                                                    <td><a href="#" class="editable1 fcastMarginVAL" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_FCAST_MARGIN.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
-                                                    <td><a href="#" class="editable1 planMarginVAL" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_PLAN_MARGIN.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
+                                                    <td><a href="#" class="editable1 fcastReceitaVAL" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VALOR_FCAST_RECEITA.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
+                                                    <td><a href="#" class="editable1 planReceitaVAL" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VALOR_PLAN_RECEITA.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
+                                                    <td><a href="#" class="editable1 fcastMarginVAL" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VALOR_FCAST_MARGIN.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
+                                                    <td><a href="#" class="editable1 planMarginVAL" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VALOR_PLAN_MARGIN.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
                                                 </tr>
 
                                                 totalVALOR_FCAST_RECEITA += item.VALOR_FCAST_RECEITA;
@@ -222,24 +222,24 @@
                                     <div class="col-md-12">
                                         <table class="table table-hover table-bordered updateTotalTable2">
                                             <tr>
-                                                <th>Mês</th>
-                                                <th>Valor Sul</th>
-                                                <th>Valor Sudeste</th>
-                                                <th>Valor Norte</th>
-                                                <th>Valor Nordeste</th>
-                                                <th>Valor Centro Oeste</th>
-                                                <th>Valor Exterior</th>
+                                                <th>Month</th>
+                                                <th>South Value</th>
+                                                <th>Southest Value</th>
+                                                <th>North Value</th>
+                                                <th>Northeast Value</th>
+                                                <th>Midwest Value</th>
+                                                <th>Exterioe Value</th>
                                             </tr>
                                             @foreach (GTSRegiaoReceitaShows item in Model._GTSRegiaoReceitaShows)
                                             {
                                                 <tr class="saveLine2">
                                                     <td class="mesVAL">@item.MES</td>
-                                                    <td><a href="#" class="editable2 VLSul" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLSul.ToString("#,0")</a></td>
-                                                    <td><a href="#" class="editable2 VLSudeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLSudeste.ToString("#,0")</a></td>
-                                                    <td><a href="#" class="editable2 VLNorte" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLNorte.ToString("#,0")</a></td>
-                                                    <td><a href="#" class="editable2 VLNordeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLNordeste.ToString("#,0")</a></td>
-                                                    <td><a href="#" class="editable2 VLCentroOeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLCentroOeste.ToString("#,0")</a></td>
-                                                    <td><a href="#" class="editable2 VLExterior" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VLExterior.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLSul" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VLSul.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLSudeste" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VLSudeste.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLNorte" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VLNorte.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLNordeste" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VLNordeste.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLCentroOeste" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VLCentroOeste.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable2 VLExterior" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VLExterior.ToString("#,0")</a></td>
                                                 </tr>
 
                                                 totalVLSul += item.VLSul;
@@ -274,24 +274,24 @@
                                     <div class="col-md-12">
                                         <table class="table table-hover table-bordered updateTotalTable3">
                                             <tr>
-                                                <th>Mês</th>
-                                                <th>Qtd Sul</th>
-                                                <th>Qtd Sudeste</th>
-                                                <th>Qtd Norte</th>
-                                                <th>Qtd Nordeste</th>
-                                                <th>Qtd Centro Oeste</th>
-                                                <th>Qtd Exterior</th>
+                                                <th>Month</th>
+                                                <th>South Amount</th>
+                                                <th>Southest Amount</th>
+                                                <th>North Amount</th>
+                                                <th>Northeast Amount</th>
+                                                <th>Midwest Amount</th>
+                                                <th>Exterioe Amount</th>
                                             </tr>
                                             @foreach (GTSRegiaoReceitaShows item in Model._GTSRegiaoReceitaShows)
                                             {
                                                 <tr class="saveLine3">
                                                     <td class="mesVAL">@item.MES</td>
-                                                    <td><a href="#" class="editable3 QTDSul" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDSul.ToString("#")</a></td>
-                                                    <td><a href="#" class="editable3 QTDSudeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDSudeste.ToString("#")</a></td>
-                                                    <td><a href="#" class="editable3 QTDNorte" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDNorte.ToString("#")</a></td>
-                                                    <td><a href="#" class="editable3 QTDNordeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDNordeste.ToString("#")</a></td>
-                                                    <td><a href="#" class="editable3 QTDCentroOeste" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDCentroOeste.ToString("#")</a></td>
-                                                    <td><a href="#" class="editable3 QTDExterior" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.QTDExterior.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDSul" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.QTDSul.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDSudeste" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.QTDSudeste.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDNorte" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.QTDNorte.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDNordeste" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.QTDNordeste.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDCentroOeste" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.QTDCentroOeste.ToString("#")</a></td>
+                                                    <td><a href="#" class="editable3 QTDExterior" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.QTDExterior.ToString("#")</a></td>
                                                 </tr>
 
                                                 totalQTDSul += item.QTDSul;
@@ -326,14 +326,14 @@
                                     <div class="col-md-12">
                                         <table class="table table-hover table-bordered updateTotalTable4">
                                             <tr>
-                                                <th>Artista</th>
-                                                <th>Valor</th>
+                                                <th>Artist</th>
+                                                <th>Value</th>
                                             </tr>
                                             @foreach (GTSSaldos item in Model._GTSSaldos)
                                             {
                                                 <tr class="saveLine4">
                                                     <td class="idartistaVAL">@item.IDARTISTA</td>
-                                                    <td><a href="#" class="editable4 saldoQuantidade" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable4 saldoQuantidade" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VALOR.ToString("#,0")</a></td>
                                                 </tr>
 
                                                 totalVALOR_Saldos += item.VALOR;
@@ -358,22 +358,22 @@
                                     <div class="col-md-12">
                                         <table class="table table-hover table-bordered updateTotalTable5">
                                             <tr>
-                                                <th>Mês</th>
-                                                <th>VL Artista</th>
+                                                <th>Month</th>
+                                                <th>VL Artist</th>
                                                 <th>VL Live</th>
                                                 <th>VL GTS</th>
                                                 <th>VL Cache</th>
-                                                <th>VL Margem</th>
+                                                <th>VL Margin</th>
                                             </tr>
                                             @foreach (GTSMarginCachePartc item in Model._GTSMarginCachePartc)
                                             {
                                                 <tr class="saveLine5">
                                                     <td class="mesVAL">@item.MES</td>
-                                                    <td><a href="#" class="editable5 VLArtista" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_ARTISTA.ToString("#,0")</a></td>
-                                                    <td><a href="#" class="editable5 VLLive" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_LIVE.ToString("#,0")</a></td>
-                                                    <td><a href="#" class="editable5 VLGTS" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_GTS.ToString("#,0")</a></td>
-                                                    <td><a href="#" class="editable5 VLCache" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_CACHE.ToString("#,0")</a></td>
-                                                    <td><a href="#" class="editable5 VLMargem" data-type="text" data-placement="top" data-title="Digite um valor para o campo" data-emptytext="0">@item.VALOR_MARGEM.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable5 VLArtista" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VALOR_ARTISTA.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable5 VLLive" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VALOR_LIVE.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable5 VLGTS" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VALOR_GTS.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable5 VLCache" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VALOR_CACHE.ToString("#,0")</a></td>
+                                                    <td><a href="#" class="editable5 VLMargem" data-type="text" data-placement="top" data-title="Type a value for the field" data-emptytext="0">@item.VALOR_MARGEM.ToString("#,0")</a></td>
                                                 </tr>
 
 

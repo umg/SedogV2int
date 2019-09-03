@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <br />
                     <input type="radio" id="contratoTodos"
-                           name="contrato" value="0|Todos" checked="@(ViewBag.contrato == "0")">
+                           name="contrato" value="0|All" checked="@(ViewBag.contrato == "0")">
                     <label for="contratoTodos">Todos</label>
                     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                     <input type="radio" id="contratoUMG"
@@ -51,7 +51,7 @@
                     <label for="contratoJV">Joint Venture</label>
                     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                     <input type="radio" id="contratoProjeto"
-                           name="contrato" value="3|Projeto" checked="@(ViewBag.contrato == "3")">
+                           name="contrato" value="3|Project" checked="@(ViewBag.contrato == "3")">
                     <label for="contratoProjeto">Projeto</label>
                     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                 </div>
@@ -61,7 +61,7 @@
                 <div class="col-md-1">
 
                     <div class="form-group">
-                        <label style="font-size:18px; font-weight: bold;">Projeto</label>
+                        <label style="font-size:18px; font-weight: bold;">Project</label>
                     </div>
 
                 </div>
@@ -69,21 +69,21 @@
                 <div class="col-md-8">
 
                     <div class="form-group">
-                        <input class="typeahead form-control" placeholder="Artista" id="typeAheadArtista" name="nomeArtista" value="" /><i id="loading" class="fa fa-cog fa-spin fa-fw hidden li-loading"></i>
+                        <input class="typeahead form-control" placeholder="Artist" id="typeAheadArtista" name="nomeArtista" value="" /><i id="loading" class="fa fa-cog fa-spin fa-fw hidden li-loading"></i>
 
                     </div>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <input type="submit" name="buscar" value="Gerar Relatório" class="btn btn-default btn-lg btn-block" />
+                <input type="submit" name="buscar" value="Generate Report" class="btn btn-default btn-lg btn-block" />
             </div>
 
         </div>
 
         <div class="row" id="spanContratos" style="visibility:hidden;">
             <div class="col-md-12">
-                <h4>Projetos</h4>
+                <h4>Projects</h4>
             </div>
                 @if (Model != null)
                 {

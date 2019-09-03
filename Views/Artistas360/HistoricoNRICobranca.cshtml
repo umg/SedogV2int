@@ -103,7 +103,7 @@
 @if (item.STATUS == "PENDENTE")
 {
 
-                                    @Html.ActionLink("Finalizar", "HistoricoNRICobrancaFechar", new { @id = item.ID, @id_seq = item.ID_SEQ }, new { @class = "link" })<span> | </span><a href="@Url.Action("HistoricoNRICobrancaApagar", "Artistas360", new { @id = item.ID, @id_seq = item.ID_SEQ })" class="linkRemove" data-title="Remover Cobrança" data-query="Tem certeza que deseja remover o item @item.COMENTARIOS/ @item.VALOR?">Remover</a>
+                                    @Html.ActionLink("Finalizar", "HistoricoNRICobrancaFechar", new { @id = item.ID, @id_seq = item.ID_SEQ }, new { @class = "link" })<span> | </span><a href="@Url.Action("HistoricoNRICobrancaApagar", "Artistas360", new { @id = item.ID, @id_seq = item.ID_SEQ })" class="linkRemove" data-title="Remover Cobrança" data-query="Are you sure you want to remove item @item.COMENTARIOS/ @item.VALOR?">Remover</a>
 }
                             </td>
 

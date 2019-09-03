@@ -15,45 +15,45 @@
                 <h2>
                     @appSettings.pageName()
                 </h2>
-                <h3>Finalizado</h3>
+                <h3>Finished</h3>
             </div>
         </div>
         <div class="row">
             <div class="container">
                 <table class="table">
                     <tr>
-                        <td colspan="10" class="text-center"><h4>Dados do Projeto</h4></td>
+                        <td colspan="10" class="text-center"><h4>Project Data</h4></td>
                     </tr>
                     <tr>
                         <th>
-                            IdProjetoSedog
+                            Sedog Project ID
                         </th>
                         <th>
-                            NomeDoProjeto
+                            Project Name
                         </th>
                         <th>
-                            IdArtista
+                            Artist ID
                         </th>
                         <th>
-                            NomeDoArtista
+                            Artist Name
                         </th>
                         <th>
                             Obs
                         </th>
                         <th>
-                            TipoContrato
+                            Contract Name
                         </th>
                         <th>
-                            TipoProcesso
+                            Process Type
                         </th>
                         <th>
-                            TipoRelease
+                            Release Type
                         </th>
                         <th>
-                            Lancamento
+                            Release
                         </th>
                         <th>
-                            Origem
+                            Origin
                         </th>
                     </tr>
 
@@ -91,15 +91,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="10" class="text-center"><h4>Inclusões Relacionadas ao Projeto</h4></td>
+                        <td colspan="10" class="text-center"><h4>Project Related Inclusions</h4></td>
                     </tr>
                     <tr>
                         <td colspan="10">
                             <table width="100%">
                                 <tr>
-                                    <th>Detalhes</th>
-                                    <th>Erro</th>
-                                    <th>Mensagem</th>
+                                    <th>Details</th>
+                                    <th>Error</th>
+                                    <th>Message</th>
                                 </tr>
                                 @foreach (SEDOGv2.Models.Resposta<string> item in Model.Includes)
                                 {
@@ -110,7 +110,7 @@
                                             <span>@item.Error</span>
                                         }
                                         else {
-                                            <span>NÂO</span>
+                                            <span>No</span>
                                         }</td>
                                         <td>
                                             @if (item.Message != "")
@@ -119,7 +119,7 @@
                                         }
                                         else
                                         {
-                                            <span>INCLUÍDO COM SUCESSO</span>
+                                            <span>SUCCESSFULLY INCLUDED</span>
                                         }
                                     </td>
                                     </tr>

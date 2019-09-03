@@ -28,24 +28,24 @@
             <div class="row">
                 <div class="col-md-1 text-right">
                     <div class="form-group">
-                        <h4>Mês:</h4>
+                        <h4>Month:</h4>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <select class="form-control" name="mes" id="mes">
-                            <option value="1" selected="@(1 == Model._selectedMes)">Janeiro</option>
-                            <option value="2" selected="@(2 == Model._selectedMes)">Fevereiro</option>
-                            <option value="3" selected="@(3 == Model._selectedMes)">Março</option>
-                            <option value="4" selected="@(4 == Model._selectedMes)">Abril</option>
-                            <option value="5" selected="@(5 == Model._selectedMes)">Maio</option>
-                            <option value="6" selected="@(6 == Model._selectedMes)">Junho</option>
-                            <option value="7" selected="@(7 == Model._selectedMes)">Julho</option>
-                            <option value="8" selected="@(8 == Model._selectedMes)">Agosto</option>
-                            <option value="9" selected="@(9 == Model._selectedMes)">Setembro</option>
-                            <option value="10" selected="@(10 == Model._selectedMes)">Outubro</option>
-                            <option value="11" selected="@(11 == Model._selectedMes)">Novembro</option>
-                            <option value="12" selected="@(12 == Model._selectedMes)">Dezembro</option>
+                            <option value="1" selected="@(1 == Model._selectedMes)">January</option>
+                            <option value="2" selected="@(2 == Model._selectedMes)">February</option>
+                            <option value="3" selected="@(3 == Model._selectedMes)">March</option>
+                            <option value="4" selected="@(4 == Model._selectedMes)">April</option>
+                            <option value="5" selected="@(5 == Model._selectedMes)">May</option>
+                            <option value="6" selected="@(6 == Model._selectedMes)">June</option>
+                            <option value="7" selected="@(7 == Model._selectedMes)">July</option>
+                            <option value="8" selected="@(8 == Model._selectedMes)">August</option>
+                            <option value="9" selected="@(9 == Model._selectedMes)">September</option>
+                            <option value="10" selected="@(10 == Model._selectedMes)">October</option>
+                            <option value="11" selected="@(11 == Model._selectedMes)">November</option>
+                            <option value="12" selected="@(12 == Model._selectedMes)">December</option>
                         </select>
                     </div>
                 </div>
@@ -69,13 +69,13 @@
 
                 <div class="col-md-1 text-right">
                     <div class="form-group">
-                        <h4>Visualização:</h4>
+                        <h4>View:</h4>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <select class="form-control" name="visualizacao" id="visualizacao">
-                            <option value="mes" selected="@("mes" == Model._selectedVisualizacao)">Mês Anterior</option>
+                            <option value="mes" selected="@("mes" == Model._selectedVisualizacao)">Last Month</option>
                             <option value="plan" selected="@("plan" == Model._selectedVisualizacao)">Plan</option>
                             <option value="forcast" selected="@("forcast" == Model._selectedVisualizacao)">Forcast</option>
                            
@@ -106,7 +106,7 @@
         <div class="panel panel-success">
             <div class="row">
                 <div class="col-md-10 text-right">
-                    Exportar para
+                    Export to
                 </div>
                 <div class="col-md-1 text-left">
                     <button type="submit" class="btn btn-default printExcel">
@@ -117,12 +117,12 @@
             <div class="row">
                 <table class="table table-bordered table-striped">
                     <tr>
-                        <th>CONTA</th>
-                        <th>DESCRIÇÃO</th>
-                        <th>SUBCONTA</th>
+                        <th>ACCOUNT</th>
+                        <th>DESCRIPTION</th>
+                        <th>SUBLEDGER</th>
                         <th>@ViewBag.MesAnterior</th>
                         <th>@ViewBag.MesAtual</th>
-                        <th>VARIAÇÃO</th>
+                        <th>VARIATION</th>
 
                         @if (Model._selectedVisualizacao != "mes")
                         {
@@ -254,7 +254,7 @@
                         <td colspan="7" style="text-align:center"><h2 style="text-align:center" class="bold underline">Overhead</h2></td>
                     </tr>
                     <tr>
-                        <td colspan="7" style="text-align:center"><h2 style="text-align:center" class="bold underline">Comparativo Mensal</h2></td>
+                        <td colspan="7" style="text-align:center"><h2 style="text-align:center" class="bold underline">Monthly Comparison</h2></td>
                     </tr>
                     <tr>
                         <td colspan="5">&nbsp;</td>
@@ -262,12 +262,12 @@
                         <td>@DateTime.Now.ToString("dd/MM/yyyy") às @DateTime.Now.ToString("HH:mm:ss")</td>
                     </tr>
                     <tr>
-                        <td class="bold">CONTA</td>
-                        <td class="bold">DESCRIÇÃO</td>
-                        <td class="bold">SUBCONTA</td>
+                        <td class="bold">ACCOUNT</td>
+                        <td class="bold">DESCRIPTION</td>
+                        <td class="bold">SUBLEDGER</td>
                         <td class="boldright">@ViewBag.MesAnterior</td>
                         <td class="boldright">@ViewBag.MesAtual</td>
-                        <td class="boldright">VARIAÇÃO</td>
+                        <td class="boldright">VARIATION</td>
                         
                         @if (Model._selectedVisualizacao != "mes")
                         {

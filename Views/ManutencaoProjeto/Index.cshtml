@@ -46,7 +46,7 @@
                         <td>@item.OBS</td>
                         <td>
                             @Html.ActionLink("Editar", "Edit", new { id = item.IDProj_SEDOG }, new { @class = "link" }) |
-                            <a href="@Url.Action("Delete" , "ManutencaoProjeto" , new { @id = item.IDProj_SEDOG})" class="linkRemove" data-title="Apagar Projeto SEDOG" data-query="Are you sure you want to remove the item @item.Projeto/ @item.Artista?">Delete</a>
+                            <a href="@Url.Action("Delete" , "ManutencaoProjeto" , new { @id = item.IDProj_SEDOG})" class="linkRemove" data-title="Delete SEDOG Project" data-query="Are you sure you want to remove the item @item.Projeto/ @item.Artista?">Delete</a>
                         </td>
                     </tr>
 
@@ -67,8 +67,8 @@
                 <p>Some text in the modal.</p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-default" href="#" id="followLinkRemove">Sim</a>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                <a class="btn btn-default" href="#" id="followLinkRemove">Yes</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>

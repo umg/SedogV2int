@@ -31,10 +31,10 @@
                     <h4>ID: @Model.idProjSedog</h4>
                 </div>
                 <div class="col-md-4">
-                    <h4>Artista: @Model.Artista</h4>
+                    <h4>Artist: @Model.Artista</h4>
                 </div>
                 <div class="col-md-4">
-                    <h4>Projeto: @Model.Projeto</h4>
+                    <h4>Project: @Model.Projeto</h4>
                 </div>
             </div>
         </div>
@@ -51,14 +51,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nomeDoProjeto">Nome do Projeto</label>
-                                <input type="text" id="nomeDoProjeto" name="nomeDoProjeto" class="form-control input-lg" placeholder="Digite um nome para este projeto" value="@Model.Projeto" aria-describedby="basic-addon2">
+                                <input type="text" id="nomeDoProjeto" name="nomeDoProjeto" class="form-control input-lg" placeholder="Type a name for this project" value="@Model.Projeto" aria-describedby="basic-addon2">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="nomeDoArtista">Artista</label>
-                                <input type="text" id="nomeDoArtista" name="nomeDoArtista" class="form-control input-lg" placeholder="Digite o nome do artista" value="@Model.Artista" aria-describedby="basic-addon2">
+                                <label for="nomeDoArtista">Artist</label>
+                                <input type="text" id="nomeDoArtista" name="nomeDoArtista" class="form-control input-lg" placeholder="Type the artist name" value="@Model.Artista" aria-describedby="basic-addon2">
                             </div>
                         </div>
 
@@ -69,14 +69,14 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="lancamento">Data de Lançamento</label>
-                                <input type="text" id="lancamento" name="lancamento" class="form-control input-lg" placeholder="Data de Lançamento" value="@Model.LancamentoProduto.ToString("yyyy-MM-dd")" aria-describedby="basic-addon2">
+                                <label for="lancamento">Release Date</label>
+                                <input type="text" id="lancamento" name="lancamento" class="form-control input-lg" placeholder="Release Date" value="@Model.LancamentoProduto.ToString("yyyy-MM-dd")" aria-describedby="basic-addon2">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="selResponsavel" class="control-label">Responsável</label>
+                                <label for="selResponsavel" class="control-label">Responsible</label>
                                 <select class="form-control input-lg" id="selResponsavel" name="selResponsavel">
                                     @foreach (Usuario _user in Model._Usuarios)
                                     {
@@ -107,11 +107,11 @@
                                 &nbsp;
                                 @if (Model.Obs.IndexOf("FIS") > -1)
                                 {
-                                    <label><input type="checkbox" name="obs[]" value="FIS" class="chkBoxObs" checked="checked" />Físico</label>
+                                    <label><input type="checkbox" name="obs[]" value="FIS" class="chkBoxObs" checked="checked" />Physical</label>
                                 }
                                 else
                                 {
-                                    <label><input type="checkbox" name="obs[]" value="FIS" class="chkBoxObs" />Físico</label>
+                                    <label><input type="checkbox" name="obs[]" value="FIS" class="chkBoxObs" />Physical</label>
                                 }
                                 &nbsp;
                                 @if (Model.Obs.IndexOf("CD") > -1)
@@ -192,7 +192,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="selTipoRelease" class="control-label">Tipo Release:</label>
+                                <label for="selTipoRelease" class="control-label">Release Type:</label>
                                 <select class="form-control input-lg" id="selTipoRelease" name="selTipoRelease">
                                     @foreach (TipoRelease item in Model._TipoRelease)
                                     {
@@ -220,7 +220,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
 
-                                <label for="selGeneroMusical" class="control-label">Gênero Musical</label>
+                                <label for="selGeneroMusical" class="control-label">Musical Genre</label>
                                 <select class="form-control input-lg" id="selGeneroMusical" name="selGeneroMusical">
                                     @foreach (Genero_Musical _genero in Model._TipoGeneroMusical)
                                     {
@@ -233,7 +233,7 @@
 
                         <div class="col-md-6">
 
-                            <label for="selTipoContrato" class="control-label">Tipo Contrato:</label>
+                            <label for="selTipoContrato" class="control-label">Contrato Type:</label>
                             <select class="form-control input-lg" id="selTipoContrato" name="selTipoContrato">
                                 @foreach (TipoContrato item in Model._TipoContrato)
                                 {
@@ -261,7 +261,7 @@
                             <div class="col-md-6">
                                     <div class="form-group">
 
-                                        <label for="ebtidaProjetada" class="control-label">Ebtida Projetada</label>
+                                        <label for="ebtidaProjetada" class="control-label">Projected Ebtida</label>
                                         <input type="text" id="ebtidaProjetada" name="ebtidaProjetada" class="form-control input-lg" placeholder="%" value="@Model.EBITDAProjetado" aria-describedby="basic-addon2" />
 
                                     </div>
@@ -270,7 +270,7 @@
 
                             <div class="col-md-6">
 
-                                <label for="selTipoProcesso" class="control-label">Tipo Processo:</label>
+                                <label for="selTipoProcesso" class="control-label">Process Tipo:</label>
                                 <select class="form-control input-lg" id="selTipoProcesso" name="selTipoProcesso">
                                     @foreach (TipoProcesso item in Model._TipoProcesso)
                                     {
@@ -295,7 +295,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
 
-                                    <label for="receitaProjetada" class="control-label">Receita Projetada</label>
+                                    <label for="receitaProjetada" class="control-label">Projected Revenue</label>
                                     <input type="text" id="receitaProjetada" name="receitaProjetada" class="form-control input-lg" placeholder="%" value="@Model.RECEITAProjetado" aria-describedby="basic-addon2" />
 
                                 </div>
@@ -354,14 +354,14 @@
                                 <tr>
                                     <th>Id Projeto Digital</th>
                                     <th>Nome do Projeto</th>
-                                    <th><a href="@Url.Action("AddProjetoDigital" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @idArt = Model.IdArtista })" class="linkDiv" data-title="Adicionar Projetos Digitais"><i class="fa fa-plus"></i> Adicionar</a></th>
+                                    <th><a href="@Url.Action("AddProjetoDigital" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @idArt = Model.IdArtista })" class="linkDiv" data-title="Add Digital Projects"><i class="fa fa-plus"></i> Adicionar</a></th>
                                 </tr>
                                 @foreach (PL_Projeto item in Model.plProjeto)
                                 {
                                     <tr>
                                         <td>@item.IDPROJ</td>
                                         <td>@item.PROJECTNAME</td>
-                                        <td><a href="@Url.Action("RemoveProjetoDigital" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @idProjDigital = item.IDPROJ })" class="linkRemove" data-title="Remover Projetos Digitais" data-query="Tem certeza que deseja remover o item @item.IDPROJ / @item.PROJECTNAME?"><i class="fa fa-remove"></i> Remover</a></td>
+                                        <td><a href="@Url.Action("RemoveProjetoDigital" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @idProjDigital = item.IDPROJ })" class="linkRemove" data-title="Remove Digital Projects" data-query="Are you sure you want to remove item @item.IDPROJ / @item.PROJECTNAME?"><i class="fa fa-remove"></i> Remover</a></td>
                                     </tr>
                                 }
                             </table>
@@ -377,7 +377,7 @@
                                 <input type="hidden" name="idProjSedog" value="@Url.RequestContext.RouteData.Values["id"]" />
                                 <table class="table">
                                     <tr>
-                                        <th>Cod Produto</th>
+                                        <th>Product Code</th>
                                         <th>Packing</th>
                                         <th>BU</th>
                                         <th></th>
@@ -394,7 +394,7 @@
                                             <td>@item.COD_PRODUTO</td>
                                             <td>@item.PACKING</td>
                                             <td>@item.BU</td>
-                                            <td><a href="@Url.Action("DelBU" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @codprod = item.COD_PRODUTO, @packing = item.PACKING, @BU = item.BU })" class="linkRemove" data-title="Remover BU's" data-query="Tem certeza que deseja remover o item @item.COD_PRODUTO / @item.PACKING / @item.BU?"><i class="fa fa-remove"></i> Remover</a></td>
+                                            <td><a href="@Url.Action("DelBU" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @codprod = item.COD_PRODUTO, @packing = item.PACKING, @BU = item.BU })" class="linkRemove" data-title="Remover BU's" data-query="Are you sure you want to remove item @item.COD_PRODUTO / @item.PACKING / @item.BU?"><i class="fa fa-remove"></i> Remover</a></td>
                                         </tr>
                                     }
                                 </table>
@@ -408,13 +408,13 @@
                         <div id="tblProdutosFisicos" class="collapse in">
                             <table class="table">
                                 <tr>
-                                    <th>Id Produto</th>
+                                    <th>Product Id</th>
                                     <th>Packing</th>
-                                    <th>Midia</th>
-                                    <th>Artista</th>
-                                    <th>Título</th>
-                                    <th>Lançamento</th>
-                                    <th><a href="@Url.Action("AddProdutoFisico" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @artista = Model.Artista })" class="linkDiv" data-title="Adicionar Produtos Físicos"><i class="fa fa-plus"></i> Adicionar</a></th>
+                                    <th>Media</th>
+                                    <th>Artist</th>
+                                    <th>Title</th>
+                                    <th>Release</th>
+                                    <th><a href="@Url.Action("AddProdutoFisico" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @artista = Model.Artista })" class="linkDiv" data-title="Add Physical Products"><i class="fa fa-plus"></i> Adicionar</a></th>
                                 </tr>
                                 @foreach (PL_Produto item in Model.plProduto)
                                 {
@@ -426,8 +426,8 @@
                                         <td>@item.TITULO_PRODUTO</td>
                                         <td>@item.DATA_LANCAMENTO</td>
                                         <td>
-                                            <a href="@Url.Action("RemoveProdutoFisico" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @codprod = item.COD_PRODUTO, @packing = item.PACKING })" title="Remover" class="linkRemove" data-title="Remover Produtos" data-query="Tem certeza que deseja remover o item @item.COD_PRODUTO / @item.PACKING?"><i class="fa fa-times"></i></a>
-                                            &nbsp; <a href="@Url.Action("EditProdutoFisico" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @codprod = item.COD_PRODUTO, @packing = item.PACKING })" title="Editar - Direitos e Autoral" class="linkEdit" data-title="Editar Produtos"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a href="@Url.Action("RemoveProdutoFisico" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @codprod = item.COD_PRODUTO, @packing = item.PACKING })" title="Remover" class="linkRemove" data-title="Remover Produtos" data-query="Are you sure you want to remove item @item.COD_PRODUTO / @item.PACKING?"><i class="fa fa-times"></i></a>
+                                            &nbsp; <a href="@Url.Action("EditProdutoFisico" , "ManutencaoProjeto" , new { @id = Model.idProjSedog, @codprod = item.COD_PRODUTO, @packing = item.PACKING })" title="Edit - Copyright" class="linkEdit" data-title="Edit Products"><i class="fa fa-pencil-square-o"></i></a>
                                         </td>
                                     </tr>
                                 }
@@ -443,10 +443,10 @@
                             {
                                 <table class="table">
                                     <tr>
-                                        <th>Tipo Receita</th>
-                                        <th>Receita</th>
-                                        <th>Despesa</th>
-                                        <th>Ano/Mês</th>
+                                        <th>Revenue Type</th>
+                                        <th>Revenue</th>
+                                        <th>Expenses</th>
+                                        <th>Year/Month</th>
                                         <th>
                                             <input type="hidden" name="idProjSedog" value="@Url.RequestContext.RouteData.Values["id"]" />
                                         </th>
@@ -472,7 +472,7 @@
                                             <td>@item.VALOR</td>
                                             <td>@item.DESPESA</td>
                                             <td>@item.ANOMES</td>
-                                            <td><a href="@Url.Action("RemoveReceitaExtra" , "ManutencaoProjeto" , new { @id = item.IDPROJ_SEDOG, @idTipoReceita = item.ID_TIPO_RECEITA , @valor = item.VALOR })" class="linkRemove" data-title="Remover Receita Extra" data-query="Tem certeza que deseja remover o item @item.TIPO_RECEITA/ @item.VALOR?"><i class="fa fa-remove"></i> Remover</a></td>
+                                            <td><a href="@Url.Action("RemoveReceitaExtra" , "ManutencaoProjeto" , new { @id = item.IDPROJ_SEDOG, @idTipoReceita = item.ID_TIPO_RECEITA , @valor = item.VALOR })" class="linkRemove" data-title="Remover Receita Extra" data-query="Are you sure you want to remove item @item.TIPO_RECEITA/ @item.VALOR?"><i class="fa fa-remove"></i> Remover</a></td>
                                         </tr>
                                     }
                                 </table>

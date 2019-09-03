@@ -163,7 +163,7 @@
                                 <tr>
                                     <td>@item.TIPO_CONTRATO</td>
                                     <td>@item.DESCRICAO</td>
-                                    <td><a href="@Url.Action("RemoveContrato", "Artistas360", new { @id = item.ID_PROJNRI, @idTipoContrato = item.ID_TIPO_CONTRATO })" class="linkRemove" data-title="Remover Contrato" data-query="Tem certeza que deseja remover o item @item.TIPO_CONTRATO/ @item.DESCRICAO_TIPO_CONTRATO?"><i class="fa fa-remove"></i> Remover</a></td>
+                                    <td><a href="@Url.Action("RemoveContrato", "Artistas360", new { @id = item.ID_PROJNRI, @idTipoContrato = item.ID_TIPO_CONTRATO })" class="linkRemove" data-title="Remover Contrato" data-query="Are you sure you want to remove item @item.TIPO_CONTRATO/ @item.DESCRICAO_TIPO_CONTRATO?"><i class="fa fa-remove"></i> Remover</a></td>
                                 </tr>
                             }
                         </table>
@@ -244,7 +244,7 @@
                                     <td>
                                         <a href="@Url.Action("HistoricoNRIShows", "Artistas360", new { @id = item.ID_SEQ })" class="">Receitas</a><span> |</span>
                                         <a href="@Url.Action("HistoricoNRICobranca", "Artistas360", new { @id = item.ID_SEQ })" class="">Cobranças</a> |
-                                        <a href="@Url.Action("RemoveReceita", "Artistas360", new { @id = item.ID_PROJNRI, @idTipoReceita = item.ID_TIPO_RECEITA, @idSeq = item.ID_SEQ })" class="linkRemove" data-title="Remover Contrato" data-query="Tem certeza que deseja remover o item @item.TIPO_RECEITA ?">Remover</a>
+                                        <a href="@Url.Action("RemoveReceita", "Artistas360", new { @id = item.ID_PROJNRI, @idTipoReceita = item.ID_TIPO_RECEITA, @idSeq = item.ID_SEQ })" class="linkRemove" data-title="Remover Contrato" data-query="Are you sure you want to remove item @item.TIPO_RECEITA ?">Remover</a>
                                     </td>
                                 </tr>
                             }

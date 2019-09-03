@@ -34,7 +34,7 @@
                         
                         <input type="radio" id="contratoTodos"
                                name="contrato" value="0">
-                        <label for="contratoTodos">Todos</label>
+                        <label for="contratoTodos">All</label>
 
                         <input type="radio" id="contratoUMG"
                                name="contrato" value="1">
@@ -50,7 +50,7 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <input type="submit" name="buscar" value="Buscar" class="btn btn-default btn-lg btn-block" />
+                        <input type="submit" name="buscar" value="Search" class="btn btn-default btn-lg btn-block" />
                     </div>
                 </div>
 
@@ -116,41 +116,41 @@
                         <table class="table table-striped table-bordered table-inline DireitostableSortPagging" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Projeto</th>
-                                    <th>Artista</th>
+                                    <th>Project</th>
+                                    <th>Artist</th>
                                     <th>Release</th>
-                                    <th>Venda Líquida Física</th>
-                                    <th>Custo de Fabricação</th>
-                                    <th>Direitos Autorais</th>
-                                    <th>Distribuição</th>
-                                    <th>Direitos Artísticos</th>
-                                    <th>Margem Venda Física</th>
-                                    <th>Receita Venda Digital</th>
-                                    <th>Custos de Distribuição</th>
-                                    <th>Custos de Digitalização</th>
-                                    <th>Direitos Artísticos</th>
-                                    <th>Direitos Autorais</th>
-                                    <th>Outros Custos Direitos</th>
-                                    <th>Margem Venda Digital</th>
-                                    <th>Receita de Licenciamento</th>
-                                    <th>Direitos</th>
-                                    <th>Margem Licenciamento</th>
-                                    <th>Receita Novos Negócios</th>
-                                    <th>Custos de Fabricação</th>
-                                    <th>Custos de Distribuição</th>
-                                    <th>Direitos Artísticos</th>
-                                    <th>Direitos Autorais</th>
-                                    <th>Outros Custos Direitos</th>
-                                    <th>Margem Novos Negócios</th>
-                                    <th>Custo Inicial</th>
+                                    <th>Net Physical Sale</th>
+                                    <th>Manufacture Costs</th>
+                                    <th>Copyright</th>
+                                    <th>Distribution</th>
+                                    <th>Artistic Rights</th>
+                                    <th>Physical Selling Margin</th>
+                                    <th>Digital Selling Revenue</th>
+                                    <th>Distribution Costs</th>
+                                    <th>Scanning Costs</th>
+                                    <th>Artistic Rights</th>
+                                    <th>Copyright</th>
+                                    <th>Other Costs Rights</th>
+                                    <th>Digital Selling Margin</th>
+                                    <th>Licensing Revenue</th>
+                                    <th>Rights</th>
+                                    <th>Licensing Margin</th>
+                                    <th>New Business Revenue</th>
+                                    <th>Manufacturing Costs</th>
+                                    <th>Distribution Costs</th>
+                                    <th>Artistic Rights</th>
+                                    <th>Copyright</th>
+                                    <th>Other Costs Rights</th>
+                                    <th>New Business Margin</th>
+                                    <th>Initial cost</th>
                                     <th>Marketing</th>
-                                    <th>Custo de Gravação</th>
-                                    <th>Provisão Devedores Duvidosos</th>
-                                    <th>Provisão de Devolução</th>
-                                    <th>Provisão de Obsolescência</th>
-                                    <th>Comissão de Vendas</th>
-                                    <th>Valor a ser pago para parceiro JV</th>
-                                    <th>Resultado Líquido</th>
+                                    <th>Recording Cost</th>
+                                    <th>Doubtful Debtors Provision</th>
+                                    <th>Return Provision</th>
+                                    <th>Obsolescence Provision</th>
+                                    <th>Sales Commission</th>
+                                    <th>Amount to be paid to JV partner</th>
+                                    <th>Net income</th>
                                 </tr>
                             </thead>
                             @foreach (var item in Model)
@@ -283,45 +283,45 @@
                         <td colspan="6" style="text-align:center"><h2 style="text-align:center" class="bold underline">@appSettings.pageName()</h2></td>
                     </tr>
                     <tr>
-                        <td colspan="6" style="text-align:center" class="bgRed">Filtro: @ViewBag.contrato</td>
+                        <td colspan="6" style="text-align:center" class="bgRed">Filter: @ViewBag.contrato</td>
                     </tr>
 
                     <tr>
-                        <th>Projeto</th>
-                        <th>Artista</th>
+                        <th>Project</th>
+                        <th>Artist</th>
                         <th>Release</th>
-                        <th class="bold">Venda Líquida Física</th>
-                        <th>Custo de Fabricação</th>
-                        <th>Direitos Autorais</th>
-                        <th>Distribuição</th>
-                        <th>Direitos Artísticos</th>
-                        <th class="bgGrayBold">Margem Venda Física</th>
-                        <th class="bold">Receita Venda Digital</th>
-                        <th>Custos de Distribuição</th>
-                        <th>Custos de Digitalização</th>
-                        <th>Direitos Artísticos</th>
-                        <th>Direitos Autorais</th>
-                        <th>Outros Custos Direitos</th>
-                        <th class="bgGrayBold">Margem Venda Digital</th>
-                        <th class="bold">Receita de Licenciamento</th>
-                        <th>Direitos</th>
-                        <th class="bgGrayBold">Margem Licenciamento</th>
-                        <th class="bold">Receita Novos Negócios</th>
-                        <th>Custos de Fabricação</th>
-                        <th>Custos de Distribuição</th>
-                        <th>Direitos Artísticos</th>
-                        <th>Direitos Autorais</th>
-                        <th>Outros Custos Direitos</th>
-                        <th class="bgGrayBold">Margem Novos Negócios</th>
-                        <th>Custo Inicial</th>
+                        <th class="bold">Net Physical Sale</th>
+                        <th>Manufacture Costs</th>
+                        <th>Copyright</th>
+                        <th>Distribution</th>
+                        <th>Artistic Rights</th>
+                        <th class="bgGrayBold">Physical Selling Margin</th>
+                        <th class="bold">Digital Selling Revenue</th>
+                        <th>Distribution Costs</th>
+                        <th>Scanning Costs</th>
+                        <th>Artistic Rights</th>
+                        <th>Copyright</th>
+                        <th>Other Costs Rights</th>
+                        <th class="bgGrayBold">Digital Selling Margin</th>
+                        <th class="bold">Licensing Revenue</th>
+                        <th>Rights</th>
+                        <th class="bgGrayBold">Licensing Margin</th>
+                        <th class="bold">New Business Revenue</th>
+                        <th>Manufacturing Costs</th>
+                        <th>Distribution Costs</th>
+                        <th>Artistic Rights</th>
+                        <th>Copyright</th>
+                        <th>Other Costs Rights</th>
+                        <th class="bgGrayBold">New Business Margin</th>
+                        <th>Initial Cost</th>
                         <th>Marketing</th>
-                        <th>Custo de Gravação</th>
-                        <th>Provisão Devedores Duvidosos</th>
-                        <th>Provisão de Devolução</th>
-                        <th>Provisão de Obsolescência</th>
-                        <th>Comissão de Vendas</th>
-                        <th>Valor a ser pago para parceiro JV</th>
-                        <th class="bgGrayBold">Resultado Líquido</th>
+                        <th>Recording Cost</th>
+                        <th>Doubtful Debtors Provision</th>
+                        <th>Return Provision</th>
+                        <th>Obsolescence Provision</th>
+                        <th>Sales Commission</th>
+                        <th>Amount to be paid to JV partner</th>
+                        <th class="bgGrayBold">Net income</th>
                     </tr>
 
 

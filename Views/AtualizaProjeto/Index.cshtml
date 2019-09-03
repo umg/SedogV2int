@@ -24,17 +24,17 @@
             <div class="row">
                 <div class="col-md-4 text-right">
                     <div class="form-group">
-                        <h4>Artista ou projeto:</h4>
+                        <h4>Artist or project:</h4>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="text" name="pesquisa" class="form-control" placeholder="Digite o artista ou projeto" />
+                        <input type="text" name="pesquisa" class="form-control" placeholder="Type artist or project" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="submit" name="Pesquisar" value="Pesquisar" class="btn btn-default" />
+                        <input type="submit" name="Pesquisar" value="Search" class="btn btn-default" />
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-md-4 text-right">
                     <div class="form-group">
-                        <h4>Data de Referência:</h4>
+                        <h4>Reference Date:</h4>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="submit" name="updData" value="Atualizar Data" class="btn btn-default" />
+                        <input type="submit" name="updData" value="Date Update" class="btn btn-default" />
                     </div>
                 </div>
             </div>
@@ -72,10 +72,10 @@
                 <table class="table">
                     <tr class="bg-default">
                         <th><input type="checkbox" name="seltodos" id="chkAll" /></th>
-                        <th>ID Projeto</th>
-                        <th>Projeto</th>
-                        <th>ID Artista</th>
-                        <th>Artista</th>
+                        <th>Project ID</th>
+                        <th>Project</th>
+                        <th>Artist ID</th>
+                        <th>Artist</th>
 
                     </tr>
                     @foreach (PLProjeto item in Model.Dados)
@@ -97,7 +97,7 @@
 
             <div class="col-md-3">
                 <div class="row">
-                    <input type="button" id="btnAtualizar" name="btnAtualizar" value="Atualizar Selecionados" class="btn btn-lg btn-default btn-block btnShowModal" />
+                    <input type="button" id="btnAtualizar" name="btnAtualizar" value="Update Selected" class="btn btn-lg btn-default btn-block btnShowModal" />
                 </div>
             </div>
 

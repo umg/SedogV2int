@@ -33,7 +33,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <select class="form-control" name="ano" id="ano">
-                            <option value="00"> -- Todos --</option>
+                            <option value="00"> -- All --</option>
                             @for (int ano = 0; ano < 7; ano++)
                             {
                                 <option value="@DateTime.Now.AddYears(-ano).ToString("yy")">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="submit" name="Pesquisar" value="Pesquisar" class="btn btn-default" />
+                        <input type="submit" name="Pesquisar" value="Search" class="btn btn-default" />
                     </div>
                 </div>
             </div>

@@ -33,9 +33,9 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <select class="form-control" name="origem">
-                            <option value="">Todos</option>
-                            <option value="NAC">Nacional</option>
-                            <option value="INT">Internacional</option>
+                            <option value="">All</option>
+                            <option value="NAC">National</option>
+                            <option value="INT">International</option>
                             <option value="SPE">Special Marketing</option>
                         </select>
                     </div>
@@ -48,18 +48,18 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <select class="form-control" name="mes">
-                            <option value="1">Janeiro</option>
-                            <option value="2">Fevereiro</option>
-                            <option value="3">Março</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Maio</option>
-                            <option value="6">Junho</option>
-                            <option value="7">Julho</option>
-                            <option value="8">Agosto</option>
-                            <option value="9">Setembro</option>
-                            <option value="10">Outubro</option>
-                            <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
                         </select>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <input type="submit" name="btnGerarRelatorios" value="pesquisar" class="btn btn-default" />
+                        <input type="submit" name="btnGerarRelatorios" value="serch" class="btn btn-default" />
                     </div>
                 </div>
             </div>
@@ -107,26 +107,26 @@
                         <thead>
                             <tr class="bg-default">
                                 <th>BU</th>
-                                <th>Descrição</th>
-                                <th>Artista</th>
-                                <th>Classif.HFM</th>
-                                <th>Total Desp. Marketing</th>
-                                <th>ORCAMENTO_MES</th>
-                                <th>Custo Inicial</th>
+                                <th>Description</th>
+                                <th>Artist</th>
+                                <th>HFM Class</th>
+                                <th>Total Marketing Exp.</th>
+                                <th>MONTH_BUDGET</th>
+                                <th>Initial Cost</th>
                                 <th>TV</th>
                                 <th>Radio</th>
-                                <th>Ação Promocional Outros</th>
-                                <th>Mídia On Line</th>
-                                <th>Imprensa</th>
+                                <th>Promocional Others</th>
+                                <th>On Line Media</th>
+                                <th>Press</th>
                                 <th>Merchandising</th>
-                                <th>Amostras</th>
-                                <th>Video Clips</th>
+                                <th>Samples</th>
+                                <th>VideoClips</th>
                                 <th>Freelancers</th>
                                 <th>Clipping</th>
                                 <th>NBD</th>
                                 <th>DIGITAL</th>
-                                <th>Marketing Outros</th>
-                                <th>Publicidade On Line</th>
+                                <th>Marketing Others</th>
+                                <th>On Line Publicity</th>
                             </tr>
                             <tr class="bg-default">
                                 <th colspan="4" style="text-align:right">Total:</th>
@@ -187,7 +187,7 @@
                     <td colspan="22" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
                 </tr>
                 <tr>
-                    <td colspan="22" style="text-align:center"><h2 style="text-align:center" class="bold">RELATÓRIO DE DESPESA DE MARKETING POR GRUPO</h2></td>
+                    <td colspan="22" style="text-align:center"><h2 style="text-align:center" class="bold">GROUP MARKETING EXPENDITURE REPORT</h2></td>
                 </tr>
                 <tr>
                     <td colspan="22"><h2 style="text-align:center" class="bold">@ViewBag.Header</h2></td>
@@ -197,26 +197,26 @@
                 </tr>
                 <tr>
                     <th class="box">BU</th>
-                    <th class="box">Descrição</th>
-                    <th class="box">Artista</th>
-                    <th class="box">Classif.HFM</th>
-                    <th class="box">Total Desp. Marketing</th>
-                    <th class="box">ORCAMENTO_MES</th>
-                    <th class="box">Custo Inicial</th>
+                    <th class="box">Description</th>
+                    <th class="box">Artist</th>
+                    <th class="box">HFM Class</th>
+                    <th class="box">Total Marketing Exp.</th>
+                    <th class="box">MONTH_BUDGET</th>
+                    <th class="box">Initial Cost</th>
                     <th class="box">TV</th>
                     <th class="box">Radio</th>
-                    <th class="box">Ação Promocional Outros</th>
-                    <th class="box">Mídia On Line</th>
-                    <th class="box">Imprensa</th>
+                    <th class="box">Promocional Others</th>
+                    <th class="box">On Line Media</th>
+                    <th class="box">Press</th>
                     <th class="box">Merchandising</th>
-                    <th class="box">Amostras</th>
+                    <th class="box">Samples</th>
                     <th class="box">Video Clips</th>
                     <th class="box">Freelancers</th>
                     <th class="box">Clipping</th>
                     <th class="box">NBD</th>
                     <th class="box">DIGITAL</th>
-                    <th class="box">Marketing Outros</th>
-                    <th class="box">Publicidade On Line</th>
+                    <th class="box">Marketing Others</th>
+                    <th class="box">On Line Publicity</th>
                 </tr>
                 <tr>
                     <th colspan="4" class="box" style="text-align:right">Total:</th>
