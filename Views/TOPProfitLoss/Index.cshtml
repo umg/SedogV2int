@@ -40,7 +40,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <select class="form-control" name="ano" id="ano">
-                            <option value="00"> -- Todos --</option>
+                            <option value="00"> -- All --</option>
                             @for (int ano = 0; ano < 7; ano++)
                             {
                                 <option value="@DateTime.Now.AddYears(-ano).ToString("yy")">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="submit" name="Pesquisar" value="Pesquisar" class="btn btn-default" />
+                        <input type="submit" name="Pesquisar" value="Search" class="btn btn-default" />
                     </div>
                 </div>
             </div>
@@ -104,9 +104,9 @@
                 <div class="col-md-12" id="tbExcel">
                     <table class="table table-sm">
                         <tr class="bg-default reportHeader">
-                            <th>ID Projeto</th>
-                            <th>Artista</th>
-                            <th>Projeto</th>
+                            <th>Project ID</th>
+                            <th>Artist</th>
+                            <th>Project</th>
                             <th>Profit Loss</th>
                             @if (ViewBag.Ano != "- Todos -") {
                                 <th>Profit Loss RTD</th>

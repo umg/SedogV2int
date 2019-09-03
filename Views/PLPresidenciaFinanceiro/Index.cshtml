@@ -29,12 +29,12 @@
             <div class="row">
                 <div class="col-md-4 text-right">
                     <div class="form-group">
-                        <h4>Artista ou projeto:</h4>
+                        <h4>Artist or project:</h4>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="text" name="txtArtistaProduto" class="form-control" placeholder="Digite o artista ou projeto" />
+                        <input type="text" name="txtArtistaProduto" class="form-control" placeholder="Artist or project name" />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -115,20 +115,20 @@
                 <div class="row text-right">
                     <input type="hidden" name="idProjeto" id="idProjeto" value="@ViewBag.IDLote" />
                     <select name="selAno" id="selAno">
-                        <option value="0">TODOS</option>
+                        <option value="0">ALL</option>
                         @for (int ano = 0; ano <= DateTime.Now.Year - 2010; ano++)
                         {
                             <option value="@(DateTime.Now.AddYears(-ano).ToString("yy"))">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
                         }
                     </select>
-                    <input type="submit" class="btn btn-default" value="Recalcular" />
+                    <input type="submit" class="btn btn-default" value="Recalculate" />
                 </div>
             }
             <div class="row reportHeader">
                 <div class="col-md-1 text-center"><h2>&nbsp;</h2></div>
-                <div class="col-md-3 text-center"><h4>Receita Total</h4></div>
-                <div class="col-md-4 text-center"><h4>Despesa Total</h4></div>
-                <div class="col-md-3 text-center"><h4>Resultado</h4></div>
+                <div class="col-md-3 text-center"><h4>Total Revenue</h4></div>
+                <div class="col-md-4 text-center"><h4>Total Expenses</h4></div>
+                <div class="col-md-3 text-center"><h4>Result</h4></div>
                 <div class="col-md-1 text-center">
                     <button type="submit" class="btn btn-default printPDF">
                         <i class="fa fa-file-pdf-o fa-4"></i>
@@ -152,7 +152,7 @@
                     <table class="report-table" style="width:100%">
                         <tr>
                             <td colspan="8" class="text-center" style="padding:5px">
-                                <div class="col-md-12 text-left"><h4>Projeto(s)</h4></div>
+                                <div class="col-md-12 text-left"><h4>Project(s)</h4></div>
                                 <div class="col-md-12">
                                     <div class="flex">
                                         @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesHeaderDosProdutos)
@@ -163,11 +163,11 @@
                                                         <tr>
                                                             <td valign="top"><img src="@prd.URL" alt="@prd.COD_BARRAS" class="plcHld150 shadow" style="width:150px; height:150px;" /></td>
                                                             <td class="text-left">
-                                                                <div class="text-bold"><span class="text-small">ID Projeto:</span> @prd.IDPROJ_SEDOG</div>
-                                                                <div class="text-bold"><span class="text-small">Artista:</span> @prd.ARTISTA</div>
-                                                                <div class="text-bold"><span class="text-small">Projeto:</span> @prd.PROJETO</div>
-                                                                <div class="text-bold"><span class="text-small">Formatos:</span> @prd.OBS</div>
-                                                                <div class="text-bold"><span class="text-small">Lançamento:</span> @prd.DATA_LANCAMENTO</div>
+                                                                <div class="text-bold"><span class="text-small">Project ID:</span> @prd.IDPROJ_SEDOG</div>
+                                                                <div class="text-bold"><span class="text-small">Artist:</span> @prd.ARTISTA</div>
+                                                                <div class="text-bold"><span class="text-small">Project:</span> @prd.PROJETO</div>
+                                                                <div class="text-bold"><span class="text-small">Formats:</span> @prd.OBS</div>
+                                                                <div class="text-bold"><span class="text-small">Release:</span> @prd.DATA_LANCAMENTO</div>
                                                                 <div class="text-bold">
                                                                     <span class="text-small">Contrato:</span> @prd.TIPO_CONTRATO @if (prd.TIPO_CONTRATO == "Join Venture")
                                                                     { <i class="fa fa-exclamation-circle"></i> }
@@ -191,15 +191,15 @@
                         <tr>
                             <td colspan="8">
                                 <div id="tdISRCS" class="collapse row">
-                                    <div class="modal-header">Projetos/ISRCs&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdISRCS">fechar</button></div>
+                                    <div class="modal-header">Projects/ISRCs&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdISRCS">close</button></div>
                                     <div class="modal-body">
                                         <table>
                                             <tr>
                                                 <th style="padding-left: 15px;"><b>ProjectCode:</b></th>
-                                                <th style="padding-left: 15px;"><b>Projeto:</b></th>
+                                                <th style="padding-left: 15px;"><b>Project:</b></th>
                                                 <th style="padding-left: 15px;"><b>ISRC:</b></th>
                                                 <th style="padding-left: 15px;"><b>Title:</b> </th>
-                                                <th style="padding-left: 15px;"><b>Receita:</b> </th>
+                                                <th style="padding-left: 15px;"><b>Revenue:</b> </th>
                                             </tr>
                                             @foreach (SEDOGv2.Models.ISRCs i in Model.isrc)
                                             {
@@ -222,7 +222,7 @@
                                     </div>
                                 </div>
                                 <div id="tdProdutos" class="collapse row">
-                                    <div class="modal-header">Produtos&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdProdutos">fechar</button></div>
+                                    <div class="modal-header">Produtos&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdProdutos">close</button></div>
                                     <div class="modal-body">
                                         @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesDosProdutos)
                                         {
@@ -231,7 +231,7 @@
                                     </div>
                                 </div>
                                 <div id="tdBUs" class="collapse row">
-                                    <div class="modal-header">BUs&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdBUs">fechar</button></div>
+                                    <div class="modal-header">BUs&nbsp;<button class="btn btn-default pull-right" data-toggle="collapse" data-target="#tdBUs">close</button></div>
                                     <div class="modal-body">
                                         @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesDosProdutos)
                                         {
@@ -250,8 +250,8 @@
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr class="bg-default reportHeader">
-                            <th>Descrição</th>
-                            <th>Valor</th>
+                            <th>Description</th>
+                            <th>Value</th>
                             <th>%</th>
                         </tr>
                         @foreach (SEDOGv2.Models.LucrosEPerdas item in Model.LucrosEPerdas)
@@ -332,7 +332,7 @@
                     <td colspan="3" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align:center"><h2 style="text-align:center" class="bold underline">RELATÓRIO DE LUCROS E PERDAS</h2></td>
+                    <td colspan="3" style="text-align:center"><h2 style="text-align:center" class="bold underline">PROFIT AND LOSS REPORT</h2></td>
                 </tr>
                 @*<tr>
                         <td colspan="3" style="text-align:center"><h2 style="text-align:center" class="bold underline">@ViewBag.Ano</h2></td>
@@ -352,12 +352,12 @@
                         <table class="box" style="width:100%">
                             <tr>
                                 <td class="bold">Cover</td>
-                                <td class="bold">ID Projeto</td>
+                                <td class="bold">Project ID</td>
                                 <td class="bold">Artist</td>
                                 <td class="bold">Title</td>
                                 <td class="bold">Media</td>
                                 <td class="bold">Release</td>
-                                <td class="bold">Contrato</td>
+                                <td class="bold">Contract</td>
                             </tr>
                             @foreach (SEDOGv2.Models.DetalhesDeProdutos prd in Model.DetalhesHeaderDosProdutos)
                             {
@@ -382,7 +382,7 @@
                 </tr>
                 <tr class="RDLast">
                     <td width="33%" class="bold underline left">Description</td>
-                    <td width="33%" class="bold underline left">Release to date value (BRL)</td>
+                    <td width="33%" class="bold underline left">Release to date value</td>
                     <td width="33%" class="bold underline right">% Release to date</td>
                 </tr>
 

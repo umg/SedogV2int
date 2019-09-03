@@ -28,14 +28,14 @@
                                   <div class="row">
                                       <div class="col-md-3 text-right">
                                           <div class="form-group">
-                                              <h4>Escolha o tipo:</h4>
+                                              <h4>Select a type:</h4>
                                           </div>
                                       </div>
                                       <div class="col-md-2">
                                           <div class="form-group">
                                               <select class="form-control" name="tipo" id="tipo">
-                                                  <option value="NAC">Nacional</option>
-                                                  <option value="INT">Internacional</option>
+                                                  <option value="NAC">National</option>
+                                                  <option value="INT">International</option>
                                                   <option value="GOS">Gospel</option>
                                               </select>
                                           </div>
@@ -43,13 +43,13 @@
 
                                       <div class="col-md-3 text-right">
                                           <div class="form-group">
-                                              <h4>Escolha o Year:</h4>
+                                              <h4>Select a Year:</h4>
                                           </div>
                                       </div>
                                       <div class="col-md-2">
                                           <div class="form-group">
                                               <select class="form-control" name="ano" id="ano">
-                                                  <option value="0">- Todos - </option>
+                                                  <option value="0">- All - </option>
                                                   @for (int ano = 0; ano <= DateTime.Now.Year - 2010; ano++)
                                                   {
                                                       <option value="@(DateTime.Now.AddYears(-ano).ToString("yyyy"))">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
@@ -81,58 +81,58 @@
                                   <table class="table table-striped table-bordered table-inline tableSortPagging" cellspacing="0" width="100%">
                                       <thead>
                                           <tr>
-                                              <th>Artista</th>
-                                              <th>Projeto</th>
-                                              <th>Custo Inicial</th>
-                                              <th>Ação TV</th>
-                                              <th>Ação Imprensa</th>
-                                              <th>Ação Rádio</th>
-                                              <th>Ação Internet</th>
-                                              <th>Ação Outros</th>
-                                              <th>Mídia Impressa</th>
-                                              <th>Mídia TV</th>
-                                              <th>Mídia Digital</th>
-                                              <th>Mídia Rádio</th>
-                                              <th>Mídia Influentes</th>
-                                              <th>Mídia Outros</th>
-                                              <th>Prod Vídeo</th>
-                                              <th>Apoio Turnê</th>
+                                              <th>Artist</th>
+                                              <th>Project</th>
+                                              <th>Initial Cost</th>
+                                              <th>TV Action</th>
+                                              <th>Press Action</th>
+                                              <th>Radio Action</th>
+                                              <th>Internet Action</th>
+                                              <th>Other Actions</th>
+                                              <th>Press Media</th>
+                                              <th>TV Media</th>
+                                              <th>Digital Media</th>
+                                              <th>Rádio Media</th>
+                                              <th>Influencer Media</th>
+                                              <th>Other Media</th>
+                                              <th>Video Production</th>
+                                              <th>Tour Support</th>
                                               <th>Poster/Banner</th>
                                               <th>Websites</th>
-                                              <th>Clipagem</th>
-                                              <th>CD Promo</th>
-                                              <th>Mkt+Custo</th>
+                                              <th>Clipping</th>
+                                              <th>Promo CD</th>
+                                              <th>Mkt+Cost</th>
                                               <th>Net Sales</th>
-                                              <th>Resultado Liq</th>
+                                              <th>Net Result</th>
                                           </tr>
                                       </thead>
 
                                       @foreach (var item in Model)
                                       {
                                           <tr>
-                                              <td>@item.ARTISTA</td>
-                                              <td>@item.PROJETO</td>
-                                              <td>@String.Format("{0:N2}", item.CUSTO_INICIAL)</td>
-                                              <td>@String.Format("{0:N2}", item.ACAO_TV)</td>
-                                              <td>@String.Format("{0:N2}", item.ACAO_IMPRENSA)</td>
-                                              <td>@String.Format("{0:N2}", item.ACAO_RADIO)</td>
-                                              <td>@String.Format("{0:N2}", item.ACAO_INTERNET)</td>
-                                              <td>@String.Format("{0:N2}", item.ACAO_OUTROS)</td>
-                                              <td>@String.Format("{0:N2}", item.MIDIA_IMPRESSA)</td>
-                                              <td>@String.Format("{0:N2}", item.MIDIA_TV)</td>
-                                              <td>@String.Format("{0:N2}", item.MIDIA_DIGITAL)</td>
-                                              <td>@String.Format("{0:N2}", item.MIDIA_RADIO)</td>
-                                              <td>@String.Format("{0:N2}", item.MIDIA_INFLUENTES)</td>
-                                              <td>@String.Format("{0:N2}", item.MIDIA_OUTROS)</td>
-                                              <td>@String.Format("{0:N2}", item.PROD_VIDEO)</td>
-                                              <td>@String.Format("{0:N2}", item.APOIO_TURNE)</td>
-                                              <td>@String.Format("{0:N2}", item.POSTER_BANNER)</td>
-                                              <td>@String.Format("{0:N2}", item.WEBSITES)</td>
-                                              <td>@String.Format("{0:N2}", item.CLIPAGEM)</td>
-                                              <td>@String.Format("{0:N2}", item.CD_PROMO)</td>
-                                              <td>@String.Format("{0:N2}", item.TOT_MARKETING_E_CUSTO_INICIAL)</td>
-                                              <td>@String.Format("{0:N2}", item.TOTAL_NET_SALES)</td>
-                                              <td>@String.Format("{0:N2}", item.RESULTADO_LIQUIDO)</td>
+                                              <td class="bold">@item.ARTISTA</td>
+                                              <td class="bold">@item.PROJETO</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.CUSTO_INICIAL)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.ACAO_TV)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.ACAO_IMPRENSA)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.ACAO_RADIO)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.ACAO_INTERNET)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.ACAO_OUTROS)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.MIDIA_IMPRESSA)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.MIDIA_TV)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.MIDIA_DIGITAL)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.MIDIA_RADIO)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.MIDIA_INFLUENTES)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.MIDIA_OUTROS)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.PROD_VIDEO)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.APOIO_TURNE)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.POSTER_BANNER)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.WEBSITES)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.CLIPAGEM)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.CD_PROMO)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.TOT_MARKETING_E_CUSTO_INICIAL)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.TOTAL_NET_SALES)</td>
+                                              <td class="bold">@String.Format("{0:N2}", item.RESULTADO_LIQUIDO)</td>
                                           </tr>
                                       }
                                   </table>
@@ -146,40 +146,41 @@
                                   <td colspan="22" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
                               </tr>
                               <tr>
-                                  <td colspan="22" style="text-align:center"><h2 style="text-align:center" class="bold underline">TOP Despesas de Marketing</h2></td>
+                                  <td colspan="22" style="text-align:center"><h2 style="text-align:center" class="bold underline">TOP Marketing Expenses</h2></td>
                               </tr>
                               <tr>
                                   <td colspan="22" style="text-align:center"><h2 style="text-align:center" class="bold underline">@ViewBag.TituloReport</h2></td>
                               </tr>
                               <tr>
                                   <td colspan="20">&nbsp;</td>
-                                  <td>@DateTime.Now.ToString("MMMM").ToUpper()[0]@DateTime.Now.ToString("MMMM").Substring(1) / @DateTime.Now.Year</td>
-                                  <td>@DateTime.Now.ToString("dd/MM/yyyy") às @DateTime.Now.ToString("HH:mm:ss")</td>
+                                  <td class="bold">@DateTime.Now.ToString("MMMM").ToUpper()[0]@DateTime.Now.ToString("MMMM").Substring(1) / @DateTime.Now.Year</td>
+                                  <td class="bold">@DateTime.Now.ToString("dd/MM/yyyy") às @DateTime.Now.ToString("HH:mm:ss")</td>
                               </tr>
                               <tr class="RDLast">
-                                  <td class="bold">Artista</td>
-                                  <td class="bold">Projeto</td>
-                                  <td class="bold">Custo Inicial</td>
-                                  <td class="bold">Ação TV</td>
-                                  <td class="bold">Ação Imprensa</td>
-                                  <td class="bold">Ação Rádio</td>
-                                  <td class="bold">Ação Internet</td>
-                                  <td class="bold">Ação Outros</td>
-                                  <td class="bold">Mídia Impressa</td>
-                                  <td class="bold">Mídia TV</td>
-                                  <td class="bold">Mídia Digital</td>
-                                  <td class="bold">Mídia Rádio</td>
-                                  <td class="bold">Mídia Influentes</td>
-                                  <td class="bold">Mídia Outros</td>
-                                  <td class="bold">Prod Vídeo</td>
-                                  <td class="bold">Apoio Turnê</td>
+
+                                  <td class="bold">Artist</td>
+                                  <td class="bold">Project</td>
+                                  <td class="bold">Initial Cost</td>
+                                  <td class="bold">TV Action</td>
+                                  <td class="bold">Press Action</td>
+                                  <td class="bold">Radio Action</td>
+                                  <td class="bold">Internet Action</td>
+                                  <td class="bold">Other Actions</td>
+                                  <td class="bold">Press Media</td>
+                                  <td class="bold">TV Media</td>
+                                  <td class="bold">Digital Media</td>
+                                  <td class="bold">Rádio Media</td>
+                                  <td class="bold">Influencer Media</td>
+                                  <td class="bold">Other Media</td>
+                                  <td class="bold">Video Production</td>
+                                  <td class="bold">Tour Support</td>
                                   <td class="bold">Poster/Banner</td>
                                   <td class="bold">Websites</td>
-                                  <td class="bold">Clipagem</td>
-                                  <td class="bold">CD Promo</td>
-                                  <td class="bold">Mkt+Custo</td>
+                                  <td class="bold">Clipping</td>
+                                  <td class="bold">Promo CD</td>
+                                  <td class="bold">Mkt+Cost</td>
                                   <td class="bold">Net Sales</td>
-                                  <td class="boldright">Resultado Liq</td>
+                                  <td class="boldright">Net Result</td>
                               </tr>
 
                               @foreach (var item in Model)
