@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SEDOGv2.Models;
 using SEDOGv2.Models.Context;
+using SEDOGv2.Helpers;
 
 namespace SEDOGv2.Controllers.MarketingTools
 {
@@ -30,7 +31,7 @@ namespace SEDOGv2.Controllers.MarketingTools
             PLProjetoProvider provider = new PLProjetoProvider();
             try
             {
-                System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("pt-br");
+                System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo(appSettings.Culture);
 
                 string artista = collection["txtArtistaProduto"];
                 int mes = int.Parse(collection["selMes"]);

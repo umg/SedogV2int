@@ -694,11 +694,15 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
-    <None Include="Properties\PublishProfiles\SEDOGv2.pubxml" />
+    <None Include="Properties\PublishProfiles\SedogInt.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="References\appConfig.dll" />
+    <Content Include="References\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="References\Microsoft.Web.Services3.dll" />
+    <Content Include="References\UsernameAssertionLibrary.dll" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />

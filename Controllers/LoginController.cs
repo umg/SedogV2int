@@ -30,6 +30,7 @@ namespace SEDOGv2.Controllers
 
             appSettings.Servidor= servidor;
             appSettings.Ambiente = ambiente;
+            appSettings.Culture = culture;
 
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(pass))
             {

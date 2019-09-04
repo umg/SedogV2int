@@ -106,6 +106,23 @@ namespace SEDOGv2.Helpers
             }
         }
 
+        public static string Culture
+        {
+            get
+            {
+                if (HttpContext.Current.Session["SEDOGv2.CULTURE"] != null)
+                    return HttpContext.Current.Session["SEDOGv2.CULTURE"].ToString();
+                else
+                {
+                    return ConfigurationManager.AppSettings["DefaultCulture"] ;
+                }
+            }
+            set
+            {
+                HttpContext.Current.Session["SEDOGv2.CULTURE"] = value;
+            }
+        }
+
         public static Pages currentPage()
         {
             string uri = HttpContext.Current.Request.Url.AbsoluteUri;

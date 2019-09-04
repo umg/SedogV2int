@@ -91,7 +91,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             {
                 return Json(new { success = false, responseText = ex.Message }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { success = true, responseText = "Atualizado!" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, responseText = "Updated!" }, JsonRequestBehavior.AllowGet);
         }
         [ActionFilter_CheckLogin]
         [HttpPost]
