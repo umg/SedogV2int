@@ -1,0 +1,106 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+
+@using (Html.BeginForm("Index", "ImportNRI", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="panel panel-success">
+        <!-- Default panel contents -->
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    @appSettings.pageName()
+                </h2>
+            </div>
+        </div>
+
+
+        <div class="col-md-12" runat="server" id="divAlert">
+            @ViewBag.Error
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 text-right">
+                <div class="form-group">
+                    <h4>File:</h4>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="file" name="file" class="form-control" placeholder="Select File" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="submit" name="enviar" value="Send" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (Model != null)
+{
+    <div class="panel panel-success panel-report">
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    Processed File: @ViewBag.FileName
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <tr>
+                        @*<th>
+                                Linhas Processadas
+                            </th>*@
+                        <th>
+                            Sedog Project
+                        </th>
+                   
+                        <th>
+                            R2 projects
+                        </th>
+                        <th>
+                            Advance
+                        </th>
+                        <th>
+                            Recoupable
+                        </th>
+                        
+                    </tr>
+                    @foreach (var i in @ViewBag.processedNRIList)
+                    {
+                        <tr>
+
+                            <td>
+                                @i.IdProjetoSedog
+                            </td>
+                            <td>
+                                @i.R2Projects
+                            </td>
+                            <td>
+                                @i.Advance
+                            </td>
+                            <td>
+                                @i.Recoupable
+                            </td>
+
+
+
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+
