@@ -21,6 +21,8 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
         [HttpPost]
         public ActionResult Index(FormCollection collection)
         {
+            List<ImportAIF> aifList = new List<ImportAIF>();
+
             DataTable dt = new DataTable();
             try
             {
@@ -37,7 +39,6 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                         ProcessAIF psc = new ProcessAIF();
                         dt = psc.ProcessAif(path);
 
-                        List<ImportAIF> aifList = new List<ImportAIF>();
 
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
@@ -58,7 +59,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                         }
 
                         ViewBag.FileName = fileName;
-                        ViewBag.processedList = aifList;
+                        //ViewBag.processedList = aifList;
                     }
                 }
             }
@@ -66,7 +67,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             {
                 ViewBag.Error = ex.Message;
             }
-            return View(ViewBag.processedList);
+            return View(aifList);
         }
 
     }

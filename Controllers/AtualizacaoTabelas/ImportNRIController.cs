@@ -21,6 +21,9 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
         [HttpPost]
         public ActionResult Index(FormCollection collection)
         {
+
+            List<ImportNRI> nriList = new List<ImportNRI>();
+
             DataTable dt = new DataTable();
             try
             {
@@ -37,7 +40,6 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                         ProcessNRI psc = new ProcessNRI();
                         dt = psc.ProcessaNRI(path);
 
-                        List<ImportNRI> nriList = new List<ImportNRI>();
 
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
@@ -52,7 +54,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                         }
 
                         ViewBag.FileName = fileName;
-                        ViewBag.processedNRIList = nriList;
+                        //ViewBag.processedNRIList = nriList;
                     }
                 }
             }
@@ -60,7 +62,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             {
                 ViewBag.Error = ex.Message;
             }
-            return View(ViewBag.processedNRIList);
+            return View(nriList);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SEDOGv2.Helpers
     {
         public DataTable ProcessaNRI(string filepath)
         {
-            string insertHeader = "INSERT INTO MXSEDOG . NRI_INCOMING VALUES";
+            string insertHeader = "INSERT INTO MXSEDOG . ADVANCES_RECOUPABLE VALUES";
             //string deleteHeader = "DELETE FROM BRDIGITAL . STREAMCHART";
 
             // List<ImportAIF> listAif = new List<ImportAIF>();
@@ -48,7 +48,7 @@ namespace SEDOGv2.Helpers
 
                             int c = 0;
 
-                            db.ExecuteCommandSQL("DELETE MXSEDOG . NRI_INCOMING");
+                            db.ExecuteCommandSQL("DELETE MXSEDOG . ADVANCES_RECOUPABLE");
 
                             //ret.Linhas = totalRows - 4;
 
@@ -145,7 +145,7 @@ namespace SEDOGv2.Helpers
                                 // db.ExecuteCommandSQL(insertHeader + sb.ToString());
                                 // }
 
-                                string selRetorno = "SELECT NRI.IDPROJ_SEDOG, R2_PROJECT, ADVANCE, RECOUPABLE FROM MXSEDOG . NRI_INCOMING NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
+                                string selRetorno = "SELECT NRI.IDPROJ_SEDOG, R2_PROJECT, ADVANCE, RECOUPABLE FROM MXSEDOG . ADVANCES_RECOUPABLE NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
 
 
                                 dt = db.GetTableFromSQLString(selRetorno);
