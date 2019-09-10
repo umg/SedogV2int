@@ -10,7 +10,7 @@ using System.Data;
 
 namespace SEDOGv2.Controllers.AtualizacaoTabelas
 {
-    public class ImportNRIController : Controller
+    public class ImportAdvancesController : Controller
     {
         // GET: ImportNI
         public ActionResult Index()

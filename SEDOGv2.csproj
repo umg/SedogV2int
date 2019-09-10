@@ -225,7 +225,7 @@
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaTanqueController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaValoresController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\ImportAIFController.cs" />
-    <Compile Include="Controllers\AtualizacaoTabelas\ImportNRIController.cs" />
+    <Compile Include="Controllers\AtualizacaoTabelas\ImportAdvancesController.cs" />
     <Compile Include="Controllers\Cadastros\AtualizaProjetoController.cs" />
     <Compile Include="Controllers\Cadastros\CadastroProjetoController.cs" />
     <Compile Include="Controllers\Adm\DepartamentosController.cs" />
@@ -964,7 +964,7 @@
     <Content Include="Views\ManagementMeeting\_ListManagementMeetingPartial.cshtml" />
     <Content Include="Views\Shared\_AlertMessagePartial.cshtml" />
     <Content Include="Views\ImportAIF\Index.cshtml" />
-    <Content Include="Views\ImportNRI\Index.cshtml" />
+    <Content Include="Views\ImportAdvances\Index.cshtml" />
     <None Include="Web References\net.umusic.catalogueservices\SecureDataServices.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

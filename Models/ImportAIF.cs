@@ -11,6 +11,7 @@ namespace SEDOGv2.Models
         public string IdProjetoSedog { get; set; }
         public string Projeto { get; set; }
         public string R2Projects { get; set; }
+        public string Year { get; set; }
         public string ForeignIncome { get; set; }
         public string ArtistRoyalties { get; set; }
         public string ProducerRoyalties { get; set; }

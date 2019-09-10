@@ -98,13 +98,14 @@ namespace SEDOGv2.Helpers
 
                                         sb.Append(" (' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][2])) + "' , ");
                                         sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][3])) + "' , ");
-                                        sb.Append(" ' " + totalStreamTable.Rows[r][4] +  "' , ");
-                                        sb.Append(" ' " + totalStreamTable.Rows[r][5] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][4] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][5] +  "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][6] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][7] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][8] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][9] + "' , ");
-                                        sb.Append(" ' " + System.Convert.ToDecimal(totalStreamTable.Rows[r][10]) * 100 + "' ) ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][10] + "' , ");
+                                        sb.Append(" ' " + System.Convert.ToDecimal(totalStreamTable.Rows[r][11]) * 100 + "' ) ");
 
 
 
@@ -145,7 +146,7 @@ namespace SEDOGv2.Helpers
                                 // db.ExecuteCommandSQL(insertHeader + sb.ToString());
                                 // }
 
-                                string selRetorno = "SELECT AIF.IDPROJ_SEDOG, PRJ.PROJETO, R2_PROJECT, FOREIGN_INCOME, ARTIST_ROYALTIES, PRODUCER_ROYALTY, OTHER_ROYALTY, ALL_ROYALTIES, FOREIGN_MARGIN, PERC_AIF_MARGIN FROM MXSEDOG . AIF_INCOMING AIF INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON AIF.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
+                                string selRetorno = "SELECT AIF.IDPROJ_SEDOG, PRJ.PROJETO, R2_PROJECT, YEAR,FOREIGN_INCOME, ARTIST_ROYALTIES, PRODUCER_ROYALTY, OTHER_ROYALTY, ALL_ROYALTIES, FOREIGN_MARGIN, PERC_AIF_MARGIN FROM MXSEDOG . AIF_INCOMING AIF INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON AIF.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
 
 
                                 dt = db.GetTableFromSQLString(selRetorno);
