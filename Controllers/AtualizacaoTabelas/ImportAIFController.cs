@@ -47,6 +47,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                             ret.IdProjetoSedog = dt.Rows[i]["IDPROJ_SEDOG"].ToString() ;
                             ret.Projeto = dt.Rows[i]["PROJETO"].ToString();
                             ret.R2Projects = dt.Rows[i]["R2_PROJECT"].ToString();
+                            ret.Year = dt.Rows[i]["Year"].ToString();
                             ret.ForeignIncome = dt.Rows[i]["FOREIGN_INCOME"].ToString();
                             ret.ArtistRoyalties = dt.Rows[i]["ARTIST_ROYALTIES"].ToString();
                             ret.ProducerRoyalties = dt.Rows[i]["PRODUCER_ROYALTY"].ToString();
