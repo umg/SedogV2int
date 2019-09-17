@@ -38,11 +38,11 @@ namespace SEDOGv2.Helpers
                     var result = reader.AsDataSet();
                     if (result.Tables.Count > 0)
                     {
-                        if (result.Tables["NRI Summary"] != null)
+                        if (result.Tables["Advances A&R"] != null)
                         {
                             Models.Context.Conn db = new Models.Context.Conn();
 
-                            DataTable totalStreamTable = result.Tables["NRI Summary"];
+                            DataTable totalStreamTable = result.Tables["Advances A&R"];
                             int totalCols = totalStreamTable.Columns.Count;
                             int totalRows = totalStreamTable.Rows.Count;
 
@@ -99,7 +99,10 @@ namespace SEDOGv2.Helpers
                                         sb.Append(" (' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][2])) + "' , ");
                                         sb.Append(" ' " + Decimal.Round(System.Convert.ToDecimal(totalStreamTable.Rows[r][3])) + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][4] +  "' , ");
-                                        sb.Append(" ' " + totalStreamTable.Rows[r][5] + "')");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][5] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][6] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][7] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][8] + "')");
                                         //sb.Append(" ' " + totalStreamTable.Rows[r][6] + "' , ");
                                         //sb.Append(" ' " + totalStreamTable.Rows[r][7] + "' , ");
                                         //sb.Append(" ' " + totalStreamTable.Rows[r][8] + "' , ");
@@ -145,7 +148,7 @@ namespace SEDOGv2.Helpers
                                 // db.ExecuteCommandSQL(insertHeader + sb.ToString());
                                 // }
 
-                                string selRetorno = "SELECT NRI.IDPROJ_SEDOG, R2_PROJECT, ADVANCE, RECOUPABLE FROM MXSEDOG . ADVANCES_RECOUPABLE NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
+                                string selRetorno = "SELECT NRI.IDPROJ_SEDOG, R2_PROJECT, YEAR, TOTAL, ADVANCE, AUDIO, VIDEO FROM MXSEDOG . ADVANCES_RECOUPABLE NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
 
 
                                 dt = db.GetTableFromSQLString(selRetorno);

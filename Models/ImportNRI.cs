@@ -10,8 +10,11 @@ namespace SEDOGv2.Models
         public int Linhas { get; set; }
         public string IdProjetoSedog { get; set; }
         public string R2Projects { get; set; }
+        public string Year { get; set; }
+        public string Total { get; set; }
         public string Advance { get; set; }
-        public string Recoupable { get; set; }
+        public string Audio { get; set; }
+        public string Video { get; set; }
 
     }
 }

@@ -47,8 +47,11 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
 
                             ret.IdProjetoSedog = dt.Rows[i]["IDPROJ_SEDOG"].ToString();                            
                             ret.R2Projects = dt.Rows[i]["R2_PROJECT"].ToString();
-                            ret.Advance = dt.Rows[i]["Advance"].ToString();
-                            ret.Recoupable = dt.Rows[i]["Recoupable"].ToString();                            
+                            ret.Year = dt.Rows[i]["YEAR"].ToString();
+                            ret.Total = dt.Rows[i]["TOTAL"].ToString();
+                            ret.Advance = dt.Rows[i]["ADVANCE"].ToString();
+                            ret.Audio = dt.Rows[i]["AUDIO"].ToString();
+                            ret.Video = dt.Rows[i]["VIDEO"].ToString();
 
                             nriList.Add(ret);
                         }
