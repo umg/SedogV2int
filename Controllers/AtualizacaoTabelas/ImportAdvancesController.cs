@@ -15,7 +15,42 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
         // GET: ImportNI
         public ActionResult Index()
         {
-            return View();
+            List<ImportNRI> nriList = new List<ImportNRI>();
+
+            DataTable dt = new DataTable();
+            try
+            {
+                Models.Context.Conn db = new Models.Context.Conn();
+
+                string selRetorno = "SELECT NRI.IDPROJ_SEDOG, R2_PROJECT, YEAR, TOTAL, ADVANCE, AUDIO, VIDEO FROM MXSEDOG . ADVANCES_RECOUPABLE NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
+
+                dt = db.GetTableFromSQLString(selRetorno);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ImportNRI ret = new ImportNRI();
+
+                    ret.IdProjetoSedog = dt.Rows[i]["IDPROJ_SEDOG"].ToString();
+                    ret.R2Projects = dt.Rows[i]["R2_PROJECT"].ToString();
+                    ret.Year = dt.Rows[i]["YEAR"].ToString();
+                    ret.Total = dt.Rows[i]["TOTAL"].ToString();
+                    ret.Advance = dt.Rows[i]["ADVANCE"].ToString();
+                    ret.Audio = dt.Rows[i]["AUDIO"].ToString();
+                    ret.Video = dt.Rows[i]["VIDEO"].ToString();
+
+                    nriList.Add(ret);
+                }
+
+                ViewBag.FileName = "Last file imported content";
+                //ViewBag.processedNRIList = nriList;
+
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+            return View(nriList);
         }
 
         [HttpPost]

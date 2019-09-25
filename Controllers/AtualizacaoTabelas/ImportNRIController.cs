@@ -15,8 +15,54 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
         // GET: ImportNI
         public ActionResult Index()
         {
-            return View();
+            List<ImportNRIAnc> nriList = new List<ImportNRIAnc>();
+
+            DataTable dt = new DataTable();
+            try
+            {
+                Models.Context.Conn db = new Models.Context.Conn();
+
+                string selRetorno = "SELECT NRI.IDPROJ_SEDOG, YEAR, RELEASE_DATE, RELEASE_DATE_YTD, ARTISTNAME, LICENSE_INCOME, LICENSE_ROYALTIES, LICENSE_MARGIN, PREMIUM, SPONSORSHIP, OTHER_ADV, MANAGMNT_COMISSION, LIVE_EVENT_THEATRE, LIVE_AGENCY_TICKETING, PASSIVE_TOURING_INCOME, ALL_NRI FROM MXSEDOG . NRI NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
+
+                dt = db.GetTableFromSQLString(selRetorno);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ImportNRIAnc ret = new ImportNRIAnc();
+
+                    ret.IdProjetoSedog = dt.Rows[i]["IDPROJ_SEDOG"].ToString();
+                    ret.Year = dt.Rows[i]["YEAR"].ToString();
+                    ret.ReleaseDate = dt.Rows[i]["RELEASE_DATE"].ToString();
+                    ret.YTD = dt.Rows[i]["RELEASE_DATE_YTD"].ToString();
+                    ret.ArtistName = dt.Rows[i]["ARTISTNAME"].ToString();
+                    ret.LicenseIncome = dt.Rows[i]["LICENSE_INCOME"].ToString();
+                    ret.LicenseRoyalties = dt.Rows[i]["LICENSE_ROYALTIES"].ToString();
+                    ret.LicenceMargin = dt.Rows[i]["LICENSE_MARGIN"].ToString();
+                    ret.Premium = dt.Rows[i]["PREMIUM"].ToString();
+                    ret.SponsorShip = dt.Rows[i]["SPONSORSHIP"].ToString();
+                    ret.OtherAdv = dt.Rows[i]["OTHER_ADV"].ToString();
+                    ret.ManagmntComiission = dt.Rows[i]["MANAGMNT_COMISSION"].ToString();
+                    ret.LiveEvent = dt.Rows[i]["LIVE_EVENT_THEATRE"].ToString();
+                    ret.LiveAgency = dt.Rows[i]["LIVE_AGENCY_TICKETING"].ToString();
+                    ret.PassiveTouring = dt.Rows[i]["PASSIVE_TOURING_INCOME"].ToString();
+                    ret.AllNRI = dt.Rows[i]["ALL_NRI"].ToString();
+
+                    nriList.Add(ret);
+                }
+
+                ViewBag.FileName = "Last file imported content";
+                //ViewBag.processedNRIList = nriList;
+
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+            return View(nriList);
         }
+        //return View();
+    
 
         [HttpPost]
         public ActionResult Index(FormCollection collection)
@@ -76,5 +122,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
             }
             return View(nriList);
         }
+
+       
     }
 }
