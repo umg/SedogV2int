@@ -1,0 +1,68 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+
+<div class="container-fluid">
+    @using (Html.BeginForm())
+    {
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="row">
+                <div class="panel-heading  text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+           
+                <div class="col-md-6">
+                    <input type="submit" name="atualizar" value="Import" class="btn btn-default pull-right" />
+                    @*<div class="panel panel-default">
+
+                        <div class="panel-heading"><h4>Update Dashboard</h4></div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input type="submit" name="atualizar" value="Import" class="btn btn-default pull-right" />
+                            </div>
+                        </div>
+                    </div>*@
+                   
+                </div>                
+            </div>
+            <div class="panel-success" >
+                <div class="row"  style="t">
+                    <div class="col-md-3">
+                        <strong>@Html.Raw(ViewBag.Message)</strong>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        @*<div class="panel-success">
+            <div class="row">
+                <div class="col-md-9" id="divAlert">
+                    <div class="alert alert-success alert-dismissable" role="alert" >
+                        <button type="button" class="close" data-dismiss="success" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <strong>Got something wrong!!</strong>@Html.Raw(ViewBag.Message)
+                    </div>
+                </div>
+
+            </div>
+        </div>*@
+
+    }
+</div>
+
+
+
+
