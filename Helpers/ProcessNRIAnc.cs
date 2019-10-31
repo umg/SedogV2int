@@ -16,7 +16,7 @@ namespace SEDOGv2.Helpers
     {
         public DataTable ProcessaNRIAnc(string filepath)
         {
-            string insertHeader = "INSERT INTO MXSEDOG . NRI VALUES";
+            string insertHeader = "INSERT INTO MXSEDOG . NRITESTE VALUES";
             //string deleteHeader = "DELETE FROM BRDIGITAL . STREAMCHART";
 
             // List<ImportAIF> listAif = new List<ImportAIF>();
@@ -48,7 +48,7 @@ namespace SEDOGv2.Helpers
 
                             int c = 0;
 
-                            db.ExecuteCommandSQL("DELETE MXSEDOG . NRI");
+                            db.ExecuteCommandSQL("DELETE MXSEDOG . NRITESTE");
 
                             //ret.Linhas = totalRows - 4;
 
@@ -101,26 +101,57 @@ namespace SEDOGv2.Helpers
                                         sb.Append(" ' " + totalStreamTable.Rows[r][2] +  "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][3] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][4] + "' , ");
+                                        //sb.Append(" ' " + totalStreamTable.Rows[r][5] + "' , ");
+                                        //sb.Append(" ' " + totalStreamTable.Rows[r][6] + "' , ");
+                                        //sb.Append(" ' " + totalStreamTable.Rows[r][7] + "' , ");
+                                        //sb.Append(" ' " + totalStreamTable.Rows[r][8] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][9] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][10] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][11] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][12] + "' , ");
+                                        
                                         sb.Append(" ' " + totalStreamTable.Rows[r][13] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][14] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][15] + "' , ");
+                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][13])) - (Convert.ToInt32(totalStreamTable.Rows[r][14]))) + "' , ");
+
                                         sb.Append(" ' " + totalStreamTable.Rows[r][16] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][17] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][18] + "' , ");
-                                        sb.Append(" ' " + totalStreamTable.Rows[r][19] + "')");
-                                        //sb.Append(" ' " + totalStreamTable.Rows[r][6] + "' , ");
-                                        //sb.Append(" ' " + totalStreamTable.Rows[r][7] + "' , ");
-                                        //sb.Append(" ' " + totalStreamTable.Rows[r][8] + "' , ");
-                                        //sb.Append(" ' " + totalStreamTable.Rows[r][9] + "' , ");
-                                        //sb.Append(" ' " + System.Convert.ToDecimal(totalStreamTable.Rows[r][10]) * 100 + "' ) ");
+                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][16])) - (Convert.ToInt32(totalStreamTable.Rows[r][17]))) + "' , ");
+
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][19] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][20] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][21] + "' , ");
+                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][19])) - (Convert.ToInt32(totalStreamTable.Rows[r][20]))) + "' , ");
+
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][22] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][23] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][24] + "' , ");
+                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][22])) - (Convert.ToInt32(totalStreamTable.Rows[r][23]))) + "' , ");
+
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][25] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][26] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][27] + "' , ");
+                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][25])) - (Convert.ToInt32(totalStreamTable.Rows[r][26]))) + "' , ");
+
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][28] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][29] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][30] + "' , ");
+                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][28])) - (Convert.ToInt32(totalStreamTable.Rows[r][29]))) + "' , ");
+
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][31] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][32] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][33] + "' , ");
+
+                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][31])) - (Convert.ToInt32(totalStreamTable.Rows[r][32]))) + "' , ");
 
 
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][34] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][35] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][36] + "' , ");
 
-
+                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][34])) - (Convert.ToInt32(totalStreamTable.Rows[r][35]))) + "')");
 
 
                                         //ImportAIF ret = new ImportAIF();
@@ -157,9 +188,18 @@ namespace SEDOGv2.Helpers
                                 // db.ExecuteCommandSQL(insertHeader + sb.ToString());
                                 // }
 
-                                string selRetorno = "SELECT NRI.IDPROJ_SEDOG, YEAR, RELEASE_DATE, RELEASE_DATE_YTD, ARTISTNAME, LICENSE_INCOME, LICENSE_ROYALTIES, LICENSE_MARGIN, PREMIUM, SPONSORSHIP, OTHER_ADV, MANAGMNT_COMISSION, LIVE_EVENT_THEATRE, LIVE_AGENCY_TICKETING, PASSIVE_TOURING_INCOME, ALL_NRI FROM MXSEDOG . NRI NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
-
-
+                                string selRetorno = "SELECT NRI.IDPROJ_SEDOG, YEAR, RELEASE_DATE, RELEASE_DATE_YTD, ARTISTNAME, " +
+                                    "LICENSE_INCOME, LICENSE_ROYALTIES, LICENSE_MARGIN, LICENSE_PERCENT, " +
+                                    "PREMIUM_INCOME, PREMIUM_MARGIN, PREMIUM_PERCENT, PREMIUM_DIFF, " + 
+                                    "SPONSORSHIP_INCOME, SPONSORSHIP_MARGIN, SPONSORSHIP_PERCENT, SPONSORSHIP_DIFF ," + 
+                                    "OTHERADV_INCOME,OTHERADV_MARGIN , OTHERADV_PERCENT,OTHERADV_DIFF ," + 
+                                    "MANAGMNT_COMISSION_INCOME,MANAGMNT_COMISSION_MARGIN,MANAGMNT_COMISSION_PERCENT,MANAGMNT_COMISSION_DIFF," + 
+                                    "LIVEEVENT_INCOME,LIVEEVENT_MARGIN,LIVEEVENT_PERCENT,LIVEEVENT_DIFF, " + 
+                                    "LIVEAGENCY_INCOME,LIVEAGENCY_MARGIN,LIVEAGENCY_PERCENT,LIVEAGENCY_DIFF, " + 
+                                    "PASSIVETOURING_INCOME,PASSIVETOURING_MARGIN,PASSIVETOURING_PERCENT,PASSIVETOURING_DIFF," + 
+                                    "ALLNRI_INCOME,ALLNRI_MARGIN,ALLNRI_PERCENT,ALLNRI_DIFF " +
+                                    "FROM MXSEDOG . NRITESTE NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
+                                
                                 dt = db.GetTableFromSQLString(selRetorno);
 
                             }
