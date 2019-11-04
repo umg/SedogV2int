@@ -264,6 +264,12 @@
 
                                 @switch (item.Tipo)
                                 {
+                                    case "X":
+                                        <td class="right">
+                                            @(item.Valor != 0 ? "100%" : "0%" )
+                                        </td>
+                                        primeiroIDPL = item.Valor;
+                                        break;
                                     case "R":
                                         <td class="right">
                                             @(item.Valor != 0 ? "100%" : "0%" )
@@ -284,6 +290,21 @@
                                             </td>
                                         }
                                         primeiroIDPL = 0;
+                                        break;
+                                    case "Y":
+                                        switch (item.IDPL)
+                                        {
+                                            case 245:
+                                                <td class="right">
+                                                    @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", ((item.Valor / ViewBag.ValorTotalReceita))) : "0%" )
+                                                </td>
+                                                break;
+                                            default:
+                                                <td>
+                                                    @(primeiroIDPL != 0 ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
+                                                </td>
+                                                break;
+                                        }
                                         break;
                                     case "D":
                                         switch (item.IDPL)
