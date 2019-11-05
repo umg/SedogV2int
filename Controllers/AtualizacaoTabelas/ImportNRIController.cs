@@ -32,7 +32,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                                     "LIVEAGENCY_INCOME,LIVEAGENCY_MARGIN,LIVEAGENCY_PERCENT,LIVEAGENCY_DIFF, " +
                                     "PASSIVETOURING_INCOME,PASSIVETOURING_MARGIN,PASSIVETOURING_PERCENT,PASSIVETOURING_DIFF," +
                                     "ALLNRI_INCOME,ALLNRI_MARGIN,ALLNRI_PERCENT,ALLNRI_DIFF " +
-                                    "FROM MXSEDOG . NRITESTE NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
+                                    "FROM MXSEDOG . NRI NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
 
                 dt = db.GetTableFromSQLString(selRetorno);
 
