@@ -296,6 +296,7 @@
     <Compile Include="Models\DespesasDeMarketingCTBRepertorioPorGrupoViewModel.cs" />
     <Compile Include="Models\DespesasDeMarketingPorArtistaViewModel.cs" />
     <Compile Include="Models\DespesasDeMarketingTotalPorArtistaViewModel.cs" />
+    <Compile Include="Models\DetalhesDeProdutosBU.cs" />
     <Compile Include="Models\DetalhesDeProdutos.cs" />
     <Compile Include="Models\DigitalCustomerUsageTypeViewModel.cs" />
     <Compile Include="Models\DireitosMarginAnalysisViewModel.cs" />

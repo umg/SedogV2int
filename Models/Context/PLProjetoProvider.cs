@@ -148,7 +148,33 @@ namespace SEDOGv2.Models.Context
             return ret;
         }
 
-       
+        public List<DetalhesDeProdutosBU> SLT_PRODUTOS_POR_PROJETO_BU(long idLote)
+        {
+            List<DetalhesDeProdutosBU> ret = new List<DetalhesDeProdutosBU>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_ID_PLLOTE", idLote));
+                string procedure = AddScheme("SLT_PRODUTOS_POR_PROJETO_BU");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<DetalhesDeProdutosBU>();
+
+                foreach (DetalhesDeProdutosBU det in ret)
+                {
+                    //det.URL = GetCapa.GetCoverUrlString(det.COD_BARRAS);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
+
+
         public List<DetalhesDeProdutos> SLT_PRODUTOS_HEADER_POR_PROJETO(long idLote)
         {
             List<DetalhesDeProdutos> ret = new List<DetalhesDeProdutos>();

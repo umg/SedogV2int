@@ -20,6 +20,7 @@ namespace SEDOGv2.Controllers.Relatorios
             model.PLProjetos = new List<PLProjeto>();
             model.LucrosEPerdas = new List<LucrosEPerdas>();
             model.DetalhesDosProdutos = new List<DetalhesDeProdutos>();
+            model.DetalhesDosProdutosBU = new List<DetalhesDeProdutosBU>();
             model.RecDespTot = new ReceitaDespesaTotal();
             return View(model);
         }
@@ -84,6 +85,7 @@ namespace SEDOGv2.Controllers.Relatorios
 
                 model.DetalhesHeaderDosProdutos = provider.SLT_PRODUTOS_HEADER_POR_PROJETO(IDLote);
                 model.DetalhesDosProdutos = provider.SLT_PRODUTOS_POR_PROJETO(IDLote);
+                model.DetalhesDosProdutosBU = provider.SLT_PRODUTOS_POR_PROJETO_BU(IDLote);
                 model.isrc = provider.SLT_ISRC_RECEITA_TITULO_POR_PROJETO(IDLote);
                 
                 //model.RecDespTot = provider.SEL_RECEITAS_DESPESAS_EBITDA(IDLote);
@@ -147,6 +149,7 @@ namespace SEDOGv2.Controllers.Relatorios
 
                 model.DetalhesHeaderDosProdutos = provider.SLT_PRODUTOS_HEADER_POR_PROJETO(IDLote);
                 model.DetalhesDosProdutos = provider.SLT_PRODUTOS_POR_PROJETO(IDLote);
+                model.DetalhesDosProdutosBU = provider.SLT_PRODUTOS_POR_PROJETO_BU(IDLote);
                 model.isrc = provider.SLT_ISRC_RECEITA_TITULO_POR_PROJETO(IDLote);
 
                 decimal despesa = 0;
@@ -185,3 +188,4 @@ namespace SEDOGv2.Controllers.Relatorios
         
     }
 }
+

@@ -11,6 +11,7 @@ namespace SEDOGv2.Models
         public List<LucrosEPerdas> LucrosEPerdas { get; set; }
         public List<DetalhesDeProdutos> DetalhesHeaderDosProdutos { get; set; }
         public List<DetalhesDeProdutos> DetalhesDosProdutos { get; set; }
+        public List<DetalhesDeProdutosBU> DetalhesDosProdutosBU { get; set; }
         public ReceitaDespesaTotal RecDespTot { get; set; }
         public List<ISRCs> isrc { get; set; }
     }
