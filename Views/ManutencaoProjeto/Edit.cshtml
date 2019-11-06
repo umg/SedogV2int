@@ -80,7 +80,7 @@
                                 <select class="form-control input-lg" id="selResponsavel" name="selResponsavel">
                                     @foreach (Usuario _user in Model._Usuarios)
                                     {
-                                        <option value="@_user.Login" selected="@(@_user.Login == Model.Responsavel)">@_user.Nome</option>
+                                        <option value="@_user.Login" selected="@(@_user.Nome == Model.Responsavel)">@_user.Nome</option>
                                     }
                                 </select>
                             </div>
