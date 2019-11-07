@@ -291,7 +291,7 @@
                                         }
                                         primeiroIDPL = 0;
                                         break;
-                                    case "Y":
+                                    @*case "Y":
                                         switch (item.IDPL)
                                         {
                                             case 245:
@@ -305,11 +305,17 @@
                                                 </td>
                                                 break;
                                         }
-                                        break;
-                                    case "D":
-                                        switch (item.IDPL)
-                                        {
-                                            case 245:
+                                        break;*@
+                                case "Y":
+                                    <td class="right">
+                                        @(item.Valor != 0 ? "100%" : "0%" )
+                                    </td>
+                                    primeiroIDPL = item.Valor;
+                                    break;
+                                case "D":
+                                    switch (item.IDPL)
+                                    {
+                                        case 245:
                                                 <td class="right">
                                                     @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", ((item.Valor / ViewBag.ValorTotalReceita))) : "0%" )
                                                 </td>
