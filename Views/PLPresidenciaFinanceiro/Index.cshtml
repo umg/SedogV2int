@@ -270,17 +270,20 @@
                                         </td>
                                         primeiroIDPL = item.Valor;
                                         break;
+
                                     case "R":
                                         <td class="right">
                                             @(item.Valor != 0 ? "100%" : "0%" )
                                         </td>
                                         primeiroIDPL = item.Valor;
+                                        
                                         break;
+
                                     case "RD":
                                         if (item.IDPL != 250)
                                         {
                                             <td class="right">
-                                                @(primeiroIDPL != 0 ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
+                                                @((primeiroIDPL != 0 || primeiroIDPL != 0.00M) ? string.Format("{0:P2}", (item.Valor / primeiroIDPL))  : "0%" )
                                             </td>
                                         }
                                         else
@@ -291,27 +294,30 @@
                                         }
                                         primeiroIDPL = 0;
                                         break;
+
                                     @*case "Y":
-                                        switch (item.IDPL)
-                                        {
-                                            case 245:
-                                                <td class="right">
-                                                    @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", ((item.Valor / ViewBag.ValorTotalReceita))) : "0%" )
-                                                </td>
-                                                break;
-                                            default:
-                                                <td>
-                                                    @(primeiroIDPL != 0 ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
-                                                </td>
-                                                break;
-                                        }
+                                        <td class="right">
+                                            @(item.Valor != 0 ? "100%" : "0%" )
+                                        </td>
+                                        primeiroIDPL = item.Valor;
                                         break;*@
+
                                 case "Y":
-                                    <td class="right">
-                                        @(item.Valor != 0 ? "100%" : "0%" )
-                                    </td>
-                                    primeiroIDPL = item.Valor;
+                                    switch (item.IDPL)
+                                    {
+                                        case 245:
+                                            <td class="right">
+                                                @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", ((item.Valor / ViewBag.ValorTotalReceita))) : "0%" )
+                                            </td>
+                                            break;
+                                        default:
+                                            <td>
+                                                @((primeiroIDPL != 0 || primeiroIDPL != 0.00M) ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
+                                            </td>
+                                            break;
+                                    }
                                     break;
+
                                 case "D":
                                     switch (item.IDPL)
                                     {
@@ -322,11 +328,12 @@
                                                 break;
                                             default:
                                                 <td>
-                                                    @(primeiroIDPL != 0 ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
+                                                    @((primeiroIDPL != 0 || primeiroIDPL != 0.00M) ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
                                                 </td>
                                                 break;
                                         }
                                         break;
+
                                     case "DD":
                                         switch (item.IDPL)
                                         {
@@ -343,7 +350,8 @@
                                                 break;
                                         }
                                         break;
-                                    default:
+
+                                        default:
                                         <td>0%</td>
                                         break;
                                 }
