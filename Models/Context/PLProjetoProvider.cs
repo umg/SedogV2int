@@ -11,6 +11,27 @@ namespace SEDOGv2.Models.Context
 {
     public class PLProjetoProvider : PLProjetoProvider_ext
     {
+        public List<AtualizaAssinantesViewModel> SLT_ASSINANTES(int ano)
+        {
+            List<AtualizaAssinantesViewModel> ret = new List<AtualizaAssinantesViewModel>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_ANO", ano));
+                string procedure = AddScheme("SLT_ASSINANTES");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<AtualizaAssinantesViewModel>();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
         public Resposta<List<PLProjeto>> SEL_PLPROJETOS(string pesquisa)
         {
             Resposta<List<PLProjeto>> resp = new Resposta<List<PLProjeto>>();

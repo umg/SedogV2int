@@ -220,6 +220,7 @@
     <Compile Include="Controllers\Adm\AtualizaDashBoardController.cs" />
     <Compile Include="Controllers\Adm\PaginasAdmController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaARPUController.cs" />
+    <Compile Include="Controllers\AtualizacaoTabelas\AtualizaAssinantesController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaGTSController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaMarketShareController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaTanqueController.cs" />
@@ -279,6 +280,7 @@
     <Compile Include="Models\ARControleDespesaViewModel.cs" />
     <Compile Include="Models\ARPUViewModel.cs" />
     <Compile Include="Models\ArtistaProjeto.cs" />
+    <Compile Include="Models\AtualizaAssinantesViewModel.cs" />
     <Compile Include="Models\AtualizaGTSViewModel.cs" />
     <Compile Include="Models\CadastroProjetoViewModel.cs" />
     <Compile Include="Models\CamposTanqueViewModel.cs" />
