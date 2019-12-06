@@ -74,9 +74,15 @@
     $(".editable").editable().on('shown', function (e, editable) {
         editable.input.$input.val(editable.input.$input.val().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
         editable.input.$input.keydown(function (e) {
+            if (e.key == ',' || e.key == '.') {
+                e.preventDefault();
+                //alert('Tecla inválida');
+                return;
+            }
             if ($.inArray(e.keyCode, [188]) !== -1) {
                 if (editable.input.$input.val().indexOf(',') > -1) {
                     e.preventDefault();
+                    alert('Tecla inválida');
                     return;
                 }
             }

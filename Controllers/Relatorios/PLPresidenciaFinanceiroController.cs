@@ -106,7 +106,7 @@ namespace SEDOGv2.Controllers.Relatorios
                     //    despesa = despesa + lucros.Valor;
 
                  
-                    if (lucros.Tipo == "R")
+                    if (lucros.Tipo == "R" || lucros.Tipo == "RR")
                         receita = receita + lucros.Valor;
                     else if (lucros.Tipo == "D" || lucros.Tipo == "DD")
                         despesa = despesa + lucros.Valor;

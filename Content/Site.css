@@ -203,6 +203,16 @@ html {
     font-weight:bold;
     background-color:rgb(0, 140, 143);
 }
+.RR{
+    color:#000;
+    font-weight:bold;
+    background-color:#ccc;
+}
+.RR:last-of-type{
+    color:#fff;
+    font-weight:bold;
+    background-color:rgb(0, 140, 143);
+}
 .nav-pills .active a{
     background-color:rgb(0, 143, 146)!important;
 }
