@@ -104,12 +104,30 @@ namespace SEDOGv2.Controllers.Relatorios
                     //    receita = receita + lucros.Valor;
                     //else if (lucros.Tipo == "DD")
                     //    despesa = despesa + lucros.Valor;
+                    if (lucros.IDPL == 320)
+                    {
+                        if (lucros.Valor < 0)
+                        {
+                            lucros.Valor = (lucros.Valor * -1);
+                            lucros.Tipo = "RR";
+                        } else
+                        {
+                            lucros.Valor = (lucros.Valor * -1);
+                            lucros.Tipo = "DD";
+                        }
 
-                 
+                    }
+
                     if (lucros.Tipo == "R" || lucros.Tipo == "RR")
-                        receita = receita + lucros.Valor;
+                         receita = receita + lucros.Valor;
+                    if (lucros.IDPL == 320)
+                    {
+                        lucros.Valor = (lucros.Valor * -1);
+                    }
+
+
                     else if (lucros.Tipo == "D" || lucros.Tipo == "DD")
-                        despesa = despesa + lucros.Valor;
+                      despesa = despesa + lucros.Valor;                    
 
                 }
 
@@ -166,9 +184,26 @@ namespace SEDOGv2.Controllers.Relatorios
                     //    receita = receita + lucros.Valor;
                     //else if (lucros.Tipo == "DD")
                     //    despesa = despesa + lucros.Valor;
+                    if (lucros.IDPL == 320)
+                    {
+                        if (lucros.Valor < 0)
+                        {
+                            lucros.Valor = (lucros.Valor * -1);
+                            lucros.Tipo = "RR";
+                        }
+                        else
+                        {
+                            lucros.Valor = (lucros.Valor * -1);
+                            lucros.Tipo = "DD";
+                        }
 
+                    }
                     if (lucros.Tipo == "R")
                         receita = receita + lucros.Valor;
+                    if (lucros.IDPL == 320)
+                    {
+                        lucros.Valor = (lucros.Valor * -1);
+                    }
                     else if (lucros.Tipo == "D" || lucros.Tipo == "DD")
                         despesa = despesa + lucros.Valor;
                 }
