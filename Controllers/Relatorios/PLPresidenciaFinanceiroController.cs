@@ -189,12 +189,12 @@ namespace SEDOGv2.Controllers.Relatorios
                         if (lucros.Valor < 0)
                         {
                             lucros.Valor = (lucros.Valor * -1);
-                            lucros.Tipo = "RR";
+                            //lucros.Tipo = "RR";
                         }
                         else
                         {
                             lucros.Valor = (lucros.Valor * -1);
-                            lucros.Tipo = "DD";
+                            //lucros.Tipo = "DD";
                         }
 
                     }
