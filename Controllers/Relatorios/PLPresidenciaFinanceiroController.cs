@@ -94,6 +94,9 @@ namespace SEDOGv2.Controllers.Relatorios
                 decimal receita = 0;
                 decimal resultado = 0;
 
+                decimal royalties = 0;
+                decimal advances = 0;
+
                 foreach (LucrosEPerdas lucros in model.LucrosEPerdas)
                 {
                     if (lucros.IDPL == 10) ViewBag.VendaFisicaLiquida = lucros.Valor;
@@ -104,14 +107,32 @@ namespace SEDOGv2.Controllers.Relatorios
                     //    receita = receita + lucros.Valor;
                     //else if (lucros.Tipo == "DD")
                     //    despesa = despesa + lucros.Valor;
+                    
+                    if (lucros.IDPL == 315)
+                    {
+                        royalties = lucros.Valor;
+                    }
+                    if (lucros.IDPL == 310)
+                    {
+                        advances = lucros.Valor;
+                    }
+
                     if (lucros.IDPL == 320)
                     {
                         if (lucros.Valor < 0)
                         {
+                            if (royalties > advances)
+                            {
+                                lucros.Valor = 0;
+                            }
                             lucros.Valor = (lucros.Valor * -1);
                             //lucros.Tipo = "RR";
                         } else
                         {
+                            if (royalties > advances)
+                            {
+                                lucros.Valor = 0;
+                            }
                             lucros.Valor = (lucros.Valor * -1);
                             //lucros.Tipo = "DD";
                         }
@@ -131,6 +152,9 @@ namespace SEDOGv2.Controllers.Relatorios
 
                 }
 
+                ViewBag.Royal = royalties;
+                ViewBag.Advances = advances;
+
                 ViewBag.ValorTotalReceita = receita;
 
                 resultado = receita - despesa;
@@ -139,6 +163,7 @@ namespace SEDOGv2.Controllers.Relatorios
                 ViewBag.despesa = string.Format("{0:c2}", despesa);
                 ViewBag.receita = string.Format("{0:c2}", receita);
                 ViewBag.resultado = string.Format("{0:c2}", resultado);
+                ViewBag.result250 =  resultado;
                 ViewBag.fundoResultado = resultado >= 0 ? "bgBlue" : "bgRed";
 
             }
@@ -184,15 +209,35 @@ namespace SEDOGv2.Controllers.Relatorios
                     //    receita = receita + lucros.Valor;
                     //else if (lucros.Tipo == "DD")
                     //    despesa = despesa + lucros.Valor;
+                    decimal royalties = 0;
+                    decimal advances = 0;
+
+                    if (lucros.IDPL == 315)
+                    {
+                        royalties = lucros.Valor;
+                    }
+                    if (lucros.IDPL == 310)
+                    {
+                        advances = lucros.Valor;
+                    }
+
                     if (lucros.IDPL == 320)
                     {
                         if (lucros.Valor < 0)
                         {
+                            if (royalties > advances)
+                            {
+                                lucros.Valor = 0;
+                            }
                             lucros.Valor = (lucros.Valor * -1);
                             //lucros.Tipo = "RR";
                         }
                         else
                         {
+                            if (royalties > advances)
+                            {
+                                lucros.Valor = 0;
+                            }
                             lucros.Valor = (lucros.Valor * -1);
                             //lucros.Tipo = "DD";
                         }

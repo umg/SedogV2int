@@ -259,8 +259,16 @@
                             <tr class="@item.Tipo">
 
                                 <td class="no-padding"><a href="#" data-toggle="tooltip" title="@item.OBS" data-placement="right" class="info-tooltip"><div><i class="fa fa-info"></i>&nbsp;@item.Nome</div></a></td>
-                                <td>@string.Format("{0:c2}", @item.Valor)</td>
+                                @if (item.IDPL == 250)
+                                {
+                                    <td>@string.Format("{0:c2}", ViewBag.result250)</td>
+                                }
+                                else
+                                {
 
+
+                                <td>@string.Format("{0:c2}", @item.Valor)</td>
+                                }
 
                                 @switch (item.Tipo)
                                 {
@@ -287,13 +295,20 @@
                                                 @((primeiroIDPL != 0 || primeiroIDPL != 0.00M) ? string.Format("{0:P2}", (item.Valor / primeiroIDPL))  : "0%" )
                                             </td>
                                         }
+                                        else if (item.IDPL == 250)
+                                        {
+                                            <td class="right">
+                                                @*@((ViewBag.Royal < ViewBag.Advances) ? (ViewBag.resultado), (item.Valor / ViewBag.ValorTotalReceita)) : "0%" )*@  
+                                                @( ViewBag.result250 != 0 ? string.Format("{0:P2}", (ViewBag.result250 / ViewBag.ValorTotalReceita)) : "0%" )
+                                            </td>
+                                        }
                                         else
                                         {
                                             <td class="right">
                                                 @( ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", (item.Valor / ViewBag.ValorTotalReceita)) : "0%" )
                                             </td>
                                         }
-                                        primeiroIDPL = 0;
+                                primeiroIDPL = 0;
                                         break;
 
                                    
