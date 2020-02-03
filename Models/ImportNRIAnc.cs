@@ -46,6 +46,10 @@ namespace SEDOGv2.Models
         public string PassiveTouringMargin { get; set; }
         public string PassiveTouringPercent { get; set; }
         public string PassiveTouringDIF { get; set; }
+        public string PassivePublishing { get; set; }
+        public string PassivePublishingMargin { get; set; }
+        public string PassivePublishingPercent { get; set; }
+        public string PassivePublishingDIF { get; set; }
         public string AllNRI { get; set; }
         public string AllNRIMargin { get; set; }
         public string AllNRIPercent { get; set; }

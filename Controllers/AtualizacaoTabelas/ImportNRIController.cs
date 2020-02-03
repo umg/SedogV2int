@@ -31,6 +31,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                                     "LIVEEVENT_INCOME,LIVEEVENT_MARGIN,LIVEEVENT_PERCENT,LIVEEVENT_DIFF, " +
                                     "LIVEAGENCY_INCOME,LIVEAGENCY_MARGIN,LIVEAGENCY_PERCENT,LIVEAGENCY_DIFF, " +
                                     "PASSIVETOURING_INCOME,PASSIVETOURING_MARGIN,PASSIVETOURING_PERCENT,PASSIVETOURING_DIFF," +
+                                    "PASSIVEPUBLISHING_INCOME,PASSIVEPUBLISHING_MARGIN,PASSIVEPUBLISHING_PERCENT,PASSIVEPUBLISHING_DIFF," +
                                     "ALLNRI_INCOME,ALLNRI_MARGIN,ALLNRI_PERCENT,ALLNRI_DIFF " +
                                     "FROM MXSEDOG . NRI NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
 
@@ -55,6 +56,7 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                     ret.LiveEvent = dt.Rows[i]["LIVEEVENT_INCOME"].ToString();
                     ret.LiveAgency = dt.Rows[i]["LIVEAGENCY_INCOME"].ToString();
                     ret.PassiveTouring = dt.Rows[i]["PASSIVETOURING_INCOME"].ToString();
+                    ret.PassivePublishing = dt.Rows[i]["PASSIVEPUBLISHING_INCOME"].ToString();
                     ret.AllNRI = dt.Rows[i]["ALLNRI_INCOME"].ToString();
 
                     nriList.Add(ret);
@@ -138,6 +140,10 @@ namespace SEDOGv2.Controllers.AtualizacaoTabelas
                             ret.PassiveTouringMargin = dt.Rows[i]["PASSIVETOURING_MARGIN"].ToString();
                             ret.PassiveTouringPercent = dt.Rows[i]["PASSIVETOURING_PERCENT"].ToString();
                             ret.PassiveTouringDIF = dt.Rows[i]["PASSIVETOURING_DIFF"].ToString();
+                            ret.PassivePublishing = dt.Rows[i]["PASSIVEPUBLISHING_INCOME"].ToString();
+                            ret.PassivePublishingMargin = dt.Rows[i]["PASSIVEPUBLISHING_MARGIN"].ToString();
+                            ret.PassivePublishingPercent = dt.Rows[i]["PASSIVEPUBLISHING_PERCENT"].ToString();
+                            ret.PassivePublishingDIF = dt.Rows[i]["PASSIVEPUBLISHING_DIFF"].ToString();
                             ret.AllNRI = dt.Rows[i]["ALLNRI_INCOME"].ToString();
                             ret.AllNRIMargin = dt.Rows[i]["ALLNRI_MARGIN"].ToString();
                             ret.AllNRIPercent = dt.Rows[i]["ALLNRI_PERCENT"].ToString();

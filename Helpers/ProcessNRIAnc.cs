@@ -151,7 +151,13 @@ namespace SEDOGv2.Helpers
                                         sb.Append(" ' " + totalStreamTable.Rows[r][35] + "' , ");
                                         sb.Append(" ' " + totalStreamTable.Rows[r][36] + "' , ");
 
-                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][34])) - (Convert.ToInt32(totalStreamTable.Rows[r][35]))) + "')");
+                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][34])) - (Convert.ToInt32(totalStreamTable.Rows[r][35]))) + "' , ");
+
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][37] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][38] + "' , ");
+                                        sb.Append(" ' " + totalStreamTable.Rows[r][39] + "' , ");
+
+                                        sb.Append(" ' " + ((Convert.ToInt32(totalStreamTable.Rows[r][37])) - (Convert.ToInt32(totalStreamTable.Rows[r][38]))) + "')");
 
 
                                         //ImportAIF ret = new ImportAIF();
@@ -196,7 +202,8 @@ namespace SEDOGv2.Helpers
                                     "MANAGMNT_COMISSION_INCOME,MANAGMNT_COMISSION_MARGIN,MANAGMNT_COMISSION_PERCENT,MANAGMNT_COMISSION_DIFF," + 
                                     "LIVEEVENT_INCOME,LIVEEVENT_MARGIN,LIVEEVENT_PERCENT,LIVEEVENT_DIFF, " + 
                                     "LIVEAGENCY_INCOME,LIVEAGENCY_MARGIN,LIVEAGENCY_PERCENT,LIVEAGENCY_DIFF, " + 
-                                    "PASSIVETOURING_INCOME,PASSIVETOURING_MARGIN,PASSIVETOURING_PERCENT,PASSIVETOURING_DIFF," + 
+                                    "PASSIVETOURING_INCOME,PASSIVETOURING_MARGIN,PASSIVETOURING_PERCENT,PASSIVETOURING_DIFF," +
+                                    "PASSIVEPUBLISHING_INCOME,PASSIVEPUBLISHING_MARGIN,PASSIVEPUBLISHING_PERCENT,PASSIVEPUBLISHING_DIFF," +
                                     "ALLNRI_INCOME,ALLNRI_MARGIN,ALLNRI_PERCENT,ALLNRI_DIFF " +
                                     "FROM MXSEDOG . NRI NRI INNER JOIN MXSEDOG . PL_PROJETO_SEDOG PRJ ON NRI.IDPROJ_SEDOG = PRJ.IDPROJ_SEDOG";
                                 
