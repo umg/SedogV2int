@@ -260,6 +260,7 @@ namespace SEDOGv2.Controllers.Relatorios
                 ViewBag.updown = resultado >= 0 ? "fa-arrow-up" : "fa-arrow-down";
                 ViewBag.despesa = string.Format("{0:c2}", despesa);
                 ViewBag.receita = string.Format("{0:c2}", receita);
+                ViewBag.result250 = resultado;
                 ViewBag.resultado = string.Format("{0:c2}", resultado);
                 ViewBag.fundoResultado = resultado >= 0 ? "bgBlue" : "bgRed";
             }
