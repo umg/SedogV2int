@@ -448,7 +448,106 @@
 
                         @switch (item.Tipo)
                         {
+                            case "X":
+                                <td class="right">
+                                    @(item.Valor != 0 ? "100%" : "0%" )
+                                </td>
+                                primeiroIDPL = item.Valor;
+                                break;
+
                             case "R":
+                                <td class="right">
+                                    @(item.Valor != 0 ? "100%" : "0%" )
+                                </td>
+                                primeiroIDPL = item.Valor;
+
+                                break;
+
+
+                            case "RD":
+                                if (item.IDPL != 250)
+                                {
+                                    <td class="right">
+                                        @((primeiroIDPL != 0 || primeiroIDPL != 0.00M) ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
+                                    </td>
+                                }
+                                else if (item.IDPL == 250)
+                                {
+                                    <td class="right">
+                                        @*@((ViewBag.Royal < ViewBag.Advances) ? (ViewBag.resultado), (item.Valor / ViewBag.ValorTotalReceita)) : "0%" )*@
+                                        @( ViewBag.result250 != 0 ? string.Format("{0:P2}", (ViewBag.result250 / ViewBag.ValorTotalReceita)) : "0%" )
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="right">
+                                        @( ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", (item.Valor / ViewBag.ValorTotalReceita)) : "0%" )
+                                    </td>
+                                }
+                                primeiroIDPL = 0;
+                                break;
+
+
+                                @*case "Y":
+                                    <td class="right">
+                                        @(item.Valor != 0 ? "100%" : "0%" )
+                                    </td>
+                                    primeiroIDPL = item.Valor;
+                                    break;*@
+
+                        case "Y":
+                            switch (item.IDPL)
+                            {
+                                case 245:
+                                    <td class="right">
+                                        @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", ((item.Valor / ViewBag.ValorTotalReceita))) : "0%" )
+                                    </td>
+                                    break;
+                                default:
+                                    <td>
+                                        @((primeiroIDPL != 0 || primeiroIDPL != 0.00M) ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
+                                    </td>
+                                    break;
+                            }
+                            break;
+
+                        case "D":
+                            switch (item.IDPL)
+                            {
+                                case 245:
+                                    <td class="right">
+                                        @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", ((item.Valor / ViewBag.ValorTotalReceita))) : "0%" )
+                                    </td>
+                                        break;
+                                    default:
+                                        <td>
+                                            @((primeiroIDPL != 0 || primeiroIDPL != 0.00M) ? string.Format("{0:P2}", (item.Valor / primeiroIDPL)) : "0%" )
+                                        </td>
+                                        break;
+                                }
+                                break;
+
+                            case "DD":
+                                switch (item.IDPL)
+                                {
+                                    case 180:
+                                    case 190:
+                                    case 200:
+                                    case 210:
+                                    case 220:
+                                    case 230:
+                                    case 240:
+                                        <td class="right">
+                                            @(ViewBag.ValorTotalReceita != 0 ? string.Format("{0:P2}", ((item.Valor / ViewBag.ValorTotalReceita))) : "0%" )
+                                        </td>
+                                        break;
+                                }
+                                break;
+
+                            default:
+                                <td>0%</td>
+                                break;
+                            @*case "R":
                                 <td class="right">
                                     @(item.Valor != 0 ? "100,00" : "0,00" )
                                 </td>
@@ -502,7 +601,7 @@
                                 break;
                             default:
                                 <td class="right">0,00</td>
-                                break;
+                                break;*@
                         }
                     </tr>
                 }

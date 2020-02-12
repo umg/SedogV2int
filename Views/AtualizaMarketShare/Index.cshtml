@@ -53,7 +53,8 @@
                         <tr class="saveLine">
                             <td class="anoVal">@item.ANO</td>
                             <td class="mesVal">@item.MES</td>
-                            <td><a href="#" class="editable percentVal" data-type="text" data-placement="top" data-title="Type a value for field" data-emptytext="0">@item.PERCENT.ToString("N2", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>
+                            @*<td><a href="#" class="editable percentVal" data-type="text" data-placement="top" data-title="Type a value for field" data-emptytext="0">@item.PERCENT.ToString("N2", System.Globalization.CultureInfo.CreateSpecificCulture(SEDOGv2.Helpers.appSettings._User.Culture))</a></td>*@
+                            <td><a href="#" class="editable percentVal" data-type="text" data-placement="top" data-title="Type a value for field" data-emptytext="0">@item.PERCENT.ToString("#0.0")</a></td>
                         </tr>
                     }
                 </table>
@@ -70,13 +71,14 @@
     };
 
     $(".editable").editable().on('shown', function (e, editable) {
-        editable.input.$input.val(editable.input.$input.val().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+        //editable.input.$input.val(editable.input.$input.val().replace(/[\.]+/g, '').replace(/[\,]+/g, ''))
+        editable.input.$input.val(editable.input.$input.val().replace(/[\.]+/g, ''))
         editable.input.$input.keydown(function (e) {
-            if (e.key == ',' || e.key == '.') {
-                e.preventDefault();
-                //alert('Tecla inválida');
-                return;
-            }
+            //if (e.key == ',' || e.key == '.') {
+            //    e.preventDefault();
+            //    //alert('Tecla inválida');
+            //    return;
+            //}
             if ($.inArray(e.keyCode, [188]) !== -1) {
                 if (editable.input.$input.val().indexOf(',') > -1) {
                     e.preventDefault();
