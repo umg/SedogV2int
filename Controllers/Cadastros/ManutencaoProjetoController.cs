@@ -182,7 +182,8 @@ namespace SEDOGv2.Controllers.Cadastros
                 string packing = collection["packing"];
                 if (codprod == "") codprod = "0";
                 if (packing == "") packing = "00";
-                if (Convert.ToInt32(packing) <= 9) packing = "0" + packing;
+                //if (Convert.ToInt32(packing) <= 9) packing = "0" + packing;
+                if (packing.Length < 2) packing = packing.Trim().PadLeft(2, '0');
 
                 PLProjetoProvider provider = new PLProjetoProvider();
                 long idProjSedog = long.Parse(collection["idProjSedog"]);

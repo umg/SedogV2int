@@ -6,6 +6,13 @@
     Layout = "~/Views/Shared/_LoggedIn.cshtml";
 }
 
+<style>
+    .twochar
+{
+    width:2em;
+}
+</style>
+
 <div class="container-fluid">
     <div class="panel panel-success">
         <!-- Default panel contents -->
@@ -384,7 +391,7 @@
                                     </tr>
                                     <tr>
                                         <th><input type="text" name="cod_prod" class="input-sm" /></th>
-                                        <th><input type="text" name="packing" class="input-sm" /></th>
+                                        <th><input type="text" name="packing" class="input-sm" maxlength="2" class="twochar" /></th>
                                         <th><input type="text" name="BU" class="input-sm" /></th>
                                         <th><input type="submit" name="salvar" class="btn btn-default" value="incluir" /></th>
                                     </tr>
