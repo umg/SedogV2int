@@ -812,6 +812,26 @@ namespace SEDOGv2.Models.Context
                 throw ex;
             }
         }
+        public List<DashBoardsPorUsuarioViewModel> SLT_LOAD_DASHBOARD_INFO(string login)
+        {
+            var ret = new List<DashBoardsPorUsuarioViewModel>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_LOGIN", login));
+                string procedure = AddScheme("SLT_LOAD_DASHBOARD_INFO");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<DashBoardsPorUsuarioViewModel>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
         public List<PagesPorUsuarioViewModel> SLT_PAGES_POR_USUARIO(string login)
         {
             List<PagesPorUsuarioViewModel> ret = new List<PagesPorUsuarioViewModel>();
@@ -831,6 +851,56 @@ namespace SEDOGv2.Models.Context
                 throw ex;
             }
             return ret;
+        }
+        public List<DashBoard> SLT_OBJETOS()
+        {
+            try
+            {
+                var procedure = AddScheme("SLT_OBJETOS");
+
+                var dt = GetTable(procedure);
+
+                return dt.DataTableToList<DashBoard>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void INS_OBJETOS_USUARIO(string login, string idpage, string label)
+        {
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_LOGIN", login.ToUpper()));
+                parameters.Add(AddParameter("P_IDPAGE", idpage));
+                parameters.Add(AddParameter("P_LABEL", label));
+                string procedure = AddScheme("INS_OBJETOS_USUARIO");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public void DEL_OBJETO_USUARIO(string login)
+        {
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_LOGIN", login.ToUpper()));
+                string procedure = AddScheme("DEL_OBJETO_USUARIO");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public void DEL_PAGINAS_USUARIO(string login)
         {
