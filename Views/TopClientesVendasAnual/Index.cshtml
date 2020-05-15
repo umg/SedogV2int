@@ -1,0 +1,36 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+
+@model TopClientesVendasAnualViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel panel-heading text-center">
+                <h2>
+                    @appSettings.pageName()
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-md-12 alertMessage" runat="server" id="divAlert">
+            @Html.Raw(ViewBag.Message)
+        </div>
+
+        @using (Html.BeginForm("Index", "TopClientesVendasAnual", FormMethod.Post, new { id = "FormTopClientesVendasAnual" }))
+        {
+            @Html.Partial("_FilterPartial")
+        }
+        @Html.Partial("_ListTopClientesVendasAnualPartial", Model)
+    </div>
+</div>
+
+@using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+{
+    <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+    <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+}

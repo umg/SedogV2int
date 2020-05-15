@@ -2429,5 +2429,105 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
+
+        public List<TopClientesVendasAnual> SLT_TOP_CLIENTES_VENDAS_COMPARATIVO_ANUAL(string tipo, int mes1, int ano1, int mes2, int ano2, char sumarizado)
+        {
+            var retorno = new List<TopClientesVendasAnual>();
+            try
+            {
+                var dataTable = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_TIPO", tipo));
+                parameters.Add(AddParameter("P_MES1", mes1));
+                parameters.Add(AddParameter("P_ANO1", ano1));
+                parameters.Add(AddParameter("P_MES2", mes2));
+                parameters.Add(AddParameter("P_ANO2", ano2));
+                parameters.Add(AddParameter("P_SUMARIZADO", sumarizado));
+
+                var procedure = AddScheme("SLT_TOP_CLIENTES_VENDAS_COMPARATIVO_ANUAL");
+
+                dataTable = GetTable(procedure, parameters.ToArray());
+
+                retorno = dataTable.DataTableToList<TopClientesVendasAnual>();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return retorno;
+        }
+        public List<TopClientesFisicoDigitalTotal> SLT_TOP_VENDAS(string mesDe, string anoDe, string mesAte, string anoAte, string diaAte)
+        {
+            var retorno = new List<TopClientesFisicoDigitalTotal>();
+            try
+            {
+                var dataTable = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_MES_DE", mesDe));
+                parameters.Add(AddParameter("P_ANO_DE", anoDe));
+                parameters.Add(AddParameter("P_MES_ATE", mesAte));
+                parameters.Add(AddParameter("P_ANO_ATE", anoAte));
+                parameters.Add(AddParameter("P_DIA_ATE", diaAte));
+
+                var procedure = AddScheme("SLT_TOP_VENDAS");
+
+                dataTable = GetTable(procedure, parameters.ToArray());
+
+                retorno = dataTable.DataTableToList<TopClientesFisicoDigitalTotal>();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return retorno;
+        }
+        public List<TopClientesFisicoDigital> SLT_TOP10_CLIENTE(string mesDe, string anoDe, string mesAte, string anoAte, int top)
+        {
+            var retorno = new List<TopClientesFisicoDigital>();
+            try
+            {
+                var dataTable = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_MES_DE", mesDe));
+                parameters.Add(AddParameter("P_ANO_DE", anoDe));
+                parameters.Add(AddParameter("P_MES_ATE", mesAte));
+                parameters.Add(AddParameter("P_ANO_ATE", anoAte));
+                parameters.Add(AddParameter("P_TOP", top));
+
+                var procedure = AddScheme("SLT_TOP10_CLIENTE");
+
+                dataTable = GetTable(procedure, parameters.ToArray());
+
+                retorno = dataTable.DataTableToList<TopClientesFisicoDigital>();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return retorno;
+        }
+        public List<TopClientesFisicoViewModel> SLT_TOP_CLIENTES_DETALHADO(DateTime dataInicial, DateTime dataFinal)
+        {
+            var retorno = new List<TopClientesFisicoViewModel>();
+            try
+            {
+
+                var dataTable = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_DATAINICIAL", dataInicial.ToString("yyyy-MM-dd")));
+                parameters.Add(AddParameter("P_DATAFINAL", dataFinal.ToString("yyyy-MM-dd")));
+                var procedure = AddScheme("SLT_TOP_CLIENTES_DETALHADO");
+
+                dataTable = GetTable(procedure, parameters.ToArray());
+
+                retorno = dataTable.DataTableToList<TopClientesFisicoViewModel>();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return retorno;
+        }
+
     }
 }

@@ -1,0 +1,118 @@
+﻿
+<div class="row">
+
+    <div class="row">
+        <div class="col-md-2 text-center">
+            <div class="form-group">
+                <h4>Tipo de Cliente:</h4>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-1">
+                <input type="radio" name="tipoCliente" value="Todos" checked />Todos
+            </div>
+            <div class="col-md-1">
+                <input type="radio" name="tipoCliente" value="Digital" />Digital
+            </div>
+            <div class="col-md-1">
+                <input type="radio" name="tipoCliente" value="Fisico" />Físico
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-center">
+            <div class="form-group">
+                <h4>1° Período:</h4>
+            </div>
+        </div>
+        <div class="col-md-1 text-right">
+            <div class="form-group">
+                <h4>Mês:</h4>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <select class="form-control" name="mes1" id="mes1">
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-1 text-right">
+            <div class="form-group">
+                <h4>Ano:</h4>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <select name="ano1" id="ano1" class="form-control">
+                    @for (int ano = 0; ano <= DateTime.Now.Year - 2010; ano++)
+                    {
+                        <option value="@DateTime.Now.AddYears(-ano).ToString("yyyy")">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-center">
+            <div class="form-group">
+                <h4>2° Período:</h4>
+            </div>
+        </div>
+        <div class="col-md-1 text-right">
+            <div class="form-group">
+                <h4>Mês:</h4>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <select class="form-control" name="mes2" id="mes2">
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-1 text-right">
+            <div class="form-group">
+                <h4>Ano:</h4>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <select name="ano2" id="ano2" class="form-control">
+                    @for (int ano = 0; ano <= DateTime.Now.Year - 2010; ano++)
+                    {
+                        <option value="@DateTime.Now.AddYears(-ano).ToString("yyyy")">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                    }
+                </select>
+            </div>
+        </div>        
+        <div class="col-md-4 text-center">
+            <button type="submit" id="btnFiltrar" class="btn btn-default">
+                Buscar
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+    </div>
+</div>

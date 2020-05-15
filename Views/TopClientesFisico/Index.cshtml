@@ -1,0 +1,243 @@
+﻿@using SEDOGv2.Helpers;
+@model List<SEDOGv2.Models.TopClientesFisicoViewModel>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_LoggedIn.cshtml";
+    }
+
+    <div class="container-fluid">
+        <div class="panel panel-success">
+            <div class="row">
+                <div class="panel panel-heading text-center">
+                    <h2>
+                        @appSettings.pageName()
+                    </h2>
+                </div>
+            </div>
+
+            <div class="col-md-12 alertMessage" runat="server" id="divAlert">
+                @Html.Raw(ViewBag.Message)
+            </div>
+
+            @using (Html.BeginForm("Index", "TopClientesFisico", FormMethod.Post, new { id = "formInput", enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <h4 for="dataInicial">Data Inicial:</h4>
+                    </div>
+                    <div class="col-md-2 text-left">
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" id="dataInicial" name="dataInicial">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <h4 for="dataFinal">Data Final:</h4>
+                    </div>
+                    <div class="col-md-2 text-left">
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" id="dataFinal" name="dataFinal">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2 form-group">
+                        <button type="submit" id="buscar" class="btn btn-default">Buscar
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            }
+            <br/>
+            @if (Model != null)
+            {
+                var dataInicial = Request.Form["dataInicial"];
+                var dataFinal = Request.Form["dataFinal"];
+                decimal quantidadeVendida = 0;
+                decimal valorVendaBruta = 0;
+                decimal desconto = 0;
+                decimal impostos = 0;
+                decimal valorVendaLiquida = 0;
+                decimal quantidadeDevolucao = 0;
+                decimal valorDevolucaoLiquido = 0;
+                decimal valorHfm = 0;
+
+                <div class="panel panel-success panel-report">
+                    <div class="row">
+                        <div class="col-md-2 text-left text-bold">Data Inicial: @dataInicial</div>
+                        <div class="col-md-2 text-left text-bold">Data Final: @dataFinal</div>
+                        <div class="col-md-6 text-right">
+                            <h4>Exportar para</h4>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <button type="submit" class="btn btn-default printPDF">
+                                <i class="fa fa-file-pdf-o fa-4"></i>
+                            </button>
+                            <button type="submit" class="btn btn-default printExcel">
+                                <i class="fa fa-file-excel-o fa-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" id="tdExcel">
+                            <table class="table table-striped table-bordered table-inline DireitostableSortPagging" cellspacing="0" width="100">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente Id</th>
+                                        <th>Cliente</th>
+                                        <th>Quantidade Vendida</th>
+                                        <th>Valor de Venda Bruta</th>
+                                        <th>Desconto</th>
+                                        <th>Impostos</th>
+                                        <th>Valor Venda Liquida</th>
+                                        <th>Quantidade de Devolução</th>
+                                        <th>Valor Liquido de Devolução</th>
+                                        <th>Valor HFM</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.IdCliente</td>
+                                            <td>@item.Cliente</td>
+                                            <td>@item.QuantidadeVendida</td>
+                                            <td>@string.Format("{0:N2}", item.ValorVendaBruta)</td>
+                                            <td>@string.Format("{0:N2}", item.Desconto)</td>
+                                            <td>@string.Format("{0:N2}", item.Impostos)</td>
+                                            <td>@string.Format("{0:N2}", item.ValorVendaLiquida)</td>
+                                            <td>@item.QuantidadeDevolucao</td>
+                                            <td>@string.Format("{0:N2}", item.ValorDevolucaoLiquido)</td>
+                                            <td>@string.Format("{0:N2}", item.ValorHfm)</td>
+                                        </tr>
+                                        quantidadeVendida += item.QuantidadeVendida;
+                                        valorVendaBruta += item.ValorVendaBruta;
+                                        desconto += item.Desconto;
+                                        impostos += item.Impostos;
+                                        valorVendaLiquida += item.ValorVendaLiquida;
+                                        quantidadeDevolucao += item.QuantidadeDevolucao;
+                                        valorDevolucaoLiquido += item.ValorDevolucaoLiquido;
+                                        valorHfm += item.ValorHfm;
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr style="font-weight:bold">
+                                        <td colspan="2">Total</td>
+                                        <td>@quantidadeVendida</td>
+                                        <td>@string.Format("{0:C2}", valorVendaBruta)</td>
+                                        <td>@string.Format("{0:C2}", desconto)</td>
+                                        <td>@string.Format("{0:C2}", impostos)</td>
+                                        <td>@string.Format("{0:C2}", valorVendaLiquida)</td>
+                                        <td>@quantidadeDevolucao</td>
+                                        <td>@string.Format("{0:C2}", valorDevolucaoLiquido)</td>
+                                        <td>@string.Format("{0:C2}", valorHfm)</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="print" style="display:none">
+                    @{
+                        quantidadeVendida = 0;
+                        valorVendaBruta = 0;
+                        desconto = 0;
+                        impostos = 0;
+                        valorVendaLiquida = 0;
+                        quantidadeDevolucao = 0;
+                        valorDevolucaoLiquido = 0;
+                        valorHfm = 0;
+                    }
+                    <table cellspacing="0px" style="width:100%">
+                        <thead>
+                            <tr>
+                                <td colspan="6" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="text-align:center"><h2 style="text-align:center" class="bold underline">@appSettings.pageName()</h2></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="text-align:center" class="bgRed">Filtro: @ViewBag.filtro</td>
+                            </tr>
+
+                            <tr>
+                                <th>Cliente Id</th>
+                                <th>Cliente</th>
+                                <th>Quantidade Vendida</th>
+                                <th>Valor de Venda Bruta</th>
+                                <th>Desconto</th>
+                                <th>Impostos</th>
+                                <th>Valor Venda Liquida</th>
+                                <th>Quantidade de Devolução</th>
+                                <th>Valor Liquido de Devolução</th>
+                                <th>Valor HFM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.IdCliente</td>
+                                    <td>@item.Cliente</td>
+                                    <td>@item.QuantidadeVendida</td>
+                                    <td>@string.Format("{0:C2}", item.ValorVendaBruta)</td>
+                                    <td>@string.Format("{0:C2}", item.Desconto)</td>
+                                    <td>@string.Format("{0:C2}", item.Impostos)</td>
+                                    <td>@string.Format("{0:C2}", item.ValorVendaLiquida)</td>
+                                    <td>@item.QuantidadeDevolucao</td>
+                                    <td>@string.Format("{0:C2}", item.ValorDevolucaoLiquido)</td>
+                                    <td>@string.Format("{0:C2}", item.ValorHfm)</td>
+                                </tr>
+                                quantidadeVendida += item.QuantidadeVendida;
+                                valorVendaBruta += item.ValorVendaBruta;
+                                desconto += item.Desconto;
+                                impostos += item.Impostos;
+                                valorVendaLiquida += item.ValorVendaLiquida;
+                                quantidadeDevolucao += item.QuantidadeDevolucao;
+                                valorDevolucaoLiquido += item.ValorDevolucaoLiquido;
+                                valorHfm += item.ValorHfm;
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr style="font-weight:bold">
+                                <td colspan="2">Total</td>
+                                <td>@quantidadeVendida</td>
+                                <td>@string.Format("{0:C2}", valorVendaBruta)</td>
+                                <td>@string.Format("{0:C2}", desconto)</td>
+                                <td>@string.Format("{0:C2}", impostos)</td>
+                                <td>@string.Format("{0:C2}", valorVendaLiquida)</td>
+                                <td>@quantidadeDevolucao</td>
+                                <td>@string.Format("{0:C2}", valorDevolucaoLiquido)</td>
+                                <td>@string.Format("{0:C2}", valorHfm)</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Index", "Print", FormMethod.Post, new { id = "printForm" }))
+    {
+        <input type="hidden" name="PrintHtmlContent" id="PrintHtmlContent" />
+        <input type="hidden" name="PrintHtmlType" id="PrintHtmlType" />
+    }
+
+    <script type="text/javascript">
+    $(function () {
+        $('.input-group.date').datepicker({
+            format: "dd/mm/yyyy",
+            orientation: 'top'
+        });
+    });
+    </script>

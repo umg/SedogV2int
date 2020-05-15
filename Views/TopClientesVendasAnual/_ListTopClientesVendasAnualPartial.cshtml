@@ -1,0 +1,251 @@
+﻿@using SEDOGv2.Helpers;
+@using SEDOGv2.Models;
+@using System.Globalization;
+
+@model TopClientesVendasAnualViewModel
+
+<br/>
+
+@if (Model.Fracionado.Count() > 0 && Model.Fracionado.Count() > 0)
+{
+    var mes1 = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(int.Parse(Request.Form["mes1"]));
+    var mes2 = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(int.Parse(Request.Form["mes2"]));
+    var ano1 = Request.Form["ano1"];
+    var ano2 = Request.Form["ano2"];
+    decimal mes1Total = 0;
+    decimal mes2Total = 0;
+    decimal ano1Total = 0;
+    decimal ano2Total = 0;
+
+    <div class="panel panel-success panel-report">
+        <div class="row">
+            <div class="col-md-10 text-right">
+                <h4>Exportar para</h4>
+            </div>
+            <div class="col-md-2 text-center">
+                <button type="submit" class="btn btn-default printPDF">
+                    <i class="fa fa-file-pdf-o fa-4"></i>
+                </button>
+                <button type="submit" class="btn btn-default printExcel">
+                    <i class="fa fa-file-excel-o fa-4"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-bordered table-inline tableSortPaggingComAutoWidth1FixedColumns" cellspacing="0" width="100">
+                    <thead>
+                        <tr>
+                            <th>Vendas</th>
+                            <th>@mes1/@ano1</th>
+                            <th>@ano1</th>
+                            <th>@mes2/@ano2</th>
+                            <th>@ano2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Total)
+                        {
+                            <tr>
+                                <td>@String.Format("{0:N2}", @item.Tipo)</td>
+                                <td>@String.Format("{0:N2}", @item.Mes2)</td>
+                                <td>@String.Format("{0:N2}", @item.Ano2)</td>
+                                <td>@String.Format("{0:N2}", @item.Mes1)</td>
+                                <td>@String.Format("{0:N2}", @item.Ano1)</td>
+                            </tr>
+                            mes2Total += item.Mes2;
+                            ano2Total += item.Ano2;
+                            mes1Total += item.Mes1;
+                            ano1Total += item.Ano1;
+
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr style="font-weight:bold">
+                            <td>Total:</td>
+                            <td>@String.Format("{0:C2}", @mes2Total)</td>
+                            <td>@String.Format("{0:C2}", @ano2Total)</td>
+                            <td>@String.Format("{0:C2}", @mes1Total)</td>
+                            <td>@String.Format("{0:C2}", @ano1Total)</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        @{
+            var posicao = 1;
+            mes1Total = 0;
+            mes2Total = 0;
+            ano1Total = 0;
+            ano2Total = 0;
+        }
+
+        <div class="row">
+            <div class="col-md-12" id="tdExcel">
+                <table class="table table-striped table-bordered table-inline tableSortPaggingComAutoWidth3FixedColumns" cellspacing="0" width="100">
+                    <thead>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Cliente Id</th>
+                            <th>Cliente</th>
+                            <th>Tipo</th>
+                            <th>@mes1/@ano1</th>
+                            <th>@ano1</th>
+                            <th>@mes2/@ano2</th>
+                            <th>@ano2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Fracionado)
+                        {
+                            <tr>
+                                <td>@posicao</td>
+                                <td>@item.IdCliente</td>
+                                <td>@item.Cliente</td>
+                                <td>@item.Tipo</td>
+                                <td>@String.Format("{0:N2}", item.Mes2)</td>
+                                <td>@String.Format("{0:N2}", item.Ano2)</td>
+                                <td>@String.Format("{0:N2}", item.Mes1)</td>
+                                <td>@String.Format("{0:N2}", item.Ano1)</td>
+                            </tr>
+                            mes2Total += item.Mes2;
+                            ano2Total += item.Ano2;
+                            mes1Total += item.Mes1;
+                            ano1Total += item.Ano1;
+                            posicao++;
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr style="font-weight:bold">
+                            <td colspan="3">Total:</td>
+                            <td></td>
+                            <td>@String.Format("{0:C2}", mes2Total)</td>
+                            <td>@String.Format("{0:C2}", ano2Total)</td>
+                            <td>@String.Format("{0:C2}", mes1Total)</td>
+                            <td>@String.Format("{0:C2}", ano1Total)</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+
+@if (Model.Fracionado.Count() > 0 && Model.Fracionado.Count() > 0)
+{
+    var mes1 = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(int.Parse(Request.Form["mes1"]));
+    var mes2 = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(int.Parse(Request.Form["mes2"]));
+    var ano1 = Request.Form["ano1"];
+    var ano2 = Request.Form["ano2"];
+    var posicao = 1;
+    decimal mes1Total = 0;
+    decimal mes2Total = 0;
+    decimal ano1Total = 0;
+    decimal ano2Total = 0;
+
+    <div class="print" style="display:none">
+        <table cellspacing="0px" style="width:100%">
+            <thead>
+                <tr>
+                    <td colspan="6" class="left"><img src="@SEDOGv2.Controllers.ContentToPrint.ResolveServerUrl("/Content/themes/base/images/logomarca_bw.jpg", false)" width="141" height="84" style="width:141px; height:84px" /></td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="text-align:center"><h2 style="text-align:center" class="bold underline">@appSettings.pageName()</h2></td>
+                </tr>
+                <tr>
+                    <th>Vendas</th>
+                    <th>@mes1/@ano1</th>
+                    <th>@ano1</th>
+                    <th>@mes2/@ano2</th>
+                    <th>@ano2</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Total)
+                {
+                    <tr>
+                        <td>@String.Format("{0:N2}", @item.Tipo)</td>
+                        <td>@String.Format("{0:N2}", @item.Mes2)</td>
+                        <td>@String.Format("{0:N2}", @item.Ano2)</td>
+                        <td>@String.Format("{0:N2}", @item.Mes1)</td>
+                        <td>@String.Format("{0:N2}", @item.Ano1)</td>
+                    </tr>
+                    mes2Total += item.Mes2;
+                    ano2Total += item.Ano2;
+                    mes1Total += item.Mes1;
+                    ano1Total += item.Ano1;
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total:</td>
+                    <td>@String.Format("{0:C2}", @mes2Total)</td>
+                    <td>@String.Format("{0:C2}", @ano2Total)</td>
+                    <td>@String.Format("{0:C2}", @mes1Total)</td>
+                    <td>@String.Format("{0:C2}", @ano1Total)</td>
+                </tr>
+            </tfoot>
+        </table>
+        @{
+            mes1Total = 0;
+            mes2Total = 0;
+            ano1Total = 0;
+            ano2Total = 0;
+        }
+        <br>
+        <br>
+        <table cellspacing="0px" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Cliente Id</th>
+                    <th>Cliente</th>
+                    <th>Tipo</th>
+                    <th>@mes1/@ano1</th>
+                    <th>@ano1</th>
+                    <th>@mes2/@ano2</th>
+                    <th>@ano2</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Fracionado)
+                {
+                    <tr>
+                        <td>@posicao</td>
+                        <td>@item.IdCliente</td>
+                        <td>@item.Cliente</td>
+                        <td>@item.Tipo</td>
+                        <td>@String.Format("{0:N2}", item.Mes2)</td>
+                        <td>@String.Format("{0:N2}", item.Ano2)</td>
+                        <td>@String.Format("{0:N2}", item.Mes1)</td>
+                        <td>@String.Format("{0:N2}", item.Ano1)</td>
+                    </tr>
+                    mes2Total += item.Mes2;
+                    ano2Total += item.Ano2;
+                    mes1Total += item.Mes1;
+                    ano1Total += item.Ano1;
+                    posicao++;
+                }
+            </tbody>
+            <tfoot>
+                <tr style="font-weight:bold">
+                    <td colspan="3">Total:</td>
+                    <td></td>
+                    <td>@String.Format("{0:C2}", mes2Total)</td>
+                    <td>@String.Format("{0:C2}", ano2Total)</td>
+                    <td>@String.Format("{0:C2}", mes1Total)</td>
+                    <td>@String.Format("{0:C2}", ano1Total)</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+}
+
+<script type="text/javascript">
+    function getElement(a) {
+        var e = document.getElementById(a);
+        return e.options[e.selectedIndex].value;
+    }
+</script>
