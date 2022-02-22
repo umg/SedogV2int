@@ -1,0 +1,152 @@
+﻿@using SEDOGv2.Helpers;
+
+@model IEnumerable<SEDOGv2.Models.ParametrosVendaFisicaViewModel>
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_LoggedIn.cshtml";
+    }
+                      <div class="container-fluid">
+                          @using (Html.BeginForm())
+                          {
+                              <div class="panel panel-success">
+                                  <!-- Default panel contents -->
+                                  <div class="row">
+                                      <div class="panel-heading  text-center">
+                                          <h2>
+                                              @appSettings.pageName()
+                                          </h2>
+                                      </div>
+                                  </div>
+
+
+                                  <div class="col-md-12" runat="server" id="divAlert">
+                                      @ViewBag.Error
+                                  </div>
+
+
+                                  <div class="row">
+                                      <div class="col-md-3">
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="panel panel-default">
+                                              <div class="panel-heading"><h4>New Config</h4></div>
+                                              <div class="panel-body">
+                                                  <div class="form-group">
+                                                      <h5>Midia:</h5>
+                                                      <input type="text" name="MIDIA" class="form-control" placeholder="MIDIA" />
+                                                      <h5>AVERAGE_MANUFACTURING_PRICE:</h5>
+                                                      <input type="text" name="AVERAGE_MANUFACTURING_PRICE" class="form-control" placeholder="AVERAGE_MANUFACTURING_PRICE" />
+                                                      <h5>OBSOLENCENCE_PROVISION_PERCENT:</h5>
+                                                      <input type="text" name="OBSOLENCENCE_PROVISION_PERCENT" class="form-control" placeholder="OBSOLENCENCE_PROVISION_PERCENT" />
+                                                      <h5>RETURNS_PROVISION_PERCENT:</h5>
+                                                      <input type="text" name="RETURNS_PROVISION_PERCENT" class="form-control" placeholder="RETURNS_PROVISION_PERCENT" />
+                                                      <h5>BAD_DEBTS_PROVISION_PERCENT:</h5>
+                                                      <input type="text" name="BAD_DEBTS_PROVISION_PERCENT" class="form-control" placeholder="BAD_DEBTS_PROVISION_PERCENT" />
+                                                      <h5>COPYRIGHT_PERCENT:</h5>
+                                                      <input type="text" name="COPYRIGHT_PERCENT" class="form-control" placeholder="COPYRIGHT_PERCENT" />
+                                                      <h5>ARTIST_RIGHT_PERCENT:</h5>
+                                                      <input type="text" name="ARTIST_RIGHT_PERCENT" class="form-control" placeholder="ARTIST_RIGHT_PERCENT" />
+                                                      <h5>OTHER_ROYALTY_PERCENT:</h5>
+                                                      <input type="text" name="OTHER_ROYALTY_PERCENT" class="form-control" placeholder="OTHER_ROYALTY_PERCENT" />
+                                                      <h5>PRODUCER_ROYALTY_PERCENT:</h5>
+                                                      <input type="text" name="PRODUCER_ROYALTY_PERCENT" class="form-control" placeholder="AVERAGE_MANUFACTURING_PRICE" />
+                                                      <h5>DISTRIBUITION_COST_PERCENT:</h5>
+                                                      <input type="text" name="DISTRIBUITION_COST_PERCENT" class="form-control" placeholder="DISTRIBUITION_COST_PERCENT" />
+                                                      <h5>MANUFACTURING_COST_PERCENT:</h5>
+                                                      <input type="text" name="MANUFACTURING_COST_PERCENT" class="form-control" placeholder="MANUFACTURING_COST_PERCENT" />
+                                                      <h5>SALES_COMISSION_PERCENT:</h5>
+                                                      <input type="text" name="SALES_COMISSION_PERCENT" class="form-control" placeholder="SALES_COMISSION_PERCENT" />
+                                                      <h5>TAX_PERCENT:</h5>
+                                                      <input type="text" name="TAX_PERCENT" class="form-control" placeholder="SALES_COMISSION_PERCENT" />
+
+                                                      <input type="submit" name="inserir" value="Add" class="btn btn-default pull-right" />
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-3">
+                                      </div>
+                                  </div>
+                              </div>
+                          }
+                          <div class="panel panel-success panel-report">
+                              <div class="row">
+
+                                  <div class="col-md-12">
+                                      <table class="table table-striped table-bordered table-inline tableSortPagging" cellspacing="0" width="100%">
+                                          <thead>
+                                              <tr>
+                                                  <th>MIDIA</th>
+                                                  <th>AVERAGE_MANUFACTURING_PRICE</th>
+                                                  <th>OBSOLENCENCE_PROVISION_PERCENT</th>
+                                                  <th>RETURNS_PROVISION_PERCENT</th>
+                                                  <th>BAD_DEBTS_PROVISION_PERCENT</th>
+                                                  <th>COPYRIGHT_PERCENT</th>
+                                                  <th>ARTIST_RIGHT_PERCENT</th>
+                                                  <th>OTHER_ROYALTY_PERCENT</th>
+                                                  <th>PRODUCER_ROYALTY_PERCENT</th>
+                                                  <th>DISTRIBUITION_COST_PERCENT</th>
+                                                  <th>MANUFACTURING_COST_PERCENT</th>
+                                                  <th>SALES_COMISSION_PERCENT</th>
+                                                  <th>TAX_PERCENT</th> 
+
+
+                                                  <th></th>
+                                              </tr>
+                                              </thead>
+                                              @foreach (var item in Model)
+                                              {
+                                      <tr>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.MIDIA)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.AVERAGE_MANUFACTURING_PRICE)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.OBSOLENCENCE_PROVISION_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.RETURNS_PROVISION_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.BAD_DEBTS_PROVISION_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.COPYRIGHT_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.ARTIST_RIGHT_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.OTHER_ROYALTY_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.PRODUCER_ROYALTY_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.DISTRIBUITION_COST_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.MANUFACTURING_COST_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.SALES_COMISSION_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.DisplayFor(modelItem => item.TAX_PERCENT)
+                                          </td>
+                                          <td>
+                                              @Html.ActionLink("Edit", "Edit", new { ID = item.ID }, new { title = "Edit parameter " + @item.ID }) |
+                                              @Html.ActionLink("Delete", "Delete", new { ID = item.ID }, new { title = "Delete parameter " + @item.ID }) |
+
+                                          </td>
+                                      </tr>
+                                              }
+
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+                          </div>

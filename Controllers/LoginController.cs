@@ -28,7 +28,7 @@ namespace SEDOGv2.Controllers
             string ambiente = collection["selServidor"].Split(':')[1];
             string culture = collection["selServidor"].Split(':')[2];
 
-            appSettings.Servidor= servidor;
+            appSettings.Servidor = servidor;
             appSettings.Ambiente = ambiente;
             appSettings.Culture = culture;
 

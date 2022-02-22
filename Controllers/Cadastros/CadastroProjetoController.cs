@@ -70,7 +70,11 @@ namespace SEDOGv2.Controllers.Adm
                 new ArtistaProjeto() {ARTISTNAME="Pixinguinha" , IDARTISTA="20000151521"},
                 new ArtistaProjeto() {ARTISTNAME="Alamir", IDARTISTA="30023394095" } ,
                 new ArtistaProjeto() {ARTISTNAME="Simone & Simaria", IDARTISTA="31799642302" },
-                new ArtistaProjeto() {ARTISTNAME="JonasVilar", IDARTISTA="31498692873" }
+                new ArtistaProjeto() {ARTISTNAME="JonasVilar", IDARTISTA="31498692873" },
+                new ArtistaProjeto() {ARTISTNAME="MetroStation", IDARTISTA="30155144532" },
+                new ArtistaProjeto() {ARTISTNAME="Sting", IDARTISTA="20000159499" }
+
+                
             };
 
             ret = ret.Where(d => d.ARTISTNAME.ToUpper().Contains(term.ToUpper())).ToList();
@@ -281,6 +285,10 @@ namespace SEDOGv2.Controllers.Adm
                     StepMessage = "INS_PL_PARAMETROS_DIREITOS: " + dpercArt.ToString() + " | " + dpercAut.ToString();
                     model.Includes.Add(provider.INS_PL_PARAMETROS_DIREITOS(idProjetoSedog, dpercArt, dpercAut));
                 }
+
+                // atualiza titulos dos fonogramas dos projetos
+                Helpers.functions.ISRCSummaryUpdate(idProjetoSedog);
+
             }
             catch (Exception ex){
                 Resposta<string> err = new Resposta<string>();

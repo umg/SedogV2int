@@ -219,12 +219,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Adm\AtualizaDashBoardController.cs" />
     <Compile Include="Controllers\Adm\PaginasAdmController.cs" />
+    <Compile Include="Controllers\Adm\ParametrosVendaFisiscaController .cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaARPUController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaAssinantesController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaGTSController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaMarketShareController.cs" />
+    <Compile Include="Controllers\AtualizacaoTabelas\AtualizaTabMensalController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaTanqueController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\AtualizaValoresController.cs" />
+    <Compile Include="Controllers\AtualizacaoTabelas\ImportVendasFisicasController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\ImportALLController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\ImportNRIController.cs" />
     <Compile Include="Controllers\AtualizacaoTabelas\ImportAIFController.cs" />
@@ -241,6 +244,7 @@
     <Compile Include="Controllers\LoginCobrancaNRIController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarketingTools\DespesaDeMarketingPorArtistaController.cs" />
+    <Compile Include="Controllers\MarketingTools\DespesaDeMarketingPorArtistaProjetoCopaController.cs" />
     <Compile Include="Controllers\MarketingTools\DespesaDeMarketingPorArtistaProjetoController.cs" />
     <Compile Include="Controllers\MarketingTools\DespesasDeMarketingPorContaController.cs" />
     <Compile Include="Controllers\MarketingTools\DespesasDeMarketingPorGrupoContaController.cs" />
@@ -276,6 +280,7 @@
     <Compile Include="Helpers\Erros.cs" />
     <Compile Include="Helpers\functions.cs" />
     <Compile Include="Helpers\GetCapa.cs" />
+    <Compile Include="Helpers\ProcessVendasFisicas .cs" />
     <Compile Include="Helpers\ProcessNRIAnc.cs" />
     <Compile Include="Helpers\ProcessNRI.cs" />
     <Compile Include="Helpers\ProcessAIF.cs" />
@@ -310,6 +315,7 @@
     <Compile Include="Models\DireitosMarginAnalysisViewModel.cs" />
     <Compile Include="Models\DireitosProfitLoss.cs" />
     <Compile Include="Models\Faixa.cs" />
+    <Compile Include="Models\ImportVendasFisicas .cs" />
     <Compile Include="Models\ImportAIF.cs" />
     <Compile Include="Models\ImportNRI.cs" />
     <Compile Include="Models\ImportNRIAnc.cs" />
@@ -362,6 +368,7 @@
     <Compile Include="Models\TotalByTypeDigitalViewModel.cs" />
     <Compile Include="Models\TotalDigitalMensalViewModel.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\ParamtrosVendaFisicaViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Models\ValoresTanqueViewModel.cs" />
     <Compile Include="Models\VendasDigitaisJVModel.cs" />
@@ -413,6 +420,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\r2Resource\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\R2WS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -994,6 +1006,12 @@
     <Content Include="Views\TopClientesFisicoDigital\_FilterPartial.cshtml" />
     <Content Include="Views\TopClientesFisicoDigital\_ListTopClientesFisicoDigitalPartial.cshtml" />
     <Content Include="Views\TopClientesFisico\Index.cshtml" />
+    <Content Include="Views\DespesaDeMarketingPorArtistaProjetoCopa\Index.cshtml" />
+    <Content Include="Views\ParametrosVendaFisica\Index.cshtml" />
+    <Content Include="Views\ParametrosVendaFisica\Delete.cshtml" />
+    <Content Include="Views\ParametrosVendaFisica\Edit.cshtml" />
+    <Content Include="Views\AtualizaTabMensal\Index.cshtml" />
+    <Content Include="Views\ImportVendasFisicas\Index.cshtml" />
     <None Include="Web References\net.umusic.catalogueservices\SecureDataServices.disco" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -1051,8 +1069,32 @@
     <Content Include="Web References\r2Resource\WSWorkLink.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\R2WS\CompositeType.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\R2WS\ISRC_Information.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\R2WS\R2Info.disco" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web References\R2WS\R2Info.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\R2WS\R2Info0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\R2WS\R2Info1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\R2WS\R2Info2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\R2WS\R2InfoServices.wsdl" />
+    <Content Include="Web References\R2WS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -1089,6 +1131,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SEDOGv2_net_umusic_catalogueservices_SecureDataServices</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://ukbcewvapp107.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\R2WS\</RelPath>
+      <UpdateFromURL>http://ukbcewvapp107.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SEDOGv2_R2WS_R2InfoServices</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://r2.umusic.net/r2/Release/services/WSReleaseSearchService/wsdl/WSReleaseSearchService.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

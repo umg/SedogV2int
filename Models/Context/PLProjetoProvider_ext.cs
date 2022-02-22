@@ -14,7 +14,32 @@ namespace SEDOGv2.Models.Context
     /// </summary>
     public class PLProjetoProvider_ext : Conn
     {
+        public PLProjetoProvider_ext()
+        {
+        }
+        public PLProjetoProvider_ext(HttpContext context)
+        {
+            HttpContext.Current = context;
+        }
 
+        public void PL_PROCESSO_DIGITAL_MENSAL(DateTime dataReferencia, string lib)
+        {
+            try
+            {
+                List<OleDbParameter> parametros = new List<OleDbParameter>();
+
+                int anomes = dataReferencia.Year * 100 + dataReferencia.Month;
+                parametros.Add(AddParameter("P_ANOMES", anomes));
+
+                var procedure = lib + ".PL_PROCESSO_DIGITAL_MENSAL";
+
+                ExecutaProcedureNoQuery(procedure, parametros.ToArray());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<ResponsavelDepartamento> SEL_RESPONSAVEL_POR_DEPARTAMENTO()
         {
             List<ResponsavelDepartamento> listRespDepartamento = new List<ResponsavelDepartamento>();
@@ -166,7 +191,7 @@ namespace SEDOGv2.Models.Context
             }
         }
 
-        public void UPD_PARAMETROS_DIREITOS_PRODUTO(int IDProj_SEDOG, string CodProduto, string Packing, decimal artistico, decimal autoral)
+        public void UPD_PARAMETROS_DIREITOS_PRODUTO(int IDProj_SEDOG, string CodProduto, string Packing, decimal artistico, decimal autoral, decimal producer, decimal other)
         {
             try
             {
@@ -177,6 +202,8 @@ namespace SEDOGv2.Models.Context
                 parameters.Add(AddParameter("P_PACKING", Packing));
                 parameters.Add(AddParameter("P_ARTISTICO", artistico));
                 parameters.Add(AddParameter("P_AUTORAL", autoral));
+                parameters.Add(AddParameter("P_PRODUCER", producer));
+                parameters.Add(AddParameter("P_OTHER", other));
                 string procedure = AddScheme("UPD_PARAMETROS_DIREITOS_PRODUTO");
 
                 ExecutaProcedureNoQuery(procedure, parameters.ToArray());

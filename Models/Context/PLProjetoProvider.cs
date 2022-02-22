@@ -11,6 +11,7 @@ namespace SEDOGv2.Models.Context
 {
     public class PLProjetoProvider : PLProjetoProvider_ext
     {
+        
         public List<AtualizaAssinantesViewModel> SLT_ASSINANTES(int ano)
         {
             List<AtualizaAssinantesViewModel> ret = new List<AtualizaAssinantesViewModel>();
@@ -776,6 +777,30 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
+
+        public List<ParametrosVendaFisicaViewModel> SLT_PARAMETROS_VENDAS_FISICAS(int ID)
+        {
+            List<ParametrosVendaFisicaViewModel> ret = new List<ParametrosVendaFisicaViewModel>();      
+            try
+            {
+                DataTable dt = new DataTable();
+                
+                string procedure = AddScheme("SLT_PARAMETROS_VENDAS_FISICAS");
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+
+                parameters.Add(AddParameter("P_ID", ID));
+
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<ParametrosVendaFisicaViewModel>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
         public void INS_USUARIO(string login, string nome, string email, string departamento)
         {
             try
@@ -794,6 +819,48 @@ namespace SEDOGv2.Models.Context
                 throw ex;
             }
         }
+
+        public void INS_PARAMETROS_VENDAS_FISICAS(  string  P_MIDIA,
+                                                    decimal P_AVERAGE_MANUFACTURING_PRICE,
+                                                    decimal P_OBSOLENCENCE_PROVISION_PERCENT,
+                                                    decimal P_RETURNS_PROVISION_PERCENT,
+                                                    decimal P_BAD_DEBTS_PROVISION_PERCENT,
+                                                    decimal P_COPYRIGHT_PERCENT,
+                                                    decimal P_ARTIST_RIGHT_PERCENT,
+                                                    decimal P_OTHER_ROYALTY_PERCENT,
+                                                    decimal P_PRODUCER_ROYALTY_PERCENT,
+                                                    decimal P_DISTRIBUITION_COST_PERCENT,
+                                                    decimal P_MANUFACTURING_COST_PERCENT,
+                                                    decimal P_SALES_COMISSION_PERCENT,
+                                                    decimal P_TAX_PERCENT)
+        {
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+
+                parameters.Add(AddParameter("P_MIDIA", P_MIDIA.ToUpper()));
+                parameters.Add(AddParameter("P_AVERAGE_MANUFACTURING_PRICE", P_AVERAGE_MANUFACTURING_PRICE));
+                parameters.Add(AddParameter("P_OBSOLENCENCE_PROVISION_PERCENT", P_OBSOLENCENCE_PROVISION_PERCENT));
+                parameters.Add(AddParameter("P_RETURNS_PROVISION_PERCENT", P_RETURNS_PROVISION_PERCENT));
+                parameters.Add(AddParameter("P_BAD_DEBTS_PROVISION_PERCENT", P_BAD_DEBTS_PROVISION_PERCENT));
+                parameters.Add(AddParameter("P_COPYRIGHT_PERCENT", P_COPYRIGHT_PERCENT));
+                parameters.Add(AddParameter("P_ARTIST_RIGHT_PERCENT", P_ARTIST_RIGHT_PERCENT));
+                parameters.Add(AddParameter("P_OTHER_ROYALTY_PERCENT", P_OTHER_ROYALTY_PERCENT));
+                parameters.Add(AddParameter("P_PRODUCER_ROYALTY_PERCENT", P_PRODUCER_ROYALTY_PERCENT));
+                parameters.Add(AddParameter("P_DISTRIBUITION_COST_PERCENT", P_DISTRIBUITION_COST_PERCENT));
+                parameters.Add(AddParameter("P_MANUFACTURING_COST_PERCENT", P_MANUFACTURING_COST_PERCENT));
+                parameters.Add(AddParameter("P_SALES_COMISSION_PERCENT", P_SALES_COMISSION_PERCENT));
+                parameters.Add(AddParameter("P_TAX_PERCENT", P_TAX_PERCENT));
+
+                string procedure = AddScheme("INS_PARAMETROS_VENDAS_FISICAS");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void UPD_USUARIO(string login, string nome, string email, string departamento)
         {
             try
@@ -804,6 +871,47 @@ namespace SEDOGv2.Models.Context
                 parameters.Add(AddParameter("P_EMAIL", email.ToUpper()));
                 parameters.Add(AddParameter("P_DEPTO", departamento.ToUpper()));
                 string procedure = AddScheme("UPD_USUARIO");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void UPD_PARAMETROS_VENDA_FISICA(int P_ID, string P_MIDIA,
+                                                    decimal P_AVERAGE_MANUFACTURING_PRICE,
+                                                    decimal P_OBSOLENCENCE_PROVISION_PERCENT,
+                                                    decimal P_RETURNS_PROVISION_PERCENT,
+                                                    decimal P_BAD_DEBTS_PROVISION_PERCENT,
+                                                    decimal P_COPYRIGHT_PERCENT,
+                                                    decimal P_ARTIST_RIGHT_PERCENT,
+                                                    decimal P_OTHER_ROYALTY_PERCENT,
+                                                    decimal P_PRODUCER_ROYALTY_PERCENT,
+                                                    decimal P_DISTRIBUITION_COST_PERCENT,
+                                                    decimal P_MANUFACTURING_COST_PERCENT,
+                                                    decimal P_SALES_COMISSION_PERCENT,
+                                                    decimal P_TAX_PERCENT)
+        {
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_ID", P_ID));
+
+                parameters.Add(AddParameter("P_MIDIA", P_MIDIA.ToUpper()));
+                parameters.Add(AddParameter("P_AVERAGE_MANUFACTURING_PRICE", P_AVERAGE_MANUFACTURING_PRICE));
+                parameters.Add(AddParameter("P_OBSOLENCENCE_PROVISION_PERCENT", P_OBSOLENCENCE_PROVISION_PERCENT));
+                parameters.Add(AddParameter("P_RETURNS_PROVISION_PERCENT", P_RETURNS_PROVISION_PERCENT));
+                parameters.Add(AddParameter("P_BAD_DEBTS_PROVISION_PERCENT", P_BAD_DEBTS_PROVISION_PERCENT));
+                parameters.Add(AddParameter("P_COPYRIGHT_PERCENT", P_COPYRIGHT_PERCENT));
+                parameters.Add(AddParameter("P_ARTIST_RIGHT_PERCENT", P_ARTIST_RIGHT_PERCENT));
+                parameters.Add(AddParameter("P_OTHER_ROYALTY_PERCENT", P_OTHER_ROYALTY_PERCENT));
+                parameters.Add(AddParameter("P_PRODUCER_ROYALTY_PERCENT", P_PRODUCER_ROYALTY_PERCENT));
+                parameters.Add(AddParameter("P_DISTRIBUITION_COST_PERCENT", P_DISTRIBUITION_COST_PERCENT));
+                parameters.Add(AddParameter("P_MANUFACTURING_COST_PERCENT", P_MANUFACTURING_COST_PERCENT));
+                parameters.Add(AddParameter("P_SALES_COMISSION_PERCENT", P_SALES_COMISSION_PERCENT));
+                parameters.Add(AddParameter("P_TAX_PERCENT", P_TAX_PERCENT));
+                string procedure = AddScheme("UPD_PARAMETROS_VENDA_FISICA");
 
                 ExecutaProcedureNoQuery(procedure, parameters.ToArray());
             }
@@ -948,6 +1056,23 @@ namespace SEDOGv2.Models.Context
                 throw ex;
             }
         }
+
+        public void DEL_PARAMETROS_VENDA_FISICA(int id)
+        {
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_ID", id));
+                string procedure = AddScheme("DEL_PARAMETROS_VENDA_FISICA");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
         public void UPD_PL_DADOS_DATA_REFERENCIA(string data, int dataCordis)
         {
             try
@@ -1660,7 +1785,7 @@ namespace SEDOGv2.Models.Context
                 DataTable dt = new DataTable();
                 List<OleDbParameter> parameters = new List<OleDbParameter>();
                 parameters.Add(AddParameter("P_IDPROJ_SEDOG", P_IDPROJ_SEDOG));
-                string procedure = AddScheme("SLT_DESPESAS_MARKETING_TOTAL_POR_ARTISTA_MES_ANO ");
+                string procedure = AddScheme("SLT_DESPESAS_MARKETING_TOTAL_POR_ARTISTA_MES_ANO_COPA ");
 
                 dt = GetTable(procedure, parameters.ToArray());
 
@@ -1682,6 +1807,49 @@ namespace SEDOGv2.Models.Context
                 List<OleDbParameter> parameters = new List<OleDbParameter>();
                 parameters.Add(AddParameter("P_IDPROJ_SEDOG", P_IDPROJ_SEDOG));
                 string procedure = AddScheme("SLT_DESPESAS_MARKETING_TOTAL_POR_ARTISTA ");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<DespesasDeMarketingTotalPorArtista>();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
+
+        public List<DespesasDeMarketingTotalPorArtista> SLT_DESPESAS_MARKETING_TOTAL_POR_ARTISTA_MES_ANO_COPA(long P_IDPROJ_SEDOG)
+        {
+            List<DespesasDeMarketingTotalPorArtista> ret = new List<DespesasDeMarketingTotalPorArtista>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_IDPROJ_SEDOG", P_IDPROJ_SEDOG));
+                string procedure = AddScheme("SLT_DESPESAS_MARKETING_TOTAL_POR_ARTISTA_MES_ANO_COPA ");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<DespesasDeMarketingTotalPorArtista>();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
+        public List<DespesasDeMarketingTotalPorArtista> SLT_DESPESAS_MARKETING_TOTAL_POR_ARTISTA_COPA(long P_IDPROJ_SEDOG)
+        {
+            List<DespesasDeMarketingTotalPorArtista> ret = new List<DespesasDeMarketingTotalPorArtista>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_IDPROJ_SEDOG", P_IDPROJ_SEDOG));
+                string procedure = AddScheme("SLT_DESPESAS_MARKETING_TOTAL_POR_ARTISTA_COPA ");
 
                 dt = GetTable(procedure, parameters.ToArray());
 
@@ -2527,6 +2695,49 @@ namespace SEDOGv2.Models.Context
                 throw e;
             }
             return retorno;
+        }
+        public List<ISRCs> SEL_ISRC_IDPROJ_SEDOG_MISSING(long IDProjetoSEDOG)
+        {
+            List<ISRCs> ret = new List<ISRCs>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_IDPROJ_SEDOG", IDProjetoSEDOG));
+                string procedure = AddScheme("SEL_ISRC_IDPROJ_SEDOG_MISSING");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                ret = dt.DataTableToList<ISRCs>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ret;
+        }
+        public Resposta<string> INS_ISRC_SUMMARY(string P_VALUEINSERT)
+        {
+            Resposta<string> ret = new Resposta<string>();
+            ret.Dados = "";
+            ret.Error = "";
+            ret.Message = "";
+            try
+            {
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+                parameters.Add(AddParameter("P_VALUEINSERT", P_VALUEINSERT));
+
+                string procedure = AddScheme("INS_ISRC_SUMMARY");
+
+                ExecutaProcedureNoQuery(procedure, parameters.ToArray());
+            }
+            catch (Exception ex)
+            {
+                ret.Error = ex.Source;
+                ret.Message = ex.Message;
+
+            }
+            return ret;
         }
 
     }

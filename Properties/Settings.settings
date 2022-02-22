@@ -11,5 +11,8 @@
     <Setting Name="SEDOGv2_r2Resource_WSResourceSearchServiceService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://r2.umusic.net:443/r2/Resource/services/WSResourceSearchService</Value>
     </Setting>
+    <Setting Name="SEDOGv2_R2WS_R2InfoServices" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://ukbcewvapp107.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

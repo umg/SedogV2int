@@ -262,7 +262,80 @@ namespace SEDOGv2.Helpers
             outputMemStream.Position = 0;
             return outputMemStream;
         }
+        public static void ISRCSummaryUpdate(long idProjetoSedog)
+        {
+            StreamWriter sw = File.AppendText(HttpContext.Current.Server.MapPath("~/temp/log_sedog.txt"));
 
+            try
+            {
+
+                PLProjetoProvider provider = new PLProjetoProvider();
+                //buscar ISRC sem nome da faixa
+                string valuesInsert = "";
+                foreach (ISRCs item in provider.SEL_ISRC_IDPROJ_SEDOG_MISSING(idProjetoSedog))
+                {
+                    R2WS.R2InfoServices svc = new R2WS.R2InfoServices();
+                    R2WS.ISRC_Information svcISRC = svc.GetR2ISRCInformation(item.ISRC, false, false);
+                    if (svcISRC.Error == null)
+                    {
+                        if (valuesInsert.Length > 9500)
+                        {
+                            //gravar nome das faixas no banco
+                            Resposta<string> fsd = new Resposta<string>();
+                            fsd = provider.INS_ISRC_SUMMARY(valuesInsert);
+                            if (fsd.Message != "")
+                            {
+                                sw.WriteLine("erro ao tentar gravar ProjectID {0}.\n{1}", idProjetoSedog.ToString(), fsd.Message);
+                            }
+                            valuesInsert = "";
+                        }
+
+                        //pegar nome da faixa no arquivo XML
+                        valuesInsert += valuesInsert == "" ? "" : ",";
+                        valuesInsert += "(" + CleanInsertValue(svcISRC.ResourceId.ToString()) + "," + CleanInsertValue(svcISRC.ISRCId.ToString()) + ",'" + CleanInsertValue(svcISRC.Track_Title.ToString()) + "','" + CleanInsertValue(svcISRC.ISRC.ToString()) + "','" + CleanInsertValue(svcISRC.Track_Artist.ToString()) + "')";
+                    }
+
+                }
+
+                //gravar nome da faixa no banco
+                if (valuesInsert != "")
+                {
+                    Resposta<string> fsd = new Resposta<string>();
+                    fsd = provider.INS_ISRC_SUMMARY(valuesInsert);
+                    if (fsd.Message != "")
+                    {
+                        sw.WriteLine("erro ao tentar gravar ProjectID {0}.\n{1}", idProjetoSedog.ToString(), fsd.Message);
+                    }
+                }
+
+
+                //sw.WriteLine("gravou no banco");
+
+            }
+            catch (Exception ex)
+            {
+                sw.WriteLine("erro ao tentar gravar ProjectID {0}.\n{1}", idProjetoSedog.ToString(), ex.Message);
+            }
+            finally
+            {
+                sw.Flush();
+                sw.Close();
+            }
+
+
+        }
+        public static string CleanInsertValue(string valuesInsert)
+        {
+            string strClean = valuesInsert;
+
+            strClean = Regex.Replace(strClean, @"\'", "`");
+            strClean = Regex.Replace(strClean, @"\’", "`");
+            strClean = Regex.Replace(strClean, @"\“", "`");
+            strClean = Regex.Replace(strClean, @"\”", "´");
+            strClean = Regex.Replace(strClean, @"\–", "-");
+
+            return strClean;
+        }
     }
     public static class ColorScheme
     {
@@ -270,6 +343,11 @@ namespace SEDOGv2.Helpers
         public static readonly string[] Colors = { "rgba(0, 72, 70,1)", "rgba(23,123,172,1)", "rgba(255,165,0,1)", "rgba(255,0,0,1)", "rgba(120,120,120,1)", "rgba(155,217,48,1)", "rgba(247,10,10,1)", "rgba(90,103,45,1)", "rgba(207,48,155,1)", "rgba(10,247,10,1)", "rgba(145,114,90,1)", "rgba(0,255,50,1)", "rgba(33,33,33,1)", "rgba(75,192,192,1)", "rgba(0,0,255,1)" };
     }
 
-   
+
+
+
+
+
+
 
 }

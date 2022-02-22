@@ -1,0 +1,72 @@
+﻿@using SEDOGv2.Helpers;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel panel-heading text-center">
+                <h2>@appSettings.pageName()</h2>
+            </div>
+            <div class="col-md-12 alertMessage" runat="server" id="divAlert">
+                @Html.Raw(ViewBag.Message)
+            </div>
+        </div>
+        @{
+            bool alertaSucesso = ViewBag.AlertaSucesso == null ? false : bool.Parse(ViewBag.AlertaSucesso.ToString());
+            bool altertaAviso = ViewBag.AlertaAviso == null ? false : bool.Parse(ViewBag.AlertaAviso.ToString());
+        }
+        @if (alertaSucesso)
+        {
+            <div class="alert alert-success text-center" role="alert">
+                <h4>@ViewBag.Mensagem</h4>
+            </div>
+        }
+        @if (altertaAviso)
+        {
+            <div class="alert alert-warning text-center" role="alert">
+                <h4>@ViewBag.Mensagem</h4>
+            </div>
+        }
+
+        @if (ViewBag.TarefaEmAndamento == false)
+        {
+            <div class="row">
+                @using (Html.BeginForm("AtualizaTabMensal", "AtualizaTabMensal", FormMethod.Post))
+                {
+                    <div class="col-md-2 text-right">
+                        <h4>Data de Referência:</h4>
+                    </div>
+                    <div class="col-md-2 text-left">
+                        <div class="form-group">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" id="dataReferencia" name="dataReferencia">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 form-group text-center">
+                        <button type="submit" id="atualizar" class="btn btn-default">
+                            Atualizar
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </button>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+     $('.input-group.date').datepicker({
+        format: "MM yyyy",
+        startView: "months",
+        minViewMode: "months",
+        orientation: 'top'
+    });
+</script>

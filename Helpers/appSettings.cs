@@ -39,6 +39,48 @@ namespace SEDOGv2.Helpers
                 HttpContext.Current.Session["SEDOGv2.USUARIOS"] = value;
             }
         }
+        public static string Ambiente
+        {
+            get
+            {
+                //HttpContext context = HttpContext.Current;
+
+                //if (context.Session["SEDOGv2.AMBIENTE"] != null)
+                if (HttpContext.Current.Session != null)
+                    
+                    return HttpContext.Current.Session["SEDOGv2.AMBIENTE"].ToString();
+                else
+                {
+                    string[] _app = ConfigurationManager.AppSettings["dados"].Split(';');
+                    return _app[1];
+                }
+            }
+            set
+            {
+                HttpContext.Current.Session["SEDOGv2.AMBIENTE"] = value;
+            }
+        }
+
+        public static string Servidor
+        {
+            get
+            {
+                //HttpContext context = HttpContext.Current;
+
+                //if (context.Session["SEDOGv2.AMBIENTE"] != null)
+                if (HttpContext.Current.Session != null)
+                    return HttpContext.Current.Session["SEDOGv2.SERVIDOR"].ToString();
+                else
+                {
+                    string[] _app = ConfigurationManager.AppSettings["dados"].Split(';');
+                    return _app[0];
+                }
+            }
+            set
+            {
+                HttpContext.Current.Session["SEDOGv2.SERVIDOR"] = value;
+            }
+        }
 
         public static string KeepMeAlive
         {
@@ -70,41 +112,35 @@ namespace SEDOGv2.Helpers
         }
 
 
-        public static string Ambiente
-        {
-            get
-            {
-                if (HttpContext.Current.Session["SEDOGv2.AMBIENTE"] != null)
-                    return HttpContext.Current.Session["SEDOGv2.AMBIENTE"].ToString();
-                else
-                {
-                    string[] _app = ConfigurationManager.AppSettings["dados"].Split(';');
-                    return _app[1];
-                }
-            }
-            set
-            {
-                HttpContext.Current.Session["SEDOGv2.AMBIENTE"] = value;
-            }
-        }
+       
 
-        public static string Servidor
-        {
-            get
-            {
-                if (HttpContext.Current.Session["SEDOGv2.SERVIDOR"] != null)
-                    return HttpContext.Current.Session["SEDOGv2.SERVIDOR"].ToString();
-                else
-                {
-                    string[] _app = ConfigurationManager.AppSettings["dados"].Split(';');
-                    return _app[0];
-                }
-            }
-            set
-            {
-                HttpContext.Current.Session["SEDOGv2.SERVIDOR"] = value;
-            }
-        }
+        //public static string Ambiente
+        //{
+        //    get
+        //    {
+        //        string[] _app = ConfigurationManager.AppSettings["dados"].Split(';');
+        //        return _app[1];
+        //    }
+        //    set
+        //    {
+        //        HttpContext.Current.Session["SEDOGv2.AMBIENTE"] = value;
+        //    }
+        //}
+
+        //public  static string Servidor
+        //{
+        //    get
+        //    {
+
+        //        string[] _app = ConfigurationManager.AppSettings["dados"].Split(';');
+        //        return _app[0];
+
+        //    }
+        //    set
+        //    {
+        //        HttpContext.Current.Session["SEDOGv2.SERVIDOR"] = value;
+        //    }
+        //}
 
         public static string Culture
         {

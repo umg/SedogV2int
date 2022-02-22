@@ -18,12 +18,15 @@ namespace SEDOGv2.Controllers.Relatorios
         [HttpPost]
         public ActionResult Index(FormCollection collection)
         {
+            var dataIni = collection["anoInicial"] + "-" + collection["mesInicial"] + "-01";
+            var dataFim = collection["anoFim"] + "-" + collection["mesFim"] + "-01";
+
             DateTime dataInicial;
             DateTime dataFinal;
             List<TopClientesFisicoViewModel> model = null;
-            if (DateTime.TryParse(collection["dataInicial"], out dataInicial) && DateTime.TryParse(collection["dataFinal"], out dataFinal))
+            if (DateTime.TryParse(dataIni, out dataInicial) && DateTime.TryParse(dataFim, out dataFinal))
             {
-                ViewBag.filtro = $"{collection["dataInicial"]} - {collection["dataFinal"]}";
+                ViewBag.filtro = dataInicial.ToShortDateString() + " - " + dataFinal.ToShortDateString();
 
                 var provider = new PLProjetoProvider();
                 model = provider.SLT_TOP_CLIENTES_DETALHADO(dataInicial, dataFinal);

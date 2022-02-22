@@ -1,0 +1,70 @@
+﻿@using SEDOGv2.Helpers;
+@model SEDOGv2.Models.ParametrosVendaFisicaViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LoggedIn.cshtml";
+}
+<div class="container-fluid">
+    <div class="panel panel-success">
+        <div class="row">
+            <div class="panel-heading  text-center">
+                <h2>
+                    Edit Parameters
+                </h2>
+            </div>
+        </div>
+
+
+        <div class="col-md-12" runat="server" id="divAlert">
+            @ViewBag.Error
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Edit User</h4></div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <h5>ID:</h5>
+                                @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control" , style = "display: none;" } })
+
+                                <h5>MIDIA :</h5>
+                                @Html.EditorFor(model => model.MIDIA, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>AVERAGE_MANUFACTURING_PRICE:</h5>
+                                @Html.EditorFor(model => model.AVERAGE_MANUFACTURING_PRICE, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>OBSOLENCENCE_PROVISION_PERCENT:</h5>
+                                @Html.EditorFor(model => model.OBSOLENCENCE_PROVISION_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>RETURNS_PROVISION_PERCENT:</h5>@Html.EditorFor(model => model.RETURNS_PROVISION_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>BAD_DEBTS_PROVISION_PERCENT:</h5>@Html.EditorFor(model => model.BAD_DEBTS_PROVISION_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>COPYRIGHT_PERCENT:</h5>@Html.EditorFor(model => model.COPYRIGHT_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>ARTIST_RIGHT_PERCENT:</h5>@Html.EditorFor(model => model.ARTIST_RIGHT_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>OTHER_ROYALTY_PERCENT:</h5>@Html.EditorFor(model => model.OTHER_ROYALTY_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>PRODUCER_ROYALTY_PERCENT:</h5>@Html.EditorFor(model => model.PRODUCER_ROYALTY_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>DISTRIBUITION_COST_PERCENT:</h5>@Html.EditorFor(model => model.DISTRIBUITION_COST_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>MANUFACTURING_COST_PERCENT:</h5>@Html.EditorFor(model => model.MANUFACTURING_COST_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>SALES_COMISSION_PERCENT:</h5>@Html.EditorFor(model => model.SALES_COMISSION_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+                                <h5>TAX_PERCENT :</h5>@Html.EditorFor(model => model.TAX_PERCENT, new { htmlAttributes = new { @class = "form-control" } })
+
+                                <br />
+                                <input type="submit" name="salvar" value="Save" class="btn btn-default pull-right" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-right">
+                    @Html.ActionLink("Back to list", "Index", "ParametrosVendaFisica", null, new { @class = "link" })
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>
+
+
+
+

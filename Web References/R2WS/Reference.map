@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://ukbcewvapp107.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?xsd=xsd0" filename="R2Info.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://ukbcewvapp107.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?xsd=xsd1" filename="R2Info0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://ukbcewvapp107.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?xsd=xsd3" filename="R2Info1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://ukbcewvapp107.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?xsd=xsd2" filename="R2Info2.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://ukbcewvapp107.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?wsdl" filename="R2InfoServices.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://ukbcewvapp107.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc?disco" filename="R2Info.disco" />
+  </Results>
+</DiscoveryClientResultsFile>

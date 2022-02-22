@@ -52,5 +52,15 @@ namespace SEDOGv2.Properties {
                 return ((string)(this["SEDOGv2_r2Resource_WSResourceSearchServiceService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://ukbcewvapp107.global.umusic.ext/r2InfoService/R2Info.R2InfoServices.svc")]
+        public string SEDOGv2_R2WS_R2InfoServices {
+            get {
+                return ((string)(this["SEDOGv2_R2WS_R2InfoServices"]));
+            }
+        }
     }
 }

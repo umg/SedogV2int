@@ -28,12 +28,26 @@
                     </div>
                     <div class="col-md-2 text-left">
                         <div class="form-group">
-                            <div class="input-group date">
-                                <input type="text" class="form-control" id="dataInicial" name="dataInicial">
-                                <div class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </div>
-                            </div>
+                            <select class="form-control" name="mesInicial" id="mesInicial">
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select class="form-control" name="anoInicial" id="anoInicial">
+                                @for (int ano = 0; ano <= DateTime.Now.Year - 2010; ano++)
+                                {
+                                    <option value="@(DateTime.Now.AddYears(-ano).ToString("yyyy"))">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                                }
+                            </select>                        
                         </div>
                     </div>
                     <div class="col-md-2 text-right">
@@ -41,12 +55,26 @@
                     </div>
                     <div class="col-md-2 text-left">
                         <div class="form-group">
-                            <div class="input-group date">
-                                <input type="text" class="form-control" id="dataFinal" name="dataFinal">
-                                <div class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </div>
-                            </div>
+                            <select class="form-control" name="mesFim" id="mesFim">
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select class="form-control" name="anoFim" id="anoFim">
+                                @for (int ano = 0; ano <= DateTime.Now.Year - 2010; ano++)
+                                {
+                                    <option value="@(DateTime.Now.AddYears(-ano).ToString("yyyy"))">@DateTime.Now.AddYears(-ano).ToString("yyyy")</option>
+                                }
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-1"></div>
@@ -60,8 +88,8 @@
             <br/>
             @if (Model != null)
             {
-                var dataInicial = Request.Form["dataInicial"];
-                var dataFinal = Request.Form["dataFinal"];
+                var dataInicial = Request.Form["mesInicial"] + "/" + Request.Form["anoInicial"];
+                var dataFinal = Request.Form["mesFim"] + "/" + Request.Form["anoFim"];
                 decimal quantidadeVendida = 0;
                 decimal valorVendaBruta = 0;
                 decimal desconto = 0;
@@ -95,13 +123,7 @@
                                         <th>Cliente Id</th>
                                         <th>Cliente</th>
                                         <th>Quantidade Vendida</th>
-                                        <th>Valor de Venda Bruta</th>
-                                        <th>Desconto</th>
-                                        <th>Impostos</th>
                                         <th>Valor Venda Liquida</th>
-                                        <th>Quantidade de Devolução</th>
-                                        <th>Valor Liquido de Devolução</th>
-                                        <th>Valor HFM</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,13 +133,7 @@
                                             <td>@item.IdCliente</td>
                                             <td>@item.Cliente</td>
                                             <td>@item.QuantidadeVendida</td>
-                                            <td>@string.Format("{0:N2}", item.ValorVendaBruta)</td>
-                                            <td>@string.Format("{0:N2}", item.Desconto)</td>
-                                            <td>@string.Format("{0:N2}", item.Impostos)</td>
                                             <td>@string.Format("{0:N2}", item.ValorVendaLiquida)</td>
-                                            <td>@item.QuantidadeDevolucao</td>
-                                            <td>@string.Format("{0:N2}", item.ValorDevolucaoLiquido)</td>
-                                            <td>@string.Format("{0:N2}", item.ValorHfm)</td>
                                         </tr>
                                         quantidadeVendida += item.QuantidadeVendida;
                                         valorVendaBruta += item.ValorVendaBruta;
@@ -133,13 +149,7 @@
                                     <tr style="font-weight:bold">
                                         <td colspan="2">Total</td>
                                         <td>@quantidadeVendida</td>
-                                        <td>@string.Format("{0:C2}", valorVendaBruta)</td>
-                                        <td>@string.Format("{0:C2}", desconto)</td>
-                                        <td>@string.Format("{0:C2}", impostos)</td>
                                         <td>@string.Format("{0:C2}", valorVendaLiquida)</td>
-                                        <td>@quantidadeDevolucao</td>
-                                        <td>@string.Format("{0:C2}", valorDevolucaoLiquido)</td>
-                                        <td>@string.Format("{0:C2}", valorHfm)</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -174,13 +184,7 @@
                                 <th>Cliente Id</th>
                                 <th>Cliente</th>
                                 <th>Quantidade Vendida</th>
-                                <th>Valor de Venda Bruta</th>
-                                <th>Desconto</th>
-                                <th>Impostos</th>
                                 <th>Valor Venda Liquida</th>
-                                <th>Quantidade de Devolução</th>
-                                <th>Valor Liquido de Devolução</th>
-                                <th>Valor HFM</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -190,13 +194,7 @@
                                     <td>@item.IdCliente</td>
                                     <td>@item.Cliente</td>
                                     <td>@item.QuantidadeVendida</td>
-                                    <td>@string.Format("{0:C2}", item.ValorVendaBruta)</td>
-                                    <td>@string.Format("{0:C2}", item.Desconto)</td>
-                                    <td>@string.Format("{0:C2}", item.Impostos)</td>
-                                    <td>@string.Format("{0:C2}", item.ValorVendaLiquida)</td>
-                                    <td>@item.QuantidadeDevolucao</td>
-                                    <td>@string.Format("{0:C2}", item.ValorDevolucaoLiquido)</td>
-                                    <td>@string.Format("{0:C2}", item.ValorHfm)</td>
+                                    <td style="text-align:right" >@string.Format("{0:N2}", item.ValorVendaLiquida)</td>
                                 </tr>
                                 quantidadeVendida += item.QuantidadeVendida;
                                 valorVendaBruta += item.ValorVendaBruta;
@@ -212,13 +210,7 @@
                             <tr style="font-weight:bold">
                                 <td colspan="2">Total</td>
                                 <td>@quantidadeVendida</td>
-                                <td>@string.Format("{0:C2}", valorVendaBruta)</td>
-                                <td>@string.Format("{0:C2}", desconto)</td>
-                                <td>@string.Format("{0:C2}", impostos)</td>
-                                <td>@string.Format("{0:C2}", valorVendaLiquida)</td>
-                                <td>@quantidadeDevolucao</td>
-                                <td>@string.Format("{0:C2}", valorDevolucaoLiquido)</td>
-                                <td>@string.Format("{0:C2}", valorHfm)</td>
+                                <td style="text-align:right" >@string.Format("{0:C2}", valorVendaLiquida)</td>
                             </tr>
                         </tfoot>
                     </table>
