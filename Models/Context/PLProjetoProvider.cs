@@ -33,6 +33,34 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
+
+        public Resposta<List<ProjetoBU>> SEL_BU_PROJETO(string bu)
+        {
+            Resposta<List<ProjetoBU>> resp = new Resposta<List<ProjetoBU>>();
+            List<ProjetoBU> pls = new List<ProjetoBU>();
+            try
+            {
+                DataTable dt = new DataTable();
+                List<OleDbParameter> parameters = new List<OleDbParameter>();
+
+                parameters.Add(AddParameter("P_BU", bu));
+                string procedure = AddScheme("SEL_BU_PROJETO");
+
+                dt = GetTable(procedure, parameters.ToArray());
+
+                resp.Dados = dt.DataTableToList<ProjetoBU>();
+
+
+            }
+            catch (Exception ex)
+            {
+                resp.Error = ex.StackTrace;
+                resp.Message = ex.Message;
+            }
+
+            return resp;
+        }
+
         public Resposta<List<PLProjeto>> SEL_PLPROJETOS(string pesquisa)
         {
             Resposta<List<PLProjeto>> resp = new Resposta<List<PLProjeto>>();
@@ -243,7 +271,7 @@ namespace SEDOGv2.Models.Context
             }
             return ret;
         }
-        public List<ProjetosBrdigitalPorArtistCode> SLT_PROJETOS_POR_ARTISTA(string artistcode)
+        public List<ProjetosBrdigitalPorArtistCode> SLT_PROJETOS_POR_ARTISTA(string artistcode, int p_optional = 0)
         {
             List<ProjetosBrdigitalPorArtistCode> ret = new List<ProjetosBrdigitalPorArtistCode>();
             try
@@ -251,7 +279,10 @@ namespace SEDOGv2.Models.Context
                 DataTable dt = new DataTable();
                 List<OleDbParameter> parameters = new List<OleDbParameter>();
                 parameters.Add(AddParameter("P_ARTISTCODE", artistcode));
+                parameters.Add(AddParameter("P_OPTIONAL", p_optional));
+
                 string procedure = AddScheme("SLT_PROJETOS_POR_ARTISTA ");
+
 
                 dt = GetTable(procedure, parameters.ToArray());
 

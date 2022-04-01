@@ -378,11 +378,15 @@
                 <div class="itm">
                     <div class="detalhesBody">
                         <h4 data-toggle="collapse" data-target="#tblProdutosBUS" class="clickRotateIcon">BU's do projeto:<i class="fa fa-arrow-circle-down pull-right rotate"></i></h4>
+                        <div id="dataDivBU"></div>
+
                         <div id="tblProdutosBUS" class="collapse in">
+                            <input type="hidden" name="idProjSedog" id="idProjSedog" value="@Url.RequestContext.RouteData.Values["id"]" />
+
                             @using (Html.BeginForm("AddBU", "ManutencaoProjeto", FormMethod.Post))
                             {
                                 <input type="hidden" name="idProjSedog" value="@Url.RequestContext.RouteData.Values["id"]" />
-                                <table class="table">
+                                <table class="table" id="dataTableBu">
                                     <tr>
                                         <th>Product Code</th>
                                         <th>Packing</th>
@@ -390,10 +394,11 @@
                                         <th></th>
                                     </tr>
                                     <tr>
-                                        <th><input type="text" name="cod_prod" class="input-sm" /></th>
-                                        <th><input type="text" name="packing" class="input-sm" maxlength="2" class="twochar" /></th>
-                                        <th><input type="text" name="BU" class="input-sm" /></th>
-                                        <th><input type="submit" name="salvar" class="btn btn-default" value="incluir" /></th>
+                                        <th><input type="text" name="cod_prod" id="cod_prod" class="input-sm" /></th>
+                                        <th><input type="text" name="packing" id="packing" class="input-sm" /></th>
+                                        <th><input type="text" name="BU" id="BU" class="input-sm" /></th>
+                                        @*<th><input type="submit" name="salvar" class="btn btn-default" value="incluir" /></th>*@
+                                        <th><a class="salvarBU" href="#"><i class="fa fa-edit"></i>Adicionar BU</a></th>
                                     </tr>
                                     @foreach (PL_Produto_BUS item in Model.plProdutoBus)
                                     {
@@ -616,5 +621,59 @@
             });
             $("#submitEditProjSedog").trigger('click');
         });
+
+        $(document).on("click", ".salvarBU", function (e) {
+            //   var t = $('#dataTableBu').DataTable();
+            var bu = $('#BU').val();
+            var codprod = $('#cod_prod').val();
+            var packing = $('#packing').val();
+            var idprojsedog = $('#idProjSedog').val();
+            //alert(bu + "/" + codprod + "/" packing + "/" idprojsedog + "/");
+            //alert(idprojsedog);
+            if (bu == null || bu == '') {
+                alert('Necessário informar um BU antes da gravação!');
+            } else {
+                $.ajax({
+                    type: "POST",
+                    //url: "/SEDOGV2/ManutencaoProjeto/AddBU",
+                    url: "/ManutencaoProjeto/AddBU",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"bu":"' + bu + '","cod_prod":"' + codprod + '","packing":"' + packing + '","idprojsedog":"' + idprojsedog + '"}',
+                    dataType: "html",
+                    success: function (result, status, xhr) {
+                        var cond = result;
+                        if (cond != 1) {
+                            var cond = cond.split(";");
+
+                            $("#dataDivBU").show();
+                            $("#dataDivBU").addClass("alert alert-success ").html("<span style:font-weight:bold>BU já associado ao projeto ID=" + cond[0] + " Projeto = " + cond[1] + " Artista = " + cond[2] + ".!</span>");
+                            $("#dataDivBU").hide(5000);
+                        } else {
+                            //t.row.add([
+                            //      "<input type='text' name='cod_prod' id='cod_prod' class='input - sm' /><input type='text' name='packing' id='packing' class='input - sm' /><input type='text' name='BU' id='BU' class='input - sm' />'
+
+
+                            //    ,
+                            //     "<input type='text' id='percentualLiqEsp' class='small' value='" + perLiq + "'>%"
+                            //    ,
+                            //    "<input type='text' id='ArtistaShare' class='small' value='" + artistaEsp + "'>%&nbsp;&nbsp;&nbsp;&nbsp;<a class='editPercentual' href='#'><i class='fa fa-edit'></i>Atualizar</a>&nbsp;&nbsp;<a class='removerIsrc' href='#' data-title='Apagar ISRC' data-query='Tem certeza que deseja remover o item " + isrc + "?'><i class='fa fa-remove'></i>Remover</a>"
+                            //]).draw(true);
+
+                            $("#dataDivBU").show();
+                            $("#dataDivBU").addClass("alert alert-success ").html("<span style:font-weight:bold>Resultado: BU nº " + bu + " incluído!</span>");
+                            $("#dataDivBU").hide(5000);
+                            window.location.reload(true);
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        $("#dataDiv").html("Result:" + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+                    }
+                });
+
+            }
+
+        });
+
     });
 </script>

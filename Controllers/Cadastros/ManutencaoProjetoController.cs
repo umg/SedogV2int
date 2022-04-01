@@ -176,24 +176,68 @@ namespace SEDOGv2.Controllers.Cadastros
             }
             return RedirectToAction("Edit", new { id = collection["idProjSedog"] });
         }
-        [ActionFilter_CheckLogin]
-        [HttpPost]
-        public ActionResult AddBU(FormCollection collection)
-        {
-            if (collection["BU"] != "")
-            {
-                string codprod = collection["cod_prod"];
-                string packing = collection["packing"];
-                if (codprod == "") codprod = "0";
-                if (packing == "") packing = "00";
-                //if (Convert.ToInt32(packing) <= 9) packing = "0" + packing;
-                if (packing.Length < 2) packing = packing.Trim().PadLeft(2, '0');
+        //[ActionFilter_CheckLogin]
+        //[HttpPost]
+        //public ActionResult AddBU(FormCollection collection)
+        //{
+        //    if (collection["BU"] != "")
+        //    {
+        //        string codprod = collection["cod_prod"];
+        //        string packing = collection["packing"];
+        //        if (codprod == "") codprod = "0";
+        //        if (packing == "") packing = "00";
+        //        //if (Convert.ToInt32(packing) <= 9) packing = "0" + packing;
+        //        if (packing.Length < 2) packing = packing.Trim().PadLeft(2, '0');
 
+        //        PLProjetoProvider provider = new PLProjetoProvider();
+        //        long idProjSedog = long.Parse(collection["idProjSedog"]);
+        //        provider.INS_PRODUTO_BUS(idProjSedog, codprod, packing, collection["BU"].Trim().PadLeft(12, ' '));
+        //    }
+        //    return RedirectToAction("Edit", new { id = collection["idProjSedog"] });
+        //}
+
+        public JsonResult AddBU(string bu, string cod_prod, string packing, string idprojsedog)
+        {
+            ViewBag.BU = bu.Trim().PadLeft(12, ' ');
+            string codprod = cod_prod;
+            string pack = packing;
+            if (codprod == "") codprod = "0";
+            if (packing == "") packing = "0";
+            long idProjSedog = long.Parse(idprojsedog);
+            //ViewBag.per = per;
+            try
+            {
                 PLProjetoProvider provider = new PLProjetoProvider();
-                long idProjSedog = long.Parse(collection["idProjSedog"]);
-                provider.INS_PRODUTO_BUS(idProjSedog, codprod, packing, collection["BU"].Trim().PadLeft(12, ' '));
+
+                var resp = provider.SEL_BU_PROJETO(bu.Trim().PadLeft(12, ' '));
+                if (resp.Dados.Count() == 0)
+                {
+                    provider.INS_PRODUTO_BUS(idProjSedog, codprod, packing, bu.Trim().PadLeft(12, ' ')); ;
+                    return Json(1);
+
+                }
+                else
+                {
+                    return Json(resp.Dados[0].IdProjetoSedog.ToString() + ";" + resp.Dados[0].PROJETO.ToString() + ";" + resp.Dados[0].ARTISTA.ToString());
+                }
+
+
             }
-            return RedirectToAction("Edit", new { id = collection["idProjSedog"] });
+            catch (Exception e)
+            {
+                throw e;
+            }
+            //if (collection["BU"] != "")
+            //{
+            //    string codprod = collection["cod_prod"];
+            //    string packing = collection["packing"];
+            //    if (codprod == "") codprod = "0";
+            //    if (packing == "") packing = "0";
+            //    PLProjetoProvider provider = new PLProjetoProvider();
+            //    long idProjSedog = long.Parse(collection["idProjSedog"]);
+            //    provider.INS_PRODUTO_BUS(idProjSedog, codprod, packing, collection["BU"].Trim().PadLeft(12, ' '));
+            //}
+            //return RedirectToAction("Edit", new { id = collection["idProjSedog"] });
         }
         [ActionFilter_CheckLogin]
         public ActionResult DelBU(long id, string codprod, string packing, string BU)
@@ -207,6 +251,8 @@ namespace SEDOGv2.Controllers.Cadastros
             }
             return RedirectToAction("Edit", new { @id = id });
         }
+
+
         [ActionFilter_CheckLogin]
         [HttpPost]
         public ActionResult EditDetalhesProjeto(FormCollection collection)

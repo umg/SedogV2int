@@ -89,7 +89,7 @@ namespace SEDOGv2.Controllers.Adm
         public JsonResult ProjectsByArtistCodeBrDigital(string artistcode)
         {
             PLProjetoProvider provider = new PLProjetoProvider();
-            List<ProjetosBrdigitalPorArtistCode> ret = provider.SLT_PROJETOS_POR_ARTISTA(artistcode);
+            List<ProjetosBrdigitalPorArtistCode> ret = provider.SLT_PROJETOS_POR_ARTISTA(artistcode,1);
             return Json(ret, JsonRequestBehavior.AllowGet);
         }
 

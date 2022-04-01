@@ -340,6 +340,7 @@
     <Compile Include="Models\PLPresidenciaFinanceiroViewModel.cs" />
     <Compile Include="Models\PLProjeto.cs" />
     <Compile Include="Models\ProdutosBrdigitalPorArtist.cs" />
+    <Compile Include="Models\ProjetoBU.cs" />
     <Compile Include="Models\ProjetosBrdigitalPorArtistCode.cs" />
     <Compile Include="Models\ProjetoTotalViewModel.cs" />
     <Compile Include="Models\ResponsavelDepartamento.cs" />
